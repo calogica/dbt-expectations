@@ -1,0 +1,36 @@
+
+name: 'dbt_expectations_integration_tests'
+version: '1.0'
+
+profile: 'integration_tests'
+
+# require-dbt-version: inherit this from dbt-utils
+
+config-version: 2
+
+source-paths: ["models"]
+analysis-paths: ["analysis"] 
+test-paths: ["tests"]
+data-paths: ["data"]
+macro-paths: ["macros"]
+
+target-path: "target"
+clean-targets:
+    - "target"
+    - "dbt_modules"
+
+require-dbt-version: ">=0.18.1"
+
+quoting:
+    database: true
+    identifier: false
+    schema: false
+
+seeds:
+  +quote_columns: false
+  schema: test
+
+models:
+
+    # dbt_expectations_integration_tests:
+    #     schema: test

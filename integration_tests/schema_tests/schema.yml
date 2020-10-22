@@ -1,0 +1,70 @@
+version: 2
+
+seeds:
+  - name: data_test
+    tests:
+        - dbt_expectations.table_row_count_equal:
+            expected_number_of_rows: 3
+        - dbt_expectations.table_row_count_between:
+            minimum: 1
+            maximum: 3
+        - dbt_expectations.table_row_count_compare:
+            compare_model: ref("data_test")
+        - dbt_expectations.column_count:
+            expected_number_of_columns: 6
+        - dbt_expectations.columns_match_list:
+            column_list: ["idx", "col_numeric_a", "col_numeric_b", "col_string_a", "col_string_b", "col_null"]
+        - dbt_expectations.compare_column_count:
+            compare_model: ref("data_test")
+        - dbt_expectations.expression_is_true:
+            expression: (col_numeric_a + col_numeric_b = 1)
+        - dbt_expectations.equal_expression:
+            expression: sum(col_numeric_a)
+            compare_model: ref("data_test")
+            group_by: [idx]
+        - dbt_expectations.equal_expression:
+            expression: sum(col_numeric_a)
+            compare_model: ref("data_test")
+            compare_expression: sum(col_numeric_b)
+
+    columns:
+      - name: idx
+        tests:
+          - dbt_expectations.column_exists
+          - dbt_expectations.unique
+
+      - name: col_numeric_a
+        tests:
+          - dbt_expectations.not_null
+          - dbt_expectations.min_between:
+              minimum: 0
+              maximum: 0
+          - dbt_expectations.max_between:
+              minimum: 1
+              maximum: 1
+          - dbt_expectations.mean_between:
+              minimum: 0
+              maximum: 1.5
+          - dbt_expectations.unique_values_between:
+              minimum: 3
+              maximum: 3
+
+
+      - name: col_string_a
+        tests:
+          - dbt_expectations.unaccepted_values:
+              values: ['2','3']
+          - dbt_expectations.length_equal:
+              length: 1
+
+      - name: col_string_b
+        tests:
+          - dbt_expectations.unaccepted_values:
+              values: ['b','c']
+          - dbt_expectations.length_between:
+              minimum_length: 1
+              maximum_length: 3
+
+      - name: col_null
+        tests:
+          - dbt_expectations.is_null

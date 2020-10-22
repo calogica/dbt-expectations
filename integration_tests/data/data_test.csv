@@ -1,0 +1,4 @@
+idx,col_numeric_a,col_numeric_b,col_string_a,col_string_b,col_null
+1,0,1,a,a,
+2,1,0,b,ab,
+3,0.5,0.5,c,abc,
