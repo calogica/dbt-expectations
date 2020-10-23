@@ -48,12 +48,19 @@ seeds:
           - dbt_expectations.expect_column_unique_value_count_to_be_between:
               minimum: 3
               maximum: 3
+          - dbt_expectations.expect_column_stdev_to_be_between:
+              minimum: 0
+              maximum: 2
 
 
       - name: col_string_a
         tests:
           - dbt_expectations.expect_column_values_to_not_be_in_set:
               values: ['2','3']
+          - dbt_expectations.expect_column_distinct_values_to_be_in_set:
+              values: ['a','b','c']
+          - dbt_expectations.expect_column_distinct_values_to_contain_set:
+              values: ['a','b']
           - dbt_expectations.expect_column_value_lengths_to_equal   :
               length: 1
 
