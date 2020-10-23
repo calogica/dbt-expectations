@@ -1,5 +1,6 @@
 {%- macro test_expect_table_columns_to_match_set(model) -%}
 {%- set column_list = kwargs.get('column_list', kwargs.get('arg')) -%}
-{%- set matching_columns = adapter.get_columns_in_relation(model) | selectattr("name", "in", column_list) |  list -%}
-select {{ column_list | length }} - {{ matching_columns | length }} 
+{%- set columns_in_relation = adapter.get_columns_in_relation(model) -%}
+{%- set matching_columns = columns_in_relation | selectattr("name", "in", column_list) | list -%}
+select {{ columns_in_relation | list | length }} - {{ matching_columns | length }} 
 {%- endmacro -%}
