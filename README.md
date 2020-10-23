@@ -12,12 +12,14 @@ packages:
     revision: <for latest release, see https://github.com/calogica/dbt-expectations/releases>
 ```
 
-## Dependdencies
+## Dependencies
+
 This package includes a reference to [**dbt-data**](https://github.com/calogica/dbt-date) which in turn references [**dbt-utils**](https://github.com/fishtown-analytics/dbt-utils) so there's no need to also import dbt-utils in your local project.
 
 Note: **dbt-date** is currently in the process of being upgraded to dbt 0.18+, which will remove the current deprecation warnings.
 
 ## Variables
+
 The following variables need to be defined in your `dbt_project.yml` file:
 
 ```yaml
@@ -29,8 +31,11 @@ You may specify [any valid timezone string](https://en.wikipedia.org/wiki/List_o
 For example, use `America/New_York` for East Coast Time.
 
 ## Integration Tests
-This project contains integration tests for all test macros in a separate `integration_tests` dbt project contained in this repo. 
+
+This project contains integration tests for all test macros in a separate `integration_tests` dbt project contained in this repo.
+
 To run the tests:
+
 1. You will need a profile called `integration_tests` in `~/.dbt/profiles.yml` pointing to a writable database.
 2. Then, from within the `integration_tests` folder, run `dbt seed` to load `data_test.csv` to the `test` schema of your database.
 3. Then run `dbt test` to run the tests specified in `integration_tests/models/schema_tests/schema.yml`
@@ -56,7 +61,6 @@ expect_table_columns_to_match_ordered_list
 [expect_table_row_count_to_equal_other_table](macros/schema_tests/table_shape/expect_table_row_count_to_equal_other_table.sql)
 
 [expect_table_row_count_to_equal](macros/schema_tests/table_shape/expect_table_row_count_to_equal.sql)
-
 
 ### Missing values, unique values, and types
 
@@ -141,7 +145,6 @@ expect_column_proportion_of_unique_values_to_be_between
 [expect_column_min_to_be_between](macros/schema_tests/aggregate_functions/expect_column_min_to_be_between.sql)
 
 [expect_column_sum_to_be_between](macros/schema_tests/aggregate_functions/expect_column_sum_to_be_between.sql)
-
 
 ### Multi-column
 
