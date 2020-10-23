@@ -1,4 +1,4 @@
-{% macro test_expect_column_quantiles_to_be_between(model) %}
+{% macro test_expect_column_quantile_values_to_be_between(model) %}
 {% set column_name = kwargs.get('column_name', kwargs.get('arg')) %}
 {% set quantile = kwargs.get('quantile', 0) %}
 {% set minimum = kwargs.get('minimum', 0) %}
