@@ -24,7 +24,7 @@ set_values as (
         '{{ value }}'
         {%- else -%}
         {{ value }}
-        {%- endif -%} as value_field
+        {%- endif %} as value_field
     {% if not loop.last %}union all{% endif %}
     {% endfor %}
 

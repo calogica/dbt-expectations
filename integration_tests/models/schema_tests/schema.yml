@@ -4,10 +4,10 @@ seeds:
   - name: data_test
     tests:
         - dbt_expectations.expect_table_row_count_to_equal:
-            expected_number_of_rows: 3
+            expected_number_of_rows: 4
         - dbt_expectations.expect_table_row_count_to_be_between:
             minimum: 1
-            maximum: 3
+            maximum: 4
         - dbt_expectations.expect_table_row_count_to_equal_other_table:
             compare_model: ref("data_test")
         - dbt_expectations.expect_table_column_count_to_equal:
@@ -61,6 +61,10 @@ seeds:
           - dbt_expectations.expect_column_stdev_to_be_between:
               minimum: 0
               maximum: 2
+          - dbt_expectations.expect_column_most_common_value_to_be_in_set:
+              values: [0.5]
+              top_n: 1
+              quote: false
 
 
       - name: col_string_a
@@ -83,7 +87,7 @@ seeds:
               values: ['b','c']
           - dbt_expectations.expect_column_value_lengths_to_be_between:
               minimum_length: 1
-              maximum_length: 3
+              maximum_length: 4
 
       - name: col_null
         tests:
