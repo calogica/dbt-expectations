@@ -31,9 +31,6 @@ quoting:
 
 seeds:
   +quote_columns: false
-  schema: test
+  schema: dbt_expectations_integration_tests
 
 models:
-
-    # dbt_expectations_integration_tests:
-    #     schema: test

@@ -1,8 +1,8 @@
 # dbt-expectations
 
-Extension package for [**dbt**](https://github.com/fishtown-analytics/dbt) inspired by Great Expectations.
+Extension package for [**dbt**](https://github.com/fishtown-analytics/dbt) inspired by the [Great Expectations package for Python](https://greatexpectations.io/). The intent is to allow dbt users to deploy GE-like tests in their data warehouse directly from dbt, vs having to add another integration with their data warehouse.
 
-FYI: this package includes [**dbt-utils**](https://github.com/fishtown-analytics/dbt-utils) so there's no need to also import dbt-utils in your local project.
+## Install
 
 Include in `packages.yml`
 
@@ -11,6 +11,11 @@ packages:
   - git: "git@github.com:calogica/dbt-expectations.git"
     revision: <for latest release, see https://github.com/calogica/dbt-expectations/releases>
 ```
+
+## Dependdencies
+This package includes a reference to [**dbt-data**](https://github.com/calogica/dbt-date) which in turn references [**dbt-utils**](https://github.com/fishtown-analytics/dbt-utils) so there's no need to also import dbt-utils in your local project.
+
+Note: **dbt-date** is currently in the process of being upgraded to dbt 0.18+, which will remove the current deprecation warnings.
 
 ## Variables
 The following variables need to be defined in your `dbt_project.yml` file:
