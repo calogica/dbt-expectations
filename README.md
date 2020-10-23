@@ -103,7 +103,7 @@ expect_column_values_to_match_json_schema
 
 [expect_column_distinct_values_to_be_in_set](macros/schema_tests/aggregate_functions/expect_column_distinct_values_to_be_in_set.sql)
 
-expect_column_distinct_values_to_contain_set
+[expect_column_distinct_values_to_contain_set](expect_column_distinct_values_to_contain_set.sql)
 
 expect_column_distinct_values_to_equal_set
 
