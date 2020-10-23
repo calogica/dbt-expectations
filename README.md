@@ -6,19 +6,29 @@ FYI: this package includes [**dbt-utils**](https://github.com/fishtown-analytics
 
 Include in `packages.yml`
 
-```
+```yaml
 packages:
-  - git: "git@github.com:calogica/dbt-test.git"
-    revision: <for latest release, see https://github.com/calogica/dbt-test/releases>
+  - git: "git@github.com:calogica/dbt-expectations.git"
+    revision: <for latest release, see https://github.com/calogica/dbt-expectations/releases>
 ```
 
 ## Variables
 The following variables need to be defined in your `dbt_project.yml` file:
 
-`'dbt_date:time_zone': 'America/Los_Angeles'`
+```yaml
+vars:
+  'dbt_date:time_zone': 'America/Los_Angeles'
+```
 
 You may specify [any valid timezone string](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) in place of `America/Los_Angeles`.
 For example, use `America/New_York` for East Coast Time.
+
+## Integration Tests
+This project contains integration tests for all test macros in a separate `integration_tests` dbt project contained in this repo. 
+To run the tests:
+1. You will need a profile called `integration_tests` in `~/.dbt/profiles.yml` pointing to a writable database.
+2. Then, from within the `integration_tests` folder, run `dbt seed` to load `data_test.csv` to the `test` schema of your database.
+3. Then run `dbt test` to run the tests specified in `integration_tests/models/schema_tests/schema.yml`
 
 ## Macros
 
