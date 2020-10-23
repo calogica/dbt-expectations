@@ -46,6 +46,9 @@ seeds:
           - dbt_expectations.expect_column_values_to_be_between:
               minimum: 0
               maximum: 1
+          - dbt_expectations.expect_column_sum_to_be_between:
+              minimum: 1
+              maximum: 3
           - dbt_expectations.expect_column_min_to_be_between:
               minimum: 0
               maximum: 0
