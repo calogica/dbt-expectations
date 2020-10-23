@@ -27,13 +27,21 @@ set_values as (
         {%- endif -%} as value_field
     {% if not loop.last %}union all{% endif %}
     {% endfor %}
+
+),
+unique_set_values as (
+
+    select distinct value_field
+    from
+        set_values
+
 ),
 validation_errors as (
     -- values in set that are not in the list of values from the model
     select
         s.value_field
     from 
-        set_values s
+        unique_set_values s
         left outer join
         all_values v on s.value_field = v.value_field
     where

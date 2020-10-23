@@ -1,4 +1,4 @@
-{% macro test_expect_column_values_to_not_be_in_set(model, values) %}
+{% macro test_expect_column_distinct_values_to_equal_set(model, values) %}
 
 {% set column_name = kwargs.get('column_name', kwargs.get('field')) %}
 {% set quote_values = kwargs.get('quote', True) %}
@@ -7,7 +7,7 @@
 
 with all_values as (
 
-    select
+    select distinct
         {{ column_name }} as value_field
 
     from {{ model }}
@@ -27,19 +27,29 @@ set_values as (
         {%- endif -%} as value_field
     {% if not loop.last %}union all{% endif %}
     {% endfor %}
+
+),
+unique_set_values as (
+
+    select distinct value_field
+    from
+        set_values
+
 ),
 validation_errors as (
-    -- values from the model that match the set
+
     select
-        v.value_field
+        count(v.value_field) as column_values, 
+        count(s.value_field) as set_values
     from 
         all_values v
-        inner join
-        set_values s on v.value_field = s.value_field
+        full outer join
+        unique_set_values s on v.value_field = s.value_field
 
 )
 
 select count(*) as validation_errors
 from validation_errors
+where column_values != set_values
 
 {% endmacro %}

@@ -67,10 +67,13 @@ seeds:
         tests:
           - dbt_expectations.expect_column_values_to_not_be_in_set:
               values: ['2','3']
+          - dbt_expectations.expect_column_distinct_values_to_equal_set:
+              values: ['a','b','c','c']
           - dbt_expectations.expect_column_distinct_values_to_be_in_set:
-              values: ['a','b','c']
+              values: ['a','b','c','d']
           - dbt_expectations.expect_column_distinct_values_to_contain_set:
               values: ['a','b']
+
           - dbt_expectations.expect_column_value_lengths_to_equal   :
               length: 1
 
