@@ -44,107 +44,338 @@ To run the tests:
 
 ### Table shape
 
-[expect_column_to_exist](macros/schema_tests/table_shape/expect_column_to_exist.sql)
+#### [expect_column_to_exist](macros/schema_tests/table_shape/expect_column_to_exist.sql)
 
-[expect_table_column_count_to_be_betweeen](macros/schema_tests/table_shape/expect_table_column_count_to_be_betweeen.sql)
+Expect the specified column to exist.
 
-[expect_table_column_count_to_equal_other_table](macros/schema_tests/table_shape/expect_table_column_count_to_equal_other_table.sql)
+Usage:
+```yaml
+tests:
+- dbt_expectations.expect_column_to_exist
+```
 
-[expect_table_column_count_to_equal](macros/schema_tests/table_shape/expect_table_column_count_to_equal.sql)
+#### [expect_table_column_count_to_be_betweeen](macros/schema_tests/table_shape/expect_table_column_count_to_be_betweeen.sql)
 
-expect_table_columns_to_match_ordered_list
+Expect the number of columns in a model to be between two values.
 
-[expect_table_columns_to_match_set](macros/schema_tests/table_shape/expect_table_columns_to_match_set.sql)
+```yaml
+tests:
+  - dbt_expectations.expect_table_column_count_to_be_betweeen:
+      minimum: 1
+      maximum: 4
+```
 
-[expect_table_row_count_to_be_between](macros/schema_tests/table_shape/expect_table_row_count_to_be_between.sql)
+#### [expect_table_column_count_to_equal_other_table](macros/schema_tests/table_shape/expect_table_column_count_to_equal_other_table.sql)
 
-[expect_table_row_count_to_equal_other_table](macros/schema_tests/table_shape/expect_table_row_count_to_equal_other_table.sql)
+Expect the number of columns in a model to match another model.
 
-[expect_table_row_count_to_equal](macros/schema_tests/table_shape/expect_table_row_count_to_equal.sql)
+```yaml
+tests:
+  - dbt_expectations.expect_table_column_count_to_equal_other_table:
+      compare_model: ref("other_model")
+```
+
+#### [expect_table_column_count_to_equal](macros/schema_tests/table_shape/expect_table_column_count_to_equal.sql)
+
+Expect the number of columns in a model to be equal to `expected_number_of_columns`.
+
+```yaml
+tests:
+  - dbt_expectations.expect_table_column_count_to_equal:
+      expected_number_of_columns: 7
+```
+
+#### expect_table_columns_to_match_ordered_list
+
+#### [expect_table_columns_to_match_set](macros/schema_tests/table_shape/expect_table_columns_to_match_set.sql)
+
+Expect the columns in a model to match a given list.
+
+```yaml
+tests:
+  - dbt_expectations.expect_table_columns_to_match_set:
+      column_list: ["col_a", "col_b"]
+```
+
+#### [expect_table_row_count_to_be_between](macros/schema_tests/table_shape/expect_table_row_count_to_be_between.sql)
+
+Expect the number of rows in a model to be between two values.
+
+```yaml
+tests:
+  - dbt_expectations.expect_table_row_count_to_be_between:
+      minimum: 1
+      maximum: 4
+```
+
+#### [expect_table_row_count_to_equal_other_table](macros/schema_tests/table_shape/expect_table_row_count_to_equal_other_table.sql)
+
+Expect the number of rows in a model match another model.
+
+```yaml
+tests:
+  - dbt_expectations.expect_table_row_count_to_equal_other_table:
+      compare_model: ref("other_model")
+```
+
+#### [expect_table_row_count_to_equal](macros/schema_tests/table_shape/expect_table_row_count_to_equal.sql)
+
+Expect the number of rows in a model to be equal to `expected_number_of_rows`.
+
+```yaml
+tests:
+  - dbt_expectations.expect_table_row_count_to_equal_other_table:
+      expected_number_of_rows: 4
+```
 
 ### Missing values, unique values, and types
 
-[expect_column_values_to_be_unique](macros/schema_tests/column_values_basic/expect_column_values_to_be_unique.sql)
+#### [expect_column_values_to_be_unique](macros/schema_tests/column_values_basic/expect_column_values_to_be_unique.sql)
 
-[expect_column_values_to_not_be_null](macros/schema_tests/column_values_basic/expect_column_values_to_not_be_null.sql)
+Expect each column value to be unique.
 
-[expect_column_values_to_be_null](macros/schema_tests/column_values_basic/expect_column_values_to_be_null.sql)
+```yaml
+tests:
+  - dbt_expectations.expect_column_values_to_be_unique
+```
 
-expect_column_values_to_be_of_type
+#### [expect_column_values_to_not_be_null](macros/schema_tests/column_values_basic/expect_column_values_to_not_be_null.sql)
 
-expect_column_values_to_be_in_type_list
+Expect column values to not be null.
+
+```yaml
+tests:
+  - dbt_expectations.expect_column_values_to_not_be_null
+```
+
+#### [expect_column_values_to_be_null](macros/schema_tests/column_values_basic/expect_column_values_to_be_null.sql)
+
+Expect column values to be null.
+
+```yaml
+tests:
+  - dbt_expectations.expect_column_values_to_be_null
+```
+
+#### expect_column_values_to_be_of_type
+
+#### expect_column_values_to_be_in_type_list
 
 ### Sets and ranges
 
-[expect_column_values_to_be_in_set](macros/schema_tests/column_values_basic/expect_column_values_to_be_in_set.sql)
+#### [expect_column_values_to_be_in_set](macros/schema_tests/column_values_basic/expect_column_values_to_be_in_set.sql)
 
-[expect_column_values_to_not_be_in_set](macros/schema_tests/column_values_basic/expect_column_values_to_not_be_in_set.sql)
+Expect each column value to be in a given set.
 
-[expect_column_values_to_be_between](macros/schema_tests/column_values_basic/expect_column_values_to_be_between.sql)
+```yaml
+tests:
+  - dbt_expectations.expect_column_values_to_be_in_set:
+      values: ['a','b','c']
+```
 
-expect_column_values_to_be_increasing
+#### [expect_column_values_to_be_between](macros/schema_tests/column_values_basic/expect_column_values_to_be_between.sql)
 
-expect_column_values_to_be_decreasing
+Expect each column value to be between two values.
+
+```yaml
+tests:
+  - dbt_expectations.expect_column_values_to_be_between:
+      minimum: 0
+      maximum: 10
+```
+
+
+#### [expect_column_values_to_not_be_in_set](macros/schema_tests/column_values_basic/expect_column_values_to_not_be_in_set.sql)
+
+Expect each column value not to be in a given set.
+
+```yaml
+tests:
+  - dbt_expectations.expect_column_values_to_not_be_in_set:
+      values: ['e','f','g']
+```
+
+#### expect_column_values_to_be_increasing
+
+#### expect_column_values_to_be_decreasing
 
 ### String matching
 
-[expect_column_value_lengths_to_be_between](macros/schema_tests/string_matching/expect_column_value_lengths_to_be_between.sql)
+#### [expect_column_value_lengths_to_be_between](macros/schema_tests/string_matching/expect_column_value_lengths_to_be_between.sql)
 
-[expect_column_value_lengths_to_equal](macros/schema_tests/string_matching/expect_column_value_lengths_to_equal.sql)
+Expect column entries to be strings with length between a minimum value and a maximum value (inclusive).
 
-expect_column_values_to_match_regex
+```yaml
+tests:
+  - dbt_expectations.expect_column_value_lengths_to_be_between:
+      minimum_length: 1
+      maximum_length: 4
+```
 
-expect_column_values_to_not_match_regex
+#### [expect_column_value_lengths_to_equal](macros/schema_tests/string_matching/expect_column_value_lengths_to_equal.sql)
 
-expect_column_values_to_match_regex_list
+Expect column entries to be strings with length equal to the provided value.
 
-expect_column_values_to_not_match_regex_list
+```yaml
+tests:
+  - dbt_expectations.expect_column_value_lengths_to_equal:
+      length: 10
+```
 
-expect_column_values_to_match_like_pattern
+#### expect_column_values_to_match_regex
 
-expect_column_values_to_not_match_like_pattern
+#### expect_column_values_to_not_match_regex
 
-expect_column_values_to_match_like_pattern_list
+#### expect_column_values_to_match_regex_list
 
-expect_column_values_to_not_match_like_pattern_list
+#### expect_column_values_to_not_match_regex_list
 
-### Datetime and JSON parsing
+#### expect_column_values_to_match_like_pattern
 
-~~expect_column_values_to_match_strftime_format~~
+#### expect_column_values_to_not_match_like_pattern
 
-~~expect_column_values_to_be_dateutil_parseable~~
+#### expect_column_values_to_match_like_pattern_list
 
-expect_column_values_to_be_json_parseable
-
-expect_column_values_to_match_json_schema
+#### expect_column_values_to_not_match_like_pattern_list
 
 ### Aggregate functions
 
-[expect_column_distinct_values_to_be_in_set](macros/schema_tests/aggregate_functions/expect_column_distinct_values_to_be_in_set.sql)
+#### [expect_column_distinct_values_to_be_in_set](macros/schema_tests/aggregate_functions/expect_column_distinct_values_to_be_in_set.sql)
 
-[expect_column_distinct_values_to_contain_set](macros/schema_tests/aggregate_functions/expect_column_distinct_values_to_contain_set.sql)
+Expect the set of distinct column values to be contained by a given set.
 
-[expect_column_distinct_values_to_equal_set](macros/schema_tests/aggregate_functions/expect_column_distinct_values_to_equal_set.sql)
+```yaml
+tests:
+  - dbt_expectations.expect_column_distinct_values_to_be_in_set:
+      values: ['a','b','c','d']
+```
 
-[expect_column_mean_to_be_between](macros/schema_tests/aggregate_functions/expect_column_mean_to_be_between.sql)
+#### [expect_column_distinct_values_to_contain_set](macros/schema_tests/aggregate_functions/expect_column_distinct_values_to_contain_set.sql)
 
-[expect_column_median_to_be_between](macros/schema_tests/aggregate_functions/expect_column_median_to_be_between.sql)
+Expect the set of distinct column values to contain a given set.
 
-[expect_column_quantile_values_to_be_between](macros/schema_tests/aggregate_functions/expect_column_quantile_values_to_be_between.sql)
+In contrast to `expect_column_values_to_be_in_set` this ensures not that all column values are members of the given set but that values from the set must be present in the column.
 
-[expect_column_stdev_to_be_between](macros/schema_tests/aggregate_functions/expect_column_stdev_to_be_between.sql)
+```yaml
+tests:
+  - dbt_expectations.expect_column_distinct_values_to_contain_set:
+      values: ['a','b']
+```
 
-[expect_column_unique_value_count_to_be_between](macros/schema_tests/aggregate_functions/expect_column_unique_value_count_to_be_between.sql)
+#### [expect_column_distinct_values_to_equal_set](macros/schema_tests/aggregate_functions/expect_column_distinct_values_to_equal_set.sql)
 
-expect_column_proportion_of_unique_values_to_be_between
+Expect the set of distinct column values to equal a given set.
 
-[expect_column_most_common_value_to_be_in_set](macros/schema_tests/aggregate_functions/expect_column_most_common_value_to_be_in_set.sql)
+In contrast to `expect_column_distinct_values_to_contain_set` this ensures not only that a certain set of values are present in the column but that these and only these values are present.
 
-[expect_column_max_to_be_between](macros/schema_tests/aggregate_functions/expect_column_max_to_be_between.sql)
+```yaml
+tests:
+  - dbt_expectations.expect_column_distinct_values_to_equal_set:
+      values: ['a','b','c']
+```
 
-[expect_column_min_to_be_between](macros/schema_tests/aggregate_functions/expect_column_min_to_be_between.sql)
+#### [expect_column_mean_to_be_between](macros/schema_tests/aggregate_functions/expect_column_mean_to_be_between.sql)
 
-[expect_column_sum_to_be_between](macros/schema_tests/aggregate_functions/expect_column_sum_to_be_between.sql)
+Expect the column mean to be between a minimum value and a maximum value (inclusive).
+
+```yaml
+tests:
+  - dbt_expectations.expect_column_mean_to_be_between:
+      minimum: 0
+      maximum: 2
+```
+
+#### [expect_column_median_to_be_between](macros/schema_tests/aggregate_functions/expect_column_median_to_be_between.sql)
+
+Expect the column median to be between a minimum value and a maximum value (inclusive).
+
+```yaml
+tests:
+  - dbt_expectations.expect_column_median_to_be_between:
+      minimum: 0
+      maximum: 2
+```
+
+#### [expect_column_quantile_values_to_be_between](macros/schema_tests/aggregate_functions/expect_column_quantile_values_to_be_between.sql)
+
+Expect specific provided column quantiles to be between provided minimum and maximum values.
+
+```yaml
+tests:
+  - dbt_expectations.expect_column_quantile_values_to_be_between:
+      quantile: .95
+      minimum: 0
+      maximum: 2
+```
+
+#### [expect_column_stdev_to_be_between](macros/schema_tests/aggregate_functions/expect_column_stdev_to_be_between.sql)
+
+Expect the column standard deviation to be between a minimum value and a maximum value. Uses sample standard deviation (normalized by N-1).
+
+```yaml
+tests:
+  - dbt_expectations.expect_column_stdev_to_be_between:
+      minimum: 0
+      maximum: 2
+```
+
+#### [expect_column_unique_value_count_to_be_between](macros/schema_tests/aggregate_functions/expect_column_unique_value_count_to_be_between.sql)
+
+Expect the number of unique values to be between a minimum value and a maximum value.
+
+```yaml
+tests:
+  - dbt_expectations.expect_column_unique_value_count_to_be_between:
+      minimum: 3
+      maximum: 3
+```
+
+
+#### expect_column_proportion_of_unique_values_to_be_between
+
+#### [expect_column_most_common_value_to_be_in_set](macros/schema_tests/aggregate_functions/expect_column_most_common_value_to_be_in_set.sql)
+
+Expect the most common value to be within the designated value set
+
+```yaml
+tests:
+  - dbt_expectations.expect_column_most_common_value_to_be_in_set:
+      values: [0.5]
+      top_n: 1
+```
+
+#### [expect_column_max_to_be_between](macros/schema_tests/aggregate_functions/expect_column_max_to_be_between.sql)
+
+Expect the column max to be between an min and max value
+
+```yaml
+tests:
+  - dbt_expectations.expect_column_max_to_be_between:
+      minimum: 1
+      maximum: 1
+```
+
+#### [expect_column_min_to_be_between](macros/schema_tests/aggregate_functions/expect_column_min_to_be_between.sql)
+
+Expect the column min to be between an min and max value
+
+```yaml
+tests:
+  - dbt_expectations.expect_column_min_to_be_between:
+      minimum: 0
+      maximum: 1
+```
+
+#### [expect_column_sum_to_be_between](macros/schema_tests/aggregate_functions/expect_column_sum_to_be_between.sql)
+
+Expect the column to sum to be between an min and max value
+
+```yaml
+tests:
+  - dbt_expectations.expect_column_sum_to_be_between:
+      minimum: 1
+      maximum: 2
+```
 
 ### Multi-column
 
@@ -158,16 +389,6 @@ expect_select_column_values_to_be_unique_within_record
 
 expect_multicolumn_sum_to_equal
 
-~~expect_column_pair_cramers_phi_value_to_be_less_than~~
-
 expect_compound_columns_to_be_unique
 
 ### Distributional functions
-
-~~expect_column_kl_divergence_to_be_less_than~~
-
-~~expect_column_bootstrapped_ks_test_p_value_to_be_greater_than~~
-
-~~expect_column_chisquare_test_p_value_to_be_greater_than~~
-
-~~expect_column_parameterized_distribution_ks_test_p_value_to_be_greater_than~~
