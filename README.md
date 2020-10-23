@@ -76,7 +76,7 @@ expect_column_values_to_be_in_type_list
 
 [expect_column_values_to_not_be_in_set](macros/schema_tests/column_values_basic/expect_column_values_to_not_be_in_set.sql)
 
-expect_column_values_to_be_between
+[expect_column_values_to_be_between](macros/schema_tests/column_values_basic/expect_column_values_to_be_between.sql)
 
 expect_column_values_to_be_increasing
 
