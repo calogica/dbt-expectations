@@ -3,18 +3,18 @@ version: 2
 seeds:
   - name: data_test
     tests:
-        - dbt_expectations.table_row_count_equal:
+        - dbt_expectations.expect_table_row_count_to_equal:
             expected_number_of_rows: 3
-        - dbt_expectations.table_row_count_between:
+        - dbt_expectations.expect_table_row_count_to_be_between:
             minimum: 1
             maximum: 3
-        - dbt_expectations.table_row_count_compare:
+        - dbt_expectations.expect_table_row_count_to_equal_other_table:
             compare_model: ref("data_test")
-        - dbt_expectations.column_count:
+        - dbt_expectations.expect_table_column_count_to_equal:
             expected_number_of_columns: 6
-        - dbt_expectations.columns_match_list:
+        - dbt_expectations.expect_table_columns_to_match_set:
             column_list: ["idx", "col_numeric_a", "col_numeric_b", "col_string_a", "col_string_b", "col_null"]
-        - dbt_expectations.compare_column_count:
+        - dbt_expectations.expect_table_column_count_to_equal_other_table   :
             compare_model: ref("data_test")
         - dbt_expectations.expression_is_true:
             expression: (col_numeric_a + col_numeric_b = 1)
@@ -30,41 +30,41 @@ seeds:
     columns:
       - name: idx
         tests:
-          - dbt_expectations.column_exists
-          - dbt_expectations.unique
+          - dbt_expectations.expect_column_to_exist
+          - dbt_expectations.expect_column_values_to_be_unique
 
       - name: col_numeric_a
         tests:
-          - dbt_expectations.not_null
-          - dbt_expectations.min_between:
+          - dbt_expectations.expect_column_values_to_not_be_null
+          - dbt_expectations.expect_column_min_to_be_between:
               minimum: 0
               maximum: 0
-          - dbt_expectations.max_between:
+          - dbt_expectations.expect_column_max_to_be_between:
               minimum: 1
               maximum: 1
-          - dbt_expectations.mean_between:
+          - dbt_expectations.expect_column_mean_to_be_between:
               minimum: 0
               maximum: 1.5
-          - dbt_expectations.unique_values_between:
+          - dbt_expectations.expect_column_unique_value_count_to_be_between:
               minimum: 3
               maximum: 3
 
 
       - name: col_string_a
         tests:
-          - dbt_expectations.unaccepted_values:
+          - dbt_expectations.expect_column_values_to_not_be_in_set:
               values: ['2','3']
-          - dbt_expectations.length_equal:
+          - dbt_expectations.expect_column_value_lengths_to_equal   :
               length: 1
 
       - name: col_string_b
         tests:
-          - dbt_expectations.unaccepted_values:
+          - dbt_expectations.expect_column_values_to_not_be_in_set:
               values: ['b','c']
-          - dbt_expectations.length_between:
+          - dbt_expectations.expect_column_value_lengths_to_be_between:
               minimum_length: 1
               maximum_length: 3
 
       - name: col_null
         tests:
-          - dbt_expectations.is_null
+          - dbt_expectations.expect_column_values_to_be_null

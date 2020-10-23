@@ -1,4 +1,4 @@
-{% macro test_bollinger_bands(model,
+{% macro test_expect_column_values_to_be_moving_normal_within_n_sigma(model,
                                   columns,
                                   group_by,
                                   lookback_days=1,

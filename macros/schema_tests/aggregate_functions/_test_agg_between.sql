@@ -1,6 +1,6 @@
-{% macro test_quantile_values_between(model) %}
+{% macro _test_agg_between(model) %}
 {% set column_name = kwargs.get('column_name', kwargs.get('arg')) %}
-{% set quantile = kwargs.get('quantile', 0) %}
+{% set agg_func = kwargs.get('agg_func', 0) %}
 {% set minimum = kwargs.get('minimum', 0) %}
 {% set maximum = kwargs.get('maximum', kwargs.get('arg')) %}
 {% set partition_column = kwargs.get('partition_column', kwargs.get('arg')) %}
@@ -8,7 +8,7 @@
 with column_aggregate as (
  
     select
-        {{ dbt_expectations.percentile_cont(column_name, quantile) }} as column_val
+        {{ agg_func }}({{ column_name }}) as column_val
     from 
         {{ model }}
     {% if partition_column and partition_filter %}
@@ -19,7 +19,7 @@ with column_aggregate as (
 select count(*)
 from (
 
-    select distinct
+    select
         column_val
     from 
         column_aggregate

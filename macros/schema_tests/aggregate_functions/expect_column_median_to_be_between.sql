@@ -1,4 +1,4 @@
-{% macro test_median_between(model) %}
+{% macro test_expect_column_median_to_be_between(model) %}
 {% set column_name = kwargs.get('column_name', kwargs.get('arg')) %}
 {% set minimum = kwargs.get('minimum', 0) %}
 {% set maximum = kwargs.get('maximum', kwargs.get('arg')) %}

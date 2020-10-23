@@ -1,5 +1,6 @@
-{% macro test_unique_values_between(model) %}
+{% macro test_expect_column_quantiles_to_be_between(model) %}
 {% set column_name = kwargs.get('column_name', kwargs.get('arg')) %}
+{% set quantile = kwargs.get('quantile', 0) %}
 {% set minimum = kwargs.get('minimum', 0) %}
 {% set maximum = kwargs.get('maximum', kwargs.get('arg')) %}
 {% set partition_column = kwargs.get('partition_column', kwargs.get('arg')) %}
@@ -7,7 +8,7 @@
 with column_aggregate as (
  
     select
-        count(distinct {{ column_name }}) as value_count
+        {{ dbt_expectations.percentile_cont(column_name, quantile) }} as column_val
     from 
         {{ model }}
     {% if partition_column and partition_filter %}
@@ -18,15 +19,15 @@ with column_aggregate as (
 select count(*)
 from (
 
-    select
-        value_count
+    select distinct
+        column_val
     from 
         column_aggregate
     where 
         (
-            value_count < {{ minimum }}
+            column_val < {{ minimum }}
             or 
-            value_count > {{ maximum }}
+            column_val > {{ maximum }}
         )
  
     ) validation_errors

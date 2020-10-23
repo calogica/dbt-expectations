@@ -1,4 +1,4 @@
-{% macro test_length_between(model) %}
+{% macro test_expect_column_value_lengths_to_be_between(model) %}
 {% set column_name = kwargs.get('column_name', kwargs.get('arg')) %}
 {% set minimum_length = kwargs.get('minimum_length', 0) %}
 {% set maximum_length = kwargs.get('maximum_length', kwargs.get('arg')) %}

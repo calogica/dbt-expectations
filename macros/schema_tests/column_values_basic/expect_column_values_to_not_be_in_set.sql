@@ -1,4 +1,4 @@
-{% macro test_unaccepted_values(model, values) %}
+{% macro test_expect_column_values_to_not_be_in_set(model, values) %}
 
 {% set column_name = kwargs.get('column_name', kwargs.get('field')) %}
 {% set quote_values = kwargs.get('quote', True) %}
