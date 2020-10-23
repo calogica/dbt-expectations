@@ -346,7 +346,7 @@ tests:
 
 #### [expect_column_max_to_be_between](macros/schema_tests/aggregate_functions/expect_column_max_to_be_between.sql)
 
-Expect the column max to be between an min and max value
+Expect the column max to be between a min and max value
 
 ```yaml
 tests:
@@ -357,7 +357,7 @@ tests:
 
 #### [expect_column_min_to_be_between](macros/schema_tests/aggregate_functions/expect_column_min_to_be_between.sql)
 
-Expect the column min to be between an min and max value
+Expect the column min to be between a min and max value
 
 ```yaml
 tests:
@@ -368,7 +368,7 @@ tests:
 
 #### [expect_column_sum_to_be_between](macros/schema_tests/aggregate_functions/expect_column_sum_to_be_between.sql)
 
-Expect the column to sum to be between an min and max value
+Expect the column to sum to be between a min and max value
 
 ```yaml
 tests:
