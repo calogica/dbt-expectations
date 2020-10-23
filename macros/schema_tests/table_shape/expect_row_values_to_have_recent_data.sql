@@ -1,4 +1,4 @@
-{% macro test_recency(model, datepart, interval) %}
+{% macro test_expect_row_values_to_have_recent_data(model, datepart, interval) %}
 
 {% set column_name = kwargs.get('column_name', kwargs.get('field')) %}
 
@@ -10,5 +10,5 @@ from {{model}}
 where
     datetime({{column_name}}) >= {{ dbt_utils.dateadd(datepart, interval * -1, dbt_date.now()) }}
     and 
-    date({{column_name}}) <= date({{ dbt_date.now() }})
+    date({{column_name}}) <= {{ dbt_date.today() }}
 {% endmacro %}

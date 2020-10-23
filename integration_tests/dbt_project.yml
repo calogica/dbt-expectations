@@ -21,6 +21,9 @@ clean-targets:
 
 require-dbt-version: ">=0.18.1"
 
+vars:
+    'dbt_date:time_zone': 'America/Los_Angeles'
+
 quoting:
     database: true
     identifier: false
