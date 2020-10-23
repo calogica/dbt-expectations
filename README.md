@@ -111,11 +111,11 @@ expect_column_distinct_values_to_equal_set
 
 [expect_column_median_to_be_between](macros/schema_tests/aggregate_functions/expect_column_median_to_be_between.sql)
 
-[expect_column_quantile_values_to_be_between]((macros/schema_tests/aggregate_functions/)
+[expect_column_quantile_values_to_be_between](macros/schema_tests/aggregate_functions/)
 
 [expect_column_stdev_to_be_between](macros/schema_tests/aggregate_functions/expect_column_stdev_to_be_between.sql)
 
-[expect_column_unique_value_count_to_be_between](macros/schema_tests/aggregate_functions/
+[expect_column_unique_value_count_to_be_between](macros/schema_tests/aggregate_functions/expect_column_unique_value_count_to_be_between.sql)
 
 expect_column_proportion_of_unique_values_to_be_between
 
