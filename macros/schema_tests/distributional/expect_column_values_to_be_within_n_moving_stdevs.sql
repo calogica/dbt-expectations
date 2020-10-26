@@ -7,11 +7,6 @@
                                   sigma_threshold=3,
                                   take_logs=true
                                 ) %}
-{#
-    This test checks for changes in metric values of more than Z sigma away from a moving average.
-    It does this by taking the (optionally logged) differences of an aggregated metric value vs its value N days ago.
-    If the the difference value of any tested metric is more than Z sigma away from the moving average, it returns an error.
-#}
 with grouped_metric_values as (
 
     select

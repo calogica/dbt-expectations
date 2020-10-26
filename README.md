@@ -390,3 +390,29 @@ expect_multicolumn_sum_to_equal
 expect_compound_columns_to_be_unique
 
 ### Distributional functions
+
+#### [expect_column_values_to_be_within_n_moving_stdevs](macros/schema_tests/distributional/expect_column_values_to_be_within_n_moving_stdevs.sql)
+
+Expects changes in metric values to be within Z sigma away from a moving average, taking the (optionally logged) differences of an aggregated metric value and comparing it to its value N days ago.
+
+```yaml
+tests:
+  - dbt_expectations.expect_column_values_to_be_within_n_moving_stdevs:
+      group_by: date_day
+      lookback_days: 1
+      trend_days: 7
+      test_days: 14
+      sigma_threshold: 3
+      take_logs: true
+```
+
+#### [expect_column_values_to_be_within_n_stdevs](macros/schema_tests/distributional/expect_column_values_to_be_within_n_stdevs.sql)
+
+Expects changes in (optionally grouped & summed) metric values to be within Z sigma away from the column average
+
+```yaml
+tests:
+  - dbt_expectations.expect_column_values_to_be_within_n_stdevs:
+      group_by: date_day
+      sigma_threshold: 3
+```

@@ -1,13 +1,8 @@
 {% macro test_expect_column_values_to_be_within_n_stdevs(model,
                                   column_name,
                                   group_by=None,
-                                  sigma_threshold=3,
-                                  take_logs=true
+                                  sigma_threshold=3
                                 ) %}
-{#
-    This test checks for changes in metric values of more than Z sigma away from a the column average.
-    If the the difference value of any tested metric is more than Z sigma away from the average, it returns an error.
-#}
 with metric_values as (
 
     {% if group_by -%}
