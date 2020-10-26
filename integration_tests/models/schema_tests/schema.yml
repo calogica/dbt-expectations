@@ -1,4 +1,20 @@
 version: 2
+models:
+  - name: timeseries_data
+    columns:
+      - name: date_day
+        tests:
+          - dbt_expectations.expect_row_values_to_have_recent_data:
+              datepart: day
+              interval: 1
+      - name: row_value
+        tests:
+          - dbt_expectations.expect_column_values_to_be_within_n_stdevs:
+              sigma_threshold: 3
+          - dbt_expectations.expect_column_values_to_be_within_n_moving_stdevs:
+              group_by: date_day
+              sigma_threshold: 3
+
 
 seeds:
   - name: data_test
@@ -34,11 +50,6 @@ seeds:
         tests:
           - dbt_expectations.expect_column_to_exist
           - dbt_expectations.expect_column_values_to_be_unique
-      - name: date_col
-        tests:
-          - dbt_expectations.expect_row_values_to_have_recent_data:
-              datepart: day
-              interval: 1
 
       - name: col_numeric_a
         tests:

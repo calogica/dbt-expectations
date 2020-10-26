@@ -34,3 +34,4 @@ seeds:
   schema: dbt_expectations_integration_tests
 
 models:
+  schema: dbt_expectations_integration_tests
