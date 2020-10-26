@@ -16,8 +16,6 @@ packages:
 
 This package includes a reference to [**dbt-date**](https://github.com/calogica/dbt-date) which in turn references [**dbt-utils**](https://github.com/fishtown-analytics/dbt-utils) so there's no need to also import dbt-utils in your local project.
 
-Note: **dbt-date** is currently in the process of being upgraded to dbt 0.18+, which will remove the current deprecation warnings.
-
 ## Variables
 
 The following variables need to be defined in your `dbt_project.yml` file:
