@@ -2,10 +2,12 @@
 {% set column_name = kwargs.get('column_name', kwargs.get('arg')) %}
 {% set partition_column = kwargs.get('partition_column', kwargs.get('arg')) %}
 {% set partition_filter =  kwargs.get('partition_filter', kwargs.get('arg')) %}
-select count(*)
-from {{ model }}
-where {{ column_name }} is null
-    {% if partition_column and partition_filter %}
-        and {{ partition_column }} {{ partition_filter }}
-    {% endif %}
+{% set filter_cond = partition_column ~ " " ~ partition_filter if partition_column and partition_filter else None %}
+{% set expression = column_name ~ " is not null" %}
+
+{{ dbt_expectations.expression_is_true(model, 
+                                        expression=expression,
+                                        filter_cond=filter_cond
+                                        )
+                                        }}
 {% endmacro %}

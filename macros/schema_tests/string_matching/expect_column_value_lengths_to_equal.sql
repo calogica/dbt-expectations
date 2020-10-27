@@ -3,18 +3,13 @@
 {% set length = kwargs.get('length', 0) %}
 {% set partition_column = kwargs.get('partition_column', kwargs.get('arg')) %}
 {% set partition_filter =  kwargs.get('partition_filter', kwargs.get('arg')) %}
-select count(*)
-from (
+{% set filter_cond = partition_column ~ " " ~ partition_filter if partition_column and partition_filter else None %}
+{% set expression = dbt_utils.length(column_name) ~ " = " ~ length %}
 
-    select
-        {{ column_name }}
+{{ dbt_expectations.expression_is_true(model, 
+                                        expression=expression,
+                                        filter_cond=filter_cond
+                                        )
+                                        }}
 
-    from {{ model }}
-    where 
-        {{ dbt_utils.length(column_name) }} != {{ length}}
-    {% if partition_column and partition_filter %}
-        and {{ partition_column }} {{ partition_filter }}
-    {% endif %}
-
-) validation_errors
 {% endmacro %}

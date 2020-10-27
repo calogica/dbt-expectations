@@ -38,6 +38,9 @@ seeds:
             compare_model: ref("data_test")
         - dbt_expectations.expect_table_column_count_to_equal:
             expected_number_of_columns: 7
+        - dbt_expectations.expect_table_column_count_to_be_between:
+            minimum: 1
+            maximum: 10
         - dbt_expectations.expect_table_columns_to_contain_set:
             column_list: ["col_numeric_b", "col_string_a"]
         - dbt_expectations.expect_table_columns_to_match_set:

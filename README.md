@@ -52,13 +52,13 @@ tests:
 - dbt_expectations.expect_column_to_exist
 ```
 
-#### [expect_table_column_count_to_be_betweeen](macros/schema_tests/table_shape/expect_table_column_count_to_be_betweeen.sql)
+#### [expect_table_column_count_to_be_between](macros/schema_tests/table_shape/expect_table_column_count_to_be_between.sql)
 
 Expect the number of columns in a model to be between two values.
 
 ```yaml
 tests:
-  - dbt_expectations.expect_table_column_count_to_be_betweeen:
+  - dbt_expectations.expect_table_column_count_to_be_between:
       minimum: 1
       maximum: 4
 ```

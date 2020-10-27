@@ -4,30 +4,18 @@
 {% set maximum = kwargs.get('maximum', kwargs.get('arg')) %}
 {% set partition_column = kwargs.get('partition_column', kwargs.get('arg')) %}
 {% set partition_filter =  kwargs.get('partition_filter', kwargs.get('arg')) %}
-with column_aggregate as (
- 
-    select
-        {{ column_name }} as column_val
-    from 
-        {{ model }}
-    {% if partition_column and partition_filter %}
-    where {{ partition_column }} {{ partition_filter }}
-    {% endif %}
+{% set filter_cond = partition_column ~ " " ~ partition_filter if partition_column and partition_filter else None %}
 
-)
-select count(*)
-from (
+{% set expression %}
+{{ column_name ~ " >= " ~ minimum ~ " or " ~
+   column_name ~ " <= " ~ maximum }}    
+{% endset %}
 
-    select distinct
-        column_val
-    from 
-        column_aggregate
-    where 
-        (
-            column_val < {{ minimum }}
-            or 
-            column_val > {{ maximum }}
-        )
- 
-    ) validation_errors
+{{ dbt_expectations.expression_is_true(model, 
+                                        expression=expression,
+                                        filter_cond=filter_cond
+                                        )
+                                        }}
+
+
 {% endmacro %}

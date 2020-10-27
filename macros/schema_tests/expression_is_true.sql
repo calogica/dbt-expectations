@@ -5,6 +5,17 @@
                                  filter_cond=None
                                  ) %}
 
+    {{ dbt_expectations.expression_is_true(model, expression, test_condition, group_by_columns, filter_cond) }}
+
+{% endmacro %}
+
+{% macro expression_is_true(model,
+                                 expression,
+                                 test_condition="= true",
+                                 group_by_columns=None,
+                                 filter_cond=None
+                                 ) %}
+
 
 with grouped_expression as (
 
