@@ -62,7 +62,11 @@ seeds:
             column_A: col_numeric_a
             column_B: col_numeric_a
             or_equal: True
+        - dbt_expectations.expect_column_pair_values_to_be_equal:
+            column_A: col_numeric_a
+            column_B: col_numeric_a
 
+            
     columns:
       - name: idx
         tests:

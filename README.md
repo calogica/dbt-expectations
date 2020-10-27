@@ -389,13 +389,22 @@ tests:
       or_equal: True
 ```
 
-expect_column_pair_values_to_be_equal
+#### [expect_column_pair_values_to_be_equal](macros/schema_tests/multi-column/expect_column_pair_values_to_be_equal.sql)
 
-expect_column_pair_values_to_be_in_set
+Expect the values in column A to be the same as column B.
 
-expect_select_column_values_to_be_unique_within_record
+```yaml
+tests:
+  - dbt_expectations.expect_column_pair_values_to_be_equal:
+      column_A: col_numeric_a
+      column_B: col_numeric_a
+```
 
-expect_multicolumn_sum_to_equal
+#### expect_column_pair_values_to_be_in_set
+
+#### expect_select_column_values_to_be_unique_within_record
+
+#### expect_multicolumn_sum_to_equal
 
 #### [expect_compound_columns_to_be_unique](macros/schema_tests/multi-column/expect_compound_columns_to_be_unique.sql)
 
