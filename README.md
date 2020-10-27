@@ -377,7 +377,17 @@ tests:
 
 ### Multi-column
 
-expect_column_pair_values_A_to_be_greater_than_B
+#### [expect_column_pair_values_A_to_be_greater_than_B](macros/schema_tests/multi-column/expect_column_pair_values_A_to_be_greater_than_B.sql)
+
+Expect values in column A to be greater than column B.
+
+```yaml
+tests:
+  - dbt_expectations.expect_column_pair_values_A_to_be_greater_than_B:
+      column_A: col_numeric_a
+      column_B: col_numeric_a
+      or_equal: True
+```
 
 expect_column_pair_values_to_be_equal
 
@@ -387,7 +397,16 @@ expect_select_column_values_to_be_unique_within_record
 
 expect_multicolumn_sum_to_equal
 
-expect_compound_columns_to_be_unique
+#### [expect_compound_columns_to_be_unique](macros/schema_tests/multi-column/expect_compound_columns_to_be_unique.sql)
+
+Expect that the columns are unique together, e.g. a multi-column primary key.
+
+```yaml
+tests:
+  - dbt_expectations.expect_compound_columns_to_be_unique:
+      column_list: ["date_col", "col_string_b"]
+      ignore_row_if: "any_value_is_missing"
+```
 
 ### Distributional functions
 

@@ -14,11 +14,21 @@ models:
           - dbt_expectations.expect_column_values_to_be_within_n_moving_stdevs:
               group_by: date_day
               sigma_threshold: 3
+              take_logs: true
+      - name: row_value_log
+        tests:
+          - dbt_expectations.expect_column_values_to_be_within_n_moving_stdevs:
+              group_by: date_day
+              sigma_threshold: 3
+              take_logs: false
 
 
 seeds:
   - name: data_test
     tests:
+        - dbt_expectations.expect_compound_columns_to_be_unique:
+            column_list: ["date_col", "col_string_b"]
+            ignore_row_if: "any_value_is_missing"
         - dbt_expectations.expect_table_row_count_to_equal:
             expected_number_of_rows: 4
         - dbt_expectations.expect_table_row_count_to_be_between:
@@ -44,6 +54,14 @@ seeds:
             expression: sum(col_numeric_a)
             compare_model: ref("data_test")
             compare_expression: sum(col_numeric_b)
+        - dbt_expectations.expect_column_pair_values_A_to_be_greater_than_B:
+            column_A: col_numeric_a+10
+            column_B: col_numeric_a
+            or_equal: False
+        - dbt_expectations.expect_column_pair_values_A_to_be_greater_than_B:
+            column_A: col_numeric_a
+            column_B: col_numeric_a
+            or_equal: True
 
     columns:
       - name: idx
