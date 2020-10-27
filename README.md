@@ -436,7 +436,7 @@ tests:
 
 #### [expect_column_values_to_be_within_n_stdevs](macros/schema_tests/distributional/expect_column_values_to_be_within_n_stdevs.sql)
 
-Expects changes in (optionally grouped & summed) metric values to be within Z sigma away from the column average
+Expects (optionally grouped & summed) metric values to be within Z sigma away from the column average
 
 ```yaml
 tests:
