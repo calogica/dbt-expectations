@@ -1,4 +1,9 @@
-{%- macro test_expect_row_values_to_have_data_for_every_n_datepart(model, date_col, date_part="day", filter_cond=None, test_start_date=None, test_end_date=None) -%}
+{%- macro test_expect_row_values_to_have_data_for_every_n_datepart(model, 
+                                                                    date_col, 
+                                                                    date_part="day", 
+                                                                    filter_cond=None, 
+                                                                    test_start_date=None, 
+                                                                    test_end_date=None) -%}
 {% if not execute %}
     {{ return('') }}
 {% endif %}

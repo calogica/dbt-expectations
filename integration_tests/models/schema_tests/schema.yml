@@ -10,16 +10,16 @@ models:
       - name: row_value
         tests:
           - dbt_expectations.expect_column_values_to_be_within_n_stdevs:
-              sigma_threshold: 3
+              sigma_threshold: 6
           - dbt_expectations.expect_column_values_to_be_within_n_moving_stdevs:
               group_by: date_day
-              sigma_threshold: 3
+              sigma_threshold: 6
               take_logs: true
       - name: row_value_log
         tests:
           - dbt_expectations.expect_column_values_to_be_within_n_moving_stdevs:
               group_by: date_day
-              sigma_threshold: 3
+              sigma_threshold: 6
               take_logs: false
 
 
@@ -60,7 +60,6 @@ seeds:
         - dbt_expectations.expect_column_pair_values_A_to_be_greater_than_B:
             column_A: col_numeric_a+10
             column_B: col_numeric_a
-            or_equal: False
         - dbt_expectations.expect_column_pair_values_A_to_be_greater_than_B:
             column_A: col_numeric_a
             column_B: col_numeric_a
@@ -103,19 +102,22 @@ seeds:
           - dbt_expectations.expect_column_most_common_value_to_be_in_set:
               values: [0.5]
               top_n: 1
-              quote: false
 
 
       - name: col_string_a
         tests:
           - dbt_expectations.expect_column_values_to_not_be_in_set:
               values: ['2','3']
+              quote_values: true
           - dbt_expectations.expect_column_distinct_values_to_equal_set:
               values: ['a','b','c','c']
+              quote_values: true
           - dbt_expectations.expect_column_distinct_values_to_be_in_set:
               values: ['a','b','c','d']
+              quote_values: true
           - dbt_expectations.expect_column_distinct_values_to_contain_set:
               values: ['a','b']
+              quote_values: true
 
           - dbt_expectations.expect_column_value_lengths_to_equal   :
               length: 1
@@ -124,6 +126,7 @@ seeds:
         tests:
           - dbt_expectations.expect_column_values_to_not_be_in_set:
               values: ['b','c']
+              quote_values: true
           - dbt_expectations.expect_column_value_lengths_to_be_between:
               minimum_length: 1
               maximum_length: 4

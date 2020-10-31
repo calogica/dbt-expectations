@@ -1,7 +1,4 @@
-{%- macro test_expect_table_column_count_to_be_between(model) -%}
-{% set minimum = kwargs.get('minimum', 0) %}
-{% set maximum = kwargs.get('maximum', kwargs.get('arg')) %}
-
+{%- macro test_expect_table_column_count_to_be_between(model, minimum, maximum) -%}
 {%- set number_actual_columns = (adapter.get_columns_in_relation(model) | length) -%}
 select 
     case

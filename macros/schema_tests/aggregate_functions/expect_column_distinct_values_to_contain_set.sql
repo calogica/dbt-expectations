@@ -1,9 +1,9 @@
-{% macro test_expect_column_distinct_values_to_contain_set(model, values) %}
-
-{% set column_name = kwargs.get('column_name', kwargs.get('field')) %}
-{% set quote_values = kwargs.get('quote', True) %}
-{% set partition_column = kwargs.get('partition_column', kwargs.get('arg')) %}
-{% set partition_filter =  kwargs.get('partition_filter', kwargs.get('arg')) %}
+{% macro test_expect_column_distinct_values_to_contain_set(model, column_name,
+                                                            values,
+                                                            quote_values=True,
+                                                            partition_column=None,
+                                                            partition_filter=None
+                                                            ) %}
 
 with all_values as (
 

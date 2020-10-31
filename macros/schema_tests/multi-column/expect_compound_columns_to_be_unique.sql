@@ -1,7 +1,11 @@
-{% macro test_expect_compound_columns_to_be_unique(model, ignore_row_if="all_values_are_missing") %}
-{% set column_list = kwargs.get('column_list', kwargs.get('arg')) %}
-{% set partition_column = kwargs.get('partition_column', kwargs.get('arg')) %}
-{% set partition_filter =  kwargs.get('partition_filter', kwargs.get('arg')) %}
+{% macro test_expect_compound_columns_to_be_unique(model, 
+                                                    column_list,
+                                                    quote_columns=False,
+                                                    ignore_row_if="all_values_are_missing",
+                                                    partition_column=None,
+                                                    partition_filter=None
+                                                    ) %}
+
 {% if not quote_columns %}
     {%- set columns=column_list %}
 {% elif quote_columns %}
@@ -11,7 +15,7 @@
         {%- endfor %}
 {% else %}
     {{ exceptions.raise_compiler_error(
-        "`quote_columns` argument for unique_combination_of_columns test must be one of [True, False] Got: '" ~ quote ~"'.'"
+        "`quote_columns` argument for unique_combination_of_columns test must be one of [True, False] Got: '" ~ quote_columns ~"'.'"
     ) }}
 {% endif %}
 

@@ -1,7 +1,4 @@
-{% macro test_expect_row_values_to_have_recent_data(model, datepart, interval) %}
-
-{% set column_name = kwargs.get('column_name', kwargs.get('field')) %}
-
+{% macro test_expect_row_values_to_have_recent_data(model, column_name, datepart, interval) %}
 select
     case when count(*) > 0 then 0
     else 1

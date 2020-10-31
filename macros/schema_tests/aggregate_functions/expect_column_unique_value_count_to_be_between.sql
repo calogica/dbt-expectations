@@ -1,9 +1,10 @@
-{% macro test_expect_column_unique_value_count_to_be_between(model) %}
-{% set column_name = kwargs.get('column_name', kwargs.get('arg')) %}
-{% set minimum = kwargs.get('minimum', 0) %}
-{% set maximum = kwargs.get('maximum', kwargs.get('arg')) %}
-{% set partition_column = kwargs.get('partition_column', kwargs.get('arg')) %}
-{% set partition_filter =  kwargs.get('partition_filter', kwargs.get('arg')) %}
+{% macro test_expect_column_unique_value_count_to_be_between(model, column_name,
+                                                            quantile,
+                                                            minimum,
+                                                            maximum,
+                                                            partition_column=None,
+                                                            partition_filter=None
+                                                            ) %}
 with column_aggregate as (
  
     select
