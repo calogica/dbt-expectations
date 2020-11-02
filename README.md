@@ -445,9 +445,31 @@ tests:
       column_B: col_numeric_a
 ```
 
-#### expect_column_pair_values_to_be_in_set
+#### [expect_column_pair_values_to_be_in_set](macros/schema_tests/multi-column/expect_column_pair_values_to_be_in_set.sql)
 
-#### expect_select_column_values_to_be_unique_within_record
+Expect paired values from columns A and B to belong to a set of valid pairs.
+
+Note: value pairs are expressed as lists within lists
+
+```yaml
+tests:
+  - dbt_expectations.expect_column_pair_values_to_be_in_set:
+      column_A: col_numeric_a
+      column_B: col_numeric_b
+      value_pairs_set: [[0, 1], [1, 0], [0.5, 0.5], [0.5, 0.5]]
+```
+
+
+#### [expect_select_column_values_to_be_unique_within_record](macros/schema_tests/multi-column/expect_select_column_values_to_be_unique_within_record.sql)
+
+Expect the values for each record to be unique across the columns listed. Note that records can be duplicated.
+
+```yaml
+tests:
+  - dbt_expectations.expect_select_column_values_to_be_unique_within_record:
+      column_list: ["col_string_a", "col_string_b"]
+      ignore_row_if: "any_value_is_missing"
+```
 
 #### expect_multicolumn_sum_to_equal
 
