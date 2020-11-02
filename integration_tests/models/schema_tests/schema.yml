@@ -1,12 +1,19 @@
 version: 2
 models:
   - name: timeseries_data
+    # tests:
+    #     - dbt_expectations.expect_table_columns_to_match_ordered_list:
+    #         ordered_column_list: ["date_day", "row_value", "row_value_log"]
     columns:
       - name: date_day
         tests:
           - dbt_expectations.expect_row_values_to_have_recent_data:
               datepart: day
               interval: 1
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: date
+          - dbt_expectations.expect_column_values_to_be_in_type_list:
+              column_type_list: [date, datetime]
       - name: row_value
         tests:
           - dbt_expectations.expect_column_values_to_be_within_n_stdevs:
@@ -45,6 +52,8 @@ seeds:
             column_list: ["col_numeric_b", "col_string_a"]
         - dbt_expectations.expect_table_columns_to_match_set:
             column_list: ["idx", "date_col", "col_numeric_a", "col_numeric_b", "col_string_a", "col_string_b", "col_null"]
+        - dbt_expectations.expect_table_columns_to_match_ordered_list:
+            ordered_column_list: ["idx", "date_col", "col_numeric_a", "col_numeric_b", "col_string_a", "col_string_b", "col_null"]
         - dbt_expectations.expect_table_column_count_to_equal_other_table   :
             compare_model: ref("data_test")
         - dbt_expectations.expression_is_true:

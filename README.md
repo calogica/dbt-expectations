@@ -83,7 +83,15 @@ tests:
       expected_number_of_columns: 7
 ```
 
-#### expect_table_columns_to_match_ordered_list
+#### [expect_table_columns_to_match_ordered_list](macros/schema_tests/table_shape/expect_table_columns_to_match_ordered_list.sql)
+
+Expect the columns to exactly match a specified list.
+
+```yaml
+tests:
+  - dbt_expectations.expect_table_columns_to_match_ordered_list:
+      ordered_column_list: ["col_a", "col_b"]
+```
 
 #### [expect_table_columns_to_match_set](macros/schema_tests/table_shape/expect_table_columns_to_match_set.sql)
 
@@ -155,9 +163,25 @@ tests:
   - dbt_expectations.expect_column_values_to_be_null
 ```
 
-#### expect_column_values_to_be_of_type
+#### [expect_column_values_to_be_of_type](macros/schema_tests/column_values_basic/expect_column_values_to_be_of_type.sql)
 
-#### expect_column_values_to_be_in_type_list
+Expect a column to contain values of a specified data type.
+
+```yaml
+tests:
+  - dbt_expectations.expect_column_values_to_be_of_type:
+      column_type: date
+```
+
+#### [expect_column_values_to_be_in_type_list](macros/schema_tests/column_values_basic/expect_column_values_to_be_in_type_list.sql)
+
+Expect a column to contain values from a specified type list.
+
+```yaml
+tests:
+  - dbt_expectations.expect_column_values_to_be_in_type_list:
+      column_type_list: [date, datetime]
+```
 
 ### Sets and ranges
 
