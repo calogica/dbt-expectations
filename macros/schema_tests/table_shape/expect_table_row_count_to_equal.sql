@@ -3,9 +3,12 @@
                                                 partition_column=None,
                                                 partition_filter=None
                                                 ) -%}
-select abs({{ expected_number_of_rows }} - count(*)) 
-from {{ model }}
-{% if partition_column and partition_filter %}
-where {{ partition_column }} {{ partition_filter }}
-{% endif %}
+{% set filter_cond = partition_column ~ " " ~ partition_filter if partition_column and partition_filter else None %}
+{% set expression %}
+count(*) = {{ expected_number_of_rows }}
+{% endset %}
+{{ dbt_expectations.expression_is_true(model, 
+                                        expression=expression,
+                                        filter_cond=filter_cond)
+                                        }}
 {%- endmacro -%}

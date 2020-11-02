@@ -4,16 +4,14 @@
                                                       partition_column=None,
                                                       partition_filter=None
                                                     ) -%}
-with row_count as (
-    select count(*) as cnt 
-    from {{ model }}
-    {% if partition_column and partition_filter %}
-    where {{ partition_column }} {{ partition_filter }}
-    {% endif %}
-)
-select count(*)
-from 
-    row_count
-where cnt < {{ minimum }} or
-      cnt > {{ maximum }}
+{% set expression %}
+count(*) 
+{% endset %}
+{{ dbt_expectations.expression_between(model, 
+                                        expression=expression,
+                                        minimum=minimum, 
+                                        maximum=maximum, 
+                                        partition_column=partition_column, 
+                                        partition_filter=partition_filter
+                                        ) }}      
 {%- endmacro -%}
