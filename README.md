@@ -217,7 +217,7 @@ tests:
       values: ['e','f','g']
 ```
 
-#### expect_column_values_to_be_increasing
+#### [expect_column_values_to_be_increasing](macros/schema_tests/column_values_basic/expect_column_values_to_be_increasing.sql)
 
 Expect column values to be increasing.
 
@@ -229,7 +229,11 @@ tests:
       sort_column: date_day
 ```
 
-#### expect_column_values_to_be_decreasing
+#### [expect_column_values_to_be_decreasing](macros/schema_tests/column_values_basic/expect_column_values_to_be_decreasing.sql)
+
+Expect column values to be decreasing.
+
+If strictly=True, then this expectation is only satisfied if each consecutive value is strictly increasing–equal values are treated as failures.
 
 ```yaml
 tests:
