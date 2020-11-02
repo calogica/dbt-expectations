@@ -1,11 +1,23 @@
-{% macro _test_expression_between(model, 
+{% macro test_expression_between(model,
+                                 expression,
+                                 minimum,
+                                 maximum,
+                                 partition_column=None,
+                                 partition_filter=None
+                                 ) %}
+
+    {{ dbt_expectations.expression_between(model, expression, minimum, maximum, partition_column, partition_filter) }}
+
+{% endmacro %}
+
+{% macro expression_between(model, 
                             expression,
                             minimum,
                             maximum,
                             partition_column=None,
                             partition_filter=None
                             ) %}
-with column_aggregate as (
+with column_expression as (
  
     select
         {{ expression }} as column_val
@@ -22,7 +34,7 @@ from (
     select distinct
         column_val
     from 
-        column_aggregate
+        column_expression
     where 
         not
         (
