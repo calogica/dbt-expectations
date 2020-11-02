@@ -14,6 +14,8 @@ models:
               column_type: date
           - dbt_expectations.expect_column_values_to_be_in_type_list:
               column_type_list: [date, datetime]
+          - dbt_expectations.expect_column_values_to_be_increasing:
+              sort_column: date_day
       - name: row_value
         tests:
           - dbt_expectations.expect_column_values_to_be_within_n_stdevs:
@@ -83,6 +85,8 @@ seeds:
         tests:
           - dbt_expectations.expect_column_to_exist
           - dbt_expectations.expect_column_values_to_be_unique
+          - dbt_expectations.expect_column_values_to_be_increasing:
+              sort_column: idx
 
       - name: col_numeric_a
         tests:
@@ -111,6 +115,9 @@ seeds:
           - dbt_expectations.expect_column_most_common_value_to_be_in_set:
               values: [0.5]
               top_n: 1
+          - dbt_expectations.expect_column_values_to_be_increasing:
+              sort_column: col_numeric_a
+              strictly: false
 
 
       - name: col_string_a

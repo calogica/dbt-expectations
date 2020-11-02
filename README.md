@@ -219,7 +219,24 @@ tests:
 
 #### expect_column_values_to_be_increasing
 
+Expect column values to be increasing.
+
+If strictly=True, then this expectation is only satisfied if each consecutive value is strictly increasing–equal values are treated as failures.
+
+```yaml
+tests:
+  - dbt_expectations.expect_column_values_to_be_increasing:
+      sort_column: date_day
+```
+
 #### expect_column_values_to_be_decreasing
+
+```yaml
+tests:
+  - dbt_expectations.expect_column_values_to_be_decreasing:
+      sort_column: col_numeric_a
+      strictly: false
+```
 
 ### String matching
 
