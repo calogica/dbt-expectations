@@ -1,12 +1,11 @@
-{% macro test_expect_column_stdev_to_be_between(model, column_name,
-                                                    minimum,
-                                                    maximum,
-                                                    partition_column=None,
-                                                    partition_filter=None
-                                                    ) %}
-
+{% macro test_expect_column_proportion_of_unique_values_to_be_between(model, column_name,
+                                                            minimum,
+                                                            maximum,
+                                                            partition_column=None,
+                                                            partition_filter=None
+                                                            ) %}
 {% set expression %}
-stddev({{ column_name }}) 
+count(distinct {{ column_name }})/count({{ column_name }})
 {% endset %}
 {{ dbt_expectations._test_expression_between(model, 
                                                 expression=expression,
@@ -15,4 +14,5 @@ stddev({{ column_name }})
                                                 partition_column=partition_column, 
                                                 partition_filter=partition_filter
                                                 ) }}
+
 {% endmacro %}

@@ -1,5 +1,5 @@
-{% macro _test_agg_between(model, column_name,
-                            agg_func,
+{% macro _test_expression_between(model, 
+                            expression,
                             minimum,
                             maximum,
                             partition_column=None,
@@ -8,7 +8,7 @@
 with column_aggregate as (
  
     select
-        {{ agg_func }}({{ column_name }}) as column_val
+        {{ expression }} as column_val
     from 
         {{ model }}
     {% if partition_column and partition_filter %}
@@ -19,15 +19,16 @@ with column_aggregate as (
 select count(*)
 from (
 
-    select
+    select distinct
         column_val
     from 
         column_aggregate
     where 
+        not
         (
-            column_val < {{ minimum }}
-            or 
-            column_val > {{ maximum }}
+            column_val >= {{ minimum }}
+            and 
+            column_val <= {{ maximum }}
         )
  
     ) validation_errors

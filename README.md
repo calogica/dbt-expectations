@@ -374,7 +374,19 @@ tests:
 ```
 
 
-#### expect_column_proportion_of_unique_values_to_be_between
+#### [expect_column_proportion_of_unique_values_to_be_between](macros/schema_tests/aggregate_functions/expect_column_proportion_of_unique_values_to_be_between.sql)
+
+
+Expect the proportion of unique values to be between a minimum value and a maximum value.
+
+For example, in a column containing [1, 2, 2, 3, 3, 3, 4, 4, 4, 4], there are 4 unique values and 10 total values for a proportion of 0.4.
+
+```yaml
+tests:
+  - dbt_expectations.expect_column_proportion_of_unique_values_to_be_between:
+      minimum: 0
+      maximum: .4
+```
 
 #### [expect_column_most_common_value_to_be_in_set](macros/schema_tests/aggregate_functions/expect_column_most_common_value_to_be_in_set.sql)
 

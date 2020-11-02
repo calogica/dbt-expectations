@@ -4,11 +4,14 @@
                                                 partition_column=None,
                                                 partition_filter=None
                                                 ) %}
-{{ dbt_expectations._test_agg_between(model, column_name=column_name, 
-                                agg_func="max",
-                                minimum=minimum, 
-                                maximum=maximum, 
-                                partition_column=partition_column, 
-                                partition_filter=partition_filter
-                                ) }}
+{% set expression %}
+max({{ column_name }}) 
+{% endset %}
+{{ dbt_expectations._test_expression_between(model, 
+                                                expression=expression,
+                                                minimum=minimum, 
+                                                maximum=maximum, 
+                                                partition_column=partition_column, 
+                                                partition_filter=partition_filter
+                                                ) }}
 {% endmacro %}
