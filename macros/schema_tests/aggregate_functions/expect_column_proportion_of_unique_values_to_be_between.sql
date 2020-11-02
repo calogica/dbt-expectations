@@ -8,11 +8,11 @@
 count(distinct {{ column_name }})/count({{ column_name }})
 {% endset %}
 {{ dbt_expectations.expression_between(model, 
-                                                expression=expression,
-                                                minimum=minimum, 
-                                                maximum=maximum, 
-                                                partition_column=partition_column, 
-                                                partition_filter=partition_filter
-                                                ) }}
+                                        expression=expression,
+                                        minimum=minimum, 
+                                        maximum=maximum, 
+                                        partition_column=partition_column, 
+                                        partition_filter=partition_filter
+                                        ) }}
 
 {% endmacro %}

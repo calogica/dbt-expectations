@@ -10,10 +10,10 @@
 {{ dbt_expectations.percentile_cont(column_name, quantile) }}
 {% endset %}
 {{ dbt_expectations.expression_between(model, 
-                                                expression=expression,
-                                                minimum=minimum, 
-                                                maximum=maximum, 
-                                                partition_column=partition_column, 
-                                                partition_filter=partition_filter
-                                                ) }}
+                                        expression=expression,
+                                        minimum=minimum, 
+                                        maximum=maximum, 
+                                        partition_column=partition_column, 
+                                        partition_filter=partition_filter
+                                        ) }}
 {% endmacro %}
