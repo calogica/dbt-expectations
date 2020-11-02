@@ -12,6 +12,8 @@ packages:
     revision: <for latest release, see https://github.com/calogica/dbt-expectations/releases>
 ```
 
+For latest release, see https://github.com/calogica/dbt-expectations/releases
+
 ## Dependencies
 
 This package includes a reference to [**dbt-date**](https://github.com/calogica/dbt-date) which in turn references [**dbt-utils**](https://github.com/fishtown-analytics/dbt-utils) so there's no need to also import dbt-utils in your local project.
