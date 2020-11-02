@@ -85,6 +85,10 @@ seeds:
         - dbt_expectations.expect_select_column_values_to_be_unique_within_record:
             column_list: ["col_string_a", "col_string_b"]
             ignore_row_if: "any_value_is_missing"
+        - dbt_expectations.expect_multicolumn_sum_to_equal:
+            column_list: ["col_numeric_a", "col_numeric_b"]
+            sum_total: 4
+
 
             
     columns:

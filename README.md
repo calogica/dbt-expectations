@@ -471,7 +471,16 @@ tests:
       ignore_row_if: "any_value_is_missing"
 ```
 
-#### expect_multicolumn_sum_to_equal
+#### [expect_multicolumn_sum_to_equal](macros/schema_tests/multi-column/expect_multicolumn_sum_to_equal.sql)
+
+Expects that sum of all rows for a set of columns is equal to a specific value
+
+```yaml
+tests:
+  - dbt_expectations.expect_multicolumn_sum_to_equal:
+      column_list: ["col_numeric_a", "col_numeric_b"]
+      sum_total: 4
+```
 
 #### [expect_compound_columns_to_be_unique](macros/schema_tests/multi-column/expect_compound_columns_to_be_unique.sql)
 
