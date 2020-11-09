@@ -8,7 +8,7 @@ Include in `packages.yml`
 
 ```yaml
 packages:
-  - git: "git@github.com:calogica/dbt-expectations.git"
+  - git: "https://github.com/calogica/dbt-expectations.git"
     revision: <for latest release, see https://github.com/calogica/dbt-expectations/releases>
 ```
 
