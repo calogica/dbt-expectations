@@ -94,13 +94,17 @@ seeds:
     columns:
       - name: idx
         tests:
-          - dbt_expectations.expect_column_to_exist
+          - dbt_expectations.expect_column_to_exist:
+              column_index: 1
           - dbt_expectations.expect_column_values_to_be_unique
           - dbt_expectations.expect_column_values_to_be_increasing:
               sort_column: idx
 
       - name: col_numeric_a
         tests:
+          - dbt_expectations.expect_column_to_exist
+          - dbt_expectations.expect_column_to_exist:
+              column_index: 3
           - dbt_expectations.expect_column_values_to_not_be_null
           - dbt_expectations.expect_column_values_to_be_between:
               minimum: 0
