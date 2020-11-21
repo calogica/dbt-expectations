@@ -1,5 +1,5 @@
 {% macro test_expect_column_values_to_not_be_in_set(model, column_name,
-                                                   values,
+                                                   value_set,
                                                    partition_column=None,
                                                    partition_filter=None,
                                                    quote_values=True
@@ -18,7 +18,7 @@ with all_values as (
 ),
 set_values as (
 
-    {% for value in values -%}
+    {% for value in value_set -%}
     select 
         {% if quote_values -%}
         '{{ value }}'

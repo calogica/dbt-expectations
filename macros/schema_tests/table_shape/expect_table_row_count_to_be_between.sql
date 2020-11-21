@@ -1,6 +1,6 @@
 {%- macro test_expect_table_row_count_to_be_between(model, 
-                                                      minimum, 
-                                                      maximum, 
+                                                      min_value, 
+                                                      max_value, 
                                                       partition_column=None,
                                                       partition_filter=None
                                                     ) -%}
@@ -9,8 +9,8 @@ count(*)
 {% endset %}
 {{ dbt_expectations.expression_between(model, 
                                         expression=expression,
-                                        minimum=minimum, 
-                                        maximum=maximum, 
+                                        min_value=min_value, 
+                                        max_value=max_value, 
                                         partition_column=partition_column, 
                                         partition_filter=partition_filter
                                         ) }}      

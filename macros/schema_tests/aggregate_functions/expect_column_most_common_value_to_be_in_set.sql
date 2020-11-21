@@ -1,5 +1,5 @@
 {% macro test_expect_column_most_common_value_to_be_in_set(model, column_name,
-                                                            values,
+                                                            value_set,
                                                             top_n,
                                                             quote_values=False,
                                                             partition_column=None,
@@ -40,7 +40,7 @@ value_count_top_n as (
 ),
 set_values as (
 
-    {% for value in values -%}
+    {% for value in value_set -%}
     select 
         {% if quote_values -%}
         '{{ value }}'

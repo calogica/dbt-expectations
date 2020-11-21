@@ -1,19 +1,19 @@
 {% macro test_expression_between(model,
                                  expression,
-                                 minimum,
-                                 maximum,
+                                 min_value,
+                                 max_value,
                                  partition_column=None,
                                  partition_filter=None
                                  ) %}
 
-    {{ dbt_expectations.expression_between(model, expression, minimum, maximum, partition_column, partition_filter) }}
+    {{ dbt_expectations.expression_between(model, expression, min_value, max_value, partition_column, partition_filter) }}
 
 {% endmacro %}
 
 {% macro expression_between(model, 
                             expression,
-                            minimum,
-                            maximum,
+                            min_value,
+                            max_value,
                             partition_column=None,
                             partition_filter=None
                             ) %}
@@ -38,9 +38,9 @@ from (
     where 
         not
         (
-            column_val >= {{ minimum }}
+            column_val >= {{ min_value }}
             and 
-            column_val <= {{ maximum }}
+            column_val <= {{ max_value }}
         )
  
     ) validation_errors
