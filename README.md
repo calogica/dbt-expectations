@@ -267,21 +267,47 @@ tests:
       value: 10
 ```
 
-#### expect_column_values_to_match_regex
+#### [expect_column_values_to_match_regex](macros/schema_tests/string_matching/expect_column_values_to_match_regex.sql)
 
-#### expect_column_values_to_not_match_regex
+Expect column entries to be strings that match a given regular expression. Valid matches can be found anywhere in the string, for example "[at]+" will identify the following strings as expected: "cat", "hat", "aa", "a", and "t", and the following strings as unexpected: "fish", "dog".
 
-#### expect_column_values_to_match_regex_list
+```yaml
+tests:
+  - dbt_expectations.expect_column_values_to_match_regex:
+      regex: "[at]+"
+```
 
-#### expect_column_values_to_not_match_regex_list
 
-#### expect_column_values_to_match_like_pattern
+#### [expect_column_values_to_not_match_regex](macros/schema_tests/string_matching/expect_column_values_to_not_match_regex.sql)
 
-#### expect_column_values_to_not_match_like_pattern
+Expect column entries to be strings that do NOT match a given regular expression. The regex must not match any portion of the provided string. For example, "[at]+" would identify the following strings as expected: "fish”, "dog”, and the following as unexpected: "cat”, "hat”.
 
-#### expect_column_values_to_match_like_pattern_list
+```yaml
+tests:
+  - dbt_expectations.expect_column_values_to_not_match_regex:
+      regex: "[at]+"
+```
 
-#### expect_column_values_to_not_match_like_pattern_list
+
+#### [expect_column_values_to_match_regex_list](macros/schema_tests/string_matching/expect_column_values_to_match_regex_list.sql)
+
+Expect the column entries to be strings that can be matched to either any of or all of a list of regular expressions. Matches can be anywhere in the string.
+
+```yaml
+tests:
+  - dbt_expectations.expect_column_values_to_match_regex_list:
+      regex_list: ["@[^.]*", "&[^.]*"]
+```
+
+#### [expect_column_values_to_not_match_regex_list](macros/schema_tests/string_matching/expect_column_values_to_not_match_regex_list.sql)
+
+Expect the column entries to be strings that do not match any of a list of regular expressions. Matches can be anywhere in the string.
+
+```yaml
+tests:
+  - dbt_expectations.expect_column_values_to_not_match_regex_list:
+      regex_list: ["@[^.]*", "&[^.]*"]
+```
 
 ### Aggregate functions
 
