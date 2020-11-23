@@ -8,10 +8,10 @@
 
 {% set expression %}
 {{ column_name ~ " >= " ~ min_value ~ " or " ~
-   column_name ~ " <= " ~ max_value }}    
+   column_name ~ " <= " ~ max_value }}
 {% endset %}
 
-{{ dbt_expectations.expression_is_true(model, 
+{{ dbt_expectations.expression_is_true(model,
                                         expression=expression,
                                         filter_cond=filter_cond
                                         )

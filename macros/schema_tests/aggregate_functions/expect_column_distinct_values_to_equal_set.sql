@@ -19,7 +19,7 @@ with all_values as (
 set_values as (
 
     {% for value in value_set -%}
-    select 
+    select
         {% if quote_values -%}
         '{{ value }}'
         {%- else -%}
@@ -39,9 +39,9 @@ unique_set_values as (
 validation_errors as (
 
     select
-        count(v.value_field) as column_values, 
+        count(v.value_field) as column_values,
         count(s.value_field) as set_values
-    from 
+    from
         all_values v
         full outer join
         unique_set_values s on v.value_field = s.value_field

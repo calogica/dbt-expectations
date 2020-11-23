@@ -6,6 +6,6 @@ select
 from {{model}}
 where
     datetime({{column_name}}) >= {{ dbt_utils.dateadd(datepart, interval * -1, dbt_date.now()) }}
-    and 
+    and
     date({{column_name}}) <= {{ dbt_date.today() }}
 {% endmacro %}

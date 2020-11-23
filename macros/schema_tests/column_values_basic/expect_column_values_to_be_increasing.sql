@@ -1,4 +1,4 @@
-{% macro test_expect_column_values_to_be_increasing(model, column_name, 
+{% macro test_expect_column_values_to_be_increasing(model, column_name,
                                                    sort_column=None,
                                                    strictly=True,
                                                    partition_column=None,
@@ -23,19 +23,19 @@ add_lag_values as (
     select
         sort_column,
         value_field,
-        lag(value_field) over(order by sort_column) as value_field_lag 
+        lag(value_field) over(order by sort_column) as value_field_lag
     from
         all_values
 
 ),
 validation_errors as (
- 
+
     select
         *
-    from 
+    from
         add_lag_values
     where
-        value_field_lag is not null 
+        value_field_lag is not null
         and
         not (value_field {{ operator }} value_field_lag)
 

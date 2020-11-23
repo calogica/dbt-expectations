@@ -1,5 +1,5 @@
-{%- macro test_expect_table_row_count_to_equal(model, 
-                                                value, 
+{%- macro test_expect_table_row_count_to_equal(model,
+                                                value,
                                                 partition_column=None,
                                                 partition_filter=None
                                                 ) -%}
@@ -7,7 +7,7 @@
 {% set expression %}
 count(*) = {{ value }}
 {% endset %}
-{{ dbt_expectations.expression_is_true(model, 
+{{ dbt_expectations.expression_is_true(model,
                                         expression=expression,
                                         filter_cond=filter_cond)
                                         }}

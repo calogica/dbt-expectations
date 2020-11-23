@@ -6,13 +6,13 @@
                                                     ) %}
 
 {% set expression %}
-stddev({{ column_name }}) 
+stddev({{ column_name }})
 {% endset %}
-{{ dbt_expectations.expression_between(model, 
+{{ dbt_expectations.expression_between(model,
                                         expression=expression,
-                                        min_value=min_value, 
-                                        max_value=max_value, 
-                                        partition_column=partition_column, 
+                                        min_value=min_value,
+                                        max_value=max_value,
+                                        partition_column=partition_column,
                                         partition_filter=partition_filter
                                         ) }}
 {% endmacro %}

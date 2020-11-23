@@ -1,4 +1,4 @@
-{% macro test_expect_compound_columns_to_be_unique(model, 
+{% macro test_expect_compound_columns_to_be_unique(model,
                                                     column_list,
                                                     quote_columns=False,
                                                     ignore_row_if="all_values_are_missing",
@@ -40,7 +40,7 @@ validation_errors as (
     from compound_column_values
     where 1=1
     {% if ignore_row_if == "all_values_are_missing" %}
-        and 
+        and
         (
             {% for column in columns -%}
             {{ column }} is not null{% if not loop.last %} and {% endif %}
@@ -57,6 +57,6 @@ validation_errors as (
     group by column_key
     having count(*) > 1
 
-) 
+)
 select count(*) from validation_errors
 {% endmacro %}

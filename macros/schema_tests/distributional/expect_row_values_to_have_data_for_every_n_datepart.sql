@@ -1,8 +1,8 @@
-{%- macro test_expect_row_values_to_have_data_for_every_n_datepart(model, 
-                                                                    date_col, 
-                                                                    date_part="day", 
-                                                                    filter_cond=None, 
-                                                                    test_start_date=None, 
+{%- macro test_expect_row_values_to_have_data_for_every_n_datepart(model,
+                                                                    date_col,
+                                                                    date_part="day",
+                                                                    filter_cond=None,
+                                                                    test_start_date=None,
                                                                     test_end_date=None) -%}
 {% if not execute %}
     {{ return('') }}
@@ -11,10 +11,10 @@
 {% if not test_start_date or not test_end_date %}
     {% set sql %}
 
-        select 
-            min({{ date_col }}) as start_date, 
-            max({{ date_col }}) as end_date 
-        from {{ model }} 
+        select
+            min({{ date_col }}) as start_date,
+            max({{ date_col }}) as end_date
+        from {{ model }}
         {% if filter_cond %}
         where {{ filter_cond }}
         {% endif %}
@@ -62,13 +62,13 @@ model_data as
     group by
         1
 ),
-{# date_part_dates as 
+{# date_part_dates as
 (
     select
         cast({{ dbt_utils.date_trunc(date_part, 'date_' ~ date_part ) }} as date) as date_{{date_part}}
     from
         date_spine d
-    group by 
+    group by
         1
 ), #}
 final as

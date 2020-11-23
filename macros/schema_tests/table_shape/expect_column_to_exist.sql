@@ -13,6 +13,6 @@
 {%- else -%}
     {%- set matching_column = relation_columns | selectattr("name", "eq", column_name) | first %}
 {%- endif %}
-select 1 - {{ 1 if matching_column else 0 }} 
+select 1 - {{ 1 if matching_column else 0 }}
 {%- endif -%}
 {%- endmacro -%}

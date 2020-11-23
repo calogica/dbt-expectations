@@ -1,4 +1,4 @@
-{% macro test_expect_select_column_values_to_be_unique_within_record(model, 
+{% macro test_expect_select_column_values_to_be_unique_within_record(model,
                                                     column_list,
                                                     quote_columns=False,
                                                     ignore_row_if="all_values_are_missing",
@@ -32,7 +32,7 @@ with column_values as (
         and {{ partition_column }} {{ partition_filter }}
     {% endif %}
     {% if ignore_row_if == "all_values_are_missing" %}
-        and 
+        and
         (
             {% for column in columns -%}
             {{ column }} is not null{% if not loop.last %} and {% endif %}
@@ -56,7 +56,7 @@ unpivot_columns as (
     {% endfor %}
 ),
 validation_errors as (
-    
+
     select
         row_index,
         count(distinct column_value) as column_values
@@ -64,6 +64,6 @@ validation_errors as (
     group by 1
     having count(distinct column_value) < {{ columns | length }}
 
-) 
+)
 select count(*) from validation_errors
 {% endmacro %}

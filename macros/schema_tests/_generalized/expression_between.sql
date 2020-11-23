@@ -10,7 +10,7 @@
 
 {% endmacro %}
 
-{% macro expression_between(model, 
+{% macro expression_between(model,
                             expression,
                             min_value,
                             max_value,
@@ -18,10 +18,10 @@
                             partition_filter=None
                             ) %}
 with column_expression as (
- 
+
     select
         {{ expression }} as column_val
-    from 
+    from
         {{ model }}
     {% if partition_column and partition_filter %}
     where {{ partition_column }} {{ partition_filter }}
@@ -33,15 +33,15 @@ from (
 
     select distinct
         column_val
-    from 
+    from
         column_expression
-    where 
+    where
         not
         (
             column_val >= {{ min_value }}
-            and 
+            and
             column_val <= {{ max_value }}
         )
- 
+
     ) validation_errors
 {% endmacro %}

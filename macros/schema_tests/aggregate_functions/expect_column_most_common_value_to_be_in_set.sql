@@ -21,7 +21,7 @@ with value_counts as (
 ),
 value_counts_ranked as (
 
-    select 
+    select
         *,
         row_number() over(order by value_count desc) as value_count_rank
     from
@@ -30,7 +30,7 @@ value_counts_ranked as (
 ),
 value_count_top_n as (
 
-    select 
+    select
         value_field
     from
         value_counts_ranked
@@ -41,7 +41,7 @@ value_count_top_n as (
 set_values as (
 
     {% for value in value_set -%}
-    select 
+    select
         {% if quote_values -%}
         '{{ value }}'
         {%- else -%}
@@ -62,7 +62,7 @@ validation_errors as (
     -- values from the model that are not in the set
     select
         v.value_field
-    from 
+    from
         value_count_top_n v
         left outer join
         unique_set_values s on v.value_field = s.value_field

@@ -1,5 +1,5 @@
 
-{% macro test_expect_multicolumn_sum_to_equal(model, 
+{% macro test_expect_multicolumn_sum_to_equal(model,
                                                 column_list,
                                                 sum_total,
                                                 partition_column=None,
@@ -14,7 +14,7 @@ sum({{ column }}){% if not loop.last %} + {% endif %}
 {% endfor %} = {{ sum_total }}
 {% endset %}
 
-{{ dbt_expectations.expression_is_true(model, 
+{{ dbt_expectations.expression_is_true(model,
                                         expression=expression,
                                         filter_cond=filter_cond
                                         )

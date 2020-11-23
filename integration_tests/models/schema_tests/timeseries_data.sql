@@ -16,13 +16,13 @@ add_row_values as (
 ),
 add_logs as (
 
-    select 
+    select
         *,
         log(nullif(row_value, 0)) as row_value_log
     from
         add_row_values
 )
-select 
+select
     *
 from
     add_logs

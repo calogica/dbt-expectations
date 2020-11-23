@@ -19,7 +19,7 @@ with all_values as (
 set_values as (
 
     {% for value in value_set -%}
-    select 
+    select
         {% if quote_values -%}
         '{{ value }}'
         {%- else -%}
@@ -40,7 +40,7 @@ validation_errors as (
     -- values in set that are not in the list of values from the model
     select
         s.value_field
-    from 
+    from
         unique_set_values s
         left outer join
         all_values v on s.value_field = v.value_field

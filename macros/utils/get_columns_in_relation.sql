@@ -20,9 +20,9 @@ with bound_views as (
         numeric_precision,
         numeric_scale
 
-    from 
+    from
         information_schema."columns"
-    where 
+    where
         table_name = '{{ relation.identifier }}'
 
 ),
@@ -58,11 +58,11 @@ unbound_views as (
             else null
         end as numeric_scale
 
-    from 
+    from
         pg_get_late_binding_view_cols()
             cols(view_schema name, view_name name, col_name name,
                 col_type varchar, ordinal_position int)
-    where 
+    where
         view_name = '{{ relation.identifier }}'
 
 ),
@@ -77,10 +77,10 @@ select
     *
 from unioned
 {% if relation.schema %}
-where 
+where
     table_schema = '{{ relation.schema }}'
 {% endif %}
-order by 
+order by
     ordinal_position
 
 {% endmacro %}
@@ -101,7 +101,7 @@ select
 from
     {{ relation.information_schema('columns') }}
 
-where 
+where
     table_name ilike '{{ relation.identifier }}'
     {% if relation.schema %}
     and table_schema ilike '{{ relation.schema }}'
@@ -109,7 +109,7 @@ where
     {% if relation.database %}
     and table_catalog ilike '{{ relation.database }}'
     {% endif %}
-order by 
+order by
     ordinal_position
 {% endmacro %}
 
@@ -127,12 +127,12 @@ select
     numeric_scale
 
 from {{ relation.information_schema('columns') }}
-where 
+where
     table_name = '{{ relation.identifier }}'
     {% if relation.schema %}
     and table_schema = '{{ relation.schema }}'
     {% endif %}
-order by 
+order by
     ordinal_position
 {% endmacro %}
 
@@ -145,6 +145,6 @@ select
     data_type
 
 from `{{ relation.database }}`.`{{ relation.schema }}`.INFORMATION_SCHEMA.COLUMNS
-where 
+where
     table_name = '{{ relation.identifier }}'
 {% endmacro %}
