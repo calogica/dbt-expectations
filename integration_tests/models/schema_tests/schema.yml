@@ -3,11 +3,17 @@ models:
   - name: emails
     columns:
       - name: email_address
-        tests: 
+        tests:
           - dbt_expectations.expect_column_values_to_match_regex:
               regex: "@[^.]*"
           - dbt_expectations.expect_column_values_to_not_match_regex:
               regex: "&[^.]*"
+          - dbt_expectations.expect_column_values_to_match_regex_list:
+              regex_list: ["@[^.]*", "&[^.]*"]
+          - dbt_expectations.expect_column_values_to_not_match_regex_list:
+              regex_list: ["@[^.]*", "&[^.]*"]
+
+
 
   - name: timeseries_data
     # tests:
@@ -99,7 +105,7 @@ seeds:
             sum_total: 4
 
 
-            
+
     columns:
       - name: idx
         tests:
