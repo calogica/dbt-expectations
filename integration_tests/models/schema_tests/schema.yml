@@ -1,5 +1,14 @@
 version: 2
 models:
+  - name: emails
+    columns:
+      - name: email_address
+        tests: 
+          - dbt_expectations.expect_column_values_to_match_regex:
+              regex: "@[^.]*"
+          - dbt_expectations.expect_column_values_to_not_match_regex:
+              regex: "&[^.]*"
+
   - name: timeseries_data
     # tests:
     #     - dbt_expectations.expect_table_columns_to_match_ordered_list:
