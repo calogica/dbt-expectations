@@ -194,7 +194,7 @@ Expect each column value to be in a given set.
 ```yaml
 tests:
   - dbt_expectations.expect_column_values_to_be_in_set:
-      value_set ['a','b','c']
+      value_set: ['a','b','c']
 ```
 
 #### [expect_column_values_to_be_between](macros/schema_tests/column_values_basic/expect_column_values_to_be_between.sql)
@@ -216,7 +216,7 @@ Expect each column value not to be in a given set.
 ```yaml
 tests:
   - dbt_expectations.expect_column_values_to_not_be_in_set:
-      value_set ['e','f','g']
+      value_set: ['e','f','g']
 ```
 
 #### [expect_column_values_to_be_increasing](macros/schema_tests/column_values_basic/expect_column_values_to_be_increasing.sql)
@@ -361,7 +361,7 @@ Expect the set of distinct column values to be contained by a given set.
 ```yaml
 tests:
   - dbt_expectations.expect_column_distinct_values_to_be_in_set:
-      value_set ['a','b','c','d']
+      value_set: ['a','b','c','d']
 ```
 
 #### [expect_column_distinct_values_to_contain_set](macros/schema_tests/aggregate_functions/expect_column_distinct_values_to_contain_set.sql)
@@ -373,7 +373,7 @@ In contrast to `expect_column_values_to_be_in_set` this ensures not that all col
 ```yaml
 tests:
   - dbt_expectations.expect_column_distinct_values_to_contain_set:
-      value_set ['a','b']
+      value_set: ['a','b']
 ```
 
 #### [expect_column_distinct_values_to_equal_set](macros/schema_tests/aggregate_functions/expect_column_distinct_values_to_equal_set.sql)
@@ -385,7 +385,7 @@ In contrast to `expect_column_distinct_values_to_contain_set` this ensures not o
 ```yaml
 tests:
   - dbt_expectations.expect_column_distinct_values_to_equal_set:
-      value_set ['a','b','c']
+      value_set: ['a','b','c']
 ```
 
 #### [expect_column_mean_to_be_between](macros/schema_tests/aggregate_functions/expect_column_mean_to_be_between.sql)
@@ -466,7 +466,7 @@ Expect the most common value to be within the designated value set
 ```yaml
 tests:
   - dbt_expectations.expect_column_most_common_value_to_be_in_set:
-      value_set [0.5]
+      value_set: [0.5]
       top_n: 1
 ```
 
