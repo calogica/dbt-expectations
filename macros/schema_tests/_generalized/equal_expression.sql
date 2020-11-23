@@ -1,4 +1,4 @@
-{%- macro get_select(model, expression, filter_cond, group_by) %}
+{%- macro get_select(model, expression, row_condition, group_by) %}
     select
         {% for g in group_by -%}
             {{ g }} as col_{{ loop.index }},
@@ -6,9 +6,9 @@
         {{ expression }} as expression
     from
         {{ model }}
-    {%- if filter_cond %}
+    {%- if row_condition %}
     where
-        {{ filter_cond }}
+        {{ row_condition }}
     {% endif %}
     group by
         {% for g in group_by -%}
@@ -21,22 +21,22 @@
                                 compare_expression=None,
                                 group_by=["'col'"],
                                 compare_group_by=None,
-                                filter_cond=None,
-                                compare_filter_cond=None,
+                                row_condition=None,
+                                compare_row_condition=None,
                                 tolerance=0.0,
                                 tolerance_percent=None) -%}
 
     {%- set compare_model = model if not compare_model else compare_model -%}
     {%- set compare_expression = expression if not compare_expression else compare_expression -%}
-    {%- set compare_filter_cond = filter_cond if not compare_filter_cond else compare_filter_cond -%}
+    {%- set compare_row_condition = row_condition if not compare_row_condition else compare_row_condition -%}
     {%- set compare_group_by = group_by if not compare_group_by else compare_group_by -%}
 
     {%- set n_cols = group_by|length %}
     with a as (
-        {{ dbt_expectations.get_select(model, expression, filter_cond, group_by) }}
+        {{ dbt_expectations.get_select(model, expression, row_condition, group_by) }}
     ),
     b as (
-        {{ dbt_expectations.get_select(compare_model, compare_expression, compare_filter_cond, compare_group_by) }}
+        {{ dbt_expectations.get_select(compare_model, compare_expression, compare_row_condition, compare_group_by) }}
     ),
     final as (
 

@@ -1,8 +1,7 @@
 {% macro test_expect_column_values_to_not_be_in_set(model, column_name,
                                                    value_set,
-                                                   partition_column=None,
-                                                   partition_filter=None,
-                                                   quote_values=True
+                                                   quote_values=True,
+                                                   row_condition=None
                                                    ) %}
 
 with all_values as (
@@ -11,8 +10,8 @@ with all_values as (
         {{ column_name }} as value_field
 
     from {{ model }}
-    {% if partition_column and partition_filter %}
-    where {{ partition_column }} {{ partition_filter }}
+    {% if row_condition %}
+    where {{ row_condition }}
     {% endif %}
 
 ),

@@ -2,11 +2,10 @@
                                  expression,
                                  min_value,
                                  max_value,
-                                 partition_column=None,
-                                 partition_filter=None
+                                 row_condition=None
                                  ) %}
 
-    {{ dbt_expectations.expression_between(model, expression, min_value, max_value, partition_column, partition_filter) }}
+    {{ dbt_expectations.expression_between(model, expression, min_value, max_value, row_condition) }}
 
 {% endmacro %}
 
@@ -14,34 +13,17 @@
                             expression,
                             min_value,
                             max_value,
-                            partition_column=None,
-                            partition_filter=None
+                            row_condition
                             ) %}
-with column_expression as (
 
-    select
-        {{ expression }} as column_val
-    from
-        {{ model }}
-    {% if partition_column and partition_filter %}
-    where {{ partition_column }} {{ partition_filter }}
-    {% endif %}
+{% set expression %}
+{{ expression }} >= {{ min_value }} and
+{{ expression }} <= {{ max_value }}
+{% endset %}
 
-)
-select count(*)
-from (
+{{ dbt_expectations.expression_is_true(model,
+                                        expression=expression,
+                                        row_condition=row_condition)
+                                        }}
 
-    select distinct
-        column_val
-    from
-        column_expression
-    where
-        not
-        (
-            column_val >= {{ min_value }}
-            and
-            column_val <= {{ max_value }}
-        )
-
-    ) validation_errors
 {% endmacro %}

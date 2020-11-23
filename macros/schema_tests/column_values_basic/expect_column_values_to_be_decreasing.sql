@@ -1,8 +1,7 @@
 {% macro test_expect_column_values_to_be_decreasing(model, column_name,
                                                    sort_column=None,
                                                    strictly=True,
-                                                   partition_column=None,
-                                                   partition_filter=None) %}
+                                                   row_condition=None) %}
 
 {%- set sort_column = column_name if not sort_column else sort_column -%}
 {%- set operator = "<" if strictly else "<=" %}
@@ -13,8 +12,8 @@ with all_values as (
         {{ column_name }} as value_field
 
     from {{ model }}
-    {% if partition_column and partition_filter %}
-    where {{ partition_column }} {{ partition_filter }}
+    {% if row_condition %}
+    where {{ row_condition }}
     {% endif %}
 
 ),

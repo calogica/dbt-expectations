@@ -1,20 +1,24 @@
-{% macro test_expect_column_values_to_be_unique(model, column_name,
-                                                   partition_column=None,
-                                                   partition_filter=None) %}
+{% macro test_expect_column_values_to_be_unique(model, column_name, row_condition=None) %}
 
-select count(*)
-from (
+with column_values as (
 
     select
-        {{ column_name }}
-
+        {{ column_name }} as column_name
     from {{ model }}
-    where {{ column_name }} is not null
-    {% if partition_column and partition_filter %}
-        and {{ partition_column }} {{ partition_filter }}
+    where 1=1
+    {% if row_condition %}
+        and {{ row_condition }}
     {% endif %}
-    group by {{ column_name }}
+
+),
+validation_errors as (
+
+    select
+        column_name
+    from column_values
+    group by 1
     having count(*) > 1
 
-) validation_errors
+)
+select count(*) from validation_errors
 {% endmacro %}

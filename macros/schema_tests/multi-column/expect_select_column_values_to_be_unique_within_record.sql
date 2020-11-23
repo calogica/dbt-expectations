@@ -2,8 +2,7 @@
                                                     column_list,
                                                     quote_columns=False,
                                                     ignore_row_if="all_values_are_missing",
-                                                    partition_column=None,
-                                                    partition_filter=None
+                                                    row_condition=None
                                                     ) %}
 
 {% if not quote_columns %}
@@ -28,8 +27,8 @@ with column_values as (
         {%- endfor %}
     from {{ model }}
     where 1=1
-    {% if partition_column and partition_filter %}
-        and {{ partition_column }} {{ partition_filter }}
+    {% if row_condition %}
+        and {{ row_condition }}
     {% endif %}
     {% if ignore_row_if == "all_values_are_missing" %}
         and

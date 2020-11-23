@@ -1,8 +1,7 @@
 {% macro test_expect_column_max_to_be_between(model, column_name,
                                                 min_value,
                                                 max_value,
-                                                partition_column=None,
-                                                partition_filter=None
+                                                row_condition=None
                                                 ) %}
 {% set expression %}
 max({{ column_name }})
@@ -11,7 +10,6 @@ max({{ column_name }})
                                         expression=expression,
                                         min_value=min_value,
                                         max_value=max_value,
-                                        partition_column=partition_column,
-                                        partition_filter=partition_filter
+                                        row_condition=row_condition
                                         ) }}
 {% endmacro %}

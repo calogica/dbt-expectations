@@ -2,8 +2,7 @@
                                                             quantile,
                                                             min_value,
                                                             max_value,
-                                                            partition_column=None,
-                                                            partition_filter=None
+                                                            row_condition=None
                                                             ) %}
 
 {% set expression %}
@@ -13,7 +12,6 @@
                                         expression=expression,
                                         min_value=min_value,
                                         max_value=max_value,
-                                        partition_column=partition_column,
-                                        partition_filter=partition_filter
+                                        row_condition=row_condition
                                         ) }}
 {% endmacro %}

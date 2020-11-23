@@ -2,8 +2,7 @@
                                                             value_set,
                                                             top_n,
                                                             quote_values=False,
-                                                            partition_column=None,
-                                                            partition_filter=None
+                                                            row_condition=None
                                                             ) %}
 
 with value_counts as (
@@ -13,8 +12,8 @@ with value_counts as (
         count(*) as value_count
 
     from {{ model }}
-    {% if partition_column and partition_filter %}
-    where {{ partition_column }} {{ partition_filter }}
+    {% if row_condition %}
+    where {{ row_condition }}
     {% endif %}
     group by 1
 

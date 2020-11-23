@@ -2,10 +2,10 @@
                                  expression,
                                  test_condition="= true",
                                  group_by_columns=None,
-                                 filter_cond=None
+                                 row_condition=None
                                  ) %}
 
-    {{ dbt_expectations.expression_is_true(model, expression, test_condition, group_by_columns, filter_cond) }}
+    {{ dbt_expectations.expression_is_true(model, expression, test_condition, group_by_columns, row_condition) }}
 
 {% endmacro %}
 
@@ -13,7 +13,7 @@
                                  expression,
                                  test_condition="= true",
                                  group_by_columns=None,
-                                 filter_cond=None
+                                 row_condition=None
                                  ) %}
 
 
@@ -27,9 +27,9 @@ with grouped_expression as (
         {% endif %}
         {{ expression }} as expression
     from {{ model }}
-     {%- if filter_cond %}
+     {%- if row_condition %}
     where
-        {{ filter_cond }}
+        {{ row_condition }}
     {% endif %}
     {% if group_by_columns %}
     group by

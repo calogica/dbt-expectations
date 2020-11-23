@@ -2,10 +2,9 @@
                                                         column_A,
                                                         column_B,
                                                         value_pairs_set,
-                                                        partition_column=None,
-                                                        partition_filter=None
+                                                        row_condition=None
                                                         ) %}
-{% set filter_cond = partition_column ~ " " ~ partition_filter if partition_column and partition_filter else None %}
+
 {% set expression %}
 {% for pair in value_pairs_set %}
 {%- if (pair | length) == 2 %}
@@ -20,7 +19,7 @@
 {% endset %}
 {{ dbt_expectations.expression_is_true(model,
                                         expression=expression,
-                                        filter_cond=filter_cond
+                                        row_condition=row_condition
                                         )
                                         }}
 
