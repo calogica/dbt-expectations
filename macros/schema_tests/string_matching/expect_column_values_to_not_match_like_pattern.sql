@@ -3,9 +3,7 @@
                                                     row_condition=None
                                                     ) %}
 
-{% set expression %}
-{{ column_name }} not like '{{ like_pattern }}'
-{% endset %}
+{% set expression = dbt_expectations._get_like_pattern_expression(column_name, like_pattern, positive=False) %}
 
 {{ dbt_expectations.expression_is_true(model,
                                         expression=expression,

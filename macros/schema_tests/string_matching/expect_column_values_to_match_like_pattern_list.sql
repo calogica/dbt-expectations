@@ -6,7 +6,7 @@
 
 {% set expression %}
     {% for like_pattern in like_pattern_list %}
-    {{ column_name }} like '{{ like_pattern }}'
+    {{ dbt_expectations._get_like_pattern_expression(column_name, like_pattern, positive=True) }}
     {%- if not loop.last %}
     {{ " and " if match_on == "all" else " or "}}
     {% endif -%}

@@ -309,6 +309,49 @@ tests:
       regex_list: ["@[^.]*", "&[^.]*"]
 ```
 
+#### [expect_column_values_to_match_like_pattern](macros/schema_tests/string_matching/expect_column_values_to_match_like_pattern.sql)
+
+Expect column entries to be strings that match a given SQL `like` pattern.
+
+```yaml
+tests:
+  - dbt_expectations.expect_column_values_to_match_like_pattern:
+      like_pattern: "%@%"
+```
+
+#### [expect_column_values_to_not_match_like_pattern](macros/schema_tests/string_matching/expect_column_values_to_not_match_like_pattern.sql)
+
+Expect column entries to be strings that do not match a given SQL `like` pattern.
+
+```yaml
+tests:
+  - dbt_expectations.expect_column_values_to_not_match_like_pattern:
+      like_pattern: "%&%"
+```
+
+
+#### [expect_column_values_to_match_like_pattern_list](macros/schema_tests/string_matching/expect_column_values_to_match_like_pattern_list.sql)
+
+Expect the column entries to be strings that match any of a list of SQL `like` patterns.
+
+```yaml
+tests:
+  - dbt_expectations.expect_column_values_to_match_like_pattern_list:
+      like_pattern_list: ["%@%", "%&%"]
+```
+
+
+#### [expect_column_values_to_not_match_like_pattern_list](macros/schema_tests/string_matching/expect_column_values_to_not_match_like_pattern_list.sql)
+
+Expect the column entries to be strings that do not match any of a list of SQL `like` patterns.
+
+```yaml
+tests:
+  - dbt_expectations.expect_column_values_to_not_match_like_pattern_list:
+      like_pattern_list: ["%@%", "%&%"]
+```
+
+
 ### Aggregate functions
 
 #### [expect_column_distinct_values_to_be_in_set](macros/schema_tests/aggregate_functions/expect_column_distinct_values_to_be_in_set.sql)
