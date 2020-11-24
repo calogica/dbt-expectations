@@ -55,7 +55,7 @@ models:
               take_logs: false
 
 
-seeds:
+# seeds:
   - name: data_test
     tests:
         - dbt_expectations.expect_compound_columns_to_be_unique:

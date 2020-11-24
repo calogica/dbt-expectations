@@ -29,9 +29,5 @@ quoting:
     identifier: false
     schema: false
 
-seeds:
-  +quote_columns: false
-  schema: dbt_expectations_integration_tests
-
 models:
   schema: dbt_expectations_integration_tests
