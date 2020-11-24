@@ -5,7 +5,7 @@
     )
 }}
 
-select 'ab@gmail.com' as email_address, '@[^.]*' as regexp
+select 'ab@gmail.com' as email_address, '@[^.]*' as reg_exp
 
 union all
 

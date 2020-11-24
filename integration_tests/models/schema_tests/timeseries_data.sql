@@ -10,7 +10,7 @@ add_row_values as (
 
     select
         d.date_day,
-        cast(floor(100*rand()) as {{ dbt_utils.type_int() }}) as row_value
+        cast(floor(100*{{ dbt_expectations.rand() }}) as {{ dbt_utils.type_int() }}) as row_value
     from
         date_dimension d
 ),
@@ -18,7 +18,7 @@ add_logs as (
 
     select
         *,
-        log(nullif(row_value, 0)) as row_value_log
+        {{ dbt_expectations.log_natural('nullif(row_value, 0)') }} as row_value_log
     from
         add_row_values
 )
