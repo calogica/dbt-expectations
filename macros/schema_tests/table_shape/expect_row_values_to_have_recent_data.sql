@@ -5,7 +5,7 @@ select
     end as error_result
 from {{model}}
 where
-    datetime({{column_name}}) >= {{ dbt_utils.dateadd(datepart, interval * -1, dbt_date.now()) }}
+    cast({{column_name}} as datetime) >= {{ dbt_utils.dateadd(datepart, interval * -1, dbt_date.now()) }}
     and
-    date({{column_name}}) <= {{ dbt_date.today() }}
+    cast({{column_name}} as date) <= {{ dbt_date.today() }}
 {% endmacro %}

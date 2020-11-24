@@ -10,7 +10,7 @@ add_row_values as (
 
     select
         d.date_day,
-        cast(floor(100*{{ dbt_expectations.rand() }}) as {{ dbt_utils.type_int() }}) as row_value
+        cast(floor(100 * abs({{ dbt_expectations.rand() }})) as {{ dbt_utils.type_int() }}) as row_value
     from
         date_dimension d
 ),

@@ -1,14 +1,8 @@
-{% macro rand(seed) -%}
-    {{ adapter.dispatch('rand', packages=dbt_expectations._get_namespaces()) (seed) }}
+{% macro rand() -%}
+    {{ adapter.dispatch('rand', packages=dbt_expectations._get_namespaces()) () }}
 {% endmacro %}
 
-{% macro default__rand(seed) %}
-
-    rand({{ seed }})
-
-{%- endmacro -%}
-
-{% macro bigquery__rand(seed) %}
+{% macro bigquery__rand() %}
 
     rand()
 
@@ -16,6 +10,6 @@
 
 {% macro snowflake__rand(seed) %}
 
-    random({{ seed }})
+    uniform(0::float, 1::float, random())
 
 {%- endmacro -%}
