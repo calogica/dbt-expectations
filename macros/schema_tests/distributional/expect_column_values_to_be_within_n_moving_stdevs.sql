@@ -1,3 +1,13 @@
+{%- macro _get_metric_expression(metric_column, take_logs) -%}
+
+{%- if take_logs %}
+coalesce(log(nullif({{ metric_column }}, 0)), 0)
+{%- else -%}
+coalesce({{ metric_column }}, 0)
+{%- endif %}
+
+{%- endmacro -%}
+
 {% macro test_expect_column_values_to_be_within_n_moving_stdevs(model,
                                   column_name,
                                   group_by,
@@ -5,74 +15,82 @@
                                   trend_days=7,
                                   test_days=14,
                                   sigma_threshold=3,
+                                  take_diffs=true,
                                   take_logs=true
                                 ) %}
-with grouped_metric_values as (
+with metric_values as (
 
-    select
-        {{ group_by }} as metric_date,
-        sum({{ column_name }}) as {{ column_name }}_metric_value
+    with grouped_metric_values as (
+
+        select
+            {{ group_by }} as metric_date,
+            sum({{ column_name }}) as agg_metric_value
+        from
+            {{ model }}
+        group by
+            1
+
+    ),
+    {%- if take_diffs %}
+    grouped_metric_values_with_priors as (
+
+        select
+            *,
+            lag(agg_metric_value, {{ lookback_days }}) over(order by metric_date) as prior_agg_metric_value
     from
-        {{ model }}
-    group by
-        1
+        grouped_metric_values d
 
-),
-grouped_metric_values_with_priors as (
-
+    )
     select
         *,
-        lag({{ column_name }}_metric_value, {{ lookback_days }}) over(order by metric_date) as {{ column_name }}_prior_metric_value
-  from
-      grouped_metric_values d
-
-),
-metric_diffs as (
-
-    select
-        *,
-        {%- if take_logs %}
-        coalesce(log(nullif({{ column_name }}_metric_value, 0)), 0) -
-            coalesce(log(nullif({{ column_name }}_prior_metric_value, 0)), 0) as {{ column_name }}_metric_diff
-        {%- else -%}
-        coalesce({{ column_name }}_metric_value, 0) -
-            coalesce({{ column_name }}_prior_metric_value, 0) as {{ column_name }}_metric_diff
-        {%- endif %}
+        {{ dbt_expectations._get_metric_expression("agg_metric_value", take_logs) }}
+        -
+        {{ dbt_expectations._get_metric_expression("prior_agg_metric_value", take_logs) }}
+        as metric_test_value
     from
         grouped_metric_values_with_priors d
 
-),
-metric_diffs_moving_calcs as (
+    {%- else %}
 
     select
         *,
-        avg({{ column_name }}_metric_diff)
-            over(order by metric_date rows
-                    between {{ trend_days }} preceding and 1 preceding) as {{ column_name }}_metric_diff_rolling_average,
-        stddev({{ column_name }}_metric_diff)
-            over(order by metric_date rows
-                    between {{ trend_days }} preceding and 1 preceding) as {{ column_name }}_metric_diff_rolling_stddev
+        {{ dbt_expectations._get_metric_expression("agg_metric_value", take_logs) }}
     from
-        metric_diffs
+        grouped_metric_values
+
+    {%- endif %}
 
 ),
-metric_diffs_sigma as (
+metric_moving_calcs as (
 
     select
         *,
-        ({{ column_name }}_metric_diff - {{ column_name }}_metric_diff_rolling_average) as {{ column_name }}_metric_diff_delta,
-        ({{ column_name }}_metric_diff - {{ column_name }}_metric_diff_rolling_average)/
-            {{ column_name }}_metric_diff_rolling_stddev as {{ column_name }}_metric_diff_sigma
+        avg(metric_test_value)
+            over(order by metric_date rows
+                    between {{ trend_days }} preceding and 1 preceding) as metric_test_rolling_average,
+        stddev(metric_test_value)
+            over(order by metric_date rows
+                    between {{ trend_days }} preceding and 1 preceding) as metric_test_rolling_stddev
     from
-        metric_diffs_moving_calcs
+        metric_values
+
+),
+metric_sigma as (
+
+    select
+        *,
+        (metric_test_value - metric_test_rolling_average) as metric_test_delta,
+        (metric_test_value - metric_test_rolling_average)/metric_test_rolling_stddev as metric_test_sigma
+    from
+        metric_moving_calcs
 
 )
 select
     count(*)
 from
-    metric_diffs_sigma
+    metric_sigma
 where
     metric_date >= date({{ dbt_date.n_days_ago(test_days) }}) and
     metric_date < {{ dbt_date.today() }} and
-    abs({{ column_name }}_metric_diff_sigma) > {{ sigma_threshold }}
+    abs(metric_test_sigma) > {{ sigma_threshold }}
 {%- endmacro -%}
