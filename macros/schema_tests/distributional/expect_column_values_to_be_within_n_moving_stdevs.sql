@@ -1,7 +1,8 @@
 {%- macro _get_metric_expression(metric_column, take_logs) -%}
 
 {%- if take_logs %}
-coalesce(log(nullif({{ metric_column }}, 0)), 0)
+{%- set expr = "nullif(" ~ metric_column ~ ", 0)" -%}
+coalesce({{ dbt_expectations.log_natural(expr) }}, 0)
 {%- else -%}
 coalesce({{ metric_column }}, 0)
 {%- endif %}

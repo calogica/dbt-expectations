@@ -15,7 +15,7 @@ with metric_values as (
         1
     {%- else -%}
     select
-        {{ column_name }} as {{ column_name }},
+        {{ column_name }} as {{ column_name }}
     from
         {{ model }}
     {%- endif %}

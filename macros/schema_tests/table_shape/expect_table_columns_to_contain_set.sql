@@ -1,4 +1,8 @@
-{%- macro test_expect_table_columns_to_contain_set(model, column_list) -%}
-{%- set matching_columns = adapter.get_columns_in_relation(model) | selectattr("name", "in", column_list) | list -%}
-select {{ column_list | length }} - {{ matching_columns | length }}
+{%- macro test_expect_table_columns_to_contain_set(model, column_list, transform="upper") -%}
+{%- if execute -%}
+    {%- set column_list = column_list | map(transform) | list -%}
+    {%- set relation_column_names = dbt_expectations._get_column_list(model, transform) -%}
+    {%- set matching_columns = dbt_expectations._list_intersect(column_list, relation_column_names) -%}
+    select {{ column_list | length }} - {{ matching_columns | length }}
+{%- endif -%}
 {%- endmacro -%}
