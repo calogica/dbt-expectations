@@ -15,9 +15,15 @@ coalesce({{ metric_column }}, 0)
                                   trend_days=7,
                                   test_days=14,
                                   sigma_threshold=3,
+                                  sigma_threshold_upper=None,
+                                  sigma_threshold_lower=None,
                                   take_diffs=true,
                                   take_logs=true
                                 ) %}
+
+{%- set sigma_threshold_upper = sigma_threshold_upper if sigma_threshold_upper else sigma_threshold -%}
+{%- set sigma_threshold_lower = sigma_threshold_lower if sigma_threshold_lower else -1 * sigma_threshold -%}
+
 with metric_values as (
 
     with grouped_metric_values as (
@@ -92,5 +98,8 @@ from
 where
     metric_date >= date({{ dbt_date.n_days_ago(test_days) }}) and
     metric_date < {{ dbt_date.today() }} and
-    abs(metric_test_sigma) > {{ sigma_threshold }}
+    not (
+        metric_test_sigma >= {{ sigma_threshold_lower }} and
+        metric_test_sigma <= {{ sigma_threshold_upper }}
+    )
 {%- endmacro -%}
