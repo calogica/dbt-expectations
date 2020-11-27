@@ -1,10 +1,4 @@
-
-{{
-    config(
-        materialized = 'view'
-    )
-}}
-select 1 as idx, '2020-10-21' as date_col, cast(0 as {{ dbt_utils.type_float() }}) as col_numeric_a, cast(1 as {{ dbt_utils.type_float() }}) as col_numeric_b, 'a' as col_string_a, 'b' as col_string_b, null as col_null
+select 1 as idx, '2020-10-21' as date_col, cast(0 as {{ dbt_utils.type_float() }}) as col_numeric_a, cast(1 as {{ dbt_utils.type_float() }}) as col_numeric_b, 'a' as col_string_a, 'b' as col_string_b, cast(null as {{ dbt_utils.type_string() }}) as col_null
 
 union all
 
