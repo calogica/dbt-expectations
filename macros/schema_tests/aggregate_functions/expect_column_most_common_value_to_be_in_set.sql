@@ -2,13 +2,18 @@
                                                             value_set,
                                                             top_n,
                                                             quote_values=False,
+                                                            data_type="decimal",
                                                             row_condition=None
                                                             ) %}
 
 with value_counts as (
 
     select
-        {{ column_name }} as value_field,
+        {% if quote_values -%}
+        {{ column_name }}
+        {%- else -%}
+        cast({{ column_name }} as {{ data_type }})
+        {%- endif %} as value_field,
         count(*) as value_count
 
     from {{ model }}
@@ -44,7 +49,7 @@ set_values as (
         {% if quote_values -%}
         '{{ value }}'
         {%- else -%}
-        {{ value }}
+        cast({{ value }} as {{ data_type }})
         {%- endif %} as value_field
     {% if not loop.last %}union all{% endif %}
     {% endfor %}
@@ -60,13 +65,11 @@ unique_set_values as (
 validation_errors as (
     -- values from the model that are not in the set
     select
-        v.value_field
+        value_field
     from
-        value_count_top_n v
-        left outer join
-        unique_set_values s on v.value_field = s.value_field
+        value_count_top_n
     where
-        v.value_field is null
+        value_field not in (select value_field from unique_set_values)
 
 )
 
