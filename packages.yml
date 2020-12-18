@@ -1,5 +1,5 @@
 packages:
-  - git: "https://github.com/calogica/dbt-date.git"
-    revision: 0.2.2
+  - package: calogica/dbt_date
+    version: [">=0.2.0", "<0.3.0"]
   - package: fishtown-analytics/spark_utils
-    version: 0.1.0
+    version: [">=0.1.0", "<0.2.0"]
