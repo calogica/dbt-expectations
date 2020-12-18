@@ -1,5 +1,7 @@
 with date_dimension as (
+
     {{ dbt_date.get_base_dates(n_dateparts=12, datepart='month') }}
+
 ),
 add_row_values as (
 
@@ -8,6 +10,7 @@ add_row_values as (
         cast(floor(100 * abs({{ dbt_expectations.rand() }})) as {{ dbt_utils.type_int() }}) as row_value
     from
         date_dimension d
+
 ),
 add_logs as (
 
