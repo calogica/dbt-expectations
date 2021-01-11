@@ -8,8 +8,9 @@ Include in `packages.yml`
 
 ```yaml
 packages:
-  - git: "https://github.com/calogica/dbt-expectations.git"
-    revision: <for latest release, see https://github.com/calogica/dbt-expectations/releases>
+  - package: calogica/dbt_expectations
+    version: [">=0.2.0", "<0.3.0"]
+    # <see https://github.com/calogica/dbt-expectations/releases/latest> for the latest version tag
 ```
 
 For latest release, see https://github.com/calogica/dbt-expectations/releases
