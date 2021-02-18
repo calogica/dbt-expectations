@@ -3,7 +3,7 @@
 # and underscores. A good package name should reflect your organization's
 # name or the intended use of these models
 name: 'dbt_expectations'
-version: '0.1.0'
+version: '0.2.3'
 
 require-dbt-version: [">=0.18.0", "<0.20.0"]
 config-version: 2
