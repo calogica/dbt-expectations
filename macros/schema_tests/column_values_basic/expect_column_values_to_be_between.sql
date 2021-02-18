@@ -5,15 +5,15 @@
                                                    ) %}
 
 {% set expression %}
-{{ column_name ~ " >= " ~ min_value ~ " or " ~
-   column_name ~ " <= " ~ max_value }}
+{{ column_name }}
 {% endset %}
 
-{{ dbt_expectations.expression_is_true(model,
+{{ dbt_expectations.expression_between(model,
                                         expression=expression,
+                                        min_value=min_value,
+                                        max_value=max_value,
                                         row_condition=row_condition
-                                        )
-                                        }}
+                                        ) }}
 
 
 {% endmacro %}
