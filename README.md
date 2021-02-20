@@ -421,6 +421,31 @@ tests:
 
 ### Aggregate functions
 
+
+#### [expect_column_distinct_count_to_equal](macros/schema_tests/aggregate_functions/expect_column_distinct_count_to_equal.sql)
+
+Expect the number of distinct column values to be equal to a given value.
+
+*Applies to:* Column
+
+```yaml
+tests:
+  - dbt_expectations.expect_column_distinct_count_to_equal:
+      value: 10
+```
+
+#### [expect_column_distinct_count_to_be_greater_than](macros/schema_tests/aggregate_functions/expect_column_distinct_count_to_be_greater_than.sql)
+
+Expect the number of distinct column values to be greater than a given value.
+
+*Applies to:* Column
+
+```yaml
+tests:
+  - dbt_expectations.expect_column_distinct_count_to_be_greater_than:
+      value: 10
+```
+
 #### [expect_column_distinct_values_to_be_in_set](macros/schema_tests/aggregate_functions/expect_column_distinct_values_to_be_in_set.sql)
 
 Expect the set of distinct column values to be contained by a given set.
