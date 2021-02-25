@@ -39,12 +39,26 @@
 {% endif %}
 {% endset %}
 
-{% set column_expression %}
-{{ dbt_utils.surrogate_key(column_list ) }}
-{% endset %}
+with validation_errors as (
 
-{{ dbt_expectations.test_expect_column_values_to_be_unique(model, column_expression, row_condition=row_condition_ext) }}
+    select
+        {% for column in columns -%}
+        {{ column }}{% if not loop.last %},{% endif %}
+        {%- endfor %}
+    from {{ model }}
+    where 1=1
+    {% if row_condition %}
+        and {{ row_condition }}
+    {% endif %}
+    group by
+        {% for column in columns -%}
+        {{ column }}{% if not loop.last %},{% endif %}
+        {%- endfor %}
+    having count(*) > 1
 
+)
+select count(*) from validation_errors
 {% endmacro %}
+
 
 
