@@ -11,10 +11,11 @@ coalesce({{ metric_column }}, 0)
 
 {% macro test_expect_column_values_to_be_within_n_moving_stdevs(model,
                                   column_name,
-                                  group_by,
-                                  lookback_days=1,
-                                  trend_days=7,
-                                  test_days=14,
+                                  date_column_name,
+                                  period='day',
+                                  lookback_periods=1,
+                                  trend_periods=7,
+                                  test_periods=14,
                                   sigma_threshold=3,
                                   sigma_threshold_upper=None,
                                   sigma_threshold_lower=None,
@@ -30,7 +31,7 @@ with metric_values as (
     with grouped_metric_values as (
 
         select
-            {{ group_by }} as metric_date,
+            {{ dbt_utils.date_trunc(period, date_column_name) }} as metric_period,
             sum({{ column_name }}) as agg_metric_value
         from
             {{ model }}
@@ -43,7 +44,7 @@ with metric_values as (
 
         select
             *,
-            lag(agg_metric_value, {{ lookback_days }}) over(order by metric_date) as prior_agg_metric_value
+            lag(agg_metric_value, {{ lookback_periods }}) over(order by metric_period) as prior_agg_metric_value
     from
         grouped_metric_values d
 
@@ -73,11 +74,11 @@ metric_moving_calcs as (
     select
         *,
         avg(metric_test_value)
-            over(order by metric_date rows
-                    between {{ trend_days }} preceding and 1 preceding) as metric_test_rolling_average,
+            over(order by metric_period rows
+                    between {{ trend_periods }} preceding and 1 preceding) as metric_test_rolling_average,
         stddev(metric_test_value)
-            over(order by metric_date rows
-                    between {{ trend_days }} preceding and 1 preceding) as metric_test_rolling_stddev
+            over(order by metric_period rows
+                    between {{ trend_periods }} preceding and 1 preceding) as metric_test_rolling_stddev
     from
         metric_values
 
@@ -87,7 +88,7 @@ metric_sigma as (
     select
         *,
         (metric_test_value - metric_test_rolling_average) as metric_test_delta,
-        (metric_test_value - metric_test_rolling_average)/metric_test_rolling_stddev as metric_test_sigma
+        (metric_test_value - metric_test_rolling_average)/nullif(metric_test_rolling_stddev, 0) as metric_test_sigma
     from
         metric_moving_calcs
 
@@ -97,8 +98,14 @@ select
 from
     metric_sigma
 where
-    metric_date >= date({{ dbt_date.n_days_ago(test_days) }}) and
-    metric_date < {{ dbt_date.today() }} and
+
+    metric_period >= cast(
+            {{ dbt_utils.dateadd(period, -test_periods, dbt_utils.date_trunc(period, dbt_date.now())) }}
+            as {{ dbt_utils.type_timestamp() }})
+    and
+    metric_period < {{ dbt_utils.date_trunc(period, dbt_date.now()) }}
+    and
+
     not (
         metric_test_sigma >= {{ sigma_threshold_lower }} and
         metric_test_sigma <= {{ sigma_threshold_upper }}
