@@ -44,15 +44,15 @@ models:
           - dbt_expectations.expect_column_values_to_be_within_n_stdevs:
               sigma_threshold: 6
           - dbt_expectations.expect_column_values_to_be_within_n_moving_stdevs:
-              group_by: date_day
+              date_column_name: date_day
               sigma_threshold: 6
               take_logs: true
-
 
   - name: timeseries_data_extended
     tests:
         - dbt_expectations.expect_table_columns_to_match_ordered_list:
             column_list: ["date_day", "row_value", "row_value_log"]
+
     columns:
       - name: date_day
         tests:
@@ -77,9 +77,33 @@ models:
       - name: row_value_log
         tests:
           - dbt_expectations.expect_column_values_to_be_within_n_moving_stdevs:
-              group_by: date_day
+              date_column_name: cast(date_day as datetime)
               sigma_threshold: 6
               take_logs: false
+
+  - name: timeseries_hourly_data_extended
+    columns:
+      - name: date_hour
+        tests:
+          - dbt_expectations.expect_row_values_to_have_recent_data:
+              datepart: hour
+              interval: 12
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: datetime
+          - dbt_expectations.expect_column_values_to_be_in_type_list:
+              column_type_list: [date, datetime]
+
+
+      - name: row_value_log
+        tests:
+          - dbt_expectations.expect_column_values_to_be_within_n_moving_stdevs:
+              date_column_name: cast(date_hour as datetime)
+              period: hour
+              trend_periods: 48
+              test_periods: 12
+              sigma_threshold: 6
+              take_logs: true
+
 
   - name: data_test
     tests:
