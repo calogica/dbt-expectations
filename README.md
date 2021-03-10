@@ -715,10 +715,11 @@ Expects changes in metric values to be within Z sigma away from a moving average
 ```yaml
 tests:
   - dbt_expectations.expect_column_values_to_be_within_n_moving_stdevs:
-      group_by: date_day
-      lookback_days: 1
-      trend_days: 7
-      test_days: 14
+      date_column_name: date
+      period: day
+      lookback_periods: 1
+      trend_periods: 7
+      test_periods: 14
       sigma_threshold: 3
       take_logs: true
 ```
