@@ -4,6 +4,16 @@
                                                             quote_values=False,
                                                             data_type="decimal",
                                                             row_condition=None
+                                                            ) -%}
+    {{ adapter.dispatch('test_expect_column_most_common_value_to_be_in_set', packages = dbt_expectations._get_namespaces()) (model, column_name, value_set, top_n, quote_values, data_type, row_condition) }}
+{%- endmacro %}
+
+{% macro default__test_expect_column_most_common_value_to_be_in_set(model, column_name,
+                                                            value_set,
+                                                            top_n,
+                                                            quote_values,
+                                                            data_type,
+                                                            row_condition
                                                             ) %}
 
 with value_counts as (

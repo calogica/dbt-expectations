@@ -21,6 +21,34 @@ coalesce({{ metric_column }}, 0)
                                   sigma_threshold_lower=None,
                                   take_diffs=true,
                                   take_logs=true
+                                ) -%}
+    {{ adapter.dispatch('test_expect_column_values_to_be_within_n_moving_stdevs', packages = dbt_expectations._get_namespaces()) (model,
+                                  column_name,
+                                  date_column_name,
+                                  period,
+                                  lookback_periods,
+                                  trend_periods,
+                                  test_periods,
+                                  sigma_threshold,
+                                  sigma_threshold_upper,
+                                  sigma_threshold_lower,
+                                  take_diffs,
+                                  take_logs
+                                ) }}
+{%- endmacro %}
+
+{% macro default__test_expect_column_values_to_be_within_n_moving_stdevs(model,
+                                  column_name,
+                                  date_column_name,
+                                  period,
+                                  lookback_periods,
+                                  trend_periods,
+                                  test_periods,
+                                  sigma_threshold,
+                                  sigma_threshold_upper,
+                                  sigma_threshold_lower,
+                                  take_diffs,
+                                  take_logs
                                 ) %}
 
 {%- set sigma_threshold_upper = sigma_threshold_upper if sigma_threshold_upper else sigma_threshold -%}
