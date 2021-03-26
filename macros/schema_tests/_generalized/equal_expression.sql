@@ -1,4 +1,8 @@
-{%- macro get_select(model, expression, row_condition, group_by) %}
+{% macro get_select(model, expression, row_condition, group_by) -%}
+    {{ adapter.dispatch('get_select', packages = dbt_expectations._get_namespaces()) (model, expression, row_condition, group_by) }}
+{%- endmacro %}
+
+{%- macro default__get_select(model, expression, row_condition, group_by) %}
     select
         {% for g in group_by -%}
             {{ g }} as col_{{ loop.index }},
@@ -16,7 +20,8 @@
         {% endfor %}
 {% endmacro -%}
 
-{%- macro test_equal_expression(model, expression,
+
+{% macro test_equal_expression(model, expression,
                                 compare_model=None,
                                 compare_expression=None,
                                 group_by=["'col'"],
@@ -25,6 +30,26 @@
                                 compare_row_condition=None,
                                 tolerance=0.0,
                                 tolerance_percent=None) -%}
+    {{ adapter.dispatch('test_equal_expression', packages = dbt_expectations._get_namespaces()) (model, expression,
+                                compare_model,
+                                compare_expression,
+                                group_by,
+                                compare_group_by,
+                                row_condition,
+                                compare_row_condition,
+                                tolerance,
+                                tolerance_percent) }}
+{%- endmacro %}
+
+{%- macro default__test_equal_expression(model, expression,
+                                compare_model,
+                                compare_expression,
+                                group_by,
+                                compare_group_by,
+                                row_condition,
+                                compare_row_condition,
+                                tolerance,
+                                tolerance_percent) -%}
 
     {%- set compare_model = model if not compare_model else compare_model -%}
     {%- set compare_expression = expression if not compare_expression else compare_expression -%}
