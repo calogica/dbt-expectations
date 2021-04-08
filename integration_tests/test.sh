@@ -1,8 +1,16 @@
-dbt run --target bq &&
-dbt test --target bq &&
+if [[ $# -gt 0 ]]
+then
 
-dbt run --target snowflake &&
-dbt test --target snowflake &&
+i=1;
+for t in "$@"
+do
 
-dbt run --target spark &&
-dbt test --target spark
+    dbt seed -t $t &&
+    dbt run -t $t &&
+    dbt test -t $t
+
+done
+
+else
+    echo "Please specify one or more targets as command-line arguments, i.e. test.sh bq snowflake"
+fi
