@@ -240,3 +240,9 @@ models:
       - name: col_null
         tests:
           - dbt_expectations.expect_column_values_to_be_null
+
+  - name : data_test_factored
+    tests :
+        - dbt_expectations.expect_table_row_count_to_equal_other_table_times_factor:
+            compare_model: ref("data_test")
+            factor: 2
