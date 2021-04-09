@@ -83,6 +83,21 @@ models: # or seeds:
         compare_model: ref("other_model")
 ```
 
+#### [expect_table_column_count_to_equal_other_table_times_factor](macros/schema_tests/table_shape/expect_table_column_count_to_equal_other_table_times_factor.sql)
+
+Expect the number of columns in a model to match another model times a preconfigured factor.
+
+*Applies to:* Model, Seed, Source
+
+```yaml
+models: # or seeds:
+  - name: my_model
+    tests:
+    - dbt_expectations.expect_table_column_count_to_equal_other_table_times_factor:
+        compare_model: ref("other_model")
+        factor: 13
+```
+
 #### [expect_table_column_count_to_equal](macros/schema_tests/table_shape/expect_table_column_count_to_equal.sql)
 
 Expect the number of columns in a model to be equal to `expected_number_of_columns`.
