@@ -117,9 +117,6 @@ models:
             max_value: 4
         - dbt_expectations.expect_table_row_count_to_equal_other_table:
             compare_model: ref("data_test")
-        - dbt_expectations.expect_table_row_count_to_equal_other_table_times_factor:
-            compare_model: ref("data_test")
-            factor: 1
         - dbt_expectations.expect_table_column_count_to_equal:
             value: 7
         - dbt_expectations.expect_table_column_count_to_be_between:
@@ -243,3 +240,9 @@ models:
       - name: col_null
         tests:
           - dbt_expectations.expect_column_values_to_be_null
+
+  - name : data_test_factored
+    tests :
+        - dbt_expectations.expect_table_row_count_to_equal_other_table_times_factor:
+            compare_model: ref("data_test")
+            factor: 2
