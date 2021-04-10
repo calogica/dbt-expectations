@@ -35,7 +35,7 @@ models:
           - dbt_expectations.expect_column_values_to_be_of_type:
               column_type: date
           - dbt_expectations.expect_column_values_to_be_in_type_list:
-              column_type_list: [date, TIMESTAMP WITHOUT TIME ZONE]
+              column_type_list: [date, "{{ dbt_expectations.type_datetime() | trim }}"]
           - dbt_expectations.expect_column_values_to_be_increasing:
               sort_column: date_day
 
@@ -62,7 +62,7 @@ models:
           - dbt_expectations.expect_column_values_to_be_of_type:
               column_type: date
           - dbt_expectations.expect_column_values_to_be_in_type_list:
-              column_type_list: [date, "{{ dbt_utils.type_timestamp() | trim }}"]
+              column_type_list: [date, "{{ dbt_expectations.type_datetime() | trim }}"]
 
       - name: row_value
         tests:
@@ -77,7 +77,7 @@ models:
       - name: row_value_log
         tests:
           - dbt_expectations.expect_column_values_to_be_within_n_moving_stdevs:
-              date_column_name: cast(date_day as {{ dbt_utils.type_timestamp() }})
+              date_column_name: cast(date_day as {{ dbt_expectations.type_datetime() }})
               sigma_threshold: 6
               take_logs: false
 
@@ -91,13 +91,13 @@ models:
           # - dbt_expectations.expect_column_values_to_be_of_type:
           #     column_type: datetime
           - dbt_expectations.expect_column_values_to_be_in_type_list:
-              column_type_list: ["{{ dbt_utils.type_timestamp() | trim }}"]
+              column_type_list: ["{{ dbt_expectations.type_datetime() | trim }}"]
 
 
       - name: row_value_log
         tests:
           - dbt_expectations.expect_column_values_to_be_within_n_moving_stdevs:
-              date_column_name: cast(date_hour as {{ dbt_utils.type_timestamp() }})
+              date_column_name: cast(date_hour as {{ dbt_expectations.type_datetime() }})
               period: hour
               trend_periods: 48
               test_periods: 12
