@@ -19,3 +19,9 @@
     uniform(0::float, 1::float, random())
 
 {%- endmacro -%}
+
+{% macro postgres__rand() %}
+
+    random()
+
+{%- endmacro -%}

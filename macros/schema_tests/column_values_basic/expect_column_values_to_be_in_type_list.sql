@@ -8,7 +8,8 @@
     {%- set matching_column_types = [] -%}
 
     {%- for column in columns_in_relation -%}
-        {%- if ((column.name | upper ) == column_name) and ((column.dtype | upper ) in column_type_list) -%}
+            {{ log(column ~ ": " ~ (column.dtype | upper) ~ " - " ~ column_type_list | list ~ " - " ~ ((column.dtype | upper ) in column_type_list), info=true)}}
+        {%- if ((column.name | upper ) == column_name) and ((column.dtype | upper ) in (column_type_list | list)) -%}
             {%- do matching_column_types.append(column.name) -%}
         {%- endif -%}
     {%- endfor -%}

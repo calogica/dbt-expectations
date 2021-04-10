@@ -12,7 +12,7 @@ row_values as (
 add_row_values as (
 
     select
-        cast(d.date_hour as datetime) as date_hour,
+        cast(d.date_hour as {{ dbt_utils.type_timestamp() }}) as date_hour,
         cast(floor(100 * r.generated_number) as {{ dbt_utils.type_int() }}) as row_value
     from
         dates d
