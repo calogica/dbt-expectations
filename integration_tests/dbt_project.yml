@@ -23,7 +23,7 @@ require-dbt-version: ">=0.18.1"
 
 vars:
     'dbt_date:time_zone': 'America/Los_Angeles'
-    dbt_utils_dispatch_list: [spark_utils]
+    dbt_utils_dispatch_list: [spark_utils, dbt_expectations_integration_tests]
 
 quoting:
     database: false
