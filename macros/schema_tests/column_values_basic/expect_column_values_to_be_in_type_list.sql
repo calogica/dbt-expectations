@@ -3,13 +3,12 @@
 
     {%- set column_name = column_name | upper -%}
     {%- set columns_in_relation = adapter.get_columns_in_relation(model) -%}
-    {%- set column_type_list = column_type_list| map("upper") -%}
+    {%- set column_type_list = column_type_list| map("upper") | list -%}
 
     {%- set matching_column_types = [] -%}
 
     {%- for column in columns_in_relation -%}
-            {{ log(column ~ ": " ~ (column.dtype | upper) ~ " - " ~ column_type_list | list ~ " - " ~ ((column.dtype | upper ) in column_type_list), info=true)}}
-        {%- if ((column.name | upper ) == column_name) and ((column.dtype | upper ) in (column_type_list | list)) -%}
+        {%- if ((column.name | upper ) == column_name) and ((column.dtype | upper ) in column_type_list) -%}
             {%- do matching_column_types.append(column.name) -%}
         {%- endif -%}
     {%- endfor -%}
