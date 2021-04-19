@@ -84,7 +84,7 @@
     )
     -- DEBUG:
     -- select * from final
-    select expression_difference from final
+    select coalesce(sum(expression_difference), 0) from final
     where
         expression_difference > {{ tolerance }}
         {% if tolerance_percent %}
