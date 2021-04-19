@@ -136,6 +136,12 @@ models:
             expression: sum(col_numeric_a)
             compare_model: ref("data_test")
             group_by: [idx]
+        - dbt_expectations.equal_expression:
+            expression: sum(col_numeric_a)
+            compare_expression: sum(col_numeric_a * .5)
+            compare_model: ref("data_test")
+            group_by: [idx]
+            tolerance_percent: .5
         - dbt_expectations.expect_column_pair_values_to_be_in_set:
             column_A: col_numeric_a
             column_B: col_numeric_b
