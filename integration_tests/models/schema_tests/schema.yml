@@ -117,6 +117,8 @@ models:
             max_value: 4
         - dbt_expectations.expect_table_row_count_to_equal_other_table:
             compare_model: ref("data_test")
+            row_condition: 1=1
+            compare_row_condition: 1=1
         - dbt_expectations.expect_table_column_count_to_equal:
             value: 7
         - dbt_expectations.expect_table_column_count_to_be_between:
