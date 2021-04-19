@@ -29,8 +29,12 @@
                                 row_condition=None,
                                 compare_row_condition=None,
                                 tolerance=0.0,
-                                tolerance_percent=None) -%}
-    {{ adapter.dispatch('test_equal_expression', packages = dbt_expectations._get_namespaces()) (model, expression,
+                                tolerance_percent=None,
+                                return_difference=False
+                                ) -%}
+
+    {{ adapter.dispatch('test_equal_expression', packages = dbt_expectations._get_namespaces()) (
+                                model, expression,
                                 compare_model,
                                 compare_expression,
                                 group_by,
@@ -38,10 +42,12 @@
                                 row_condition,
                                 compare_row_condition,
                                 tolerance,
-                                tolerance_percent) }}
+                                tolerance_percent,
+                                return_difference) }}
 {%- endmacro %}
 
-{%- macro default__test_equal_expression(model, expression,
+{%- macro default__test_equal_expression(
+                                model, expression,
                                 compare_model,
                                 compare_expression,
                                 group_by,
@@ -49,7 +55,8 @@
                                 row_condition,
                                 compare_row_condition,
                                 tolerance,
-                                tolerance_percent) -%}
+                                tolerance_percent,
+                                return_difference) -%}
 
     {%- set compare_model = model if not compare_model else compare_model -%}
     {%- set compare_expression = expression if not compare_expression else compare_expression -%}
@@ -84,10 +91,17 @@
     )
     -- DEBUG:
     -- select * from final
-    select coalesce(sum(expression_difference), 0) from final
+    select
+        {% if return_difference %}
+        coalesce(sum(expression_difference), 0)
+        {% else %}
+        count(*)
+        {% endif %}
+    from final
     where
-        expression_difference > {{ tolerance }}
         {% if tolerance_percent %}
-        and expression_difference_percent > {{ tolerance_percent }}
+        expression_difference_percent > {{ tolerance_percent }}
+        {% else %}
+        expression_difference > {{ tolerance }}
         {% endif %}
 {%- endmacro -%}
