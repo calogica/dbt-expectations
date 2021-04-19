@@ -4,6 +4,8 @@ Extension package for [**dbt**](https://github.com/fishtown-analytics/dbt) inspi
 
 ## Install
 
+Check [dbt Hub](https://hub.getdbt.com/calogica/dbt_expectations/latest/) for the latest installation instructions, or [read the docs](https://docs.getdbt.com/docs/package-management) for more information on installing packages.
+
 Include in `packages.yml`
 
 ```yaml
