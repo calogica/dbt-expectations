@@ -15,7 +15,7 @@ packages:
     # <see https://github.com/calogica/dbt-expectations/releases/latest> for the latest version tag
 ```
 
-For latest release, see https://github.com/calogica/dbt-expectations/releases
+For latest release, see [https://github.com/calogica/dbt-expectations/releases](https://github.com/calogica/dbt-expectations/releases)
 
 ## Dependencies
 
@@ -56,6 +56,19 @@ Expect the specified column to exist.
 ```yaml
 tests:
 - dbt_expectations.expect_column_to_exist
+```
+
+#### [expect_row_values_to_have_recent_data](macros/schema_tests/table_shape/expect_row_values_to_have_recent_data.sql)
+
+Expect the model to have rows that are at least as recent as the defined interval prior to the current timestamp.
+
+*Applies to:* Column
+
+```yaml
+tests:
+  - dbt_expectations.expect_table_column_count_to_be_between:
+        datepart: day
+        interval: 1
 ```
 
 #### [expect_table_column_count_to_be_between](macros/schema_tests/table_shape/expect_table_column_count_to_be_between.sql)
@@ -351,7 +364,6 @@ tests:
       regex: "[at]+"
 ```
 
-
 #### [expect_column_values_to_not_match_regex](macros/schema_tests/string_matching/expect_column_values_to_not_match_regex.sql)
 
 Expect column entries to be strings that do NOT match a given regular expression. The regex must not match any portion of the provided string. For example, "[at]+" would identify the following strings as expected: "fish”, "dog”, and the following as unexpected: "cat”, "hat”.
@@ -437,7 +449,6 @@ tests:
 ```
 
 ### Aggregate functions
-
 
 #### [expect_column_distinct_count_to_equal](macros/schema_tests/aggregate_functions/expect_column_distinct_count_to_equal.sql)
 
@@ -680,7 +691,6 @@ tests:
       column_B: col_numeric_b
       value_pairs_set: [[0, 1], [1, 0], [0.5, 0.5], [0.5, 0.5]]
 ```
-
 
 #### [expect_select_column_values_to_be_unique_within_record](macros/schema_tests/multi-column/expect_select_column_values_to_be_unique_within_record.sql)
 
