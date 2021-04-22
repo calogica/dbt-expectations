@@ -539,6 +539,40 @@ tests:
       value_set: ['a','b','c']
 ```
 
+
+#### [expect_column_distinct_count_to_equal_other_table](macros/schema_tests/aggregate_functions/expect_column_distinct_count_to_equal_other_table.sql)
+
+Expect the number of distinct column values to be equal to number of distinct values in another model.
+
+*Applies to:* Model, Column, Seed, Source
+
+This can be applied to a model:
+
+```yaml
+models: # or seeds:
+  - name: my_model_1
+    tests:
+      - dbt_expectations.expect_column_distinct_count_to_equal_other_table:
+          column_name: col_1
+          compare_model: ref("my_model_2")
+          compare_column_name: col_2
+```
+
+or at the column level:
+
+```yaml
+models: # or seeds:
+  - name: my_model_1
+    columns:
+      - name: col_1
+        tests:
+          - dbt_expectations.expect_column_distinct_count_to_equal_other_table:
+              compare_model: ref("my_model_2")
+              compare_column_name: col_2
+```
+
+If `compare_model` or `compare_column_name` are no specified, `model` and `column_name` are substituted. So, one could compare distinct counts of two different columns in the same model, or identically named columns in separate models etc.
+
 #### [expect_column_mean_to_be_between](macros/schema_tests/aggregate_functions/expect_column_mean_to_be_between.sql)
 
 Expect the column mean to be between a min_value value and a max_value value (inclusive).
