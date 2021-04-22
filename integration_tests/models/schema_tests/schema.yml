@@ -254,3 +254,17 @@ models:
         - dbt_expectations.expect_table_row_count_to_equal_other_table_times_factor:
             compare_model: ref("data_test")
             factor: 2
+
+  - name : timeseries_data_grouped
+    tests :
+        - dbt_expectations.expect_grouped_row_values_to_have_recent_data:
+            group_by: [group_id]
+            timestamp_column: date_day
+            datepart: day
+            interval: 1
+        - dbt_expectations.expect_grouped_row_values_to_have_recent_data:
+            group_by: [group_id, row_value]
+            timestamp_column: date_day
+            datepart: day
+            interval: 1
+
