@@ -262,4 +262,9 @@ models:
             timestamp_column: date_day
             datepart: day
             interval: 1
+        - dbt_expectations.expect_grouped_row_values_to_have_recent_data:
+            group_by: [group_id, row_value]
+            timestamp_column: date_day
+            datepart: day
+            interval: 1
 

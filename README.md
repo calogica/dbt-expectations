@@ -71,6 +71,31 @@ tests:
         interval: 1
 ```
 
+#### [expect_grouped_row_values_to_have_recent_data](macros/schema_tests/table_shape/expect_grouped_row_values_to_have_recent_data.sql)
+
+Expect the model to have **grouped** rows that are at least as recent as the defined interval prior to the current timestamp.
+Uuse this to test whether there is recent data for each grouped row defined by `group_by` (which is a list of columns) and a `timestamp_column`.
+
+*Applies to:* Model, Seed, Source
+
+```yaml
+models: # or seeds:
+  - name : my_model
+    tests :
+        - dbt_expectations.expect_grouped_row_values_to_have_recent_data:
+            group_by: [group_id]
+            timestamp_column: date_day
+            datepart: day
+            interval: 1
+        # or also:
+        - dbt_expectations.expect_grouped_row_values_to_have_recent_data:
+            group_by: [group_id, other_group_id]
+            timestamp_column: date_day
+            datepart: day
+            interval: 1
+```
+
+
 #### [expect_table_column_count_to_be_between](macros/schema_tests/table_shape/expect_table_column_count_to_be_between.sql)
 
 Expect the number of columns in a model to be between two values.
