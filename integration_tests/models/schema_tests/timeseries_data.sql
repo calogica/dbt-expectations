@@ -1,6 +1,6 @@
 with dates as (
 
-    {{ dbt_date.get_base_dates(n_dateparts=12, datepart='month') }}
+    select * from {{ ref('timeseries_base') }}
 
 ),
 add_row_values as (
