@@ -1,13 +1,10 @@
 with dates as (
 
-    {{ dbt_utils.date_spine('hour',
-        start_date=dbt_date.n_days_ago(10),
-        end_date=dbt_date.today()
-        ) }}
+    select * from {{ ref('timeseries_hourly') }}
 
 ),
 row_values as (
-    {{ dbt_utils.generate_series(upper_bound=10) }}
+    select * from {{ ref('series_10') }}
 ),
 add_row_values as (
 

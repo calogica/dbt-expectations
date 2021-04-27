@@ -1,10 +1,10 @@
 with dates as (
 
-    {{ dbt_date.get_base_dates(n_dateparts=12, datepart='month') }}
+    select * from {{ ref('timeseries_base') }}
 
 ),
 row_values as (
-    {{ dbt_utils.generate_series(upper_bound=10) }}
+    select * from {{ ref('series_10') }}
 ),
 add_row_values as (
 
