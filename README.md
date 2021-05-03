@@ -4,6 +4,8 @@ Extension package for [**dbt**](https://github.com/fishtown-analytics/dbt) inspi
 
 ## Install
 
+`db-expectations` currently support `dbt 0.19.x`.
+
 Check [dbt Hub](https://hub.getdbt.com/calogica/dbt_expectations/latest/) for the latest installation instructions, or [read the docs](https://docs.getdbt.com/docs/package-management) for more information on installing packages.
 
 Include in `packages.yml`
@@ -17,11 +19,11 @@ packages:
 
 For latest release, see [https://github.com/calogica/dbt-expectations/releases](https://github.com/calogica/dbt-expectations/releases)
 
-## Dependencies
+### Dependencies
 
 This package includes a reference to [**dbt-date**](https://github.com/calogica/dbt-date) which in turn references [**dbt-utils**](https://github.com/fishtown-analytics/dbt-utils) so there's no need to also import dbt-utils in your local project.
 
-## Variables
+### Variables
 
 The following variables need to be defined in your `dbt_project.yml` file:
 
@@ -33,7 +35,7 @@ vars:
 You may specify [any valid timezone string](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) in place of `America/Los_Angeles`.
 For example, use `America/New_York` for East Coast Time.
 
-## Integration Tests
+### Integration Tests (Developers Only)
 
 This project contains integration tests for all test macros in a separate `integration_tests` dbt project contained in this repo.
 
@@ -43,9 +45,90 @@ To run the tests:
 2. Then, from within the `integration_tests` folder, run `dbt seed` to load `data_test.csv` to the `test` schema of your database.
 3. Then run `dbt test` to run the tests specified in `integration_tests/models/schema_tests/schema.yml`
 
-## Macros
+## Available Tests
 
 ### Table shape
+
+- [expect_column_to_exist](#expect_column_to_exist)
+- [expect_row_values_to_have_recent_data](#expect_row_values_to_have_recent_data)
+- [expect_grouped_row_values_to_have_recent_data](#expect_grouped_row_values_to_have_recent_data)
+- [expect_table_column_count_to_be_between](#expect_table_column_count_to_be_between)
+- [expect_table_column_count_to_equal_other_table](#expect_table_column_count_to_equal_other_table)
+- [expect_table_column_count_to_equal](#expect_table_column_count_to_equal)
+- [expect_table_columns_to_contain_set](#expect_table_columns_to_contain_set)
+- [expect_table_columns_to_match_ordered_list](#expect_table_columns_to_match_ordered_list)
+- [expect_table_columns_to_match_set](#expect_table_columns_to_match_set)
+- [expect_table_row_count_to_be_between](#expect_table_row_count_to_be_between)
+- [expect_table_row_count_to_equal_other_table](#expect_table_row_count_to_equal_other_table)
+- [expect_table_row_count_to_equal_other_table_times_factor](#expect_table_row_count_to_equal_other_table_times_factor)
+- [expect_table_row_count_to_equal](#expect_table_row_count_to_equal)
+
+### Missing values, unique values, and types
+
+- [expect_column_values_to_be_null](#expect_column_values_to_be_null)
+- [expect_column_values_to_not_be_null](#expect_column_values_to_not_be_null)
+- [expect_column_values_to_be_unique](#expect_column_values_to_be_unique)
+- [expect_column_values_to_be_of_type](#expect_column_values_to_be_of_type)
+- [expect_column_values_to_be_in_type_list](#expect_column_values_to_be_in_type_list)
+
+### Sets and ranges
+
+- [expect_column_values_to_be_in_set](#expect_column_values_to_be_in_set)
+- [expect_column_values_to_not_be_in_set](#expect_column_values_to_not_be_in_set)
+- [expect_column_values_to_be_between](#expect_column_values_to_be_between)
+- [expect_column_values_to_be_decreasing](#expect_column_values_to_be_decreasing)
+- [expect_column_values_to_be_increasing](#expect_column_values_to_be_increasing)
+
+### String matching
+
+- [expect_column_value_lengths_to_be_between](#expect_column_value_lengths_to_be_between)
+- [expect_column_value_lengths_to_equal](#expect_column_value_lengths_to_equal)
+- [expect_column_values_to_match_like_pattern](#expect_column_values_to_match_like_pattern)
+- [expect_column_values_to_match_like_pattern_list](#expect_column_values_to_match_like_pattern_list)
+- [expect_column_values_to_match_regex](#expect_column_values_to_match_regex)
+- [expect_column_values_to_match_regex_list](#expect_column_values_to_match_regex_list)
+- [expect_column_values_to_not_match_like_pattern](#expect_column_values_to_not_match_like_pattern)
+- [expect_column_values_to_not_match_like_pattern_list](#expect_column_values_to_not_match_like_pattern_list)
+- [expect_column_values_to_not_match_regex](#expect_column_values_to_not_match_regex)
+- [expect_column_values_to_not_match_regex_list](#expect_column_values_to_not_match_regex_list)
+
+
+### Aggregate functions
+
+- [expect_column_distinct_count_to_be_greater_than](#expect_column_distinct_count_to_be_greater_than)
+- [expect_column_distinct_count_to_equal_other_table](#expect_column_distinct_count_to_equal_other_table)
+- [expect_column_distinct_count_to_equal](#expect_column_distinct_count_to_equal)
+- [expect_column_distinct_values_to_be_in_set](#expect_column_distinct_values_to_be_in_set)
+- [expect_column_distinct_values_to_contain_set](#expect_column_distinct_values_to_contain_set)
+- [expect_column_distinct_values_to_equal_set](#expect_column_distinct_values_to_equal_set)
+- [expect_column_max_to_be_between](#expect_column_max_to_be_between)
+- [expect_column_mean_to_be_between](#expect_column_mean_to_be_between)
+- [expect_column_median_to_be_between](#expect_column_median_to_be_between)
+- [expect_column_min_to_be_between](#expect_column_min_to_be_between)
+- [expect_column_most_common_value_to_be_in_set](#expect_column_most_common_value_to_be_in_set)
+- [expect_column_proportion_of_unique_values_to_be_between](#expect_column_proportion_of_unique_values_to_be_between)
+- [expect_column_quantile_values_to_be_between](#expect_column_quantile_values_to_be_between)
+- [expect_column_stdev_to_be_between](#expect_column_stdev_to_be_between)
+- [expect_column_sum_to_be_between](#expect_column_sum_to_be_between)
+- [expect_column_unique_value_count_to_be_between](#expect_column_unique_value_count_to_be_between)
+
+### Multi-column
+
+- [expect_column_pair_values_A_to_be_greater_than_B](#macros/schema_tests/multi-column/expect_column_pair_values_A_to_be_greater_than_B.sql)
+- [expect_column_pair_values_to_be_equal](#macros/schema_tests/multi-column/expect_column_pair_values_to_be_equal.sql)
+- [expect_column_pair_values_to_be_in_set](#macros/schema_tests/multi-column/expect_column_pair_values_to_be_in_set.sql)
+- [expect_compound_columns_to_be_unique](#macros/schema_tests/multi-column/expect_compound_columns_to_be_unique.sql)
+- [expect_multicolumn_sum_to_equal](#macros/schema_tests/multi-column/expect_multicolumn_sum_to_equal.sql)
+- [expect_select_column_values_to_be_unique_within_record](#macros/schema_tests/multi-column/expect_select_column_values_to_be_unique_within_record.sql)
+
+
+### Distributional functions
+
+- [expect_column_values_to_be_within_n_moving_stdevs](#expect_column_values_to_be_within_n_moving_stdevs)
+- [expect_column_values_to_be_within_n_stdevs](#expect_column_values_to_be_within_n_stdevs)
+- [expect_row_values_to_have_data_for_every_n_datepart](#expect_row_values_to_have_data_for_every_n_datepart)
+
+## Documentation
 
 #### [expect_column_to_exist](macros/schema_tests/table_shape/expect_column_to_exist.sql)
 
@@ -223,8 +306,6 @@ models: # or seeds:
         value: 4
 ```
 
-### Missing values, unique values, and types
-
 #### [expect_column_values_to_be_unique](macros/schema_tests/column_values_basic/expect_column_values_to_be_unique.sql)
 
 Expect each column value to be unique.
@@ -281,8 +362,6 @@ tests:
   - dbt_expectations.expect_column_values_to_be_in_type_list:
       column_type_list: [date, datetime]
 ```
-
-### Sets and ranges
 
 #### [expect_column_values_to_be_in_set](macros/schema_tests/column_values_basic/expect_column_values_to_be_in_set.sql)
 
@@ -349,8 +428,6 @@ tests:
       sort_column: col_numeric_a
       strictly: false
 ```
-
-### String matching
 
 #### [expect_column_value_lengths_to_be_between](macros/schema_tests/string_matching/expect_column_value_lengths_to_be_between.sql)
 
@@ -473,8 +550,6 @@ tests:
       like_pattern_list: ["%@%", "%&%"]
 ```
 
-### Aggregate functions
-
 #### [expect_column_distinct_count_to_equal](macros/schema_tests/aggregate_functions/expect_column_distinct_count_to_equal.sql)
 
 Expect the number of distinct column values to be equal to a given value.
@@ -538,7 +613,6 @@ tests:
   - dbt_expectations.expect_column_distinct_values_to_equal_set:
       value_set: ['a','b','c']
 ```
-
 
 #### [expect_column_distinct_count_to_equal_other_table](macros/schema_tests/aggregate_functions/expect_column_distinct_count_to_equal_other_table.sql)
 
@@ -706,8 +780,6 @@ tests:
       max_value: 2
 ```
 
-### Multi-column
-
 #### [expect_column_pair_values_A_to_be_greater_than_B](macros/schema_tests/multi-column/expect_column_pair_values_A_to_be_greater_than_B.sql)
 
 Expect values in column A to be greater than column B.
@@ -789,8 +861,6 @@ tests:
       column_list: ["date_col", "col_string_b"]
       ignore_row_if: "any_value_is_missing"
 ```
-
-### Distributional functions
 
 #### [expect_column_values_to_be_within_n_moving_stdevs](macros/schema_tests/distributional/expect_column_values_to_be_within_n_moving_stdevs.sql)
 
