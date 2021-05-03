@@ -112,7 +112,7 @@ models:
               trend_periods: 48
               test_periods: 12
               sigma_threshold: 6
-              take_logs: true
+              take_logs: false
 
 
   - name: data_test
