@@ -23,6 +23,22 @@ For latest release, see [https://github.com/calogica/dbt-expectations/releases](
 
 This package includes a reference to [**dbt-date**](https://github.com/calogica/dbt-date) which in turn references [**dbt-utils**](https://github.com/fishtown-analytics/dbt-utils) so there's no need to also import dbt-utils in your local project.
 
+Note: we no longer include `spark_utils` in this package to avoid versioning conflicts. If you are running this package on non-core (Snowflake, BigQuery, Redshift, Postgres) platforms, you will need to use a package like `spark_utils` to shim macros.
+
+For example, in `packages.yml`, you will need to include the relevant package:
+
+```yaml
+  - package: fishtown-analytics/spark_utils
+    version: <latest or range>
+```
+
+And reference in the dispatch list for `dbt_utils` in `dbt_project.yml`:
+
+```yaml
+vars:
+    dbt_utils_dispatch_list: [spark_utils]
+```
+
 ### Variables
 
 The following variables need to be defined in your `dbt_project.yml` file:
