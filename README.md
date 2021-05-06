@@ -130,12 +130,12 @@ To run the tests:
 
 ### Multi-column
 
-- [expect_column_pair_values_A_to_be_greater_than_B](#macros/schema_tests/multi-column/expect_column_pair_values_A_to_be_greater_than_B.sql)
-- [expect_column_pair_values_to_be_equal](#macros/schema_tests/multi-column/expect_column_pair_values_to_be_equal.sql)
-- [expect_column_pair_values_to_be_in_set](#macros/schema_tests/multi-column/expect_column_pair_values_to_be_in_set.sql)
-- [expect_compound_columns_to_be_unique](#macros/schema_tests/multi-column/expect_compound_columns_to_be_unique.sql)
-- [expect_multicolumn_sum_to_equal](#macros/schema_tests/multi-column/expect_multicolumn_sum_to_equal.sql)
-- [expect_select_column_values_to_be_unique_within_record](#macros/schema_tests/multi-column/expect_select_column_values_to_be_unique_within_record.sql)
+- [expect_column_pair_values_A_to_be_greater_than_B](#expect_column_pair_values_A_to_be_greater_than_B)
+- [expect_column_pair_values_to_be_equal](#expect_column_pair_values_to_be_equal)
+- [expect_column_pair_values_to_be_in_set](#expect_column_pair_values_to_be_in_set)
+- [expect_compound_columns_to_be_unique](#expect_compound_columns_to_be_unique)
+- [expect_multicolumn_sum_to_equal](#expect_multicolumn_sum_to_equal)
+- [expect_select_column_values_to_be_unique_within_record](#expect_select_column_values_to_be_unique_within_record)
 
 
 ### Distributional functions
@@ -146,7 +146,7 @@ To run the tests:
 
 ## Documentation
 
-#### [expect_column_to_exist](macros/schema_tests/table_shape/expect_column_to_exist.sql)
+### [expect_column_to_exist](macros/schema_tests/table_shape/expect_column_to_exist.sql)
 
 Expect the specified column to exist.
 
@@ -157,7 +157,7 @@ tests:
 - dbt_expectations.expect_column_to_exist
 ```
 
-#### [expect_row_values_to_have_recent_data](macros/schema_tests/table_shape/expect_row_values_to_have_recent_data.sql)
+### [expect_row_values_to_have_recent_data](macros/schema_tests/table_shape/expect_row_values_to_have_recent_data.sql)
 
 Expect the model to have rows that are at least as recent as the defined interval prior to the current timestamp.
 
@@ -170,7 +170,7 @@ tests:
         interval: 1
 ```
 
-#### [expect_grouped_row_values_to_have_recent_data](macros/schema_tests/table_shape/expect_grouped_row_values_to_have_recent_data.sql)
+### [expect_grouped_row_values_to_have_recent_data](macros/schema_tests/table_shape/expect_grouped_row_values_to_have_recent_data.sql)
 
 Expect the model to have **grouped** rows that are at least as recent as the defined interval prior to the current timestamp.
 Uuse this to test whether there is recent data for each grouped row defined by `group_by` (which is a list of columns) and a `timestamp_column`.
@@ -195,7 +195,7 @@ models: # or seeds:
 ```
 
 
-#### [expect_table_column_count_to_be_between](macros/schema_tests/table_shape/expect_table_column_count_to_be_between.sql)
+### [expect_table_column_count_to_be_between](macros/schema_tests/table_shape/expect_table_column_count_to_be_between.sql)
 
 Expect the number of columns in a model to be between two values.
 
@@ -208,7 +208,7 @@ tests:
       max_value: 4
 ```
 
-#### [expect_table_column_count_to_equal_other_table](macros/schema_tests/table_shape/expect_table_column_count_to_equal_other_table.sql)
+### [expect_table_column_count_to_equal_other_table](macros/schema_tests/table_shape/expect_table_column_count_to_equal_other_table.sql)
 
 Expect the number of columns in a model to match another model.
 
@@ -222,7 +222,7 @@ models: # or seeds:
         compare_model: ref("other_model")
 ```
 
-#### [expect_table_column_count_to_equal](macros/schema_tests/table_shape/expect_table_column_count_to_equal.sql)
+### [expect_table_column_count_to_equal](macros/schema_tests/table_shape/expect_table_column_count_to_equal.sql)
 
 Expect the number of columns in a model to be equal to `expected_number_of_columns`.
 
@@ -236,7 +236,7 @@ models: # or seeds:
         value: 7
 ```
 
-#### [expect_table_columns_to_match_ordered_list](macros/schema_tests/table_shape/expect_table_columns_to_match_ordered_list.sql)
+### [expect_table_columns_to_match_ordered_list](macros/schema_tests/table_shape/expect_table_columns_to_match_ordered_list.sql)
 
 Expect the columns to exactly match a specified list.
 
@@ -250,7 +250,7 @@ models: # or seeds:
         column_list: ["col_a", "col_b"]
 ```
 
-#### [expect_table_columns_to_match_set](macros/schema_tests/table_shape/expect_table_columns_to_match_set.sql)
+### [expect_table_columns_to_match_set](macros/schema_tests/table_shape/expect_table_columns_to_match_set.sql)
 
 Expect the columns in a model to match a given list.
 
@@ -264,7 +264,7 @@ models: # or seeds:
         column_list: ["col_a", "col_b"]
 ```
 
-#### [expect_table_row_count_to_be_between](macros/schema_tests/table_shape/expect_table_row_count_to_be_between.sql)
+### [expect_table_row_count_to_be_between](macros/schema_tests/table_shape/expect_table_row_count_to_be_between.sql)
 
 Expect the number of rows in a model to be between two values.
 
@@ -279,7 +279,7 @@ models: # or seeds:
         max_value: 4
 ```
 
-#### [expect_table_row_count_to_equal_other_table](macros/schema_tests/table_shape/expect_table_row_count_to_equal_other_table.sql)
+### [expect_table_row_count_to_equal_other_table](macros/schema_tests/table_shape/expect_table_row_count_to_equal_other_table.sql)
 
 Expect the number of rows in a model match another model.
 
@@ -293,7 +293,7 @@ models: # or seeds:
         compare_model: ref("other_model")
 ```
 
-#### [expect_table_row_count_to_equal_other_table_times_factor](macros/schema_tests/table_shape/expect_table_row_count_to_equal_other_table_times_factor.sql)
+### [expect_table_row_count_to_equal_other_table_times_factor](macros/schema_tests/table_shape/expect_table_row_count_to_equal_other_table_times_factor.sql)
 
 Expect the number of rows in a model to match another model times a preconfigured factor.
 
@@ -308,7 +308,7 @@ models: # or seeds:
         factor: 13
 ```
 
-#### [expect_table_row_count_to_equal](macros/schema_tests/table_shape/expect_table_row_count_to_equal.sql)
+### [expect_table_row_count_to_equal](macros/schema_tests/table_shape/expect_table_row_count_to_equal.sql)
 
 Expect the number of rows in a model to be equal to `expected_number_of_rows`.
 
@@ -322,7 +322,7 @@ models: # or seeds:
         value: 4
 ```
 
-#### [expect_column_values_to_be_unique](macros/schema_tests/column_values_basic/expect_column_values_to_be_unique.sql)
+### [expect_column_values_to_be_unique](macros/schema_tests/column_values_basic/expect_column_values_to_be_unique.sql)
 
 Expect each column value to be unique.
 
@@ -333,7 +333,7 @@ tests:
   - dbt_expectations.expect_column_values_to_be_unique
 ```
 
-#### [expect_column_values_to_not_be_null](macros/schema_tests/column_values_basic/expect_column_values_to_not_be_null.sql)
+### [expect_column_values_to_not_be_null](macros/schema_tests/column_values_basic/expect_column_values_to_not_be_null.sql)
 
 Expect column values to not be null.
 
@@ -344,7 +344,7 @@ tests:
   - dbt_expectations.expect_column_values_to_not_be_null
 ```
 
-#### [expect_column_values_to_be_null](macros/schema_tests/column_values_basic/expect_column_values_to_be_null.sql)
+### [expect_column_values_to_be_null](macros/schema_tests/column_values_basic/expect_column_values_to_be_null.sql)
 
 Expect column values to be null.
 
@@ -355,7 +355,7 @@ tests:
   - dbt_expectations.expect_column_values_to_be_null
 ```
 
-#### [expect_column_values_to_be_of_type](macros/schema_tests/column_values_basic/expect_column_values_to_be_of_type.sql)
+### [expect_column_values_to_be_of_type](macros/schema_tests/column_values_basic/expect_column_values_to_be_of_type.sql)
 
 Expect a column to contain values of a specified data type.
 
@@ -367,7 +367,7 @@ tests:
       column_type: date
 ```
 
-#### [expect_column_values_to_be_in_type_list](macros/schema_tests/column_values_basic/expect_column_values_to_be_in_type_list.sql)
+### [expect_column_values_to_be_in_type_list](macros/schema_tests/column_values_basic/expect_column_values_to_be_in_type_list.sql)
 
 Expect a column to contain values from a specified type list.
 
@@ -379,7 +379,7 @@ tests:
       column_type_list: [date, datetime]
 ```
 
-#### [expect_column_values_to_be_in_set](macros/schema_tests/column_values_basic/expect_column_values_to_be_in_set.sql)
+### [expect_column_values_to_be_in_set](macros/schema_tests/column_values_basic/expect_column_values_to_be_in_set.sql)
 
 Expect each column value to be in a given set.
 
@@ -391,7 +391,7 @@ tests:
       value_set: ['a','b','c']
 ```
 
-#### [expect_column_values_to_be_between](macros/schema_tests/column_values_basic/expect_column_values_to_be_between.sql)
+### [expect_column_values_to_be_between](macros/schema_tests/column_values_basic/expect_column_values_to_be_between.sql)
 
 Expect each column value to be between two values.
 
@@ -404,7 +404,7 @@ tests:
       max_value: 10
 ```
 
-#### [expect_column_values_to_not_be_in_set](macros/schema_tests/column_values_basic/expect_column_values_to_not_be_in_set.sql)
+### [expect_column_values_to_not_be_in_set](macros/schema_tests/column_values_basic/expect_column_values_to_not_be_in_set.sql)
 
 Expect each column value not to be in a given set.
 
@@ -416,7 +416,7 @@ tests:
       value_set: ['e','f','g']
 ```
 
-#### [expect_column_values_to_be_increasing](macros/schema_tests/column_values_basic/expect_column_values_to_be_increasing.sql)
+### [expect_column_values_to_be_increasing](macros/schema_tests/column_values_basic/expect_column_values_to_be_increasing.sql)
 
 Expect column values to be increasing.
 
@@ -430,7 +430,7 @@ tests:
       sort_column: date_day
 ```
 
-#### [expect_column_values_to_be_decreasing](macros/schema_tests/column_values_basic/expect_column_values_to_be_decreasing.sql)
+### [expect_column_values_to_be_decreasing](macros/schema_tests/column_values_basic/expect_column_values_to_be_decreasing.sql)
 
 Expect column values to be decreasing.
 
@@ -445,7 +445,7 @@ tests:
       strictly: false
 ```
 
-#### [expect_column_value_lengths_to_be_between](macros/schema_tests/string_matching/expect_column_value_lengths_to_be_between.sql)
+### [expect_column_value_lengths_to_be_between](macros/schema_tests/string_matching/expect_column_value_lengths_to_be_between.sql)
 
 Expect column entries to be strings with length between a min_value value and a max_value value (inclusive).
 
@@ -458,7 +458,7 @@ tests:
       max_value: 4
 ```
 
-#### [expect_column_value_lengths_to_equal](macros/schema_tests/string_matching/expect_column_value_lengths_to_equal.sql)
+### [expect_column_value_lengths_to_equal](macros/schema_tests/string_matching/expect_column_value_lengths_to_equal.sql)
 
 Expect column entries to be strings with length equal to the provided value.
 
@@ -470,7 +470,7 @@ tests:
       value: 10
 ```
 
-#### [expect_column_values_to_match_regex](macros/schema_tests/string_matching/expect_column_values_to_match_regex.sql)
+### [expect_column_values_to_match_regex](macros/schema_tests/string_matching/expect_column_values_to_match_regex.sql)
 
 Expect column entries to be strings that match a given regular expression. Valid matches can be found anywhere in the string, for example "[at]+" will identify the following strings as expected: "cat", "hat", "aa", "a", and "t", and the following strings as unexpected: "fish", "dog".
 
@@ -482,7 +482,7 @@ tests:
       regex: "[at]+"
 ```
 
-#### [expect_column_values_to_not_match_regex](macros/schema_tests/string_matching/expect_column_values_to_not_match_regex.sql)
+### [expect_column_values_to_not_match_regex](macros/schema_tests/string_matching/expect_column_values_to_not_match_regex.sql)
 
 Expect column entries to be strings that do NOT match a given regular expression. The regex must not match any portion of the provided string. For example, "[at]+" would identify the following strings as expected: "fish”, "dog”, and the following as unexpected: "cat”, "hat”.
 
@@ -494,7 +494,7 @@ tests:
       regex: "[at]+"
 ```
 
-#### [expect_column_values_to_match_regex_list](macros/schema_tests/string_matching/expect_column_values_to_match_regex_list.sql)
+### [expect_column_values_to_match_regex_list](macros/schema_tests/string_matching/expect_column_values_to_match_regex_list.sql)
 
 Expect the column entries to be strings that can be matched to either any of or all of a list of regular expressions. Matches can be anywhere in the string.
 
@@ -506,7 +506,7 @@ tests:
       regex_list: ["@[^.]*", "&[^.]*"]
 ```
 
-#### [expect_column_values_to_not_match_regex_list](macros/schema_tests/string_matching/expect_column_values_to_not_match_regex_list.sql)
+### [expect_column_values_to_not_match_regex_list](macros/schema_tests/string_matching/expect_column_values_to_not_match_regex_list.sql)
 
 Expect the column entries to be strings that do not match any of a list of regular expressions. Matches can be anywhere in the string.
 
@@ -518,7 +518,7 @@ tests:
       regex_list: ["@[^.]*", "&[^.]*"]
 ```
 
-#### [expect_column_values_to_match_like_pattern](macros/schema_tests/string_matching/expect_column_values_to_match_like_pattern.sql)
+### [expect_column_values_to_match_like_pattern](macros/schema_tests/string_matching/expect_column_values_to_match_like_pattern.sql)
 
 Expect column entries to be strings that match a given SQL `like` pattern.
 
@@ -530,7 +530,7 @@ tests:
       like_pattern: "%@%"
 ```
 
-#### [expect_column_values_to_not_match_like_pattern](macros/schema_tests/string_matching/expect_column_values_to_not_match_like_pattern.sql)
+### [expect_column_values_to_not_match_like_pattern](macros/schema_tests/string_matching/expect_column_values_to_not_match_like_pattern.sql)
 
 Expect column entries to be strings that do not match a given SQL `like` pattern.
 
@@ -542,7 +542,7 @@ tests:
       like_pattern: "%&%"
 ```
 
-#### [expect_column_values_to_match_like_pattern_list](macros/schema_tests/string_matching/expect_column_values_to_match_like_pattern_list.sql)
+### [expect_column_values_to_match_like_pattern_list](macros/schema_tests/string_matching/expect_column_values_to_match_like_pattern_list.sql)
 
 Expect the column entries to be strings that match any of a list of SQL `like` patterns.
 
@@ -554,7 +554,7 @@ tests:
       like_pattern_list: ["%@%", "%&%"]
 ```
 
-#### [expect_column_values_to_not_match_like_pattern_list](macros/schema_tests/string_matching/expect_column_values_to_not_match_like_pattern_list.sql)
+### [expect_column_values_to_not_match_like_pattern_list](macros/schema_tests/string_matching/expect_column_values_to_not_match_like_pattern_list.sql)
 
 Expect the column entries to be strings that do not match any of a list of SQL `like` patterns.
 
@@ -566,7 +566,7 @@ tests:
       like_pattern_list: ["%@%", "%&%"]
 ```
 
-#### [expect_column_distinct_count_to_equal](macros/schema_tests/aggregate_functions/expect_column_distinct_count_to_equal.sql)
+### [expect_column_distinct_count_to_equal](macros/schema_tests/aggregate_functions/expect_column_distinct_count_to_equal.sql)
 
 Expect the number of distinct column values to be equal to a given value.
 
@@ -578,7 +578,7 @@ tests:
       value: 10
 ```
 
-#### [expect_column_distinct_count_to_be_greater_than](macros/schema_tests/aggregate_functions/expect_column_distinct_count_to_be_greater_than.sql)
+### [expect_column_distinct_count_to_be_greater_than](macros/schema_tests/aggregate_functions/expect_column_distinct_count_to_be_greater_than.sql)
 
 Expect the number of distinct column values to be greater than a given value.
 
@@ -590,7 +590,7 @@ tests:
       value: 10
 ```
 
-#### [expect_column_distinct_values_to_be_in_set](macros/schema_tests/aggregate_functions/expect_column_distinct_values_to_be_in_set.sql)
+### [expect_column_distinct_values_to_be_in_set](macros/schema_tests/aggregate_functions/expect_column_distinct_values_to_be_in_set.sql)
 
 Expect the set of distinct column values to be contained by a given set.
 
@@ -602,7 +602,7 @@ tests:
       value_set: ['a','b','c','d']
 ```
 
-#### [expect_column_distinct_values_to_contain_set](macros/schema_tests/aggregate_functions/expect_column_distinct_values_to_contain_set.sql)
+### [expect_column_distinct_values_to_contain_set](macros/schema_tests/aggregate_functions/expect_column_distinct_values_to_contain_set.sql)
 
 Expect the set of distinct column values to contain a given set.
 
@@ -616,7 +616,7 @@ tests:
       value_set: ['a','b']
 ```
 
-#### [expect_column_distinct_values_to_equal_set](macros/schema_tests/aggregate_functions/expect_column_distinct_values_to_equal_set.sql)
+### [expect_column_distinct_values_to_equal_set](macros/schema_tests/aggregate_functions/expect_column_distinct_values_to_equal_set.sql)
 
 Expect the set of distinct column values to equal a given set.
 
@@ -630,7 +630,7 @@ tests:
       value_set: ['a','b','c']
 ```
 
-#### [expect_column_distinct_count_to_equal_other_table](macros/schema_tests/aggregate_functions/expect_column_distinct_count_to_equal_other_table.sql)
+### [expect_column_distinct_count_to_equal_other_table](macros/schema_tests/aggregate_functions/expect_column_distinct_count_to_equal_other_table.sql)
 
 Expect the number of distinct column values to be equal to number of distinct values in another model.
 
@@ -663,7 +663,7 @@ models: # or seeds:
 
 If `compare_model` or `compare_column_name` are no specified, `model` and `column_name` are substituted. So, one could compare distinct counts of two different columns in the same model, or identically named columns in separate models etc.
 
-#### [expect_column_mean_to_be_between](macros/schema_tests/aggregate_functions/expect_column_mean_to_be_between.sql)
+### [expect_column_mean_to_be_between](macros/schema_tests/aggregate_functions/expect_column_mean_to_be_between.sql)
 
 Expect the column mean to be between a min_value value and a max_value value (inclusive).
 
@@ -676,7 +676,7 @@ tests:
       max_value: 2
 ```
 
-#### [expect_column_median_to_be_between](macros/schema_tests/aggregate_functions/expect_column_median_to_be_between.sql)
+### [expect_column_median_to_be_between](macros/schema_tests/aggregate_functions/expect_column_median_to_be_between.sql)
 
 Expect the column median to be between a min_value value and a max_value value (inclusive).
 
@@ -689,7 +689,7 @@ tests:
       max_value: 2
 ```
 
-#### [expect_column_quantile_values_to_be_between](macros/schema_tests/aggregate_functions/expect_column_quantile_values_to_be_between.sql)
+### [expect_column_quantile_values_to_be_between](macros/schema_tests/aggregate_functions/expect_column_quantile_values_to_be_between.sql)
 
 Expect specific provided column quantiles to be between provided min_value and max_value values.
 
@@ -703,7 +703,7 @@ tests:
       max_value: 2
 ```
 
-#### [expect_column_stdev_to_be_between](macros/schema_tests/aggregate_functions/expect_column_stdev_to_be_between.sql)
+### [expect_column_stdev_to_be_between](macros/schema_tests/aggregate_functions/expect_column_stdev_to_be_between.sql)
 
 Expect the column standard deviation to be between a min_value value and a max_value value. Uses sample standard deviation (normalized by N-1).
 
@@ -716,7 +716,7 @@ tests:
       max_value: 2
 ```
 
-#### [expect_column_unique_value_count_to_be_between](macros/schema_tests/aggregate_functions/expect_column_unique_value_count_to_be_between.sql)
+### [expect_column_unique_value_count_to_be_between](macros/schema_tests/aggregate_functions/expect_column_unique_value_count_to_be_between.sql)
 
 Expect the number of unique values to be between a min_value value and a max_value value.
 
@@ -729,7 +729,7 @@ tests:
       max_value: 3
 ```
 
-#### [expect_column_proportion_of_unique_values_to_be_between](macros/schema_tests/aggregate_functions/expect_column_proportion_of_unique_values_to_be_between.sql)
+### [expect_column_proportion_of_unique_values_to_be_between](macros/schema_tests/aggregate_functions/expect_column_proportion_of_unique_values_to_be_between.sql)
 
 Expect the proportion of unique values to be between a min_value value and a max_value value.
 
@@ -744,7 +744,7 @@ tests:
       max_value: .4
 ```
 
-#### [expect_column_most_common_value_to_be_in_set](macros/schema_tests/aggregate_functions/expect_column_most_common_value_to_be_in_set.sql)
+### [expect_column_most_common_value_to_be_in_set](macros/schema_tests/aggregate_functions/expect_column_most_common_value_to_be_in_set.sql)
 
 Expect the most common value to be within the designated value set
 
@@ -757,7 +757,7 @@ tests:
       top_n: 1
 ```
 
-#### [expect_column_max_to_be_between](macros/schema_tests/aggregate_functions/expect_column_max_to_be_between.sql)
+### [expect_column_max_to_be_between](macros/schema_tests/aggregate_functions/expect_column_max_to_be_between.sql)
 
 Expect the column max to be between a min and max value
 
@@ -770,7 +770,7 @@ tests:
       max_value: 1
 ```
 
-#### [expect_column_min_to_be_between](macros/schema_tests/aggregate_functions/expect_column_min_to_be_between.sql)
+### [expect_column_min_to_be_between](macros/schema_tests/aggregate_functions/expect_column_min_to_be_between.sql)
 
 Expect the column min to be between a min and max value
 
@@ -783,7 +783,7 @@ tests:
       max_value: 1
 ```
 
-#### [expect_column_sum_to_be_between](macros/schema_tests/aggregate_functions/expect_column_sum_to_be_between.sql)
+### [expect_column_sum_to_be_between](macros/schema_tests/aggregate_functions/expect_column_sum_to_be_between.sql)
 
 Expect the column to sum to be between a min and max value
 
@@ -796,7 +796,7 @@ tests:
       max_value: 2
 ```
 
-#### [expect_column_pair_values_A_to_be_greater_than_B](macros/schema_tests/multi-column/expect_column_pair_values_A_to_be_greater_than_B.sql)
+### [expect_column_pair_values_A_to_be_greater_than_B](macros/schema_tests/multi-column/expect_column_pair_values_A_to_be_greater_than_B.sql)
 
 Expect values in column A to be greater than column B.
 
@@ -810,7 +810,7 @@ tests:
       or_equal: True
 ```
 
-#### [expect_column_pair_values_to_be_equal](macros/schema_tests/multi-column/expect_column_pair_values_to_be_equal.sql)
+### [expect_column_pair_values_to_be_equal](macros/schema_tests/multi-column/expect_column_pair_values_to_be_equal.sql)
 
 Expect the values in column A to be the same as column B.
 
@@ -823,7 +823,7 @@ tests:
       column_B: col_numeric_a
 ```
 
-#### [expect_column_pair_values_to_be_in_set](macros/schema_tests/multi-column/expect_column_pair_values_to_be_in_set.sql)
+### [expect_column_pair_values_to_be_in_set](macros/schema_tests/multi-column/expect_column_pair_values_to_be_in_set.sql)
 
 Expect paired values from columns A and B to belong to a set of valid pairs.
 
@@ -839,7 +839,7 @@ tests:
       value_pairs_set: [[0, 1], [1, 0], [0.5, 0.5], [0.5, 0.5]]
 ```
 
-#### [expect_select_column_values_to_be_unique_within_record](macros/schema_tests/multi-column/expect_select_column_values_to_be_unique_within_record.sql)
+### [expect_select_column_values_to_be_unique_within_record](macros/schema_tests/multi-column/expect_select_column_values_to_be_unique_within_record.sql)
 
 Expect the values for each record to be unique across the columns listed. Note that records can be duplicated.
 
@@ -852,7 +852,7 @@ tests:
       ignore_row_if: "any_value_is_missing"
 ```
 
-#### [expect_multicolumn_sum_to_equal](macros/schema_tests/multi-column/expect_multicolumn_sum_to_equal.sql)
+### [expect_multicolumn_sum_to_equal](macros/schema_tests/multi-column/expect_multicolumn_sum_to_equal.sql)
 
 Expects that sum of all rows for a set of columns is equal to a specific value
 
@@ -865,7 +865,7 @@ tests:
       sum_total: 4
 ```
 
-#### [expect_compound_columns_to_be_unique](macros/schema_tests/multi-column/expect_compound_columns_to_be_unique.sql)
+### [expect_compound_columns_to_be_unique](macros/schema_tests/multi-column/expect_compound_columns_to_be_unique.sql)
 
 Expect that the columns are unique together, e.g. a multi-column primary key.
 
@@ -878,7 +878,7 @@ tests:
       ignore_row_if: "any_value_is_missing"
 ```
 
-#### [expect_column_values_to_be_within_n_moving_stdevs](macros/schema_tests/distributional/expect_column_values_to_be_within_n_moving_stdevs.sql)
+### [expect_column_values_to_be_within_n_moving_stdevs](macros/schema_tests/distributional/expect_column_values_to_be_within_n_moving_stdevs.sql)
 
 Expects changes in metric values to be within Z sigma away from a moving average, taking the (optionally logged) differences of an aggregated metric value and comparing it to its value N days ago.
 
@@ -896,7 +896,7 @@ tests:
       take_logs: true
 ```
 
-#### [expect_column_values_to_be_within_n_stdevs](macros/schema_tests/distributional/expect_column_values_to_be_within_n_stdevs.sql)
+### [expect_column_values_to_be_within_n_stdevs](macros/schema_tests/distributional/expect_column_values_to_be_within_n_stdevs.sql)
 
 Expects (optionally grouped & summed) metric values to be within Z sigma away from the column average
 
