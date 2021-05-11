@@ -19,7 +19,7 @@ clean-targets:
     - "target"
     - "dbt_modules"
 
-require-dbt-version: ">=0.18.1"
+require-dbt-version: [">=0.20.0", "<0.30.0"]
 
 vars:
     'dbt_date:time_zone': 'America/Los_Angeles'
