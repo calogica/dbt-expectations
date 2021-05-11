@@ -12,7 +12,9 @@
             {%- do matching_column_types.append(column.name) -%}
         {%- endif -%}
     {%- endfor -%}
-    select 1 - {{ matching_column_types | length }}
+    select 1
+    from (select 1) a
+    where {{ matching_column_types | length }} = 0
 
 {%- endif -%}
 {%- endmacro -%}

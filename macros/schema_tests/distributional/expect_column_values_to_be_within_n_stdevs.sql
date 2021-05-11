@@ -49,7 +49,7 @@ metric_values_z_scores as (
 
 )
 select
-    count(*) as error_count
+    *
 from
     metric_values_z_scores
 where

@@ -122,7 +122,7 @@ metric_sigma as (
 
 )
 select
-    count(*)
+    *
 from
     metric_sigma
 where

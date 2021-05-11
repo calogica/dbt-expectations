@@ -20,5 +20,5 @@ validation_errors as (
         latest_timestamp_column < {{ dbt_utils.dateadd(datepart, interval * -1, dbt_date.now()) }}
 
 )
-select count(*) from validation_errors
+select * from validation_errors
 {% endmacro %}

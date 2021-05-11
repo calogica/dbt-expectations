@@ -91,12 +91,7 @@
     )
     -- DEBUG:
     -- select * from final
-    select
-        {% if return_difference %}
-        coalesce(sum(expression_difference), 0)
-        {% else %}
-        count(*)
-        {% endif %}
+    select *
     from final
     where
         {% if tolerance_percent %}

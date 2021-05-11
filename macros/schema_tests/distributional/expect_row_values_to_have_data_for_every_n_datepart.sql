@@ -82,5 +82,5 @@ final as
         left outer join
         model_data f on d.date_{{date_part}} = f.date_{{date_part}}
 )
-select count(*) from final where row_cnt = 0
+select * from final where row_cnt = 0
 {%- endmacro -%}

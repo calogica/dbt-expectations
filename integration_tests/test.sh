@@ -5,9 +5,9 @@ i=1;
 for t in "$@"
 do
 
-    dbt seed -t $t &&
-    dbt run -t $t &&
-    dbt test -t $t
+    dbt seed -t $t --no-version-check &&
+    dbt run -t $t --no-version-check&&
+    dbt test -t $t --no-version-check
 
 done
 

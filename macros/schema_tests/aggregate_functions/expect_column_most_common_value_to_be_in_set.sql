@@ -83,7 +83,7 @@ validation_errors as (
 
 )
 
-select count(*) as validation_errors
+select *
 from validation_errors
 
 {% endmacro %}

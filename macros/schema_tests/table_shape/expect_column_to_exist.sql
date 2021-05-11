@@ -25,7 +25,9 @@
             {{ column_index_0 }} as column_index_0,
             {{ column_index_matches }} as column_index_matches
     */
-    select 1 - {{ 1 if matching_column_index >= 0 and column_index_matches else 0 }}
+    select 1
+    from (select 1) a
+    where {{ 'false' if matching_column_index >= 0 and column_index_matches else 'true' }}
 
 {%- endif -%}
 {%- endmacro -%}

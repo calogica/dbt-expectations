@@ -5,6 +5,8 @@
 
     {%- set ordered_column_names = column_list | join(", ") -%}
     {%- set ordered_relation_column_names = relation_column_names | join(", ") -%}
-    select case when '{{ ordered_column_names }}' = '{{ ordered_relation_column_names }}' then 0 else 1 end
+    select 1
+    from (select 1) a
+    where '{{ ordered_column_names }}' != '{{ ordered_relation_column_names }}'
 {%- endif -%}
 {%- endmacro -%}

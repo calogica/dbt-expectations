@@ -2,9 +2,11 @@
 {%- if execute -%}
 {%- set number_actual_columns = (adapter.get_columns_in_relation(model) | length) -%}
 select
-    case
-        when {{ number_actual_columns }} >= {{ min_value }} and {{ number_actual_columns }} <= {{ max_value }}
-        then 0 else 1
-    end
+    1
+from (select 1) a
+where
+    {{ number_actual_columns }} < {{ min_value }}
+    or
+    {{ number_actual_columns }} > {{ max_value }}
 {%- endif -%}
 {%- endmacro -%}
