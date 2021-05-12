@@ -1,4 +1,4 @@
-{%- macro test_expect_table_row_count_to_equal(model,value,row_condition=None) -%}
+{%- macro test_expect_table_row_count_to_equal(model, value, row_condition) -%}
     {{ adapter.dispatch('test_expect_table_row_count_to_equal', packages=dbt_expectations._get_namespaces()) (model,value,row_condition=None) }}
 {% endmacro %}
 
