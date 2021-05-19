@@ -125,6 +125,7 @@ To run the tests:
 - [expect_column_proportion_of_unique_values_to_be_between](#expect_column_proportion_of_unique_values_to_be_between)
 - [expect_column_quantile_values_to_be_between](#expect_column_quantile_values_to_be_between)
 - [expect_column_stdev_to_be_between](#expect_column_stdev_to_be_between)
+- [expect_column_stdev_to_be_greater_than](#expect_column_stdev_to_be_greater_than)
 - [expect_column_sum_to_be_between](#expect_column_sum_to_be_between)
 - [expect_column_unique_value_count_to_be_between](#expect_column_unique_value_count_to_be_between)
 
@@ -714,6 +715,19 @@ tests:
   - dbt_expectations.expect_column_stdev_to_be_between:
       min_value: 0
       max_value: 2
+```
+
+### [expect_column_stdev_to_be_greater_than](macros/schema_tests/aggregate_functions/expect_column_stdev_to_be_greater_than.sql)
+
+Expect the column standard deviation to be greater than a greater_than_value value and optionally grouped by one or more columns. Uses sample standard deviation (normalized by N-1).
+
+*Applies to:* Column
+
+```yaml
+tests:
+  - dbt_expectations.expect_column_stdev_to_be_greater_than:
+      greater_than_value: 0
+      group_by: ['column_a', 'column_b']
 ```
 
 ### [expect_column_unique_value_count_to_be_between](macros/schema_tests/aggregate_functions/expect_column_unique_value_count_to_be_between.sql)
