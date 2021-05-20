@@ -19,7 +19,7 @@
                                                               row_condition) %}
 
 with calc as (
-    select distinct
+    select
         {% if group_by %}
             {{ group_by | join(', ') }},
         {% endif -%}
