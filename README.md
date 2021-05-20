@@ -165,7 +165,7 @@ Expect the model to have rows that are at least as recent as the defined interva
 
 ```yaml
 tests:
-  - dbt_expectations.expect_table_column_count_to_be_between:
+  - dbt_expectations.expect_row_values_to_have_recent_data:
         datepart: day
         interval: 1
 ```
