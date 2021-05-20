@@ -719,14 +719,14 @@ tests:
 
 ### [expect_column_stdev_to_be_greater_than](macros/schema_tests/aggregate_functions/expect_column_stdev_to_be_greater_than.sql)
 
-Expect the column standard deviation to be greater than a greater_than_value value and optionally grouped by one or more columns. Uses sample standard deviation (normalized by N-1).
+Expect the column standard deviation to be greater than a value and optionally grouped by one or more columns. Uses sample standard deviation (normalized by N-1).
 
 *Applies to:* Column
 
 ```yaml
 tests:
   - dbt_expectations.expect_column_stdev_to_be_greater_than:
-      greater_than_value: 0
+      value: 0
       group_by: ['column_a', 'column_b']
 ```
 
