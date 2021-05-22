@@ -1,6 +1,6 @@
 {% macro test_expect_column_stdev_to_be_between(model, column_name,
-                                                    min_value,
-                                                    max_value,
+                                                    min_value=None,
+                                                    max_value=None,
                                                     row_condition=None
                                                     ) -%}
     {{ adapter.dispatch('test_expect_column_stdev_to_be_between', packages = dbt_expectations._get_namespaces()) (model, column_name,
