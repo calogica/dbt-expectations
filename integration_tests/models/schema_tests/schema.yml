@@ -32,6 +32,9 @@ models:
             compare_column_name: date_day
         - dbt_expectations.expect_column_distinct_count_to_equal_other_table:
             column_name: date_day
+        - dbt_expectations.expect_row_values_to_have_data_for_every_n_datepart:
+            date_col: date_day
+            date_part: day
 
     columns:
       - name: date_day
@@ -62,6 +65,9 @@ models:
     tests:
         - dbt_expectations.expect_table_columns_to_match_ordered_list:
             column_list: ["date_day", "row_value", "row_value_log"]
+        - dbt_expectations.expect_row_values_to_have_data_for_every_n_datepart:
+            date_col: date_day
+            date_part: day
 
     columns:
       - name: date_day
@@ -92,6 +98,7 @@ models:
               take_logs: false
 
   - name: timeseries_hourly_data_extended
+
     columns:
       - name: date_hour
         tests:
