@@ -9,6 +9,14 @@
 
 {% endmacro %}
 
+{% macro truth_expression(expression) %}
+    {{ adapter.dispatch('truth_expression', packages = dbt_expectations._get_namespaces()) (expression) }}
+{% endmacro %}
+
+{% macro default__truth_expression(expression) %}
+  {{ expression }} as expression
+{% endmacro %}
+
 {% macro expression_is_true(model,
                                  expression,
                                  test_condition="= true",
@@ -29,7 +37,7 @@ with grouped_expression as (
         {{ group_by_column }} as col_{{ loop.index }},
         {% endfor -%}
         {% endif %}
-        {{ expression }} as expression
+        {{ dbt_expectations.truth_expression(expression) }}
     from {{ model }}
      {%- if row_condition %}
     where
