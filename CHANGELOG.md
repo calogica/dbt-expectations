@@ -2,7 +2,7 @@
 
 ## Features
 
-* Added new `expect_column_stdev_to_be_greater_than` test ([#66](https://github.com/fishtown-analytics/dbt-utils/pull/276https://github.com/calogica/dbt-expectations/pull/66) Thanks [@MartinGuindon](https://github.com/MartinGuindon)!)
+* Added support for optional `min_value` and `max_value` parameters to all`*_between_*` tests. ([#70](https://github.com/calogica/dbt-expectations/pull/70))
 
 ## Fixes
 
