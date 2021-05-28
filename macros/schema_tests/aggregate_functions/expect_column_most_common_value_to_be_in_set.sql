@@ -30,7 +30,12 @@ with value_counts as (
     {% if row_condition %}
     where {{ row_condition }}
     {% endif %}
-    group by 1
+
+    group by {% if quote_values -%}
+                {{ column_name }}
+            {%- else -%}
+                cast({{ column_name }} as {{ data_type }})
+            {%- endif %}
 
 ),
 value_counts_ranked as (

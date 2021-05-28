@@ -1,4 +1,10 @@
 {% macro test_expect_grouped_row_values_to_have_recent_data(model, group_by, timestamp_column, datepart, interval) %}
+
+ {{ adapter.dispatch('test_expect_grouped_row_values_to_have_recent_data', packages = dbt_expectations._get_namespaces()) (model, group_by, timestamp_column, datepart, interval) }}
+
+{% endmacro %}
+
+{% macro default__test_expect_grouped_row_values_to_have_recent_data(model, group_by, timestamp_column, datepart, interval) %}
 with latest_grouped_timestamps as (
 
     select
