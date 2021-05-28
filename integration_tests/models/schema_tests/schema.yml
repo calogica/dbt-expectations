@@ -125,6 +125,10 @@ models:
         - dbt_expectations.expect_table_row_count_to_be_between:
             min_value: 1
             max_value: 4
+        - dbt_expectations.expect_table_row_count_to_be_between:
+            min_value: 1
+        - dbt_expectations.expect_table_row_count_to_be_between:
+            max_value: 4
         - dbt_expectations.expect_table_row_count_to_equal_other_table:
             compare_model: ref("data_test")
             row_condition: 1=1
@@ -133,6 +137,10 @@ models:
             value: 7
         - dbt_expectations.expect_table_column_count_to_be_between:
             min_value: 1
+            max_value: 10
+        - dbt_expectations.expect_table_column_count_to_be_between:
+            min_value: 1
+        - dbt_expectations.expect_table_column_count_to_be_between:
             max_value: 10
         - dbt_expectations.expect_table_columns_to_contain_set:
             column_list: ["col_numeric_b", "col_string_a"]
@@ -199,6 +207,8 @@ models:
           - dbt_expectations.expect_column_values_to_be_between:
               min_value: 0
               max_value: 1
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
           - dbt_expectations.expect_column_sum_to_be_between:
               min_value: 1
               max_value: 3
@@ -254,6 +264,10 @@ models:
           - dbt_expectations.expect_column_value_lengths_to_be_between:
               min_value: 1
               max_value: 4
+          - dbt_expectations.expect_column_value_lengths_to_be_between:
+              min_value: 1
+          - dbt_expectations.expect_column_value_lengths_to_be_between:
+              max_value: 4
 
       - name: col_null
         tests:
@@ -267,6 +281,14 @@ models:
 
   - name : timeseries_data_grouped
     tests :
+        - dbt_expectations.expect_table_row_count_to_be_between:
+            min_value: 10
+        - dbt_expectations.expect_table_row_count_to_be_between:
+            min_value: 10
+            group_by: [date_day]
+        - dbt_expectations.expect_table_row_count_to_be_between:
+            max_value: 10000
+            group_by: [group_id]
         - dbt_expectations.expect_grouped_row_values_to_have_recent_data:
             group_by: [group_id]
             timestamp_column: date_day

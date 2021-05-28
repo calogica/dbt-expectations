@@ -1,18 +1,18 @@
 {% macro test_expect_column_value_lengths_to_be_between(model, column_name,
-                                                         min_value,
-                                                         max_value,
+                                                         min_value=None,
+                                                         max_value=None,
                                                          row_condition=None
                                                       ) %}
 {% set expression %}
-{{ dbt_utils.length(column_name) ~ " >= " ~ min_value ~ " or " ~
-   dbt_utils.length(column_name) ~ " <= " ~ max_value }}
+{{ dbt_utils.length(column_name) }}
 {% endset %}
 
-{{ dbt_expectations.expression_is_true(model,
+{{ dbt_expectations.expression_between(model,
                                         expression=expression,
+                                        min_value=min_value,
+                                        max_value=max_value,
+                                        group_by_columns=None,
                                         row_condition=row_condition
-                                        )
-                                        }}
-
+                                        ) }}
 
 {% endmacro %}

@@ -26,11 +26,8 @@
     {{ adapter.dispatch('expression_is_true', packages = dbt_expectations._get_namespaces()) (model, expression, test_condition, group_by_columns, row_condition) }}
 {%- endmacro %}
 
-{% macro default__expression_is_true(model, expression, test_condition, group_by_columns, row_condition) %}
-
-
+{% macro default__expression_is_true(model, expression, test_condition, group_by_columns, row_condition) -%}
 with grouped_expression as (
-
     select
         {% if group_by_columns %}
         {% for group_by_column in group_by_columns -%}
@@ -65,4 +62,5 @@ validation_errors as (
 select count(*)
 from validation_errors
 
-{% endmacro %}
+
+{% endmacro -%}
