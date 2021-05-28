@@ -12,6 +12,7 @@
                                         expression=expression,
                                         min_value=min_value,
                                         max_value=max_value,
+                                        group_by_columns=None,
                                         row_condition=row_condition
                                         ) }}
 

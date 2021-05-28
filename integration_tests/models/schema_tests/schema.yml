@@ -281,6 +281,14 @@ models:
 
   - name : timeseries_data_grouped
     tests :
+        - dbt_expectations.expect_table_row_count_to_be_between:
+            min_value: 10
+        - dbt_expectations.expect_table_row_count_to_be_between:
+            min_value: 10
+            group_by: [date_day]
+        - dbt_expectations.expect_table_row_count_to_be_between:
+            max_value: 10000
+            group_by: [group_id]
         - dbt_expectations.expect_grouped_row_values_to_have_recent_data:
             group_by: [group_id]
             timestamp_column: date_day
