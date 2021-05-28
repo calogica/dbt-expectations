@@ -292,6 +292,7 @@ models:
         - dbt_expectations.expect_table_row_count_to_be_between:
             max_value: 10000
             group_by: [group_id]
+            strictly: True
         - dbt_expectations.expect_grouped_row_values_to_have_recent_data:
             group_by: [group_id]
             timestamp_column: date_day
