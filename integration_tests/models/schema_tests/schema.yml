@@ -256,6 +256,10 @@ models:
           - dbt_expectations.expect_column_value_lengths_to_be_between:
               min_value: 1
               max_value: 4
+          - dbt_expectations.expect_column_value_lengths_to_be_between:
+              min_value: 1
+          - dbt_expectations.expect_column_value_lengths_to_be_between:
+              max_value: 4
 
       - name: col_null
         tests:
