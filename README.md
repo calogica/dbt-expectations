@@ -204,8 +204,8 @@ Expect the number of columns in a model to be between two values.
 ```yaml
 tests:
   - dbt_expectations.expect_table_column_count_to_be_between:
-      min_value: 1
-      max_value: 4
+      min_value: 1 # (Optional)
+      max_value: 4 # (Optional)
 ```
 
 ### [expect_table_column_count_to_equal_other_table](macros/schema_tests/table_shape/expect_table_column_count_to_equal_other_table.sql)
@@ -267,7 +267,6 @@ models: # or seeds:
 ### [expect_table_row_count_to_be_between](macros/schema_tests/table_shape/expect_table_row_count_to_be_between.sql)
 
 Expect the number of rows in a model to be between two values.
-
 *Applies to:* Model, Seed, Source
 
 ```yaml
@@ -275,8 +274,8 @@ models: # or seeds:
   - name: my_model
     tests:
     - dbt_expectations.expect_table_row_count_to_be_between:
-        min_value: 1
-        max_value: 4
+        min_value: 1 # (Optional)
+        max_value: 4 # (Optional)
 ```
 
 ### [expect_table_row_count_to_equal_other_table](macros/schema_tests/table_shape/expect_table_row_count_to_equal_other_table.sql)
@@ -400,8 +399,8 @@ Expect each column value to be between two values.
 ```yaml
 tests:
   - dbt_expectations.expect_column_values_to_be_between:
-      min_value: 0
-      max_value: 10
+      min_value: 0  # (Optional)
+      max_value: 10 # (Optional)
 ```
 
 ### [expect_column_values_to_not_be_in_set](macros/schema_tests/column_values_basic/expect_column_values_to_not_be_in_set.sql)
@@ -454,8 +453,8 @@ Expect column entries to be strings with length between a min_value value and a 
 ```yaml
 tests:
   - dbt_expectations.expect_column_value_lengths_to_be_between:
-      min_value: 1
-      max_value: 4
+      min_value: 1 # (Optional)
+      max_value: 4 # (Optional)
 ```
 
 ### [expect_column_value_lengths_to_equal](macros/schema_tests/string_matching/expect_column_value_lengths_to_equal.sql)
@@ -672,8 +671,8 @@ Expect the column mean to be between a min_value value and a max_value value (in
 ```yaml
 tests:
   - dbt_expectations.expect_column_mean_to_be_between:
-      min_value: 0
-      max_value: 2
+      min_value: 0 # (Optional)
+      max_value: 2 # (Optional)
 ```
 
 ### [expect_column_median_to_be_between](macros/schema_tests/aggregate_functions/expect_column_median_to_be_between.sql)
@@ -699,8 +698,8 @@ Expect specific provided column quantiles to be between provided min_value and m
 tests:
   - dbt_expectations.expect_column_quantile_values_to_be_between:
       quantile: .95
-      min_value: 0
-      max_value: 2
+      min_value: 0 # (Optional)
+      max_value: 2 # (Optional)
 ```
 
 ### [expect_column_stdev_to_be_between](macros/schema_tests/aggregate_functions/expect_column_stdev_to_be_between.sql)
@@ -712,8 +711,8 @@ Expect the column standard deviation to be between a min_value value and a max_v
 ```yaml
 tests:
   - dbt_expectations.expect_column_stdev_to_be_between:
-      min_value: 0
-      max_value: 2
+      min_value: 0 # (Optional)
+      max_value: 2 # (Optional)
 ```
 
 ### [expect_column_unique_value_count_to_be_between](macros/schema_tests/aggregate_functions/expect_column_unique_value_count_to_be_between.sql)
@@ -725,8 +724,8 @@ Expect the number of unique values to be between a min_value value and a max_val
 ```yaml
 tests:
   - dbt_expectations.expect_column_unique_value_count_to_be_between:
-      min_value: 3
-      max_value: 3
+      min_value: 3 # (Optional)
+      max_value: 3 # (Optional)
 ```
 
 ### [expect_column_proportion_of_unique_values_to_be_between](macros/schema_tests/aggregate_functions/expect_column_proportion_of_unique_values_to_be_between.sql)
@@ -740,8 +739,8 @@ For example, in a column containing [1, 2, 2, 3, 3, 3, 4, 4, 4, 4], there are 4 
 ```yaml
 tests:
   - dbt_expectations.expect_column_proportion_of_unique_values_to_be_between:
-      min_value: 0
-      max_value: .4
+      min_value: 0  # (Optional)
+      max_value: .4 # (Optional)
 ```
 
 ### [expect_column_most_common_value_to_be_in_set](macros/schema_tests/aggregate_functions/expect_column_most_common_value_to_be_in_set.sql)
@@ -766,8 +765,8 @@ Expect the column max to be between a min and max value
 ```yaml
 tests:
   - dbt_expectations.expect_column_max_to_be_between:
-      min_value: 1
-      max_value: 1
+      min_value: 1 # (Optional)
+      max_value: 1 # (Optional)
 ```
 
 ### [expect_column_min_to_be_between](macros/schema_tests/aggregate_functions/expect_column_min_to_be_between.sql)
@@ -779,8 +778,8 @@ Expect the column min to be between a min and max value
 ```yaml
 tests:
   - dbt_expectations.expect_column_min_to_be_between:
-      min_value: 0
-      max_value: 1
+      min_value: 0 # (Optional)
+      max_value: 1 # (Optional)
 ```
 
 ### [expect_column_sum_to_be_between](macros/schema_tests/aggregate_functions/expect_column_sum_to_be_between.sql)
@@ -792,8 +791,8 @@ Expect the column to sum to be between a min and max value
 ```yaml
 tests:
   - dbt_expectations.expect_column_sum_to_be_between:
-      min_value: 1
-      max_value: 2
+      min_value: 1 # (Optional)
+      max_value: 2 # (Optional)
 ```
 
 ### [expect_column_pair_values_A_to_be_greater_than_B](macros/schema_tests/multi-column/expect_column_pair_values_A_to_be_greater_than_B.sql)

@@ -1,6 +1,6 @@
 {%- macro test_expect_table_row_count_to_be_between(model,
-                                                      min_value,
-                                                      max_value,
+                                                      min_value=None,
+                                                      max_value=None,
                                                       row_condition=None
                                                     ) -%}
 {% set expression %}
