@@ -12,8 +12,8 @@
 
 {%- set expression %}
 ( 1=1
-{%- if min_value is not none %} and {{ number_actual_columns }} >= {{ min_value }}{% endif %}
-{%- if max_value is not none %} and {{ number_actual_columns }} <= {{ max_value }}{% endif %}
+{%- if min_value %} and {{ number_actual_columns }} >= {{ min_value }}{% endif %}
+{%- if max_value %} and {{ number_actual_columns }} <= {{ max_value }}{% endif %}
 )
 {% endset -%}
 
