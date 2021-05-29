@@ -230,6 +230,9 @@ models:
           - dbt_expectations.expect_column_stdev_to_be_between:
               min_value: 0
               max_value: 2
+          - dbt_expectations.expect_column_stdev_to_be_between:
+              min_value: 0
+              strictly: true
           - dbt_expectations.expect_column_most_common_value_to_be_in_set:
               value_set: [0.5]
               top_n: 1
@@ -289,6 +292,7 @@ models:
         - dbt_expectations.expect_table_row_count_to_be_between:
             max_value: 10000
             group_by: [group_id]
+            strictly: True
         - dbt_expectations.expect_grouped_row_values_to_have_recent_data:
             group_by: [group_id]
             timestamp_column: date_day

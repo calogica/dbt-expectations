@@ -1,6 +1,9 @@
 # dbt-expectations
 
-Extension package for [**dbt**](https://github.com/fishtown-analytics/dbt) inspired by the [Great Expectations package for Python](https://greatexpectations.io/). The intent is to allow dbt users to deploy GE-like tests in their data warehouse directly from dbt, vs having to add another integration with their data warehouse.
+<img src="expectations.gif"/>
+
+**dbt-expectations** is an extension package for [**dbt**](https://github.com/fishtown-analytics/dbt), inspired by the [Great Expectations package for Python](https://greatexpectations.io/). The intent is to allow dbt users to deploy GE-like tests in their data warehouse directly from dbt, vs having to add another integration with their data warehouse.
+
 
 ## Install
 
