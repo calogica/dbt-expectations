@@ -4,7 +4,6 @@
 
 **dbt-expectations** is an extension package for [**dbt**](https://github.com/fishtown-analytics/dbt), inspired by the [Great Expectations package for Python](https://greatexpectations.io/). The intent is to allow dbt users to deploy GE-like tests in their data warehouse directly from dbt, vs having to add another integration with their data warehouse.
 
-
 ## Install
 
 `db-expectations` currently support `dbt 0.19.x`.
@@ -111,7 +110,6 @@ To run the tests:
 - [expect_column_values_to_not_match_regex](#expect_column_values_to_not_match_regex)
 - [expect_column_values_to_not_match_regex_list](#expect_column_values_to_not_match_regex_list)
 
-
 ### Aggregate functions
 
 - [expect_column_distinct_count_to_be_greater_than](#expect_column_distinct_count_to_be_greater_than)
@@ -139,7 +137,6 @@ To run the tests:
 - [expect_compound_columns_to_be_unique](#expect_compound_columns_to_be_unique)
 - [expect_multicolumn_sum_to_equal](#expect_multicolumn_sum_to_equal)
 - [expect_select_column_values_to_be_unique_within_record](#expect_select_column_values_to_be_unique_within_record)
-
 
 ### Distributional functions
 
@@ -196,7 +193,6 @@ models: # or seeds:
             datepart: day
             interval: 1
 ```
-
 
 ### [expect_table_column_count_to_be_between](macros/schema_tests/table_shape/expect_table_column_count_to_be_between.sql)
 
@@ -422,7 +418,7 @@ tests:
 
 Expect column values to be increasing.
 
-If strictly=True, then this expectation is only satisfied if each consecutive value is strictly increasing–equal values are treated as failures.
+If `strictly: True`, then this expectation is only satisfied if each consecutive value is strictly increasing–equal values are treated as failures.
 
 *Applies to:* Column
 
