@@ -12,8 +12,8 @@
     {% set sql %}
 
         select
-            min({{ date_col }}) as start_date,
-            max({{ date_col }}) as end_date
+            min({{ date_col }}) as start_{{ date_part }},
+            max({{ date_col }}) as end_{{ date_part }}
         from {{ model }}
         {% if row_condition %}
         where {{ row_condition }}
@@ -34,21 +34,26 @@
 {% endif %}
 
 
-{% if not test_end_date %}
-{% set end_date = db_end_date %}
-{% else %}
-{% set end_date = test_end_date %}
-{% endif %}
-}}
-with date_spine as (
+{%- if not test_end_date -%}
+{%- set end_date = db_end_date -%}
+{%- else -%}
+{%- set end_date = test_end_date -%}
+{%- endif -%}
 
-    {{ dbt_date.get_base_dates(start_date=start_date, end_date=end_date, datepart=date_part) }}
+with base_dates as (
+
+    {{ dbt_utils.date_spine(
+                            start_date="cast('" ~ start_date ~ "' as " ~ dbt_expectations.type_datetime(),
+                            end_date="cast('" ~ end_date ~ "' as " ~ dbt_expectations.type_datetime(),
+                            datepart=date_part
+                        )
+        }}
 
 ),
 model_data as (
 
     select
-        cast({{ dbt_utils.date_trunc(date_part, date_col) }} as {{ dbt_utils.type_timestamp() }}) as date_{{date_part}},
+        cast({{ dbt_utils.date_trunc(date_part, date_col) }} as {{ dbt_expectations.type_datetime() }}) as date_{{ date_part }},
         count(*) as row_cnt
     from
         {{ model }} f
@@ -66,7 +71,7 @@ final as (
         case when f.date_{{date_part}} is null then true else false end as is_missing,
         coalesce(f.row_cnt, 0) as row_cnt
     from
-        date_spine d
+        base_dates d
         left outer join
         model_data f on d.date_{{date_part}} = f.date_{{date_part}}
 

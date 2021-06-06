@@ -43,7 +43,7 @@ models:
               datepart: day
               interval: 1
           - dbt_expectations.expect_column_values_to_be_of_type:
-              column_type: date
+              column_type: ["{{ dbt_expectations.type_datetime() | trim }}"]
           - dbt_expectations.expect_column_values_to_be_in_type_list:
               column_type_list: [date, "{{ dbt_expectations.type_datetime() | trim }}"]
           - dbt_expectations.expect_column_values_to_be_increasing:
@@ -76,7 +76,7 @@ models:
               datepart: day
               interval: 1
           - dbt_expectations.expect_column_values_to_be_of_type:
-              column_type: date
+              column_type: ["{{ dbt_expectations.type_datetime() | trim }}"]
           - dbt_expectations.expect_column_values_to_be_in_type_list:
               column_type_list: [date, "{{ dbt_expectations.type_datetime() | trim }}"]
 
@@ -98,6 +98,10 @@ models:
               take_logs: false
 
   - name: timeseries_hourly_data_extended
+    tests:
+      - dbt_expectations.expect_row_values_to_have_data_for_every_n_datepart:
+          date_col: date_hour
+          date_part: hour
 
     columns:
       - name: date_hour
