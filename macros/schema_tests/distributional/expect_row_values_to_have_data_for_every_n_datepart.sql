@@ -66,7 +66,7 @@ final as (
         coalesce(f.row_cnt, 0) as row_cnt
     from
         base_dates d
-        left outer join
+        left join
         model_data f on cast(d.date_{{ date_part }} as {{ dbt_expectations.type_datetime() }}) = f.date_{{ date_part }}
 
 )

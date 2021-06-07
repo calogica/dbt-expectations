@@ -33,7 +33,7 @@ validation_errors as (
         v.value_field
     from
         all_values v
-        left outer join
+        left join
         set_values s on v.value_field = s.value_field
     where
         v.value_field is null
