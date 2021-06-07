@@ -32,6 +32,9 @@ models:
             compare_column_name: date_day
         - dbt_expectations.expect_column_distinct_count_to_equal_other_table:
             column_name: date_day
+        - dbt_expectations.expect_row_values_to_have_data_for_every_n_datepart:
+            date_col: date_day
+            date_part: day
 
     columns:
       - name: date_day
@@ -40,9 +43,9 @@ models:
               datepart: day
               interval: 1
           - dbt_expectations.expect_column_values_to_be_of_type:
-              column_type: date
+              column_type: "{{ dbt_expectations.type_datetime() }}"
           - dbt_expectations.expect_column_values_to_be_in_type_list:
-              column_type_list: [date, "{{ dbt_expectations.type_datetime() | trim }}"]
+              column_type_list: [date, "{{ dbt_expectations.type_datetime() }}"]
           - dbt_expectations.expect_column_values_to_be_increasing:
               sort_column: date_day
           - dbt_expectations.expect_column_distinct_count_to_equal_other_table:
@@ -62,6 +65,9 @@ models:
     tests:
         - dbt_expectations.expect_table_columns_to_match_ordered_list:
             column_list: ["date_day", "row_value", "row_value_log"]
+        - dbt_expectations.expect_row_values_to_have_data_for_every_n_datepart:
+            date_col: date_day
+            date_part: day
 
     columns:
       - name: date_day
@@ -70,9 +76,9 @@ models:
               datepart: day
               interval: 1
           - dbt_expectations.expect_column_values_to_be_of_type:
-              column_type: date
+              column_type: "{{ dbt_expectations.type_datetime() }}"
           - dbt_expectations.expect_column_values_to_be_in_type_list:
-              column_type_list: [date, "{{ dbt_expectations.type_datetime() | trim }}"]
+              column_type_list: [date, "{{ dbt_expectations.type_datetime() }}"]
 
       - name: row_value
         tests:
@@ -92,16 +98,21 @@ models:
               take_logs: false
 
   - name: timeseries_hourly_data_extended
+    tests:
+      - dbt_expectations.expect_row_values_to_have_data_for_every_n_datepart:
+          date_col: date_hour
+          date_part: hour
+
     columns:
       - name: date_hour
         tests:
           - dbt_expectations.expect_row_values_to_have_recent_data:
               datepart: hour
               interval: 24
-          # - dbt_expectations.expect_column_values_to_be_of_type:
-          #     column_type: datetime
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: "{{ dbt_expectations.type_datetime() }}"
           - dbt_expectations.expect_column_values_to_be_in_type_list:
-              column_type_list: ["{{ dbt_expectations.type_datetime() | trim }}"]
+              column_type_list: ["{{ dbt_expectations.type_datetime() }}"]
 
 
       - name: row_value_log

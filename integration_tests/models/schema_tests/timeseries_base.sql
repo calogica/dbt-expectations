@@ -1,1 +1,1 @@
-{{ dbt_date.get_base_dates(n_dateparts=12, datepart='month') }}
+{{ dbt_date.get_base_dates(n_dateparts=366, datepart='day') }}

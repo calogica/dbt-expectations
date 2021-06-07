@@ -7,8 +7,11 @@
 
     {%- set matching_column_types = [] -%}
 
-    {%- for column in columns_in_relation -%}
-        {%- if ((column.name | upper ) == column_name) and ((column.dtype | upper ) in column_type_list) -%}
+    -- DEBUG:
+    -- {{ model.name }}
+    {%- for column in columns_in_relation %}
+    -- {{ column.name | upper }}: {{ column.dtype | upper }} in {{ column_type_list }}?
+        {% if ((column.name | upper ) == column_name) and ((column.dtype | upper ) in column_type_list) -%}
             {%- do matching_column_types.append(column.name) -%}
         {%- endif -%}
     {%- endfor -%}
