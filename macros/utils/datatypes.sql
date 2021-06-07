@@ -11,8 +11,8 @@
     datetime
 {%- endmacro %}
 
-{% macro snowflake__type_datetime() -%}
 {# see: https://docs.snowflake.com/en/sql-reference/data-types-datetime.html#datetime #}
+{% macro snowflake__type_datetime() -%}
     timestamp_ntz
 {%- endmacro %}
 
