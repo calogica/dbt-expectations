@@ -12,8 +12,8 @@
     {% set sql %}
 
         select
-            min({{ date_col }}) as start_date,
-            max({{ date_col }}) as end_date
+            min({{ date_col }}) as start_{{ date_part }},
+            max({{ date_col }}) as end_{{ date_part }}
         from {{ model }}
         {% if row_condition %}
         where {{ row_condition }}
@@ -39,20 +39,15 @@
 {% else %}
 {% set end_date = test_end_date %}
 {% endif %}
+with base_dates as (
 
-with date_spine as
-(
-    {{ dbt_utils.date_spine(
-        datepart=date_part,
-        start_date="'" ~ start_date ~ "'",
-        end_date="'" ~ end_date ~ "'"
-       )
-    }}
+    {{ dbt_date.get_base_dates(start_date=start_date, end_date=end_date, datepart=date_part) }}
+
 ),
-model_data as
-(
+model_data as (
+
     select
-        cast({{ dbt_utils.date_trunc(date_part, date_col) }} as datetime) as date_{{date_part}},
+        cast({{ dbt_utils.date_trunc(date_part, date_col) }} as {{ dbt_expectations.type_datetime() }}) as date_{{ date_part }},
         count(*) as row_cnt
     from
         {{ model }} f
@@ -60,27 +55,24 @@ model_data as
     where {{ row_condition }}
     {% endif %}
     group by
-        1
+        date_{{date_part}}
+
 ),
-{# date_part_dates as
-(
+final as (
+
     select
-        cast({{ dbt_utils.date_trunc(date_part, 'date_' ~ date_part ) }} as date) as date_{{date_part}}
-    from
-        date_spine d
-    group by
-        1
-), #}
-final as
-(
-    select
-        d.date_{{date_part}},
-        case when f.date_{{date_part}} is null then true else false end as is_missing,
+        cast(d.date_{{ date_part }} as {{ dbt_expectations.type_datetime() }}) as date_{{ date_part }},
+        case when f.date_{{ date_part }} is null then true else false end as is_missing,
         coalesce(f.row_cnt, 0) as row_cnt
     from
-        date_spine d
+        base_dates d
         left outer join
-        model_data f on d.date_{{date_part}} = f.date_{{date_part}}
+        model_data f on cast(d.date_{{ date_part }} as {{ dbt_expectations.type_datetime() }}) = f.date_{{ date_part }}
+
 )
-select count(*) from final where row_cnt = 0
+select
+    count(*)
+from final
+where
+    row_cnt = 0
 {%- endmacro -%}

@@ -906,3 +906,18 @@ tests:
       group_by: date_day
       sigma_threshold: 3
 ```
+
+### [expect_row_values_to_have_data_for_every_n_datepart](macros/schema_tests/distributional/expect_row_values_to_have_data_for_every_n_datepart.sql)
+
+Expects model to have values for every grouped `date_part`.
+
+For example, this tests whether a model has data for every `day` (grouped on `date_col`) from either a specified `start_date` and `end_date`, or for the `min`/`max` value of the specified `date_col`.
+
+*Applies to:* Model, Seed, Source
+
+```yaml
+tests:
+    - dbt_expectations.expect_row_values_to_have_data_for_every_n_datepart:
+        date_col: date_day
+        date_part: day
+```
