@@ -1,3 +1,24 @@
+# dbt-expectations v0.3.5
+
+## Features
+* Added a new macro, `expect_row_values_to_have_data_for_every_n_datepart`, which tests whether a model has values for every grouped `date_part`.
+
+
+    For example, this tests whether a model has data for every `day` (grouped on `date_col`) from either a specified `start_date` and `end_date`, or for the `min`/`max` value of the specified `date_col`.
+
+
+    ```yaml
+    tests:
+        - dbt_expectations.expect_row_values_to_have_data_for_every_n_datepart:
+            date_col: date_day
+            date_part: day
+    ```
+
+## Fixes
+
+* Fixed `join` syntax because Twitter induced guilt: https://twitter.com/emilyhawkins__/status/1400967270537564160
+
+
 # dbt-expectations v0.3.4
 
 ## Features
@@ -23,8 +44,6 @@
 
     evaluates to `> 0`.
     ([#72](https://github.com/calogica/dbt-expectations/issues/72), [#74](https://github.com/calogica/dbt-expectations/pull/74))
-
-
 
 ## Fixes
 
