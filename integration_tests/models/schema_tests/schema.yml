@@ -43,9 +43,9 @@ models:
               datepart: day
               interval: 1
           - dbt_expectations.expect_column_values_to_be_of_type:
-              column_type: ["{{ dbt_expectations.type_datetime() | trim }}"]
+              column_type: "{{ dbt_expectations.type_datetime() }}"
           - dbt_expectations.expect_column_values_to_be_in_type_list:
-              column_type_list: [date, "{{ dbt_expectations.type_datetime() | trim }}"]
+              column_type_list: [date, "{{ dbt_expectations.type_datetime() }}"]
           - dbt_expectations.expect_column_values_to_be_increasing:
               sort_column: date_day
           - dbt_expectations.expect_column_distinct_count_to_equal_other_table:
@@ -76,9 +76,9 @@ models:
               datepart: day
               interval: 1
           - dbt_expectations.expect_column_values_to_be_of_type:
-              column_type: ["{{ dbt_expectations.type_datetime() | trim }}"]
+              column_type: "{{ dbt_expectations.type_datetime() }}"
           - dbt_expectations.expect_column_values_to_be_in_type_list:
-              column_type_list: [date, "{{ dbt_expectations.type_datetime() | trim }}"]
+              column_type_list: [date, "{{ dbt_expectations.type_datetime() }}"]
 
       - name: row_value
         tests:
@@ -112,7 +112,7 @@ models:
           # - dbt_expectations.expect_column_values_to_be_of_type:
           #     column_type: datetime
           - dbt_expectations.expect_column_values_to_be_in_type_list:
-              column_type_list: ["{{ dbt_expectations.type_datetime() | trim }}"]
+              column_type_list: ["{{ dbt_expectations.type_datetime() }}"]
 
 
       - name: row_value_log

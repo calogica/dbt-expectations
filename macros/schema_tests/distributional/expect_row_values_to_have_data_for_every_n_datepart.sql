@@ -39,8 +39,7 @@
 {% else %}
 {% set end_date = test_end_date %}
 {% endif %}
-}}
-with date_spine as (
+with base_dates as (
 
     {{ dbt_date.get_base_dates(start_date=start_date, end_date=end_date, datepart=date_part) }}
 
@@ -62,13 +61,13 @@ model_data as (
 final as (
 
     select
-        d.date_{{date_part}},
-        case when f.date_{{date_part}} is null then true else false end as is_missing,
+        cast(d.date_{{ date_part }} as {{ dbt_expectations.type_datetime() }}) as date_{{ date_part }},
+        case when f.date_{{ date_part }} is null then true else false end as is_missing,
         coalesce(f.row_cnt, 0) as row_cnt
     from
         base_dates d
         left outer join
-        model_data f on d.date_{{date_part}} = f.date_{{date_part}}
+        model_data f on cast(d.date_{{ date_part }} as {{ dbt_expectations.type_datetime() }}) = f.date_{{ date_part }}
 
 )
 select
