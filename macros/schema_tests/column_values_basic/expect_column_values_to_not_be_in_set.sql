@@ -33,7 +33,7 @@ validation_errors as (
         v.value_field
     from
         all_values v
-        inner join
+        join
         set_values s on v.value_field = s.value_field
 
 )

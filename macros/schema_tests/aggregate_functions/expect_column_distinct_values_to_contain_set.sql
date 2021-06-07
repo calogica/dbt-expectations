@@ -41,7 +41,7 @@ validation_errors as (
         s.value_field
     from
         unique_set_values s
-        left outer join
+        left join
         all_values v on s.value_field = v.value_field
     where
         v.value_field is null
