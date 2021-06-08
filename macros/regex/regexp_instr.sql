@@ -1,6 +1,6 @@
 {% macro regexp_instr(source_value, regexp, position=1, occurrence=1) %}
 
-    {{ adapter.dispatch('regexp_instr', packages=dbt_expectations._get_namespaces())(
+    {{ adapter.dispatch('regexp_instr', 'dbt_expectations')(
         source_value, regexp, position, occurrence
     ) }}
 

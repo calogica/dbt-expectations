@@ -1,6 +1,6 @@
 {% macro test_expect_grouped_row_values_to_have_recent_data(model, group_by, timestamp_column, datepart, interval) %}
 
- {{ adapter.dispatch('test_expect_grouped_row_values_to_have_recent_data', packages = dbt_expectations._get_namespaces()) (model, group_by, timestamp_column, datepart, interval) }}
+ {{ adapter.dispatch('test_expect_grouped_row_values_to_have_recent_data', 'dbt_expectations') (model, group_by, timestamp_column, datepart, interval) }}
 
 {% endmacro %}
 
@@ -26,5 +26,5 @@ validation_errors as (
         latest_timestamp_column < {{ dbt_utils.dateadd(datepart, interval * -1, dbt_date.now()) }}
 
 )
-select count(*) from validation_errors
+select * from validation_errors
 {% endmacro %}

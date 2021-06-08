@@ -1,5 +1,5 @@
 {% macro percentile_cont(field, quantile, partition=None) %}
-  {{ adapter.dispatch('quantile', packages = dbt_expectations._get_namespaces()) (field, quantile, partition) }}
+  {{ adapter.dispatch('quantile', 'dbt_expectations') (field, quantile, partition) }}
 {% endmacro %}
 
 {% macro default__quantile(field, quantile, partition)  -%}

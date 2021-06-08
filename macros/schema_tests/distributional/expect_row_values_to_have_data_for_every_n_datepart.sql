@@ -71,7 +71,7 @@ final as (
 
 )
 select
-    count(*)
+    *
 from final
 where
     row_cnt = 0

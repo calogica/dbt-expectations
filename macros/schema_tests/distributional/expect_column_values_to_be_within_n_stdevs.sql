@@ -3,7 +3,7 @@
                                   group_by=None,
                                   sigma_threshold=3
                                 ) -%}
-    {{ adapter.dispatch('test_expect_column_values_to_be_within_n_stdevs', packages = dbt_expectations._get_namespaces()) (model, column_name, group_by, sigma_threshold) }}
+    {{ adapter.dispatch('test_expect_column_values_to_be_within_n_stdevs', 'dbt_expectations') (model, column_name, group_by, sigma_threshold) }}
 {%- endmacro %}
 
 {% macro default__test_expect_column_values_to_be_within_n_stdevs(model,
@@ -49,7 +49,7 @@ metric_values_z_scores as (
 
 )
 select
-    count(*) as error_count
+    *
 from
     metric_values_z_scores
 where

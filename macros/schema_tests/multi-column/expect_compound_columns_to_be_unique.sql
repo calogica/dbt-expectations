@@ -57,7 +57,7 @@ with validation_errors as (
     having count(*) > 1
 
 )
-select count(*) from validation_errors
+select * from validation_errors
 {% endmacro %}
 
 

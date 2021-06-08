@@ -5,7 +5,7 @@
 name: 'dbt_expectations'
 version: '0.2.3'
 
-require-dbt-version: [">=0.18.0", "<0.20.0"]
+require-dbt-version: [">=0.20.0", "<0.21.0"]
 config-version: 2
 
 target-path: "target"

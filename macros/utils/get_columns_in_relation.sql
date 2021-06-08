@@ -1,6 +1,6 @@
 {% macro get_columns_in_relation_sql(relation) %}
 
-    {{ adapter.dispatch('get_columns_in_relation_sql', packages=dbt_expectations._get_namespaces())(relation) }}
+    {{ adapter.dispatch('get_columns_in_relation_sql', 'dbt_expectations')(relation) }}
 
 {% endmacro %}
 
