@@ -3,7 +3,7 @@
 # and underscores. A good package name should reflect your organization's
 # name or the intended use of these models
 name: 'dbt_expectations'
-version: '0.2.3'
+version: '0.4.0'
 
 require-dbt-version: [">=0.20.0", "<0.21.0"]
 config-version: 2
@@ -12,3 +12,7 @@ target-path: "target"
 clean-targets: ["target", "dbt_modules"]
 macro-paths: ["macros"]
 log-path: "logs"
+
+dispatch:
+  - macro_namespace: dbt_utils
+    search_order: ['dbt_expectations', 'dbt_utils']  # enable override
