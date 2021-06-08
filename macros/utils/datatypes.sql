@@ -4,7 +4,7 @@
 
 
 {%- macro type_datetime() -%}
-  {{ return(adapter.dispatch('type_datetime', packages = dbt_expectations._get_namespaces())()) }}
+  {{ return(adapter.dispatch('type_datetime', 'dbt_expectations')()) }}
 {%- endmacro -%}
 
 {% macro default__type_datetime() -%}

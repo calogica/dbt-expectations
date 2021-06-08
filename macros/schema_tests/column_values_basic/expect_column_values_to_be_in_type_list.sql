@@ -15,7 +15,18 @@
             {%- do matching_column_types.append(column.name) -%}
         {%- endif -%}
     {%- endfor -%}
-    select 1 - {{ matching_column_types | length }}
+    with test_data as (
+
+        select
+            '{{ model.name }}' as model_name,
+            '{{ column_name }}' as column_name,
+            {{ matching_column_types | length }} as number_matching_column_types
+
+    )
+    select *
+    from test_data
+    where
+        number_matching_column_types = 0
 
 {%- endif -%}
 {%- endmacro -%}

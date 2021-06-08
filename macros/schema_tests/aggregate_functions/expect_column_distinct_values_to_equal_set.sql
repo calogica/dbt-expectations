@@ -47,7 +47,7 @@ validation_errors as (
 
 )
 
-select count(*) as validation_errors
+select *
 from validation_errors
 where column_values != set_values
 

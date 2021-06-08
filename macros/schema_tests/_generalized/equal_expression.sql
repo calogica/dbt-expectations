@@ -1,5 +1,5 @@
 {% macro get_select(model, expression, row_condition, group_by) -%}
-    {{ adapter.dispatch('get_select', packages = dbt_expectations._get_namespaces()) (model, expression, row_condition, group_by) }}
+    {{ adapter.dispatch('get_select', 'dbt_expectations') (model, expression, row_condition, group_by) }}
 {%- endmacro %}
 
 {%- macro default__get_select(model, expression, row_condition, group_by) %}
@@ -37,7 +37,7 @@
                                 return_difference=False
                                 ) -%}
 
-    {{ adapter.dispatch('test_equal_expression', packages = dbt_expectations._get_namespaces()) (
+    {{ adapter.dispatch('test_equal_expression', 'dbt_expectations') (
                                 model, expression,
                                 compare_model,
                                 compare_expression,
@@ -100,11 +100,7 @@
     -- DEBUG:
     -- select * from final
     select
-        {% if return_difference %}
-        coalesce(sum(expression_difference), 0)
-        {% else %}
-        count(*)
-        {% endif %}
+        *
     from final
     where
         {% if tolerance_percent %}

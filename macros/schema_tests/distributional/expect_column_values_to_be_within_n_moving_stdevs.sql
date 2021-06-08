@@ -22,7 +22,7 @@ coalesce({{ metric_column }}, 0)
                                   take_diffs=true,
                                   take_logs=true
                                 ) -%}
-    {{ adapter.dispatch('test_expect_column_values_to_be_within_n_moving_stdevs', packages = dbt_expectations._get_namespaces()) (model,
+    {{ adapter.dispatch('test_expect_column_values_to_be_within_n_moving_stdevs', 'dbt_expectations') (model,
                                   column_name,
                                   date_column_name,
                                   period,
@@ -122,7 +122,7 @@ metric_sigma as (
 
 )
 select
-    count(*)
+    *
 from
     metric_sigma
 where

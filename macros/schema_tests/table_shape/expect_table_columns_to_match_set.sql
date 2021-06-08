@@ -3,6 +3,16 @@
     {%- set column_list = column_list | map(transform) | list -%}
     {%- set relation_column_names = dbt_expectations._get_column_list(model, transform) -%}
     {%- set matching_columns = dbt_expectations._list_intersect(column_list, relation_column_names) -%}
-    select {{ relation_column_names | length }} - {{ matching_columns | length }}
+    with test_data as (
+
+        select
+            '{{ relation_column_names | length }}' as number_columns,
+            '{{ matching_columns | length }}' as number_matching_columns
+
+    )
+    select *
+    from test_data
+    where number_columns != number_matching_columns
+
 {%- endif -%}
 {%- endmacro -%}

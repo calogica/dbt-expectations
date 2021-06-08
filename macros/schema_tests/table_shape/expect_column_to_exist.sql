@@ -17,15 +17,19 @@
         {%- set column_index_matches = true -%}
 
     {%- endif %}
-    /*
-        DEBUG:
+
+    with test_data as (
+
         select
-            {{ column_name }} as column_name,
+            '{{ column_name }}' as column_name,
             {{ matching_column_index }} as matching_column_index,
-            {{ column_index_0 }} as column_index_0,
             {{ column_index_matches }} as column_index_matches
-    */
-    select 1 - {{ 1 if matching_column_index >= 0 and column_index_matches else 0 }}
+
+    )
+    select *
+    from test_data
+    where
+        not(matching_column_index >= 0 and column_index_matches)
 
 {%- endif -%}
 {%- endmacro -%}

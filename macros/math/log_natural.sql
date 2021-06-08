@@ -1,5 +1,5 @@
 {% macro log_natural(x) -%}
-    {{ adapter.dispatch('log_natural', packages=dbt_expectations._get_namespaces()) (x) }}
+    {{ adapter.dispatch('log_natural', 'dbt_expectations') (x) }}
 {% endmacro %}
 
 {% macro default__log_natural(x) %}

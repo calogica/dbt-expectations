@@ -1,5 +1,5 @@
 {% macro rand() -%}
-    {{ adapter.dispatch('rand', packages=dbt_expectations._get_namespaces()) () }}
+    {{ adapter.dispatch('rand', 'dbt_expectations') () }}
 {% endmacro %}
 
 {% macro default__rand() %}
