@@ -1,4 +1,4 @@
-{%- macro test_expect_table_column_count_to_be_between(model,
+{%- test expect_table_column_count_to_be_between(model,
                                                         min_value=None,
                                                         max_value=None
                                                         ) -%}
@@ -30,4 +30,4 @@ from test_data
 where
     not {{ expression }}
 {%- endif -%}
-{%- endmacro -%}
+{%- endtest -%}

@@ -1,4 +1,4 @@
-{%- macro test_expect_column_to_exist(model, column_name, column_index=None, transform="upper") -%}
+{%- test expect_column_to_exist(model, column_name, column_index=None, transform="upper") -%}
 {%- if execute -%}
 
     {%- set column_name = column_name | upper -%}
@@ -32,4 +32,4 @@
         not(matching_column_index >= 0 and column_index_matches)
 
 {%- endif -%}
-{%- endmacro -%}
+{%- endtest -%}

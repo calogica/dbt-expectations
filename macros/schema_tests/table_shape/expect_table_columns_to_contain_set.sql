@@ -1,4 +1,4 @@
-{%- macro test_expect_table_columns_to_contain_set(model, column_list, transform="upper") -%}
+{%- test expect_table_columns_to_contain_set(model, column_list, transform="upper") -%}
 {%- if execute -%}
     {%- set column_list = column_list | map(transform) | list -%}
     {%- set relation_column_names = dbt_expectations._get_column_list(model, transform) -%}
@@ -14,4 +14,4 @@
     from test_data
     where number_columns != number_matching_columns
 {%- endif -%}
-{%- endmacro -%}
+{%- endtest -%}

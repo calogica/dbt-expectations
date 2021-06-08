@@ -1,4 +1,4 @@
-{% macro test_expect_row_values_to_have_recent_data(model, column_name, datepart, interval) %}
+{% test expect_row_values_to_have_recent_data(model, column_name, datepart, interval) %}
 with max_recency as (
 
     select max({{ column_name }} ) as max_date
@@ -14,4 +14,4 @@ from
 where
     max_date < {{ dbt_utils.dateadd(datepart, interval * -1, dbt_date.now()) }}
 
-{% endmacro %}
+{% endtest %}

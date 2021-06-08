@@ -1,4 +1,4 @@
-{%- macro test_expect_table_row_count_to_be_between(model,
+{%- test expect_table_row_count_to_be_between(model,
                                                     min_value=None,
                                                     max_value=None,
                                                     group_by=None,
@@ -16,4 +16,4 @@ count(*)
                                         row_condition=row_condition,
                                         strictly=strictly
                                         ) }}
-{%- endmacro -%}
+{%- endtest -%}
