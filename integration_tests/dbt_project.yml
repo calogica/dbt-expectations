@@ -19,8 +19,9 @@ clean-targets:
 
 dispatch:
   - macro_namespace: dbt_expectations
-    search_order: ['dbt_expectations_integration_tests', 'dbt_expectations']  # enable override
-
+    search_order: ['dbt_expectations_integration_tests', 'dbt_expectations']
+  - macro_namespace: dbt_utils
+    search_order: ['dbt_expectations', 'dbt_utils']
 vars:
     'dbt_date:time_zone': 'America/Los_Angeles'
 
@@ -30,5 +31,6 @@ quoting:
     schema: false
 
 models:
-  schema: dbt_expectations_integration_tests
-  materialized: table
+  dbt_expectations_integration_tests:
+    +schema: dbt_expectations_integration_tests
+    +materialized: table
