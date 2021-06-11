@@ -1,4 +1,4 @@
-{% macro test_expect_column_most_common_value_to_be_in_set(model, column_name,
+{% test expect_column_most_common_value_to_be_in_set(model, column_name,
                                                             value_set,
                                                             top_n,
                                                             quote_values=False,
@@ -6,7 +6,7 @@
                                                             row_condition=None
                                                             ) -%}
     {{ adapter.dispatch('test_expect_column_most_common_value_to_be_in_set', 'dbt_expectations') (model, column_name, value_set, top_n, quote_values, data_type, row_condition) }}
-{%- endmacro %}
+{%- endtest %}
 
 {% macro default__test_expect_column_most_common_value_to_be_in_set(model, column_name,
                                                             value_set,

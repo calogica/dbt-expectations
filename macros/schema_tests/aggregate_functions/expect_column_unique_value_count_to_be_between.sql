@@ -1,4 +1,4 @@
-{% macro test_expect_column_unique_value_count_to_be_between(model, column_name,
+{% test expect_column_unique_value_count_to_be_between(model, column_name,
                                                             min_value=None,
                                                             max_value=None,
                                                             group_by=None,
@@ -16,4 +16,4 @@ count(distinct {{ column_name }})
                                         row_condition=row_condition,
                                         strictly=strictly
                                         ) }}
-{% endmacro %}
+{% endtest %}

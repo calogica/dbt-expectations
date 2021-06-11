@@ -1,4 +1,4 @@
-{% macro test_expect_column_value_lengths_to_equal(model, column_name,
+{% test expect_column_value_lengths_to_equal(model, column_name,
                                                     value,
                                                     row_condition=None
                                                     ) %}
@@ -12,4 +12,4 @@
                                         )
                                         }}
 
-{% endmacro %}
+{% endtest %}

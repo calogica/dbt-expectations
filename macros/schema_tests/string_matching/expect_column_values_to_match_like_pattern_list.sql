@@ -1,4 +1,4 @@
-{% macro test_expect_column_values_to_match_like_pattern_list(model, column_name,
+{% test expect_column_values_to_match_like_pattern_list(model, column_name,
                                                     like_pattern_list,
                                                     match_on="any",
                                                     row_condition=None
@@ -20,4 +20,4 @@
                                         )
                                         }}
 
-{% endmacro %}
+{% endtest %}

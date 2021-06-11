@@ -9,7 +9,7 @@ coalesce({{ metric_column }}, 0)
 
 {%- endmacro -%}
 
-{% macro test_expect_column_values_to_be_within_n_moving_stdevs(model,
+{% test expect_column_values_to_be_within_n_moving_stdevs(model,
                                   column_name,
                                   date_column_name,
                                   period='day',
@@ -35,7 +35,7 @@ coalesce({{ metric_column }}, 0)
                                   take_diffs,
                                   take_logs
                                 ) }}
-{%- endmacro %}
+{%- endtest %}
 
 {% macro default__test_expect_column_values_to_be_within_n_moving_stdevs(model,
                                   column_name,

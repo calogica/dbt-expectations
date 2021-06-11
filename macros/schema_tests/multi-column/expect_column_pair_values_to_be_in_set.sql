@@ -1,4 +1,4 @@
-{% macro test_expect_column_pair_values_to_be_in_set(model,
+{% test expect_column_pair_values_to_be_in_set(model,
                                                         column_A,
                                                         column_B,
                                                         value_pairs_set,
@@ -24,4 +24,4 @@
                                         )
                                         }}
 
-{% endmacro %}
+{% endtest %}

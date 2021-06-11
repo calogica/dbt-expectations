@@ -1,4 +1,4 @@
-{%- macro test_expect_column_values_to_be_in_type_list(model, column_name, column_type_list) -%}
+{%- test expect_column_values_to_be_in_type_list(model, column_name, column_type_list) -%}
 {%- if execute -%}
 
     {%- set column_name = column_name | upper -%}
@@ -29,4 +29,4 @@
         number_matching_column_types = 0
 
 {%- endif -%}
-{%- endmacro -%}
+{%- endtest -%}

@@ -1,4 +1,4 @@
-{% macro test_expect_column_distinct_count_to_equal(model,
+{% test expect_column_distinct_count_to_equal(model,
                                                     column_name,
                                                     value,
                                                     quote_values=False,
@@ -13,4 +13,4 @@ count(distinct {{ column_name }}) = {{ value }}
                                         group_by_columns=group_by,
                                         row_condition=row_condition)
                                         }}
-{%- endmacro -%}
+{%- endtest -%}

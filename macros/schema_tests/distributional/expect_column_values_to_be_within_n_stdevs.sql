@@ -1,10 +1,10 @@
-{% macro test_expect_column_values_to_be_within_n_stdevs(model,
+{% test expect_column_values_to_be_within_n_stdevs(model,
                                   column_name,
                                   group_by=None,
                                   sigma_threshold=3
                                 ) -%}
     {{ adapter.dispatch('test_expect_column_values_to_be_within_n_stdevs', 'dbt_expectations') (model, column_name, group_by, sigma_threshold) }}
-{%- endmacro %}
+{%- endtest %}
 
 {% macro default__test_expect_column_values_to_be_within_n_stdevs(model,
                                   column_name,

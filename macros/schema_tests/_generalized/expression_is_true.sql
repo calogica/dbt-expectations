@@ -1,4 +1,4 @@
-{% macro test_expression_is_true(model,
+{% test expression_is_true(model,
                                  expression,
                                  test_condition="= true",
                                  group_by_columns=None,
@@ -7,15 +7,7 @@
 
     {{ dbt_expectations.expression_is_true(model, expression, test_condition, group_by_columns, row_condition) }}
 
-{% endmacro %}
-
-{% macro truth_expression(expression) %}
-    {{ adapter.dispatch('truth_expression', 'dbt_expectations') (expression) }}
-{% endmacro %}
-
-{% macro default__truth_expression(expression) %}
-  {{ expression }} as expression
-{% endmacro %}
+{% endtest %}
 
 {% macro expression_is_true(model,
                                  expression,

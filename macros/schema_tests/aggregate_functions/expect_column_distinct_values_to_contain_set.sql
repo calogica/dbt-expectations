@@ -1,4 +1,4 @@
-{% macro test_expect_column_distinct_values_to_contain_set(model, column_name,
+{% test expect_column_distinct_values_to_contain_set(model, column_name,
                                                             value_set,
                                                             quote_values=True,
                                                             row_condition=None
@@ -51,4 +51,4 @@ validation_errors as (
 select *
 from validation_errors
 
-{% endmacro %}
+{% endtest %}

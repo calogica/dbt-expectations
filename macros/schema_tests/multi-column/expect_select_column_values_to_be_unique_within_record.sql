@@ -1,11 +1,11 @@
-{% macro test_expect_select_column_values_to_be_unique_within_record(model,
+{% test expect_select_column_values_to_be_unique_within_record(model,
                                                     column_list,
                                                     quote_columns=False,
                                                     ignore_row_if="all_values_are_missing",
                                                     row_condition=None
                                                     )  -%}
     {{ adapter.dispatch('test_expect_select_column_values_to_be_unique_within_record', 'dbt_expectations') (model, column_list, quote_columns, ignore_row_if, row_condition) }}
-{%- endmacro %}
+{%- endtest %}
 
 {% macro default__test_expect_select_column_values_to_be_unique_within_record(model,
                                                     column_list,
