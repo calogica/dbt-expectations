@@ -1,4 +1,4 @@
-{% macro test_expect_column_proportion_of_unique_values_to_be_between(model, column_name,
+{% test expect_column_proportion_of_unique_values_to_be_between(model, column_name,
                                                             min_value=None,
                                                             max_value=None,
                                                             group_by=None,
@@ -17,4 +17,4 @@ count(distinct {{ column_name }})/count({{ column_name }})
                                         strictly=strictly
                                         ) }}
 
-{% endmacro %}
+{% endtest %}

@@ -1,5 +1,5 @@
 
-{% macro test_expect_multicolumn_sum_to_equal(model,
+{% test expect_multicolumn_sum_to_equal(model,
                                                 column_list,
                                                 sum_total,
                                                 group_by=None,
@@ -20,4 +20,4 @@ sum({{ column }}){% if not loop.last %} + {% endif %}
                                         )
                                         }}
 
-{% endmacro %}
+{% endtest %}

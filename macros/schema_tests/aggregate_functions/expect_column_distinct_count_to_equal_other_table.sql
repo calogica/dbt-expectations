@@ -1,4 +1,4 @@
-{% macro test_expect_column_distinct_count_to_equal_other_table(model,
+{% test expect_column_distinct_count_to_equal_other_table(model,
                                                                 compare_model,
                                                                 column_name,
                                                                 compare_column_name,
@@ -24,4 +24,4 @@ count(distinct {{ compare_column_name }})
     compare_row_condition=compare_row_condition,
     return_difference=True
 ) }}
-{%- endmacro -%}
+{%- endtest -%}

@@ -25,7 +25,7 @@
 {% endmacro -%}
 
 
-{% macro test_equal_expression(model, expression,
+{% test equal_expression(model, expression,
                                 compare_model=None,
                                 compare_expression=None,
                                 group_by=None,
@@ -48,7 +48,7 @@
                                 tolerance,
                                 tolerance_percent,
                                 return_difference) }}
-{%- endmacro %}
+{%- endtest %}
 
 {%- macro default__test_equal_expression(
                                 model, expression,

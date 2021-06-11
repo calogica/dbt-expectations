@@ -1,4 +1,4 @@
-{% macro test_expect_column_values_to_be_decreasing(model, column_name,
+{% test expect_column_values_to_be_decreasing(model, column_name,
                                                    sort_column=None,
                                                    strictly=True,
                                                    row_condition=None) %}
@@ -41,4 +41,4 @@ validation_errors as (
 )
 select *
 from validation_errors
-{% endmacro %}
+{% endtest %}

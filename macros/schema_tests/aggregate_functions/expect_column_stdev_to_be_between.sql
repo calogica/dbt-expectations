@@ -1,4 +1,4 @@
-{% macro test_expect_column_stdev_to_be_between(model, column_name,
+{% test expect_column_stdev_to_be_between(model, column_name,
                                                     min_value=None,
                                                     max_value=None,
                                                     group_by=None,
@@ -13,7 +13,7 @@
                                                     row_condition,
                                                     strictly
                                                     ) }}
-{%- endmacro %}
+{%- endtest %}
 
 {% macro default__test_expect_column_stdev_to_be_between(
                                                     model, column_name,

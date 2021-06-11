@@ -1,4 +1,4 @@
-{% macro test_expression_between(model,
+{% test expression_between(model,
                                  expression,
                                  min_value=None,
                                  max_value=None,
@@ -9,7 +9,7 @@
 
     {{ dbt_expectations.expression_between(model, expression, min_value, max_value, group_by_columns, row_condition, strictly) }}
 
-{% endmacro %}
+{% endtest %}
 
 {% macro expression_between(model,
                             expression,

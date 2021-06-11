@@ -1,5 +1,5 @@
 
-{% macro test_expect_column_pair_values_to_be_equal(model,
+{% test expect_column_pair_values_to_be_equal(model,
                                                         column_A,
                                                         column_B,
                                                         row_condition=None
@@ -15,4 +15,4 @@
                                         )
                                         }}
 
-{% endmacro %}
+{% endtest %}
