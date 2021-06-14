@@ -355,7 +355,7 @@ tests:
 
 ### [expect_column_values_to_be_of_type](macros/schema_tests/column_values_basic/expect_column_values_to_be_of_type.sql)
 
-Expect a column to contain values of a specified data type.
+Expect a column to be of a specified data type.
 
 *Applies to:* Column
 
@@ -367,7 +367,7 @@ tests:
 
 ### [expect_column_values_to_be_in_type_list](macros/schema_tests/column_values_basic/expect_column_values_to_be_in_type_list.sql)
 
-Expect a column to contain values from a specified type list.
+Expect a column to be one of a specified type list.
 
 *Applies to:* Column
 
