@@ -6,7 +6,7 @@
 
 ## Install
 
-`db-expectations` currently support `dbt 0.19.x`.
+`db-expectations` currently supports `dbt 0.19.x`.
 
 Check [dbt Hub](https://hub.getdbt.com/calogica/dbt_expectations/latest/) for the latest installation instructions, or [read the docs](https://docs.getdbt.com/docs/package-management) for more information on installing packages.
 
