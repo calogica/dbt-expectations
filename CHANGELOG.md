@@ -16,7 +16,11 @@
 
 ## Fixes
 
+* Updated description of type check tests ([#84](https://github.com/calogica/dbt-expectations/pull/84) @noel)
+
 * Fixed `join` syntax because Twitter induced guilt: https://twitter.com/emilyhawkins__/status/1400967270537564160
+
+* Bump version of dbt-date to `< 0.4.0` ([#85](https://github.com/calogica/dbt-expectations/issues/85))
 
 
 # dbt-expectations v0.3.4
