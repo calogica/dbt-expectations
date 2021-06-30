@@ -1,3 +1,7 @@
+# dbt-expectations v0.3.6
+
+* Remove unnecessary macro to fix issue with 0.19.2 ([#88](https://github.com/calogica/dbt-expectations/pull/88))
+
 # dbt-expectations v0.3.5
 
 ## Features
