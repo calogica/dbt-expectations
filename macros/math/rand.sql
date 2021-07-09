@@ -25,3 +25,9 @@
     random()
 
 {%- endmacro -%}
+
+{% macro redshift__rand() %}
+
+    random()
+
+{%- endmacro -%}
