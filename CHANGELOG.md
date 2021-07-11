@@ -1,3 +1,8 @@
+# dbt-expectations v0.3.7
+
+* Fix join in `expect_column_values_to_be_in_set` ([#91](https://github.com/calogica/dbt-expectations/pull/91) @ahmedrad)
+* Add support for Redshift `random` function in `rand` macro ([#92](https://github.com/calogica/dbt-expectations/pull/92) @ahmedrad)
+
 # dbt-expectations v0.3.6
 
 * Remove unnecessary macro to fix issue with 0.19.2 ([#88](https://github.com/calogica/dbt-expectations/pull/88))
