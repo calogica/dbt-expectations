@@ -36,7 +36,7 @@ validation_errors as (
         left join
         set_values s on v.value_field = s.value_field
     where
-        v.value_field is null
+        s.value_field is null
 
 )
 
