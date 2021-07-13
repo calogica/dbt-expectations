@@ -1,4 +1,4 @@
-{% macro test_expect_compound_columns_to_be_unique(model,
+{% test expect_compound_columns_to_be_unique(model,
                                                     column_list,
                                                     quote_columns=False,
                                                     ignore_row_if="all_values_are_missing",
@@ -57,8 +57,8 @@ with validation_errors as (
     having count(*) > 1
 
 )
-select count(*) from validation_errors
-{% endmacro %}
+select * from validation_errors
+{% endtest %}
 
 
 

@@ -1,4 +1,4 @@
-{%- macro test_expect_table_column_count_to_be_between(model,
+{%- test expect_table_column_count_to_be_between(model,
                                                         min_value=None,
                                                         max_value=None
                                                         ) -%}
@@ -12,16 +12,22 @@
 
 {%- set expression %}
 ( 1=1
-{%- if min_value %} and {{ number_actual_columns }} >= {{ min_value }}{% endif %}
-{%- if max_value %} and {{ number_actual_columns }} <= {{ max_value }}{% endif %}
+{%- if min_value %} and number_actual_columns >= min_value{% endif %}
+{%- if max_value %} and number_actual_columns <= max_value{% endif %}
 )
 {% endset -%}
 
-select
-    case
-        when
-            {{ expression }}
-        then 0 else 1
-    end
+with test_data as (
+
+    select
+        {{ number_actual_columns }} as number_actual_columns,
+        {{ min_value if min_value else 0 }} as min_value,
+        {{ max_value if max_value else 0 }} as max_value
+
+)
+select *
+from test_data
+where
+    not {{ expression }}
 {%- endif -%}
-{%- endmacro -%}
+{%- endtest -%}

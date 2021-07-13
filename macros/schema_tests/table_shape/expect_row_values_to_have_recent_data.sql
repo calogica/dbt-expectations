@@ -1,12 +1,17 @@
-{% macro test_expect_row_values_to_have_recent_data(model, column_name, datepart, interval) %}
+{% test expect_row_values_to_have_recent_data(model, column_name, datepart, interval) %}
+with max_recency as (
+
+    select max({{ column_name }} ) as max_date
+    from
+        {{ model }}
+    where
+        {{ column_name }} <= {{ dbt_date.today() }}
+)
 select
-    case when count(*) > 0 then 0
-    else 1
-    end as error_result
-from {{model}}
+    *
+from
+    max_recency
 where
-    {{column_name}} >=
-        {{ dbt_utils.dateadd(datepart, interval * -1, dbt_date.now()) }}
-    and
-    {{ column_name }} <= {{ dbt_date.today() }}
-{% endmacro %}
+    max_date < {{ dbt_utils.dateadd(datepart, interval * -1, dbt_date.now()) }}
+
+{% endtest %}

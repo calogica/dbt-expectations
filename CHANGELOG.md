@@ -1,3 +1,15 @@
+# dbt-expectations v0.4.0
+
+## Breaking Changes
+
+* Requires `dbt >= 0.20`
+
+* Requires `dbt-date >= 0.4.0`
+
+* Updates test macros to tests to support `dbt >= 0.20`
+
+* Updates calls to adapter.dispatch to support `dbt >= 0.20` (see [Changes to dispatch in dbt v0.20 #78](https://github.com/calogica/dbt-expectations/issues/78))
+
 # dbt-expectations v0.3.7
 
 * Fix join in `expect_column_values_to_be_in_set` ([#91](https://github.com/calogica/dbt-expectations/pull/91) @ahmedrad)

@@ -1,15 +1,15 @@
-{%- macro test_expect_table_row_count_to_equal(model,
+{%- test expect_table_row_count_to_equal(model,
                                                 value,
                                                 group_by=None,
                                                 row_condition=None
                                                 ) -%}
     {{ adapter.dispatch('test_expect_table_row_count_to_equal',
-                        packages=dbt_expectations._get_namespaces()) (model,
+                        'dbt_expectations') (model,
                                                                         value,
                                                                         group_by,
                                                                         row_condition
                                                                         ) }}
-{% endmacro %}
+{% endtest %}
 
 
 

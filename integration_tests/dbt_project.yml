@@ -4,8 +4,6 @@ version: '1.0'
 
 profile: 'integration_tests'
 
-# require-dbt-version: inherit this from dbt-utils
-
 config-version: 2
 
 source-paths: ["models"]
@@ -19,11 +17,13 @@ clean-targets:
     - "target"
     - "dbt_modules"
 
-require-dbt-version: ">=0.18.1"
-
+dispatch:
+  - macro_namespace: dbt_expectations
+    search_order: ['dbt_expectations_integration_tests', 'dbt_expectations']
+  - macro_namespace: dbt_utils
+    search_order: ['dbt_expectations', 'dbt_utils']
 vars:
     'dbt_date:time_zone': 'America/Los_Angeles'
-    dbt_utils_dispatch_list: [dbt_expectations_integration_tests]
 
 quoting:
     database: false
@@ -31,5 +31,6 @@ quoting:
     schema: false
 
 models:
-  schema: dbt_expectations_integration_tests
-  materialized: table
+  dbt_expectations_integration_tests:
+    +schema: dbt_expectations_integration_tests
+    +materialized: table

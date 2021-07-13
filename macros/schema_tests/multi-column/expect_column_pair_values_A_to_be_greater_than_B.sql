@@ -1,5 +1,5 @@
 
-{% macro test_expect_column_pair_values_A_to_be_greater_than_B(model,
+{% test expect_column_pair_values_A_to_be_greater_than_B(model,
                                                                 column_A,
                                                                 column_B,
                                                                 or_equal=False,
@@ -16,4 +16,4 @@
                                         )
                                         }}
 
-{% endmacro %}
+{% endtest %}

@@ -1,4 +1,4 @@
-{% macro test_expect_column_quantile_values_to_be_between(model, column_name,
+{% test expect_column_quantile_values_to_be_between(model, column_name,
                                                             quantile,
                                                             min_value=None,
                                                             max_value=None,
@@ -18,4 +18,4 @@
                                         row_condition=row_condition,
                                         strictly=strictly
                                         ) }}
-{% endmacro %}
+{% endtest %}

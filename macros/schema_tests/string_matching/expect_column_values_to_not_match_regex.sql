@@ -1,4 +1,4 @@
-{% macro test_expect_column_values_to_not_match_regex(model, column_name,
+{% test expect_column_values_to_not_match_regex(model, column_name,
                                                     regex,
                                                     row_condition=None
                                                     ) %}
@@ -14,4 +14,4 @@
                                         )
                                         }}
 
-{% endmacro %}
+{% endtest %}

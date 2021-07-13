@@ -1,4 +1,4 @@
-{%- macro test_expect_row_values_to_have_data_for_every_n_datepart(model,
+{%- test expect_row_values_to_have_data_for_every_n_datepart(model,
                                                                     date_col,
                                                                     date_part="day",
                                                                     row_condition=None,
@@ -71,8 +71,8 @@ final as (
 
 )
 select
-    count(*)
+    *
 from final
 where
     row_cnt = 0
-{%- endmacro -%}
+{%- endtest -%}
