@@ -173,7 +173,7 @@ tests:
 ### [expect_grouped_row_values_to_have_recent_data](macros/schema_tests/table_shape/expect_grouped_row_values_to_have_recent_data.sql)
 
 Expect the model to have **grouped** rows that are at least as recent as the defined interval prior to the current timestamp.
-Uuse this to test whether there is recent data for each grouped row defined by `group_by` (which is a list of columns) and a `timestamp_column`.
+Use this to test whether there is recent data for each grouped row defined by `group_by` (which is a list of columns) and a `timestamp_column`.
 
 *Applies to:* Model, Seed, Source
 
