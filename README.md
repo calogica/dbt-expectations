@@ -6,7 +6,7 @@
 
 ## Install
 
-`db-expectations` currently supports `dbt 0.19.x`.
+`dbt-expectations` currently supports `dbt 0.20.x`.
 
 Check [dbt Hub](https://hub.getdbt.com/calogica/dbt_expectations/latest/) for the latest installation instructions, or [read the docs](https://docs.getdbt.com/docs/package-management) for more information on installing packages.
 
@@ -15,7 +15,7 @@ Include in `packages.yml`
 ```yaml
 packages:
   - package: calogica/dbt_expectations
-    version: [">=0.3.0", "<0.4.0"]
+    version: [">=0.4.0", "<0.5.0"]
     # <see https://github.com/calogica/dbt-expectations/releases/latest> for the latest version tag
 ```
 
