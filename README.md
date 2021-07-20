@@ -198,7 +198,7 @@ models: # or seeds:
 
 Expect the number of columns in a model to be between two values.
 
-*Applies to:* Column
+*Applies to:* Model, Seed, Source
 
 ```yaml
 tests:
