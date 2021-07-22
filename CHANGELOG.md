@@ -1,5 +1,12 @@
 # dbt-expectations v0.4.0
 
+## Fixes
+* `expect_table_columns_to_match_list` remove `''` to leave columns as numbers ([#98](https://github.com/calogica/dbt-expectations/issues/98))
+
+* `expect_table_columns_to_match_ordered_list` now explicitly casts the column list to a string type ([#99](https://github.com/calogica/dbt-expectations/issues/99))
+
+# dbt-expectations v0.4.0
+
 ## Breaking Changes
 
 * Requires `dbt >= 0.20`
