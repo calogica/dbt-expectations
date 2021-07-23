@@ -10,6 +10,9 @@
 regexp_instr({{ source_value }}, '{{ regexp }}', {{ position }}, {{ occurrence }})
 {% endmacro %}
 
+{% macro redshift__regexp_instr(source_value, regexp, position, occurrence) %}
+regexp_instr({{ source_value }}, '{{ regexp }}', {{ position }}, {{ occurrence }})
+{% endmacro %}
 
 {% macro postgres__regexp_instr(source_value, regexp, position, occurrence) %}
 array_length((select regexp_matches({{ source_value }}, '{{ regexp }}')), 1)
