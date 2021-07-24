@@ -5,7 +5,7 @@
 
 * `expect_table_columns_to_match_ordered_list` now explicitly casts the column list to a string type ([#99](https://github.com/calogica/dbt-expectations/issues/99))
 
-* Fixes regex matching tests for Redshift by adding a Redshift specific adapter macro in `regexp_instr`
+* Fixes regex matching tests for Redshift by adding a Redshift specific adapter macro in `regexp_instr` ([#99](https://github.com/calogica/dbt-expectations/pull/102 @mirosval)
 
 # dbt-expectations v0.4.0
 
