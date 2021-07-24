@@ -1,9 +1,11 @@
-# dbt-expectations v0.4.0
+# dbt-expectations v0.4.1
 
 ## Fixes
 * `expect_table_columns_to_match_list` remove `''` to leave columns as numbers ([#98](https://github.com/calogica/dbt-expectations/issues/98))
 
 * `expect_table_columns_to_match_ordered_list` now explicitly casts the column list to a string type ([#99](https://github.com/calogica/dbt-expectations/issues/99))
+
+* Fixes regex matching tests for Redshift by adding a Redshift specific adapter macro in `regexp_instr`
 
 # dbt-expectations v0.4.0
 
