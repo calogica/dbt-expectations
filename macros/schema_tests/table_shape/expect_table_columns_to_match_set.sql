@@ -6,8 +6,8 @@
     with test_data as (
 
         select
-            '{{ relation_column_names | length }}' as number_columns,
-            '{{ matching_columns | length }}' as number_matching_columns
+            {{ relation_column_names | length }} as number_columns,
+            {{ matching_columns | length }} as number_matching_columns
 
     )
     select *
