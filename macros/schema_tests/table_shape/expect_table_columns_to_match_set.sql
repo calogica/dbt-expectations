@@ -7,12 +7,13 @@
 
         select
             '{{ relation_column_names | length }}' as number_columns,
-            '{{ matching_columns | length }}' as number_matching_columns
-
+            '{{ matching_columns | length }}' as number_matching_columns,
+            '{{ column_list | length }}' as number_input_columns
     )
     select *
     from test_data
     where number_columns != number_matching_columns
+       or number_input_columns > number_columns
 
 {%- endif -%}
 {%- endtest -%}
