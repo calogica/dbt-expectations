@@ -173,7 +173,7 @@ tests:
 ### [expect_grouped_row_values_to_have_recent_data](macros/schema_tests/table_shape/expect_grouped_row_values_to_have_recent_data.sql)
 
 Expect the model to have **grouped** rows that are at least as recent as the defined interval prior to the current timestamp.
-Use this to test whether there is recent data for each grouped row defined by `group_by` (which is a list of columns) and a `timestamp_column`.
+Use this to test whether there is recent data for each grouped row defined by `group_by` (which is a list of columns) and a `timestamp_column`. Optionally gives the possibility to apply filters on the results.
 
 *Applies to:* Model, Seed, Source
 
@@ -186,12 +186,14 @@ models: # or seeds:
             timestamp_column: date_day
             datepart: day
             interval: 1
+            row_condition: 'where id is not null' #optional
         # or also:
         - dbt_expectations.expect_grouped_row_values_to_have_recent_data:
             group_by: [group_id, other_group_id]
             timestamp_column: date_day
             datepart: day
             interval: 1
+            row_condition: 'where id is not null' #optional
 ```
 
 ### [expect_table_column_count_to_be_between](macros/schema_tests/table_shape/expect_table_column_count_to_be_between.sql)
