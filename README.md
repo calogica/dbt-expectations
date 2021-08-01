@@ -159,7 +159,7 @@ tests:
 
 ### [expect_row_values_to_have_recent_data](macros/schema_tests/table_shape/expect_row_values_to_have_recent_data.sql)
 
-Expect the model to have rows that are at least as recent as the defined interval prior to the current timestamp.
+Expect the model to have rows that are at least as recent as the defined interval prior to the current timestamp. Optionally gives the possibility to apply filters on the results.
 
 *Applies to:* Column
 
@@ -168,6 +168,7 @@ tests:
   - dbt_expectations.expect_row_values_to_have_recent_data:
         datepart: day
         interval: 1
+        row_condition: 'id is not null' #optional
 ```
 
 ### [expect_grouped_row_values_to_have_recent_data](macros/schema_tests/table_shape/expect_grouped_row_values_to_have_recent_data.sql)
