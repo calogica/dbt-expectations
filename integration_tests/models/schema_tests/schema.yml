@@ -75,6 +75,10 @@ models:
           - dbt_expectations.expect_row_values_to_have_recent_data:
               datepart: day
               interval: 1
+          - dbt_expectations.expect_row_values_to_have_recent_data:
+              datepart: day
+              interval: 1
+
           - dbt_expectations.expect_column_values_to_be_of_type:
               column_type: "{{ dbt_expectations.type_datetime() }}"
           - dbt_expectations.expect_column_values_to_be_in_type_list:
@@ -317,4 +321,10 @@ models:
             timestamp_column: date_day
             datepart: day
             interval: 1
+        - dbt_expectations.expect_grouped_row_values_to_have_recent_data:
+            group_by: [group_id]
+            timestamp_column: date_day
+            datepart: day
+            interval: 1
+            row_condition: group_id = 4
 
