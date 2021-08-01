@@ -187,14 +187,14 @@ models: # or seeds:
             timestamp_column: date_day
             datepart: day
             interval: 1
-            row_condition: 'id is not null' #optional
+            row_condition: "id is not null" #optional
         # or also:
         - dbt_expectations.expect_grouped_row_values_to_have_recent_data:
             group_by: [group_id, other_group_id]
             timestamp_column: date_day
             datepart: day
             interval: 1
-            row_condition: 'id is not null' #optional
+            row_condition: "id is not null" #optional
 ```
 
 ### [expect_table_column_count_to_be_between](macros/schema_tests/table_shape/expect_table_column_count_to_be_between.sql)
