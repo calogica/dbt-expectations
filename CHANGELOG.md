@@ -1,3 +1,8 @@
+# dbt-expectations v0.4.2
+
+## Features
+ * Added `row_condition` to `expect_grouped_row_values_to_have_recent_data` and `expect_row_values_to_have_recent_data` to allow for partition filtering before applying the recency test ([#106](https://github.com/calogica/dbt-expectations/pull/106) w/ [@edbizarro](https://github.com/edbizarro))
+
 # dbt-expectations v0.4.1
 
 ## Fixes
