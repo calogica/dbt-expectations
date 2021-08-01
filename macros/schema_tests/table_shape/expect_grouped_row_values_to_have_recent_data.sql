@@ -36,16 +36,21 @@ with latest_grouped_timestamps as (
 
     {{ dbt_utils.group_by(group_by | length )}}
 
-
 ),
 total_row_counts as (
-    select max(1) as join_key, count(*) as row_count from latest_grouped_timestamps
+
+    select
+        max(1) as join_key,
+        count(*) as row_count
+    from
+        latest_grouped_timestamps
+
 ),
 outdated_grouped_timestamps as (
 
     select *
     from
-        latest_grouped_timestamps t
+        latest_grouped_timestamps
     where
         latest_timestamp_column < {{ dbt_utils.dateadd(datepart, interval * -1, dbt_date.now()) }}
 
@@ -64,7 +69,8 @@ validation_errors as (
         -- fail if either no rows were returned due to row_condition,
         -- or the recency test returned failed rows
         r.row_count = 0
-        or t.join_key is not null
+        or
+        t.join_key is not null
 
 )
 select * from validation_errors
