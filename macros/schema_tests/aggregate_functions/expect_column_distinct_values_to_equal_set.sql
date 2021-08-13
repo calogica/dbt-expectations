@@ -7,7 +7,7 @@
 with all_values as (
 
     select distinct
-        {{ column_name }} as value_field
+        {{ column_name }} as column_value
 
     from {{ model }}
     {% if row_condition %}
@@ -38,17 +38,18 @@ unique_set_values as (
 validation_errors as (
 
     select
-        count(v.value_field) as column_values,
-        count(s.value_field) as set_values
+        *
     from
         all_values v
         full outer join
-        unique_set_values s on v.value_field = s.value_field
+        unique_set_values s on v.column_value = s.value_field
+    where
+        v.column_value is null or
+        s.value_field is null
 
 )
 
 select *
 from validation_errors
-where column_values != set_values
 
 {% endtest %}
