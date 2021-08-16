@@ -3,6 +3,9 @@
 ## Features
  * Added `row_condition` to `expect_grouped_row_values_to_have_recent_data` and `expect_row_values_to_have_recent_data` to allow for partition filtering before applying the recency test ([#106](https://github.com/calogica/dbt-expectations/pull/106) w/ [@edbizarro](https://github.com/edbizarro))
 
+## Under the hood
+* Converted Jinja set logic to SQL joins to make it easier to follow and iterate in the future ([#108](https://github.com/calogica/dbt-expectations/pull/108))
+
 # dbt-expectations v0.4.1
 
 ## Fixes
@@ -10,7 +13,7 @@
 
 * `expect_table_columns_to_match_ordered_list` now explicitly casts the column list to a string type ([#99](https://github.com/calogica/dbt-expectations/issues/99))
 
-* Fixes regex matching tests for Redshift by adding a Redshift specific adapter macro in `regexp_instr` ([#99](https://github.com/calogica/dbt-expectations/pull/102 @mirosval)
+* Fixes regex matching tests for Redshift by adding a Redshift specific adapter macro in `regexp_instr` ([#99](https://github.com/calogica/dbt-expectations/pull/102) @mirosval)
 
 # dbt-expectations v0.4.0
 
