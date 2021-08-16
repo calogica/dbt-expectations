@@ -3,15 +3,27 @@
     {%- set column_list = column_list | map(transform) | list -%}
     {%- set relation_column_names = dbt_expectations._get_column_list(model, transform) -%}
     {%- set matching_columns = dbt_expectations._list_intersect(column_list, relation_column_names) -%}
-    with test_data as (
+    with relation_columns as (
 
-        select
-            '{{ column_list | length }}' as number_columns,
-            '{{ matching_columns | length }}' as number_matching_columns
+        {% for col_name in relation_column_names %}
+        select '{{ col_name }}' as relation_column
+        {% if not loop.last %}union all{% endif %}
+        {% endfor %}
+    ),
+    input_columns as (
 
+        {% for col_name in column_list %}
+        select '{{ col_name }}' as input_column
+        {% if not loop.last %}union all{% endif %}
+        {% endfor %}
     )
     select *
-    from test_data
-    where number_columns != number_matching_columns
+    from
+        input_columns i
+        left join
+        relation_columns r on r.relation_column = i.input_column
+    where
+        -- catch any column in input list that is not in the list of table columns
+        r.relation_column is null
 {%- endif -%}
 {%- endtest -%}

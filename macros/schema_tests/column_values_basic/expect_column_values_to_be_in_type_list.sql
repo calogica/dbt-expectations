@@ -4,29 +4,29 @@
     {%- set column_name = column_name | upper -%}
     {%- set columns_in_relation = adapter.get_columns_in_relation(model) -%}
     {%- set column_type_list = column_type_list| map("upper") | list -%}
+    with relation_columns as (
 
-    {%- set matching_column_types = [] -%}
-
-    -- DEBUG:
-    -- {{ model.name }}
-    {%- for column in columns_in_relation %}
-    -- {{ column.name | upper }}: {{ column.dtype | upper }} in {{ column_type_list }}?
-        {% if ((column.name | upper ) == column_name) and ((column.dtype | upper ) in column_type_list) -%}
-            {%- do matching_column_types.append(column.name) -%}
-        {%- endif -%}
-    {%- endfor -%}
-    with test_data as (
+        {% for column in columns_in_relation %}
+        select
+            '{{ column.name | upper }}' as relation_column,
+            '{{ column.dtype | upper }}' as relation_column_type
+        {% if not loop.last %}union all{% endif %}
+        {% endfor %}
+    ),
+    test_data as (
 
         select
-            '{{ model.name }}' as model_name,
-            '{{ column_name }}' as column_name,
-            {{ matching_column_types | length }} as number_matching_column_types
+            *
+        from
+            relation_columns
+        where
+            relation_column = '{{ column_name }}'
+            and
+            relation_column_type not in ('{{ column_type_list | join("', '") }}')
 
     )
     select *
     from test_data
-    where
-        number_matching_column_types = 0
 
 {%- endif -%}
 {%- endtest -%}
