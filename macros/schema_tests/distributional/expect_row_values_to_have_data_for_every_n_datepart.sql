@@ -1,6 +1,7 @@
 {%- test expect_row_values_to_have_data_for_every_n_datepart(model,
                                                                     date_col,
                                                                     date_part="day",
+                                                                    interval=None,
                                                                     row_condition=None,
                                                                     test_start_date=None,
                                                                     test_end_date=None) -%}
@@ -42,7 +43,10 @@
 with base_dates as (
 
     {{ dbt_date.get_base_dates(start_date=start_date, end_date=end_date, datepart=date_part) }}
-
+    {% if interval %}
+    where mod({{ dbt_date.date_part(date_part, 'date_' + date_part) }}, {{interval}}) = 0
+    {% endif %}
+    
 ),
 model_data as (
 
