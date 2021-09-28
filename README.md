@@ -924,3 +924,5 @@ tests:
         date_col: date_day
         date_part: day
 ```
+
+The `interval` argument will optionally group `date_part` by a given integer to test data presence at a lower granularity, e.g. adding `interval: 7` to the example above will test whether a model has data for each 7-`day` period instead of for each `day`.
