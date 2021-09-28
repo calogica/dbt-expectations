@@ -7,6 +7,7 @@
 
         {% for col_name in relation_column_names %}
         select
+            {{ loop.index }} as relation_column_idx,
             '{{ col_name }}' as relation_column
         {% if not loop.last %}union all{% endif %}
         {% endfor %}
@@ -15,34 +16,17 @@
 
         {% for col_name in column_list %}
         select
+            {{ loop.index }} as input_column_idx,
             '{{ col_name }}' as input_column
 
         {% if not loop.last %}union all{% endif %}
         {% endfor %}
-    ),
-    relation_columns_sequence as (
-        -- (BigQuery won't let you use a window function without a "from" clause)
-        select
-            relation_column,
-            row_number() over() as relation_column_idx
-        from
-            relation_columns
-
-    ),
-    input_columns_sequence as (
-        -- (BigQuery won't let you use a window function without a "from" clause)
-        select
-            input_column,
-            row_number() over() as input_column_idx
-        from
-            input_columns
-
     )
     select *
     from
-        relation_columns_sequence r
+        relation_columns r
         full outer join
-        input_columns_sequence i on r.relation_column = i.input_column and r.relation_column_idx = i.input_column_idx
+        input_columns i on r.relation_column = i.input_column and r.relation_column_idx = i.input_column_idx
     where
         -- catch any column in input list that is not in the sequence of table columns
         -- or any table column that is not in the input sequence
