@@ -40,14 +40,33 @@
 {% else %}
 {% set end_date = test_end_date %}
 {% endif %}
+
 with base_dates as (
 
     {{ dbt_date.get_base_dates(start_date=start_date, end_date=end_date, datepart=date_part) }}
     {% if interval %}
-    where mod({{ dbt_date.date_part(date_part, 'date_' + date_part) }}, {{interval}}) = 0
+    where mod(
+            cast(
+                {{dbt_utils.datediff("'"~start_date~"'", 'date_' ~ date_part, "'"~date_part~"'")}} 
+                as {{ dbt_utils.type_int() }}
+            ),
+            cast({{interval}} as {{ dbt_utils.type_int() }})
+        ) = 0
     {% endif %}
     
 ),
+
+{% if interval %}
+base_date_windows as (
+
+    select
+        cast(date_{{ date_part }} as {{ dbt_expectations.type_datetime() }}) as date_{{ date_part }},
+        cast(lead(date_{{ date_part }}) over (order by date_{{ date_part }}) as {{ dbt_expectations.type_datetime() }}) as interval_end
+    from base_dates
+
+),
+{% endif %}
+
 model_data as (
 
     select
@@ -62,16 +81,31 @@ model_data as (
         date_{{date_part}}
 
 ),
-final as (
 
+final as (
+    
     select
         cast(d.date_{{ date_part }} as {{ dbt_expectations.type_datetime() }}) as date_{{ date_part }},
         case when f.date_{{ date_part }} is null then true else false end as is_missing,
+
+    {% if not interval %}
+
         coalesce(f.row_cnt, 0) as row_cnt
-    from
+    from 
         base_dates d
-        left join
+        left join 
         model_data f on cast(d.date_{{ date_part }} as {{ dbt_expectations.type_datetime() }}) = f.date_{{ date_part }}
+
+    {% else %}
+    
+        sum(coalesce(f.row_cnt, 0)) as row_cnt
+    from 
+        base_date_windows d
+        left join model_data f 
+            on f.date_{{ date_part }} >= d.date_{{ date_part }} and f.date_{{ date_part }} < d.interval_end
+    {{dbt_utils.group_by(2)}}
+
+    {% endif %}
 
 )
 select
