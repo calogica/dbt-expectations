@@ -4,7 +4,9 @@
 * Fixes incompatibility on Snowflake with use of `row_number()` without `order by` in `expect_table_columns_to_match_ordered_list`([#112](https://github.com/calogica/dbt-expectations/pull/112))
 
 ## Features
+
 ## Under the hood
+* Supports dbt 0.21.x
 
 # dbt-expectations v0.4.2
 
