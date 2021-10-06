@@ -21,11 +21,11 @@
 
     {% endset %}
 
-{% endif %}
+    {%- set dr = run_query(sql) -%}
+    {%- set db_start_date = dr.columns[0].values()[0].strftime('%Y-%m-%d') -%}
+    {%- set db_end_date = dr.columns[1].values()[0].strftime('%Y-%m-%d') -%}
 
-{%- set dr = run_query(sql) -%}
-{%- set db_start_date = dr.columns[0].values()[0].strftime('%Y-%m-%d') -%}
-{%- set db_end_date = dr.columns[1].values()[0].strftime('%Y-%m-%d') -%}
+{% endif %}
 
 {% if not test_start_date %}
 {% set start_date = db_start_date %}
