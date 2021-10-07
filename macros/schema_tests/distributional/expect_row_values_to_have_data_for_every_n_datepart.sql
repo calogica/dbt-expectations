@@ -40,7 +40,6 @@
 {% else %}
 {% set end_date = test_end_date %}
 {% endif %}
-
 with base_dates as (
 
     {{ dbt_date.get_base_dates(start_date=start_date, end_date=end_date, datepart=date_part) }}
@@ -91,9 +90,9 @@ final as (
     {% if not interval %}
 
         coalesce(f.row_cnt, 0) as row_cnt
-    from 
+    from
         base_dates d
-        left join 
+        left join
         model_data f on cast(d.date_{{ date_part }} as {{ dbt_expectations.type_datetime() }}) = f.date_{{ date_part }}
 
     {% else %}
