@@ -100,8 +100,10 @@ final as (
         sum(coalesce(f.row_cnt, 0)) as row_cnt
     from
         base_date_windows d
-        left join model_data f
-            on f.date_{{ date_part }} >= d.date_{{ date_part }} and f.date_{{ date_part }} < d.interval_end
+        left join
+        model_data f
+            on d.date_{{ date_part }} <= f.date_{{ date_part }} and
+                d.interval_end > f.date_{{ date_part }}
     {{dbt_utils.group_by(2)}}
 
     {% endif %}
