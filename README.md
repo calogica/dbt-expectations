@@ -914,7 +914,13 @@ tests:
 
 Expects model to have values for every grouped `date_part`.
 
-For example, this tests whether a model has data for every `day` (grouped on `date_col`) from either a specified `start_date` and `end_date`, or for the `min`/`max` value of the specified `date_col`.
+For example, this tests whether a model has data for every `day` (grouped on `date_col`) between either:
+
+- The `min`/`max` value of the specified `date_col` (default).
+- A specified `test_start_date` and/or `test_end_date`.
+    - if `test_start_date` or `test_end_date` are not specified, `min`/`max` of `date_col` are used, respectively
+
+Note: `test_end_date` is exclusive (e.g. a test with `test_end_date` value of `'2020-01-05'` will pass for a model's `max` `date_col` of `'2021-01-04'`).
 
 *Applies to:* Model, Seed, Source
 
