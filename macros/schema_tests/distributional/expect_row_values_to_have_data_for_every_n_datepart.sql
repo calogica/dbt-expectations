@@ -46,13 +46,13 @@ with base_dates as (
     {% if interval %}
     where mod(
             cast(
-                {{dbt_utils.datediff("'"~start_date~"'", 'date_' ~ date_part, "'"~date_part~"'")}} 
+                {{ dbt_utils.datediff("'" ~ start_date ~ "'", 'date_' ~ date_part, date_part) }}
                 as {{ dbt_utils.type_int() }}
             ),
             cast({{interval}} as {{ dbt_utils.type_int() }})
         ) = 0
     {% endif %}
-    
+
 ),
 
 {% if interval %}
@@ -82,7 +82,7 @@ model_data as (
 ),
 
 final as (
-    
+
     select
         cast(d.date_{{ date_part }} as {{ dbt_expectations.type_datetime() }}) as date_{{ date_part }},
         case when f.date_{{ date_part }} is null then true else false end as is_missing,
@@ -96,11 +96,11 @@ final as (
         model_data f on cast(d.date_{{ date_part }} as {{ dbt_expectations.type_datetime() }}) = f.date_{{ date_part }}
 
     {% else %}
-    
+
         sum(coalesce(f.row_cnt, 0)) as row_cnt
-    from 
+    from
         base_date_windows d
-        left join model_data f 
+        left join model_data f
             on f.date_{{ date_part }} >= d.date_{{ date_part }} and f.date_{{ date_part }} < d.interval_end
     {{dbt_utils.group_by(2)}}
 
