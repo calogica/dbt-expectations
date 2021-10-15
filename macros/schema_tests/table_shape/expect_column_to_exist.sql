@@ -1,7 +1,7 @@
 {%- test expect_column_to_exist(model, column_name, column_index=None, transform="upper") -%}
 {%- if execute -%}
 
-    {%- set column_name = column_name | upper -%}
+    {%- set column_name = column_name | map(transform) | join -%}
     {%- set relation_column_names = dbt_expectations._get_column_list(model, transform) -%}
 
     {%- set matching_column_index = relation_column_names.index(column_name) if column_name in relation_column_names else -1 %}
