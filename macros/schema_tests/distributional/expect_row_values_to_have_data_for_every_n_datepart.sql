@@ -54,27 +54,36 @@ with base_dates as (
     {% endif %}
 
 ),
-
-{% if interval %}
-base_date_windows as (
-
-    select
-        cast(date_{{ date_part }} as {{ dbt_expectations.type_datetime() }}) as date_{{ date_part }},
-        cast(lead(date_{{ date_part }}) over (order by date_{{ date_part }}) as {{ dbt_expectations.type_datetime() }}) as interval_end
-    from base_dates
-
-),
-{% endif %}
-
 model_data as (
 
     select
+    {% if not interval %}
+
         cast({{ dbt_utils.date_trunc(date_part, date_col) }} as {{ dbt_expectations.type_datetime() }}) as date_{{ date_part }},
         count(*) as row_cnt
     from
         {{ model }} f
     {% if row_condition %}
     where {{ row_condition }}
+    {% endif %}
+
+    {% else %}
+
+        {{dbt_utils.dateadd(date_part, 'interval_diff', 'truncated_date')}} as date_{{ date_part }},
+        count(*) as row_cnt
+    from (
+        select
+            cast({{ dbt_utils.date_trunc(date_part, date_col) }} as {{ dbt_expectations.type_datetime() }}) as truncated_date,
+            mod(
+                    cast({{dbt_utils.datediff("'"~start_date~"'", date_col, date_part)}} as {{ dbt_utils.type_int() }}),
+                    cast({{interval}} as {{ dbt_utils.type_int() }})
+                ) * (-1) as interval_diff
+        from
+            {{ model }} f
+        {% if row_condition %}
+        where {{ row_condition }}
+        {% endif %}
+    )
     {% endif %}
     group by
         date_{{date_part}}
@@ -86,27 +95,11 @@ final as (
     select
         cast(d.date_{{ date_part }} as {{ dbt_expectations.type_datetime() }}) as date_{{ date_part }},
         case when f.date_{{ date_part }} is null then true else false end as is_missing,
-
-    {% if not interval %}
-
         coalesce(f.row_cnt, 0) as row_cnt
     from
         base_dates d
         left join
         model_data f on cast(d.date_{{ date_part }} as {{ dbt_expectations.type_datetime() }}) = f.date_{{ date_part }}
-
-    {% else %}
-
-        sum(coalesce(f.row_cnt, 0)) as row_cnt
-    from
-        base_date_windows d
-        left join
-        model_data f
-            on d.date_{{ date_part }} <= f.date_{{ date_part }} and
-                d.interval_end > f.date_{{ date_part }}
-    {{dbt_utils.group_by(2)}}
-
-    {% endif %}
 
 )
 select
