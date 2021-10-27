@@ -45,10 +45,7 @@ with base_dates as (
     {{ dbt_date.get_base_dates(start_date=start_date, end_date=end_date, datepart=date_part) }}
     {% if interval %}
     where mod(
-            cast(
-                {{ dbt_utils.datediff("'" ~ start_date ~ "'", 'date_' ~ date_part, date_part) }}
-                as {{ dbt_utils.type_int() }}
-            ),
+            cast({{ dbt_utils.datediff("'" ~ start_date ~ "'", 'date_' ~ date_part, date_part) }} as {{ dbt_utils.type_int() }}),
             cast({{interval}} as {{ dbt_utils.type_int() }})
         ) = 0
     {% endif %}
@@ -60,30 +57,25 @@ model_data as (
     {% if not interval %}
 
         cast({{ dbt_utils.date_trunc(date_part, date_col) }} as {{ dbt_expectations.type_datetime() }}) as date_{{ date_part }},
+
+    {% else %}
+
+        {{dbt_utils.dateadd(
+            date_part, 
+            "mod(
+                cast(" ~ dbt_utils.datediff("'" ~ start_date ~ "'", date_col, date_part) ~ " as " ~ dbt_utils.type_int() ~ " ),
+                cast(" ~ interval ~ " as  " ~ dbt_utils.type_int() ~ " )
+            ) * (-1)", 
+            "cast( " ~ dbt_utils.date_trunc(date_part, date_col) ~ " as  " ~ dbt_expectations.type_datetime() ~ ")"
+        )}} as date_{{ date_part }},
+            
+    {% endif %}
+    
         count(*) as row_cnt
     from
         {{ model }} f
     {% if row_condition %}
     where {{ row_condition }}
-    {% endif %}
-
-    {% else %}
-
-        {{dbt_utils.dateadd(date_part, 'interval_diff', 'truncated_date')}} as date_{{ date_part }},
-        count(*) as row_cnt
-    from (
-        select
-            cast({{ dbt_utils.date_trunc(date_part, date_col) }} as {{ dbt_expectations.type_datetime() }}) as truncated_date,
-            mod(
-                    cast({{dbt_utils.datediff("'"~start_date~"'", date_col, date_part)}} as {{ dbt_utils.type_int() }}),
-                    cast({{interval}} as {{ dbt_utils.type_int() }})
-                ) * (-1) as interval_diff
-        from
-            {{ model }} f
-        {% if row_condition %}
-        where {{ row_condition }}
-        {% endif %}
-    )
     {% endif %}
     group by
         date_{{date_part}}
