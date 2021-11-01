@@ -224,6 +224,20 @@ models: # or seeds:
         compare_model: ref("other_model")
 ```
 
+### [expect_table_columns_to_contain_set](macros/schema_tests/table_shape/expect_table_columns_to_contain_set.sql)
+
+Expect the columns in a model to contain a given list.
+
+*Applies to:* Model, Seed, Source
+
+```yaml
+models: # or seeds:
+  - name: my_model
+    tests:
+    - dbt_expectations.expect_table_columns_to_contain_set:
+        column_list: ["col_a", "col_b"]
+```
+
 ### [expect_table_column_count_to_equal](macros/schema_tests/table_shape/expect_table_column_count_to_equal.sql)
 
 Expect the number of columns in a model to be equal to `expected_number_of_columns`.
