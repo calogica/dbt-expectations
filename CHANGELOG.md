@@ -1,8 +1,15 @@
+
+# dbt-expectations v0.4.5
+
+## Fixes
+
+* Fixed a regression introduced in 0.4.3 that made `expect_table_columns_to_match_ordered_list` incomatible with Redshift ([#123](https://github.com/calogica/dbt-expectations/pull/123) by [@mirosval](https://github.com/mirosval))
+
 # dbt-expectations v0.4.4
 
 ## Fixes
 
-* Replaced hardcoded value in `expect_column_to_exist` with mapping call to provided transform filter and join to reduce list back to single value. ([#118](https://github.com/calogica/dbt-expectations/pull/118) [@UselessAlias](https://github.com/UselessAlias)
+* Replaced hardcoded value in `expect_column_to_exist` with mapping call to provided transform filter and join to reduce list back to single value. ([#118](https://github.com/calogica/dbt-expectations/pull/118) [@UselessAlias](https://github.com/UselessAlias))
 
 
 # dbt-expectations v0.4.3
