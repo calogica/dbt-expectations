@@ -8,7 +8,7 @@
         {% for col_name in relation_column_names %}
         select
             {{ loop.index }} as relation_column_idx,
-            '{{ col_name }}' as relation_column
+            cast('{{ col_name }}' as {{ dbt_utils.type_string() }}) as relation_column
         {% if not loop.last %}union all{% endif %}
         {% endfor %}
     ),
@@ -17,8 +17,7 @@
         {% for col_name in column_list %}
         select
             {{ loop.index }} as input_column_idx,
-            '{{ col_name }}' as input_column
-
+            cast('{{ col_name }}' as {{ dbt_utils.type_string() }}) as input_column
         {% if not loop.last %}union all{% endif %}
         {% endfor %}
     )
