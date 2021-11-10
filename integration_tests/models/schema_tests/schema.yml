@@ -68,6 +68,10 @@ models:
         - dbt_expectations.expect_row_values_to_have_data_for_every_n_datepart:
             date_col: date_day
             date_part: day
+        - dbt_expectations.expect_row_values_to_have_data_for_every_n_datepart:
+            date_col: date_day
+            date_part: day
+            interval: 7
 
     columns:
       - name: date_day
