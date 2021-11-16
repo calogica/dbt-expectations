@@ -7,7 +7,7 @@
 
 {{ dbt_expectations.expression_is_true(model,
                                         expression=expression,
-                                        group_by_columns=group_by,
+                                        group_by_columns=None,
                                         row_condition=row_condition
                                         )
                                         }}
