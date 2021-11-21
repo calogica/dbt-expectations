@@ -236,6 +236,7 @@ models: # or seeds:
     tests:
     - dbt_expectations.expect_table_columns_to_contain_set:
         column_list: ["col_a", "col_b"]
+        transform: uppper # (Optional)
 ```
 
 ### [expect_table_column_count_to_equal](macros/schema_tests/table_shape/expect_table_column_count_to_equal.sql)
@@ -264,6 +265,7 @@ models: # or seeds:
     tests:
     - dbt_expectations.expect_table_columns_to_match_ordered_list:
         column_list: ["col_a", "col_b"]
+        transform: uppper # (Optional)
 ```
 
 ### [expect_table_columns_to_match_set](macros/schema_tests/table_shape/expect_table_columns_to_match_set.sql)
@@ -278,6 +280,7 @@ models: # or seeds:
     tests:
     - dbt_expectations.expect_table_columns_to_match_set:
         column_list: ["col_a", "col_b"]
+        transform: uppper # (Optional)
 ```
 
 ### [expect_table_row_count_to_be_between](macros/schema_tests/table_shape/expect_table_row_count_to_be_between.sql)
@@ -292,6 +295,9 @@ models: # or seeds:
     - dbt_expectations.expect_table_row_count_to_be_between:
         min_value: 1 # (Optional)
         max_value: 4 # (Optional)
+        group_by: [group_id, other_group_id, ...] # (Optional)
+        row_condition: "id is not null" # (Optional)
+        strictly: false # (Optional. Adds an 'or equal to' to the comparison operator for min/max)
 ```
 
 ### [expect_table_row_count_to_equal_other_table](macros/schema_tests/table_shape/expect_table_row_count_to_equal_other_table.sql)
@@ -306,6 +312,9 @@ models: # or seeds:
     tests:
     - dbt_expectations.expect_table_row_count_to_equal_other_table:
         compare_model: ref("other_model")
+        factor: 1 # (Optional)
+        row_condition: "id is not null" # (Optional)
+        compare_row_condition: "id is not null" # (Optional)
 ```
 
 ### [expect_table_row_count_to_equal_other_table_times_factor](macros/schema_tests/table_shape/expect_table_row_count_to_equal_other_table_times_factor.sql)
@@ -321,6 +330,8 @@ models: # or seeds:
     - dbt_expectations.expect_table_column_count_to_equal_other_table_times_factor:
         compare_model: ref("other_model")
         factor: 13
+        row_condition: "id is not null" # (Optional)
+        compare_row_condition: "id is not null" # (Optional)
 ```
 
 ### [expect_table_row_count_to_equal](macros/schema_tests/table_shape/expect_table_row_count_to_equal.sql)
@@ -335,6 +346,8 @@ models: # or seeds:
     tests:
     - dbt_expectations.expect_table_row_count_to_equal:
         value: 4
+        group_by: [group_id, other_group_id, ...] # (Optional)
+        row_condition: "id is not null" # (Optional)
 ```
 
 ### [expect_column_values_to_be_unique](macros/schema_tests/column_values_basic/expect_column_values_to_be_unique.sql)
@@ -345,7 +358,8 @@ Expect each column value to be unique.
 
 ```yaml
 tests:
-  - dbt_expectations.expect_column_values_to_be_unique
+  - dbt_expectations.expect_column_values_to_be_unique:
+      row_condition: "id is not null" # (Optional)
 ```
 
 ### [expect_column_values_to_not_be_null](macros/schema_tests/column_values_basic/expect_column_values_to_not_be_null.sql)
@@ -356,7 +370,8 @@ Expect column values to not be null.
 
 ```yaml
 tests:
-  - dbt_expectations.expect_column_values_to_not_be_null
+  - dbt_expectations.expect_column_values_to_not_be_null:
+      row_condition: "id is not null" # (Optional)
 ```
 
 ### [expect_column_values_to_be_null](macros/schema_tests/column_values_basic/expect_column_values_to_be_null.sql)
@@ -367,7 +382,8 @@ Expect column values to be null.
 
 ```yaml
 tests:
-  - dbt_expectations.expect_column_values_to_be_null
+  - dbt_expectations.expect_column_values_to_be_null:
+      row_condition: "id is not null" # (Optional)
 ```
 
 ### [expect_column_values_to_be_of_type](macros/schema_tests/column_values_basic/expect_column_values_to_be_of_type.sql)
@@ -404,6 +420,8 @@ Expect each column value to be in a given set.
 tests:
   - dbt_expectations.expect_column_values_to_be_in_set:
       value_set: ['a','b','c']
+      quote_values: true # (Optional)
+      row_condition: "id is not null" # (Optional)
 ```
 
 ### [expect_column_values_to_be_between](macros/schema_tests/column_values_basic/expect_column_values_to_be_between.sql)
@@ -417,6 +435,8 @@ tests:
   - dbt_expectations.expect_column_values_to_be_between:
       min_value: 0  # (Optional)
       max_value: 10 # (Optional)
+      row_condition: "id is not null" # (Optional)
+      strictly: false # (Optional. Default is 'false'. Adds an 'or equal to' to the comparison operator for min/max)
 ```
 
 ### [expect_column_values_to_not_be_in_set](macros/schema_tests/column_values_basic/expect_column_values_to_not_be_in_set.sql)
@@ -429,6 +449,8 @@ Expect each column value not to be in a given set.
 tests:
   - dbt_expectations.expect_column_values_to_not_be_in_set:
       value_set: ['e','f','g']
+      quote_values: true # (Optional)
+      row_condition: "id is not null" # (Optional)
 ```
 
 ### [expect_column_values_to_be_increasing](macros/schema_tests/column_values_basic/expect_column_values_to_be_increasing.sql)
@@ -443,6 +465,8 @@ If `strictly: True`, then this expectation is only satisfied if each consecutive
 tests:
   - dbt_expectations.expect_column_values_to_be_increasing:
       sort_column: date_day
+      row_condition: "id is not null" # (Optional)
+      strictly: true # (Optional for comparison operator. Default is 'true', and it uses '>'. If set to 'flase' it uses '>='.)
 ```
 
 ### [expect_column_values_to_be_decreasing](macros/schema_tests/column_values_basic/expect_column_values_to_be_decreasing.sql)
@@ -457,7 +481,8 @@ If strictly=True, then this expectation is only satisfied if each consecutive va
 tests:
   - dbt_expectations.expect_column_values_to_be_decreasing:
       sort_column: col_numeric_a
-      strictly: false
+      strictly: true # (Optional for comparison operator. Default is 'true' and it uses '<'. If set to 'false', it uses '<='.)
+      row_condition: "id is not null" # (Optional)
 ```
 
 ### [expect_column_value_lengths_to_be_between](macros/schema_tests/string_matching/expect_column_value_lengths_to_be_between.sql)
@@ -471,6 +496,8 @@ tests:
   - dbt_expectations.expect_column_value_lengths_to_be_between:
       min_value: 1 # (Optional)
       max_value: 4 # (Optional)
+      row_condition: "id is not null" # (Optional)
+      strictly: false # (Optional. Default is 'false'. Adds an 'or equal to' to the comparison operator for min/max)
 ```
 
 ### [expect_column_value_lengths_to_equal](macros/schema_tests/string_matching/expect_column_value_lengths_to_equal.sql)
@@ -483,6 +510,7 @@ Expect column entries to be strings with length equal to the provided value.
 tests:
   - dbt_expectations.expect_column_value_lengths_to_equal:
       value: 10
+      row_condition: "id is not null" # (Optional)
 ```
 
 ### [expect_column_values_to_match_regex](macros/schema_tests/string_matching/expect_column_values_to_match_regex.sql)
@@ -495,6 +523,7 @@ Expect column entries to be strings that match a given regular expression. Valid
 tests:
   - dbt_expectations.expect_column_values_to_match_regex:
       regex: "[at]+"
+      row_condition: "id is not null" # (Optional)
 ```
 
 ### [expect_column_values_to_not_match_regex](macros/schema_tests/string_matching/expect_column_values_to_not_match_regex.sql)
@@ -507,6 +536,7 @@ Expect column entries to be strings that do NOT match a given regular expression
 tests:
   - dbt_expectations.expect_column_values_to_not_match_regex:
       regex: "[at]+"
+      row_condition: "id is not null" # (Optional)
 ```
 
 ### [expect_column_values_to_match_regex_list](macros/schema_tests/string_matching/expect_column_values_to_match_regex_list.sql)
@@ -519,6 +549,8 @@ Expect the column entries to be strings that can be matched to either any of or 
 tests:
   - dbt_expectations.expect_column_values_to_match_regex_list:
       regex_list: ["@[^.]*", "&[^.]*"]
+      match_on: any # (Optional. Default is 'any', which applies an 'OR' for each regex. If 'all', it applies an 'AND' for each regex.)
+      row_condition: "id is not null" # (Optional)
 ```
 
 ### [expect_column_values_to_not_match_regex_list](macros/schema_tests/string_matching/expect_column_values_to_not_match_regex_list.sql)
@@ -531,6 +563,8 @@ Expect the column entries to be strings that do not match any of a list of regul
 tests:
   - dbt_expectations.expect_column_values_to_not_match_regex_list:
       regex_list: ["@[^.]*", "&[^.]*"]
+      match_on: any # (Optional. Default is 'any', which applies an 'OR' for each regex. If 'all', it applies an 'AND' for each regex.)
+      row_condition: "id is not null" # (Optional)
 ```
 
 ### [expect_column_values_to_match_like_pattern](macros/schema_tests/string_matching/expect_column_values_to_match_like_pattern.sql)
@@ -543,6 +577,7 @@ Expect column entries to be strings that match a given SQL `like` pattern.
 tests:
   - dbt_expectations.expect_column_values_to_match_like_pattern:
       like_pattern: "%@%"
+      row_condition: "id is not null" # (Optional)
 ```
 
 ### [expect_column_values_to_not_match_like_pattern](macros/schema_tests/string_matching/expect_column_values_to_not_match_like_pattern.sql)
@@ -555,6 +590,7 @@ Expect column entries to be strings that do not match a given SQL `like` pattern
 tests:
   - dbt_expectations.expect_column_values_to_not_match_like_pattern:
       like_pattern: "%&%"
+      row_condition: "id is not null" # (Optional)
 ```
 
 ### [expect_column_values_to_match_like_pattern_list](macros/schema_tests/string_matching/expect_column_values_to_match_like_pattern_list.sql)
@@ -567,6 +603,8 @@ Expect the column entries to be strings that match any of a list of SQL `like` p
 tests:
   - dbt_expectations.expect_column_values_to_match_like_pattern_list:
       like_pattern_list: ["%@%", "%&%"]
+      match_on: any # (Optional. Default is 'any', which applies an 'OR' for each pattern. If 'all', it applies an 'AND' for each regex.)
+      row_condition: "id is not null" # (Optional)
 ```
 
 ### [expect_column_values_to_not_match_like_pattern_list](macros/schema_tests/string_matching/expect_column_values_to_not_match_like_pattern_list.sql)
@@ -579,6 +617,8 @@ Expect the column entries to be strings that do not match any of a list of SQL `
 tests:
   - dbt_expectations.expect_column_values_to_not_match_like_pattern_list:
       like_pattern_list: ["%@%", "%&%"]
+      match_on: any # (Optional. Default is 'any', which applies an 'OR' for each pattern. If 'all', it applies an 'AND' for each regex.)
+      row_condition: "id is not null" # (Optional)
 ```
 
 ### [expect_column_distinct_count_to_equal](macros/schema_tests/aggregate_functions/expect_column_distinct_count_to_equal.sql)
@@ -591,6 +631,9 @@ Expect the number of distinct column values to be equal to a given value.
 tests:
   - dbt_expectations.expect_column_distinct_count_to_equal:
       value: 10
+      quote_values: false # (Optional. Default is 'false'.)
+      group_by: [group_id, other_group_id, ...] # (Optional)
+      row_condition: "id is not null" # (Optional)
 ```
 
 ### [expect_column_distinct_count_to_be_greater_than](macros/schema_tests/aggregate_functions/expect_column_distinct_count_to_be_greater_than.sql)
@@ -603,6 +646,9 @@ Expect the number of distinct column values to be greater than a given value.
 tests:
   - dbt_expectations.expect_column_distinct_count_to_be_greater_than:
       value: 10
+      quote_values: false # (Optional. Default is 'false'.)
+      group_by: [group_id, other_group_id, ...] # (Optional)
+      row_condition: "id is not null" # (Optional)
 ```
 
 ### [expect_column_distinct_values_to_be_in_set](macros/schema_tests/aggregate_functions/expect_column_distinct_values_to_be_in_set.sql)
@@ -615,6 +661,9 @@ Expect the set of distinct column values to be contained by a given set.
 tests:
   - dbt_expectations.expect_column_distinct_values_to_be_in_set:
       value_set: ['a','b','c','d']
+      quote_values: false # (Optional. Default is 'false'.)
+      group_by: [group_id, other_group_id, ...] # (Optional)
+      row_condition: "id is not null" # (Optional)
 ```
 
 ### [expect_column_distinct_values_to_contain_set](macros/schema_tests/aggregate_functions/expect_column_distinct_values_to_contain_set.sql)
@@ -629,6 +678,9 @@ In contrast to `expect_column_values_to_be_in_set` this ensures not that all col
 tests:
   - dbt_expectations.expect_column_distinct_values_to_contain_set:
       value_set: ['a','b']
+      quote_values: false # (Optional. Default is 'false'.)
+      group_by: [group_id, other_group_id, ...] # (Optional)
+      row_condition: "id is not null" # (Optional)
 ```
 
 ### [expect_column_distinct_values_to_equal_set](macros/schema_tests/aggregate_functions/expect_column_distinct_values_to_equal_set.sql)
@@ -643,6 +695,9 @@ In contrast to `expect_column_distinct_values_to_contain_set` this ensures not o
 tests:
   - dbt_expectations.expect_column_distinct_values_to_equal_set:
       value_set: ['a','b','c']
+      quote_values: true # (Optional. Default is 'true'.)
+      group_by: [group_id, other_group_id, ...] # (Optional)
+      row_condition: "id is not null" # (Optional)
 ```
 
 ### [expect_column_distinct_count_to_equal_other_table](macros/schema_tests/aggregate_functions/expect_column_distinct_count_to_equal_other_table.sql)
@@ -661,6 +716,8 @@ models: # or seeds:
           column_name: col_1
           compare_model: ref("my_model_2")
           compare_column_name: col_2
+          row_condition: "id is not null" # (Optional)
+          compare_row_condition: "id is not null" # (Optional)
 ```
 
 or at the column level:
@@ -674,6 +731,8 @@ models: # or seeds:
           - dbt_expectations.expect_column_distinct_count_to_equal_other_table:
               compare_model: ref("my_model_2")
               compare_column_name: col_2
+              row_condition: "id is not null" # (Optional)
+              compare_row_condition: "id is not null" # (Optional)
 ```
 
 If `compare_model` or `compare_column_name` are no specified, `model` and `column_name` are substituted. So, one could compare distinct counts of two different columns in the same model, or identically named columns in separate models etc.
@@ -689,6 +748,9 @@ tests:
   - dbt_expectations.expect_column_mean_to_be_between:
       min_value: 0 # (Optional)
       max_value: 2 # (Optional)
+      group_by: [group_id, other_group_id, ...] # (Optional)
+      row_condition: "id is not null" # (Optional)
+      strictly: false # (Optional. Default is 'false'. Adds an 'or equal to' to the comparison operator for min/max)
 ```
 
 ### [expect_column_median_to_be_between](macros/schema_tests/aggregate_functions/expect_column_median_to_be_between.sql)
@@ -702,6 +764,9 @@ tests:
   - dbt_expectations.expect_column_median_to_be_between:
       min_value: 0
       max_value: 2
+      group_by: [group_id, other_group_id, ...] # (Optional)
+      row_condition: "id is not null" # (Optional)
+      strictly: false # (Optional. Default is 'false'. Adds an 'or equal to' to the comparison operator for min/max)
 ```
 
 ### [expect_column_quantile_values_to_be_between](macros/schema_tests/aggregate_functions/expect_column_quantile_values_to_be_between.sql)
@@ -716,6 +781,9 @@ tests:
       quantile: .95
       min_value: 0 # (Optional)
       max_value: 2 # (Optional)
+      group_by: [group_id, other_group_id, ...] # (Optional)
+      row_condition: "id is not null" # (Optional)
+      strictly: false # (Optional. Default is 'false'. Adds an 'or equal to' to the comparison operator for min/max)
 ```
 
 ### [expect_column_stdev_to_be_between](macros/schema_tests/aggregate_functions/expect_column_stdev_to_be_between.sql)
@@ -729,6 +797,9 @@ tests:
   - dbt_expectations.expect_column_stdev_to_be_between:
       min_value: 0 # (Optional)
       max_value: 2 # (Optional)
+      group_by: [group_id, other_group_id, ...] # (Optional)
+      row_condition: "id is not null" # (Optional)
+      strictly: false # (Optional. Default is 'false'. Adds an 'or equal to' to the comparison operator for min/max)
 ```
 
 ### [expect_column_unique_value_count_to_be_between](macros/schema_tests/aggregate_functions/expect_column_unique_value_count_to_be_between.sql)
@@ -742,6 +813,9 @@ tests:
   - dbt_expectations.expect_column_unique_value_count_to_be_between:
       min_value: 3 # (Optional)
       max_value: 3 # (Optional)
+      group_by: [group_id, other_group_id, ...] # (Optional)
+      row_condition: "id is not null" # (Optional)
+      strictly: false # (Optional. Default is 'false'. Adds an 'or equal to' to the comparison operator for min/max)
 ```
 
 ### [expect_column_proportion_of_unique_values_to_be_between](macros/schema_tests/aggregate_functions/expect_column_proportion_of_unique_values_to_be_between.sql)
@@ -757,6 +831,9 @@ tests:
   - dbt_expectations.expect_column_proportion_of_unique_values_to_be_between:
       min_value: 0  # (Optional)
       max_value: .4 # (Optional)
+      group_by: [group_id, other_group_id, ...] # (Optional)
+      row_condition: "id is not null" # (Optional)
+      strictly: false # (Optional. Default is 'false'. Adds an 'or equal to' to the comparison operator for min/max)
 ```
 
 ### [expect_column_most_common_value_to_be_in_set](macros/schema_tests/aggregate_functions/expect_column_most_common_value_to_be_in_set.sql)
@@ -770,6 +847,9 @@ tests:
   - dbt_expectations.expect_column_most_common_value_to_be_in_set:
       value_set: [0.5]
       top_n: 1
+      quote_values: false # (Optional)
+      data_type: "decimal" # (Optional. Default is 'decimal')
+      strictly: false # (Optional. Default is 'false'. Adds an 'or equal to' to the comparison operator for min/max)
 ```
 
 ### [expect_column_max_to_be_between](macros/schema_tests/aggregate_functions/expect_column_max_to_be_between.sql)
@@ -783,6 +863,9 @@ tests:
   - dbt_expectations.expect_column_max_to_be_between:
       min_value: 1 # (Optional)
       max_value: 1 # (Optional)
+      group_by: [group_id, other_group_id, ...] # (Optional)
+      row_condition: "id is not null" # (Optional)
+      strictly: false # (Optional. Default is 'false'. Adds an 'or equal to' to the comparison operator for min/max)
 ```
 
 ### [expect_column_min_to_be_between](macros/schema_tests/aggregate_functions/expect_column_min_to_be_between.sql)
@@ -796,6 +879,9 @@ tests:
   - dbt_expectations.expect_column_min_to_be_between:
       min_value: 0 # (Optional)
       max_value: 1 # (Optional)
+      group_by: [group_id, other_group_id, ...] # (Optional)
+      row_condition: "id is not null" # (Optional)
+      strictly: false # (Optional. Default is 'false'. Adds an 'or equal to' to the comparison operator for min/max)
 ```
 
 ### [expect_column_sum_to_be_between](macros/schema_tests/aggregate_functions/expect_column_sum_to_be_between.sql)
@@ -809,6 +895,9 @@ tests:
   - dbt_expectations.expect_column_sum_to_be_between:
       min_value: 1 # (Optional)
       max_value: 2 # (Optional)
+      group_by: [group_id, other_group_id, ...] # (Optional)
+      row_condition: "id is not null" # (Optional)
+      strictly: false # (Optional. Default is 'false'. Adds an 'or equal to' to the comparison operator for min/max)
 ```
 
 ### [expect_column_pair_values_A_to_be_greater_than_B](macros/schema_tests/multi-column/expect_column_pair_values_A_to_be_greater_than_B.sql)
@@ -823,6 +912,7 @@ tests:
       column_A: col_numeric_a
       column_B: col_numeric_a
       or_equal: True
+      row_condition: "id is not null" # (Optional)
 ```
 
 ### [expect_column_pair_values_to_be_equal](macros/schema_tests/multi-column/expect_column_pair_values_to_be_equal.sql)
@@ -836,6 +926,7 @@ tests:
   - dbt_expectations.expect_column_pair_values_to_be_equal:
       column_A: col_numeric_a
       column_B: col_numeric_a
+      row_condition: "id is not null" # (Optional)
 ```
 
 ### [expect_column_pair_values_to_be_in_set](macros/schema_tests/multi-column/expect_column_pair_values_to_be_in_set.sql)
@@ -852,6 +943,7 @@ tests:
       column_A: col_numeric_a
       column_B: col_numeric_b
       value_pairs_set: [[0, 1], [1, 0], [0.5, 0.5], [0.5, 0.5]]
+      row_condition: "id is not null" # (Optional)
 ```
 
 ### [expect_select_column_values_to_be_unique_within_record](macros/schema_tests/multi-column/expect_select_column_values_to_be_unique_within_record.sql)
@@ -864,7 +956,9 @@ Expect the values for each record to be unique across the columns listed. Note t
 tests:
   - dbt_expectations.expect_select_column_values_to_be_unique_within_record:
       column_list: ["col_string_a", "col_string_b"]
-      ignore_row_if: "any_value_is_missing"
+      ignore_row_if: "any_value_is_missing" # (Optional. Default is 'all_values_are_missing')
+      quote_columns: false # (Optional)
+      row_condition: "id is not null" # (Optional)
 ```
 
 ### [expect_multicolumn_sum_to_equal](macros/schema_tests/multi-column/expect_multicolumn_sum_to_equal.sql)
@@ -878,6 +972,8 @@ tests:
   - dbt_expectations.expect_multicolumn_sum_to_equal:
       column_list: ["col_numeric_a", "col_numeric_b"]
       sum_total: 4
+      group_by: [group_id, other_group_id, ...] # (Optional)
+      row_condition: "id is not null" # (Optional)
 ```
 
 ### [expect_compound_columns_to_be_unique](macros/schema_tests/multi-column/expect_compound_columns_to_be_unique.sql)
@@ -890,7 +986,9 @@ Expect that the columns are unique together, e.g. a multi-column primary key.
 tests:
   - dbt_expectations.expect_compound_columns_to_be_unique:
       column_list: ["date_col", "col_string_b"]
-      ignore_row_if: "any_value_is_missing"
+      ignore_row_if: "any_value_is_missing" # (Optional. Default is 'all_values_are_missing')
+      quote_columns: false # (Optional)
+      row_condition: "id is not null" # (Optional)
 ```
 
 ### [expect_column_values_to_be_within_n_moving_stdevs](macros/schema_tests/distributional/expect_column_values_to_be_within_n_moving_stdevs.sql)
@@ -903,12 +1001,15 @@ Expects changes in metric values to be within Z sigma away from a moving average
 tests:
   - dbt_expectations.expect_column_values_to_be_within_n_moving_stdevs:
       date_column_name: date
-      period: day
-      lookback_periods: 1
-      trend_periods: 7
-      test_periods: 14
-      sigma_threshold: 3
-      take_logs: true
+      period: day # (Optional. Default is 'day')
+      lookback_periods: 1 # (Optional. Default is 1)
+      trend_periods: 7 # (Optional. Default is 7)
+      test_periods: 14 # (Optional. Default is 14)
+      sigma_threshold: 3 # (Optional. Default is 3)
+      take_logs: true # (Optional. Default is 'true')
+      sigma_threshold_upper: x # (Optional. Replace 'x' with a value. Default is 'None')
+      sigma_threshold_lower: y # (Optional. Replace 'y' with a value. Default is 'None')
+      take_diffs: true # (Optional)
 ```
 
 ### [expect_column_values_to_be_within_n_stdevs](macros/schema_tests/distributional/expect_column_values_to_be_within_n_stdevs.sql)
@@ -920,8 +1021,8 @@ Expects (optionally grouped & summed) metric values to be within Z sigma away fr
 ```yaml
 tests:
   - dbt_expectations.expect_column_values_to_be_within_n_stdevs:
-      group_by: date_day
-      sigma_threshold: 3
+      group_by: date_day # (Optional. Default is 'None')
+      sigma_threshold: 3 # (Optional. Default is 3)
 ```
 
 ### [expect_row_values_to_have_data_for_every_n_datepart](macros/schema_tests/distributional/expect_row_values_to_have_data_for_every_n_datepart.sql)
@@ -942,7 +1043,10 @@ Note: `test_end_date` is exclusive (e.g. a test with `test_end_date` value of `'
 tests:
     - dbt_expectations.expect_row_values_to_have_data_for_every_n_datepart:
         date_col: date_day
-        date_part: day
+        date_part: day # (Optional. Default is 'day')
+        row_condition: "id is not null" # (Optional)
+        test_start_date: x # (Optional. Replace 'x' with a date. Default is 'None')
+        test_end_date: y # (Optional. Replace 'y' with a date. Default is 'None')
 ```
 
 The `interval` argument will optionally group `date_part` by a given integer to test data presence at a lower granularity, e.g. adding `interval: 7` to the example above will test whether a model has data for each 7-`day` period instead of for each `day`.

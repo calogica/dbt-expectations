@@ -1,6 +1,14 @@
 
 # dbt-expectations v0.4.5
 
+## Fixes
+* Fix missing group by default value in string_matching macros  ([#126](https://github.com/calogica/dbt-expectations/pull/126) by [@samantha-guerriero-cko](https://github.com/samantha-guerriero-cko))
+
+## Doc Updates
+* Append missing optional parameters documentation to README.md ([#124](https://github.com/calogica/dbt-expectations/pull/124) by [@makotonium](https://github.com/makotonium))
+
+# dbt-expectations v0.4.5
+
 ## Features
 * Add an optional argument to allow for intervals of `date_part` in `expect_row_values_to_have_data_for_every_n_datepart`. ([#110](https://github.com/calogica/dbt-expectations/pull/110) by [@lewisarmistead](https://github.com/lewisarmistead))
 
