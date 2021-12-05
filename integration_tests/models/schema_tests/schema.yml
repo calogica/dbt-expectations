@@ -79,9 +79,6 @@ models:
           - dbt_expectations.expect_row_values_to_have_recent_data:
               datepart: day
               interval: 1
-          - dbt_expectations.expect_row_values_to_have_recent_data:
-              datepart: day
-              interval: 1
 
           - dbt_expectations.expect_column_values_to_be_of_type:
               column_type: "{{ dbt_expectations.type_datetime() }}"

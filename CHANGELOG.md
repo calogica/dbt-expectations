@@ -1,4 +1,15 @@
+# dbt-expectations v0.4.7
+* Patch: adds support for dbt 1.x
 
+# dbt-expectations v0.4.6
+
+## What's Changed
+* Append missing optional parameters documentation to README.md by @makotonium in https://github.com/calogica/dbt-expectations/pull/124
+* Fix missing group_by default value in string_matching macros by @samantha-guerriero-cko in https://github.com/calogica/dbt-expectations/pull/126
+
+## New Contributors
+* @makotonium made their first contribution in https://github.com/calogica/dbt-expectations/pull/124
+* @samantha-guerriero-cko made their first contribution in https://github.com/calogica/dbt-expectations/pull/126
 # dbt-expectations v0.4.5
 
 ## Fixes
