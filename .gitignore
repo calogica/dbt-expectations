@@ -1,6 +1,5 @@
 
 target/
-dbt_modules/
 dbt_packages/
 logs/
 .python-version

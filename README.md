@@ -2,7 +2,7 @@
 
 <img src="expectations.gif"/>
 
-**dbt-expectations** is an extension package for [**dbt**](https://github.com/fishtown-analytics/dbt), inspired by the [Great Expectations package for Python](https://greatexpectations.io/). The intent is to allow dbt users to deploy GE-like tests in their data warehouse directly from dbt, vs having to add another integration with their data warehouse.
+**dbt-expectations** is an extension package for [**dbt**](https://github.com/dbt-labs/dbt), inspired by the [Great Expectations package for Python](https://greatexpectations.io/). The intent is to allow dbt users to deploy GE-like tests in their data warehouse directly from dbt, vs having to add another integration with their data warehouse.
 
 ## Install
 
@@ -15,7 +15,7 @@ Include in `packages.yml`
 ```yaml
 packages:
   - package: calogica/dbt_expectations
-    version: [">=0.4.0", "<0.5.0"]
+    version: [">=0.5.0", "<0.6.0"]
     # <see https://github.com/calogica/dbt-expectations/releases/latest> for the latest version tag
 ```
 
@@ -23,14 +23,14 @@ For latest release, see [https://github.com/calogica/dbt-expectations/releases](
 
 ### Dependencies
 
-This package includes a reference to [**dbt-date**](https://github.com/calogica/dbt-date) which in turn references [**dbt-utils**](https://github.com/fishtown-analytics/dbt-utils) so there's no need to also import dbt-utils in your local project.
+This package includes a reference to [**dbt-date**](https://github.com/calogica/dbt-date) which in turn references [**dbt-utils**](https://github.com/dbt-labs/dbt-utils) so there's no need to also import dbt-utils in your local project.
 
 Note: we no longer include `spark_utils` in this package to avoid versioning conflicts. If you are running this package on non-core platforms (outside of Snowflake, BigQuery, Redshift, Postgres), you will need to use a package like `spark_utils` to shim macros.
 
 For example, in `packages.yml`, you will need to include the relevant package:
 
 ```yaml
-  - package: fishtown-analytics/spark_utils
+  - package: dbt-labs/spark_utils
     version: <latest or range>
 ```
 
