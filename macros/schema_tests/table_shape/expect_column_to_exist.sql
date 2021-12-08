@@ -21,7 +21,7 @@
     with test_data as (
 
         select
-            '{{ column_name }}' as column_name,
+            cast('{{ column_name }}' as {{ dbt_utils.type_string() }}) as column_name,
             {{ matching_column_index }} as matching_column_index,
             {{ column_index_matches }} as column_index_matches
 

@@ -6,14 +6,14 @@
     with relation_columns as (
 
         {% for col_name in relation_column_names %}
-        select '{{ col_name }}' as relation_column
+        select cast('{{ col_name }}' as {{ dbt_utils.type_string() }}) as relation_column
         {% if not loop.last %}union all{% endif %}
         {% endfor %}
     ),
     input_columns as (
 
         {% for col_name in column_list %}
-        select '{{ col_name }}' as input_column
+        select cast('{{ col_name }}' as {{ dbt_utils.type_string() }}) as input_column
         {% if not loop.last %}union all{% endif %}
         {% endfor %}
     )
