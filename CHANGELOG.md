@@ -1,3 +1,13 @@
+# dbt-expectations v0.5.1
+
+## Fixes
+* Add better support for Redshift by typing implicit `varchar` fields explicitly to strings. ([#131](https://github.com/calogica/dbt-expectations/pull/131) [#132](https://github.com/calogica/dbt-expectations/pull/132))
+
+
+# dbt-expectations v0.5.0
+* adds full support for dbt 1.x without backwards compatability
+* supports `dbt-date 0.5.0`, which supports `dbt-utils 0.8.0`
+
 # dbt-expectations v0.4.7
 * Patch: adds support for dbt 1.x
 
