@@ -12,7 +12,7 @@
 {% else %}
 {{ exceptions.raise_compiler_error(
         "`value_pairs_set` argument for expect_column_pair_values_to_be_in_set test cannot have more than 2 item per element.
-        Got: '" ~ pair ~"'.'"
+        Got: '" ~ pair ~ "'.'"
     ) }}
 {% endif %}
 {% endfor %}
