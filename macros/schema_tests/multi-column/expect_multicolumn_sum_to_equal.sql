@@ -6,7 +6,6 @@
                                                 row_condition=None
                                                 ) %}
 
-{% set operator = "=" %}
 {% set expression %}
 {% for column in column_list %}
 sum({{ column }}){% if not loop.last %} + {% endif %}
