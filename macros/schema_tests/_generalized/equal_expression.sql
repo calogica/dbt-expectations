@@ -33,12 +33,12 @@
                                 row_condition=None,
                                 compare_row_condition=None,
                                 tolerance=0.0,
-                                tolerance_percent=None,
-                                return_difference=False
+                                tolerance_percent=None
                                 ) -%}
 
     {{ adapter.dispatch('test_equal_expression', 'dbt_expectations') (
-                                model, expression,
+                                model,
+                                expression,
                                 compare_model,
                                 compare_expression,
                                 group_by,
@@ -46,12 +46,12 @@
                                 row_condition,
                                 compare_row_condition,
                                 tolerance,
-                                tolerance_percent,
-                                return_difference) }}
+                                tolerance_percent) }}
 {%- endtest %}
 
 {%- macro default__test_equal_expression(
-                                model, expression,
+                                model,
+                                expression,
                                 compare_model,
                                 compare_expression,
                                 group_by,
@@ -59,8 +59,7 @@
                                 row_condition,
                                 compare_row_condition,
                                 tolerance,
-                                tolerance_percent,
-                                return_difference) -%}
+                                tolerance_percent) -%}
 
     {%- set compare_model = model if not compare_model else compare_model -%}
     {%- set compare_expression = expression if not compare_expression else compare_expression -%}

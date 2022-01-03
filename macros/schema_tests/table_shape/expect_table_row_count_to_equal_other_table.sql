@@ -3,7 +3,6 @@
     compare_model=compare_model,
     compare_expression="count(*) * " + factor|string,
     row_condition=row_condition,
-    compare_row_condition=compare_row_condition,
-    return_difference=True
+    compare_row_condition=compare_row_condition
 ) }}
 {%- endtest -%}

@@ -21,7 +21,6 @@ count(distinct {{ compare_column_name }})
     compare_model=compare_model,
     compare_expression=compare_expression,
     row_condition=row_condition,
-    compare_row_condition=compare_row_condition,
-    return_difference=True
+    compare_row_condition=compare_row_condition
 ) }}
 {%- endtest -%}
