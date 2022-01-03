@@ -662,7 +662,6 @@ tests:
   - dbt_expectations.expect_column_distinct_values_to_be_in_set:
       value_set: ['a','b','c','d']
       quote_values: false # (Optional. Default is 'false'.)
-      group_by: [group_id, other_group_id, ...] # (Optional)
       row_condition: "id is not null" # (Optional)
 ```
 
@@ -679,7 +678,6 @@ tests:
   - dbt_expectations.expect_column_distinct_values_to_contain_set:
       value_set: ['a','b']
       quote_values: false # (Optional. Default is 'false'.)
-      group_by: [group_id, other_group_id, ...] # (Optional)
       row_condition: "id is not null" # (Optional)
 ```
 
@@ -696,7 +694,6 @@ tests:
   - dbt_expectations.expect_column_distinct_values_to_equal_set:
       value_set: ['a','b','c']
       quote_values: true # (Optional. Default is 'true'.)
-      group_by: [group_id, other_group_id, ...] # (Optional)
       row_condition: "id is not null" # (Optional)
 ```
 
