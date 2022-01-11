@@ -96,8 +96,6 @@ To run the tests:
 - [expect_column_values_to_be_between](#expect_column_values_to_be_between)
 - [expect_column_values_to_be_decreasing](#expect_column_values_to_be_decreasing)
 - [expect_column_values_to_be_increasing](#expect_column_values_to_be_increasing)
-- [expect_column_distinct values to remain unique case insensitive](#expect_column_distinct values to remain unique case insensitive)
-
 ### String matching
 
 - [expect_column_value_lengths_to_be_between](#expect_column_value_lengths_to_be_between)
@@ -499,20 +497,6 @@ tests:
       max_value: 4 # (Optional)
       row_condition: "id is not null" # (Optional)
       strictly: false # (Optional. Default is 'false'. Adds an 'or equal to' to the comparison operator for min/max)
-```
-
-### [expect_column_distinct values to remain unique case insensitive](macros/schema_tests/column_values_basic/expect_column_set_to_be_unique_case_insensitive.sql)
-
-Expect column set of values to remain unique from a case insensitive perspective. 
-
-If the column contains the values "iPhone" and "iphone" then it would not match the expectation, as both values would be part of column's set of values but from a case insenstive perspective will be equal. 
-
-*Applies to:* Column
-
-```yaml
-tests:
-  - dbt_expectations.expect_column_set_to_be_unique_case_insensitive:
-
 ```
 
 ### [expect_column_value_lengths_to_equal](macros/schema_tests/string_matching/expect_column_value_lengths_to_equal.sql)
