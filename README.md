@@ -97,7 +97,6 @@ To run the tests:
 - [expect_column_values_to_be_decreasing](#expect_column_values_to_be_decreasing)
 - [expect_column_values_to_be_increasing](#expect_column_values_to_be_increasing)
 ### String matching
-
 - [expect_column_value_lengths_to_be_between](#expect_column_value_lengths_to_be_between)
 - [expect_column_value_lengths_to_equal](#expect_column_value_lengths_to_equal)
 - [expect_column_values_to_match_like_pattern](#expect_column_values_to_match_like_pattern)
