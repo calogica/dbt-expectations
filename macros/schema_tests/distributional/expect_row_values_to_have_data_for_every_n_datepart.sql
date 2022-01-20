@@ -1,10 +1,11 @@
 {%- test expect_row_values_to_have_data_for_every_n_datepart(model,
-                                                                    date_col,
-                                                                    date_part="day",
-                                                                    interval=None,
-                                                                    row_condition=None,
-                                                                    test_start_date=None,
-                                                                    test_end_date=None) -%}
+                                                            date_col,
+                                                            date_part="day",
+                                                            interval=None,
+                                                            row_condition=None,
+                                                            exclusion_condition=None,
+                                                            test_start_date=None,
+                                                            test_end_date=None) -%}
 {% if not execute %}
     {{ return('') }}
 {% endif %}
@@ -111,6 +112,9 @@ final as (
         base_dates d
         left join
         model_data f on cast(d.date_{{ date_part }} as {{ dbt_expectations.type_datetime() }}) = f.date_{{ date_part }}
+    {% if exclusion_condition %}
+    where {{ exclusion_condition }}
+    {% endif %}
 
 )
 select
