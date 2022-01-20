@@ -112,14 +112,12 @@ final as (
         base_dates d
         left join
         model_data f on cast(d.date_{{ date_part }} as {{ dbt_expectations.type_datetime() }}) = f.date_{{ date_part }}
-    {% if exclusion_condition %}
-    where {{ exclusion_condition }}
-    {% endif %}
-
 )
 select
     *
 from final
-where
-    row_cnt = 0
+where row_cnt = 0
+{% if exclusion_condition %}
+  and {{ exclusion_condition }}
+{% endif %}
 {%- endtest -%}
