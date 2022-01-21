@@ -88,6 +88,7 @@ To run the tests:
 - [expect_column_values_to_be_unique](#expect_column_values_to_be_unique)
 - [expect_column_values_to_be_of_type](#expect_column_values_to_be_of_type)
 - [expect_column_values_to_be_in_type_list](#expect_column_values_to_be_in_type_list)
+- [expect_column_values_to_have_consistent_casing](#expect_column_values_to_have_consistent_casing)
 
 ### Sets and ranges
 
@@ -408,6 +409,18 @@ Expect a column to be one of a specified type list.
 tests:
   - dbt_expectations.expect_column_values_to_be_in_type_list:
       column_type_list: [date, datetime]
+```
+
+### [expect_column_values_to_have_consistent_casing](macros/schema_tests/column_values_basic/expect_column_values_to_have_consistent_casing.sql)
+
+Expect a column to have consistent casing. By setting display_inconsistent_columns to true, the inconsistent columns will be displayed.
+
+*Applies to:* Column
+
+```yaml
+tests:
+  - dbt_expectations.expect_column_values_to_have_consistent_casing:
+      display_inconsistent_columns: false # (Optional)
 ```
 
 ### [expect_column_values_to_be_in_set](macros/schema_tests/column_values_basic/expect_column_values_to_be_in_set.sql)
