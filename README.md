@@ -413,7 +413,7 @@ tests:
 
 ### [expect_column_values_to_have_consistent_casing](macros/schema_tests/column_values_basic/expect_column_values_to_have_consistent_casing.sql)
 
-Expect a column to have consistent casing. By setting display_inconsistent_columns to true, the inconsistent columns will be displayed.
+Expect a column to have consistent casing. By setting `display_inconsistent_columns` to true, the number of inconsistent values in the column will be displayed in the terminal whereas the inconsistent values themselves will be returned if the SQL compiled test is ran.
 
 *Applies to:* Column
 
