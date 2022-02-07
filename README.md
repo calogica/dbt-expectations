@@ -1024,7 +1024,7 @@ tests:
 
 ### [expect_row_values_to_have_data_for_every_n_datepart](macros/schema_tests/distributional/expect_row_values_to_have_data_for_every_n_datepart.sql)
 
-Expects model to have values for every grouped `date_part`.
+Expects model to have values for every grouped `date_part`. 
 
 For example, this tests whether a model has data for every `day` (grouped on `date_col`) between either:
 
@@ -1044,6 +1044,9 @@ tests:
         row_condition: "id is not null" # (Optional)
         test_start_date: x # (Optional. Replace 'x' with a date. Default is 'None')
         test_end_date: y # (Optional. Replace 'y' with a date. Default is 'None')
+        exclusion_condition: statement # (Optional. See details below. Default is 'None')
 ```
 
-The `interval` argument will optionally group `date_part` by a given integer to test data presence at a lower granularity, e.g. adding `interval: 7` to the example above will test whether a model has data for each 7-`day` period instead of for each `day`.
+The `interval` argument will optionally group `date_part` by a given integer to test data presence at a lower granularity, e.g. adding `interval: 7` to the example above will test whether a model has data for each 7-`day` period instead of for each `day`. 
+
+Known or expected missing dates can be excluded from the test by setting the `exclusion_criteria` with a valid SQL statement; e.g., adding `exclusion_condition: not(date_day = '2021-10-19')` will ensure that test passes if and only if `date_day = '2021-10-19'` is the only date with missing data. Alternatively, `exclusion_condition: not(date_part(month, date_day) = 12 and date_part(day, date_day) = 25)` will permit data to be missing on the 25th of December (Christmas day) every year.
