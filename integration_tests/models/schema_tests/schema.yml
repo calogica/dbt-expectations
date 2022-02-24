@@ -274,9 +274,11 @@ models:
           - dbt_expectations.expect_column_distinct_values_to_contain_set:
               value_set: ['a','b']
               quote_values: true
-
-          - dbt_expectations.expect_column_value_lengths_to_equal   :
+          - dbt_expectations.expect_column_value_lengths_to_equal:
               value: 1
+          - dbt_expectations.expect_column_values_to_have_consistent_casing
+          - dbt_expectations.expect_column_values_to_have_consistent_casing:
+              display_inconsistent_columns: true
 
       - name: col_string_b
         tests:
@@ -328,4 +330,3 @@ models:
             datepart: day
             interval: 1
             row_condition: group_id = 4
-
