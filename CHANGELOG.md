@@ -1,7 +1,7 @@
 # dbt-expectations v0.5.2
 
 ## Fixes
-* Change check for data date out of range to use timestamp by @MrJoosh in https://github.com/calogica/dbt-expectations/pull/145 (also fixes https://github.com/calogica/dbt-expectations/issues/104)
+* Fix `expect_row_values_to_have_recent_data` to use current timestamp by @MrJoosh in https://github.com/calogica/dbt-expectations/pull/145 (also fixes https://github.com/calogica/dbt-expectations/issues/104)
 
 ## New Features
 * Add new `expect_column_values_to_have_consistent_casing` test by @agusfigueroa-htg in https://github.com/calogica/dbt-expectations/pull/138
