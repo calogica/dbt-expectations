@@ -1,3 +1,21 @@
+# dbt-expectations v0.5.2
+
+## Fixes
+* Change check for data date out of range to use timestamp by @MrJoosh in https://github.com/calogica/dbt-expectations/pull/145
+
+## New Features
+* Add new `expect_column_values_to_have_consistent_casing` test by @agusfigueroa-htg in https://github.com/calogica/dbt-expectations/pull/138
+
+## Doc Updates 💌
+* Update README.md by @kdw2126 in https://github.com/calogica/dbt-expectations/pull/134
+* Fix documentation to note DBT 1.0.0 compatibility by @kdw2126 in https://github.com/calogica/dbt-expectations/pull/136
+
+## New Contributors
+* @kdw2126 made their first contribution in https://github.com/calogica/dbt-expectations/pull/134
+* @agusfigueroa-htg made their first contribution in https://github.com/calogica/dbt-expectations/pull/138
+* @MrJoosh made their first contribution in https://github.com/calogica/dbt-expectations/pull/145
+
+
 # dbt-expectations v0.5.1
 
 ## Fixes
