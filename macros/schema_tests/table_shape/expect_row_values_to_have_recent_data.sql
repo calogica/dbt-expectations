@@ -20,7 +20,7 @@ with max_recency as (
     from
         {{ model }}
     where
-        {{ column_name }} <= {{ dbt_date.today() }}
+        {{ column_name }} <= {{ dbt_date.now() }}
         {% if row_condition %}
         and {{ row_condition }}
         {% endif %}
