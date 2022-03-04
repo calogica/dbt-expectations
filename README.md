@@ -480,7 +480,7 @@ tests:
       sort_column: date_day
       row_condition: "id is not null" # (Optional)
       strictly: true # (Optional for comparison operator. Default is 'true', and it uses '>'. If set to 'false' it uses '>='.)
-      partition_columns: partition_col_1, partition_col_2 # (Optional: default is None)
+      group_by: [group_id, other_group_id, ...] # (Optional)
 ```
 
 ### [expect_column_values_to_be_decreasing](macros/schema_tests/column_values_basic/expect_column_values_to_be_decreasing.sql)
@@ -497,7 +497,7 @@ tests:
       sort_column: col_numeric_a
       row_condition: "id is not null" # (Optional)
       strictly: true # (Optional for comparison operator. Default is 'true' and it uses '<'. If set to 'false', it uses '<='.)
-      partition_columns: partition_col_1, partition_col_2 # (Optional: default is None)
+      group_by: [group_id, other_group_id, ...] # (Optional)
 ```
 
 ### [expect_column_value_lengths_to_be_between](macros/schema_tests/string_matching/expect_column_value_lengths_to_be_between.sql)

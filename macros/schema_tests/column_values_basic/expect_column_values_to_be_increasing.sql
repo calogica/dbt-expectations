@@ -2,17 +2,16 @@
                                                    sort_column=None,
                                                    strictly=True,
                                                    row_condition=None,
-                                                   partition_columns=None) %}
+                                                   group_by=None) %}
 
 {%- set sort_column = column_name if not sort_column else sort_column -%}
 {%- set operator = ">" if strictly else ">=" %}
-{%- set partition_columns_list = partition_columns.split(',') %}
 with all_values as (
     select
         {{ sort_column }} as sort_column,
         {{ column_name }} as value_field
-        {%- if partition_columns -%}
-            {%- for columns in partition_columns_list -%}
+        {%- if group_by -%}
+            {%- for columns in group_by_list -%}
         , {{ columns }}
             {%- endfor -%}
         {%- endif %}
@@ -26,11 +25,11 @@ add_lag_values as (
         sort_column,
         value_field,
         lag(value_field) over
-            {%- if not partition_columns -%}
+            {%- if not group_by -%}
                 (order by sort_column)
             {%- else -%}
-                (partition by {{ partition_columns }} order by sort_column)
-            {%- endif -%}    as value_field_lag
+                (partition by {{ group_by|join(", ") }} order by sort_column)
+            {%- endif  %}    as value_field_lag
     from
         all_values
 ),
