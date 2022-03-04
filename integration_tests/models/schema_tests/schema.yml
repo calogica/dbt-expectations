@@ -333,16 +333,16 @@ models:
 
   - name: window_function_test
     columns:
-      - name: rolling_sum_numeric_a
+      - name: rolling_sum_increasing
         tests :
           - dbt_expectations.expect_column_values_to_be_increasing:
-                group_by: ['idx']
-                strictly: false
-                sort_column: date_col
+              group_by: ['idx']
+              strictly: true
+              sort_column: date_col
 
-      - name: rolling_sum_numeric_b
+      - name: rolling_sum_decreasing
         tests :
-          - dbt_expectations.expect_column_values_to_be_desscreasing:
-                group_by: ['idx']
-                strictly: false
-                sort_column: date_col
+          - dbt_expectations.expect_column_values_to_be_decreasing:
+              group_by: ['idx']
+              strictly: true
+              sort_column: date_col

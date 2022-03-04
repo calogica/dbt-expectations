@@ -7,20 +7,21 @@
 {%- set sort_column = column_name if not sort_column else sort_column -%}
 {%- set operator = ">" if strictly else ">=" %}
 with all_values as (
+
     select
         {{ sort_column }} as sort_column,
-        {{ column_name }} as value_field
         {%- if group_by -%}
-            {%- for columns in group_by_list -%}
-        , {{ columns }}
-            {%- endfor -%}
+        {{ group_by | join(", ") }},
         {%- endif %}
+        {{ column_name }} as value_field
     from {{ model }}
     {% if row_condition %}
     where {{ row_condition }}
     {% endif %}
+
 ),
 add_lag_values as (
+
     select
         sort_column,
         value_field,
@@ -28,10 +29,11 @@ add_lag_values as (
             {%- if not group_by -%}
                 (order by sort_column)
             {%- else -%}
-                (partition by {{ group_by|join(", ") }} order by sort_column)
-            {%- endif  %}    as value_field_lag
+                (partition by {{ group_by | join(", ") }} order by sort_column)
+            {%- endif  %} as value_field_lag
     from
         all_values
+
 ),
 validation_errors as (
     select
@@ -42,6 +44,7 @@ validation_errors as (
         value_field_lag is not null
         and
         not (value_field {{ operator }} value_field_lag)
+
 )
 select *
 from validation_errors
