@@ -330,3 +330,19 @@ models:
             datepart: day
             interval: 1
             row_condition: group_id = 4
+
+  - name: window_function_test
+    columns:
+      - name: rolling_sum_increasing
+        tests :
+          - dbt_expectations.expect_column_values_to_be_increasing:
+              group_by: ['idx']
+              strictly: true
+              sort_column: date_col
+
+      - name: rolling_sum_decreasing
+        tests :
+          - dbt_expectations.expect_column_values_to_be_decreasing:
+              group_by: ['idx']
+              strictly: true
+              sort_column: date_col

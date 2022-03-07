@@ -479,14 +479,15 @@ tests:
   - dbt_expectations.expect_column_values_to_be_increasing:
       sort_column: date_day
       row_condition: "id is not null" # (Optional)
-      strictly: true # (Optional for comparison operator. Default is 'true', and it uses '>'. If set to 'flase' it uses '>='.)
+      strictly: true # (Optional for comparison operator. Default is 'true', and it uses '>'. If set to 'false' it uses '>='.)
+      group_by: [group_id, other_group_id, ...] # (Optional)
 ```
 
 ### [expect_column_values_to_be_decreasing](macros/schema_tests/column_values_basic/expect_column_values_to_be_decreasing.sql)
 
 Expect column values to be decreasing.
 
-If strictly=True, then this expectation is only satisfied if each consecutive value is strictly increasing–equal values are treated as failures.
+If `strictly=True`, then this expectation is only satisfied if each consecutive value is strictly increasing–equal values are treated as failures.
 
 *Applies to:* Column
 
@@ -494,8 +495,9 @@ If strictly=True, then this expectation is only satisfied if each consecutive va
 tests:
   - dbt_expectations.expect_column_values_to_be_decreasing:
       sort_column: col_numeric_a
-      strictly: true # (Optional for comparison operator. Default is 'true' and it uses '<'. If set to 'false', it uses '<='.)
       row_condition: "id is not null" # (Optional)
+      strictly: true # (Optional for comparison operator. Default is 'true' and it uses '<'. If set to 'false', it uses '<='.)
+      group_by: [group_id, other_group_id, ...] # (Optional)
 ```
 
 ### [expect_column_value_lengths_to_be_between](macros/schema_tests/string_matching/expect_column_value_lengths_to_be_between.sql)
