@@ -1,7 +1,7 @@
 # dbt-expectations v0.5.3
 
 ## New Features
-* Add `partition_by` parameter to `expect_column_values_to_be_increasing` and `expect_column_values_to_be_decreasing` ([#146](https://github.com/calogica/dbt-expectations/pull/146) @Lucasthenoob)
+* Add `group_by` parameter to `expect_column_values_to_be_increasing` and `expect_column_values_to_be_decreasing` ([#146](https://github.com/calogica/dbt-expectations/pull/146) @Lucasthenoob)
 
 
 # dbt-expectations v0.5.2
