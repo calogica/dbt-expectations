@@ -73,7 +73,7 @@ To run the tests:
 - [expect_table_column_count_to_be_between](#expect_table_column_count_to_be_between)
 - [expect_table_column_count_to_equal_other_table](#expect_table_column_count_to_equal_other_table)
 - [expect_table_column_count_to_equal](#expect_table_column_count_to_equal)
-- [expect_table_columns_not_to_contain_set](#expect_table_columns_not_to_contain_set)
+- [expect_table_columns_to_not_contain_set](#expect_table_columns_to_not_contain_set)
 - [expect_table_columns_to_contain_set](#expect_table_columns_to_contain_set)
 - [expect_table_columns_to_match_ordered_list](#expect_table_columns_to_match_ordered_list)
 - [expect_table_columns_to_match_set](#expect_table_columns_to_match_set)
@@ -226,7 +226,7 @@ models: # or seeds:
         compare_model: ref("other_model")
 ```
 
-### [expect_table_columns_not_to_contain_set](macros/schema_tests/table_shape/expect_table_columns_not_to_contain_set.sql)
+### [expect_table_columns_to_not_contain_set](macros/schema_tests/table_shape/expect_table_columns_to_not_contain_set.sql)
 
 Expect the columns in a model not to contain a given list.
 
@@ -236,7 +236,7 @@ Expect the columns in a model not to contain a given list.
 models: # or seeds:
   - name: my_model
     tests:
-    - dbt_expectations.expect_table_columns_not_to_contain_set:
+    - dbt_expectations.expect_table_columns_to_not_contain_set:
         column_list: ["col_a", "col_b"]
         transform: uppper # (Optional)
 ```
