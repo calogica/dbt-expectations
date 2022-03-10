@@ -1,4 +1,4 @@
-{%- test expect_table_columns_not_to_contain_set(model, column_list, transform="upper") -%}
+{%- test expect_table_columns_to_not_contain_set(model, column_list, transform="upper") -%}
 {%- if execute -%}
     {%- set column_list = column_list | map(transform) | list -%}
     {%- set relation_column_names = dbt_expectations._get_column_list(model, transform) -%}
@@ -17,13 +17,12 @@
         {% if not loop.last %}union all{% endif %}
         {% endfor %}
     )
+    -- catch any column in input list that is in the list of table columns
     select *
     from
         input_columns i
-        left join
+        inner join
         relation_columns r on r.relation_column = i.input_column
-    where
-        -- catch any column in input list that is not in the list of table columns
-        r.relation_column is not null
+
 {%- endif -%}
 {%- endtest -%}
