@@ -11,7 +11,7 @@ add_row_values as (
         cast(d.date_day as {{ dbt_utils.type_timestamp() }}) as date_timestamp,
         cast(abs({{ dbt_expectations.rand() }}) as {{ dbt_utils.type_float() }}) as row_value
     from
-        dates d
+        dates
 
 ),
 add_logs as (

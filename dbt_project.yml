@@ -5,6 +5,8 @@
 name: 'dbt_expectations'
 version: '0.5.0'
 
+profile: 'integration_tests'
+
 require-dbt-version: [">=1.0.0", "<2.0.0"]
 config-version: 2
 
