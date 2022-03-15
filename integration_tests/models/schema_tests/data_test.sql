@@ -5,7 +5,8 @@ select
     cast(1 as {{ dbt_utils.type_float() }}) as col_numeric_b,
     'a' as col_string_a,
     'b' as col_string_b,
-    cast(null as {{ dbt_utils.type_string() }}) as col_null
+    cast(null as {{ dbt_utils.type_string() }}) as col_null,
+    'a reserved keyword' as "offset"
 
 union all
 
@@ -16,7 +17,8 @@ select
     0 as col_numeric_b,
     'b' as col_string_a,
     'ab' as col_string_b,
-    null as col_null
+    null as col_null,
+    'a reserved keyword' as "offset"
 
 union all
 
@@ -27,7 +29,8 @@ select
     0.5 as col_numeric_b,
     'c' as col_string_a,
     'abc' as col_string_b,
-    null as col_null
+    null as col_null,
+    'a reserved keyword' as "offset"
 
 union all
 
@@ -38,4 +41,5 @@ select
     0.5 as col_numeric_b,
     'c' as col_string_a,
     'abcd' as col_string_b,
-    null as col_null
+    null as col_null,
+    'a reserved keyword' as "offset"

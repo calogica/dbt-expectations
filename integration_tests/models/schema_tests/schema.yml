@@ -161,9 +161,9 @@ models:
         - dbt_expectations.expect_table_columns_to_contain_set:
             column_list: ["col_numeric_b", "col_string_a"]
         - dbt_expectations.expect_table_columns_to_match_set:
-            column_list: ["idx", "date_col", "col_numeric_a", "col_numeric_b", "col_string_a", "col_string_b", "col_null"]
+            column_list: ["idx", "date_col", "col_numeric_a", "col_numeric_b", "col_string_a", "col_string_b", "col_null", "offset"]
         - dbt_expectations.expect_table_columns_to_match_ordered_list:
-            column_list: ["idx", "date_col", "col_numeric_a", "col_numeric_b", "col_string_a", "col_string_b", "col_null"]
+            column_list: ["idx", "date_col", "col_numeric_a", "col_numeric_b", "col_string_a", "col_string_b", "col_null", "offset"]
         - dbt_expectations.expect_table_column_count_to_equal_other_table:
             compare_model: ref("data_test")
         - dbt_expectations.expression_is_true:
@@ -296,6 +296,16 @@ models:
       - name: col_null
         tests:
           - dbt_expectations.expect_column_values_to_be_null
+
+      - name: offset
+        tests:
+          - dbt_expectations.expect_column_value_lengths_to_be_between:
+              min_value: 1
+              max_value: 20
+          - dbt_expectations.expect_column_value_lengths_to_be_between:
+              min_value: 1
+          - dbt_expectations.expect_column_value_lengths_to_be_between:
+              max_value: 20
 
   - name : data_test_factored
     tests :
