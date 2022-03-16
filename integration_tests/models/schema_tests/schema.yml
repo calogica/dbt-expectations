@@ -167,7 +167,7 @@ models:
         - dbt_expectations.expect_table_column_count_to_equal_other_table:
             compare_model: ref("data_test")
         - dbt_expectations.expect_table_columns_to_not_contain_set:
-            column_list: ["col_numeric_b", "col_string_a"]
+            column_list: ["col_numeric_c", "col_string_d"]
         - dbt_expectations.expression_is_true:
             expression: (col_numeric_a + col_numeric_b = 1)
         - dbt_expectations.equal_expression:
