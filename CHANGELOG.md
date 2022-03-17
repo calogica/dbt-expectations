@@ -1,3 +1,15 @@
+# dbt-expectations v0.5.4
+
+## New Features
+* Adds test for column presence by @rcaddell in https://github.com/calogica/dbt-expectations/pull/149
+
+## Fixes
+* Fix emails.sql by @clausherther in https://github.com/calogica/dbt-expectations/pull/153
+* Fix expect_row_values_to_have_recent_data issues on bigquery by @clausherther in https://github.com/calogica/dbt-expectations/pull/147
+
+## New Contributors
+* @rcaddell made their first contribution in https://github.com/calogica/dbt-expectations/pull/149
+
 # dbt-expectations v0.5.3
 
 ## New Features
