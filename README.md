@@ -59,9 +59,8 @@ This project contains integration tests for all test macros in a separate `integ
 
 To run the tests:
 
-1. You will need a profile called `integration_tests` in `~/.dbt/profiles.yml` pointing to a writable database.
-2. Then, from within the `integration_tests` folder, run `dbt seed` to load `data_test.csv` to the `test` schema of your database.
-3. Then run `dbt test` to run the tests specified in `integration_tests/models/schema_tests/schema.yml`
+1. You will need a profile called `integration_tests` in `~/.dbt/profiles.yml` pointing to a writable database. We only support postgres, BigQuery and Snowflake.
+2. Then, from within the `integration_tests` folder, run `dbt build` to run the test models in `integration_tests/models/schema_tests/` and run the tests specified in `integration_tests/models/schema_tests/schema.yml`
 
 ## Available Tests
 
