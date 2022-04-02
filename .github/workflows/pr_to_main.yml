@@ -1,0 +1,88 @@
+name: pr_to_main
+
+on:
+  pull_request:
+    branches:
+      - main
+env:
+  DBT_PROFILES_DIR: ./
+  DBT_PROJECT_DIR: ./integration_tests
+
+  DBT_GOOGLE_PROJECT: ${{ secrets.DBT_GOOGLE_PROJECT }}
+  DBT_GOOGLE_BIGQUERY_DATASET: ${{ secrets.DBT_GOOGLE_BIGQUERY_DATASET }}
+
+  DBT_GOOGLE_BIGQUERY_KEYFILE: /tmp/.service-account.json
+
+  DBT_SNOWFLAKE_ACCOUNT: ${{ secrets.DBT_SNOWFLAKE_ACCOUNT }}
+  DBT_SNOWFLAKE_USER: ${{ secrets.DBT_SNOWFLAKE_USER }}
+  DBT_SNOWFLAKE_PASSWORD: ${{ secrets.DBT_SNOWFLAKE_PASSWORD }}
+  DBT_SNOWFLAKE_ROLE: ${{ secrets.DBT_SNOWFLAKE_ROLE }}
+  DBT_SNOWFLAKE_DATABASE: ${{ secrets.DBT_SNOWFLAKE_DATABASE }}
+  DBT_SNOWFLAKE_WAREHOUSE: ${{ secrets.DBT_SNOWFLAKE_WAREHOUSE }}
+  DBT_SNOWFLAKE_SCHEMA: ${{ secrets.DBT_SNOWFLAKE_SCHEMA }}
+
+jobs:
+
+  pr_to_main:
+    name: pr_to_main
+    runs-on: ubuntu-latest
+    container: python:3.8
+    environment: dev
+
+    services:
+      # Label used to access the service container
+      postgres:
+        # Docker Hub image
+        image: postgres
+        # Provide the password for postgres
+        env:
+          POSTGRES_DB: postgres
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+
+        # Set health checks to wait until postgres has started
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install Python packages
+        run: |
+          python3 -m venv venv
+          . venv/bin/activate
+          pip install -U pip wheel
+          pip install dbt-core dbt-postgres dbt-bigquery dbt-snowflake
+
+      - name: Create GCP service account
+        run: 'echo "$KEYFILE" > $DBT_GOOGLE_BIGQUERY_KEYFILE'
+        shell: bash
+        env:
+          KEYFILE: ${{ secrets.DBT_GOOGLE_BIGQUERY_KEYFILE }}
+
+      - name: Install dbt dependencies
+        run: |
+          . venv/bin/activate
+          dbt deps --project-dir $DBT_PROJECT_DIR
+
+      - name: Integration Tests (Postgres)
+        if: ${{ env.ACT == false }}
+        run:  |
+          . venv/bin/activate
+          dbt build -t postgres --project-dir $DBT_PROJECT_DIR
+
+      - name: Integration Tests (BigQuery)
+        if: ${{ env.ACT == false }}
+        run: |
+          . venv/bin/activate
+          dbt build -t bq --project-dir $DBT_PROJECT_DIR
+
+      - name: Integration Tests (Snowflake)
+        run:  |
+          . venv/bin/activate
+          dbt build -t snowflake --project-dir $DBT_PROJECT_DIR
+

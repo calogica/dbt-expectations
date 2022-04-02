@@ -1,0 +1,38 @@
+config:
+  partial_parse: True
+  send_anonymous_usage_stats: False
+
+integration_tests:
+  outputs:
+    postgres:
+      type: postgres
+      host: postgres
+      user: postgres
+      pass: postgres
+      dbname: postgres
+      schema: test
+      port: 5432
+
+    bq:
+      type: bigquery
+      method: service-account
+      keyfile: "{{ env_var('DBT_GOOGLE_BIGQUERY_KEYFILE') }}"
+      project: "{{ env_var('DBT_GOOGLE_PROJECT') }}"
+      dataset: "{{ env_var('DBT_GOOGLE_BIGQUERY_DATASET') }}"
+      threads: 8
+      timeout_seconds: 300
+      priority: interactive
+
+    snowflake:
+      type: snowflake
+      account: "{{ env_var('DBT_SNOWFLAKE_ACCOUNT') }}"
+      user: "{{ env_var('DBT_SNOWFLAKE_USER') }}"
+      password: "{{ env_var('DBT_SNOWFLAKE_PASSWORD') }}"
+      role: "{{ env_var('DBT_SNOWFLAKE_ROLE') }}"
+      database: "{{ env_var('DBT_SNOWFLAKE_DATABASE') }}"
+      warehouse: "{{ env_var('DBT_SNOWFLAKE_WAREHOUSE') }}"
+      schema: "{{ env_var('DBT_SNOWFLAKE_SCHEMA') }}"
+      threads: 8
+      client_session_keep_alive: False
+
+  target: bq
