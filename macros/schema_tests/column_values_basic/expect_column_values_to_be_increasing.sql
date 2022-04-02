@@ -24,6 +24,9 @@ add_lag_values as (
 
     select
         sort_column,
+        {%- if group_by -%}
+        {{ group_by | join(", ") }},
+        {%- endif %}
         value_field,
         lag(value_field) over
             {%- if not group_by -%}
