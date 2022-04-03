@@ -21,8 +21,11 @@ jobs:
             pip install -U pip wheel
             pip install dbt-core dbt-postgres dbt-bigquery dbt-snowflake
 
-        . venv/bin/activate
-          dbt deps --project-dir $DBT_PROJECT_DIR
+      - run:
+          name: Install dbt dependencies
+          command: |
+            . venv/bin/activate
+              dbt deps --project-dir $DBT_PROJECT_DIR
 
       - run:
           name: "Run Tests - Postgres"
