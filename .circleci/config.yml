@@ -59,4 +59,4 @@ workflows:
   version: 2
   test-all:
     jobs:
-      - integration-postgres
+      - integration-tests
