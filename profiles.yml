@@ -1,38 +1,35 @@
 config:
-  partial_parse: True
   send_anonymous_usage_stats: False
+  use_colors: True
 
 integration_tests:
   outputs:
-    postgres:
-      type: postgres
-      host: localhost
-      user: root
-      pass: ''
-      dbname: postgres
-      schema: test
-      port: 5432
+    type: postgres
+      host: "{{ env_var('POSTGRES_TEST_HOST') }}"
+      user: "{{ env_var('POSTGRES_TEST_USER') }}"
+      pass: "{{ env_var('POSTGRES_TEST_PASSWORD') }}"
+      port: "{{ env_var('POSTGRES_TEST_PORT') | as_number }}"
+      dbname: "{{ env_var('POSTGRES_TEST_DATABASE') }}"
+      schema: dbt_utils_integration_tests_postgres
+      threads: 5
 
-    bq:
+    bigquery:
       type: bigquery
       method: service-account
-      keyfile: "{{ env_var('DBT_GOOGLE_BIGQUERY_KEYFILE') }}"
-      project: "{{ env_var('DBT_GOOGLE_PROJECT') }}"
-      dataset: "{{ env_var('DBT_GOOGLE_BIGQUERY_DATASET') }}"
-      threads: 8
-      timeout_seconds: 300
-      priority: interactive
+      keyfile: "{{ env_var('BIGQUERY_SERVICE_KEY_PATH') }}"
+      project: "{{ env_var('BIGQUERY_TEST_DATABASE') }}"
+      schema: "{{ env_var('BIGQUERY_TEST_SCHEMA') }}"
+      threads: 10
 
     snowflake:
       type: snowflake
-      account: "{{ env_var('DBT_SNOWFLAKE_ACCOUNT') }}"
-      user: "{{ env_var('DBT_SNOWFLAKE_USER') }}"
-      password: "{{ env_var('DBT_SNOWFLAKE_PASSWORD') }}"
-      role: "{{ env_var('DBT_SNOWFLAKE_ROLE') }}"
-      database: "{{ env_var('DBT_SNOWFLAKE_DATABASE') }}"
-      warehouse: "{{ env_var('DBT_SNOWFLAKE_WAREHOUSE') }}"
-      schema: "{{ env_var('DBT_SNOWFLAKE_SCHEMA') }}"
-      threads: 8
-      client_session_keep_alive: False
+      account: "{{ env_var('SNOWFLAKE_TEST_ACCOUNT') }}"
+      user: "{{ env_var('SNOWFLAKE_TEST_USER') }}"
+      password: "{{ env_var('SNOWFLAKE_TEST_PASSWORD') }}"
+      role: "{{ env_var('SNOWFLAKE_TEST_ROLE') }}"
+      database: "{{ env_var('SNOWFLAKE_TEST_DATABASE') }}"
+      warehouse: "{{ env_var('SNOWFLAKE_TEST_WAREHOUSE') }}"
+      schema: "{{ env_var('SNOWFLAKE_TEST_SCHEMA') }}"
+      threads: 10
 
-  target: bq
+  target: postgres

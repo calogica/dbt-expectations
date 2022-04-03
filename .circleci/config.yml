@@ -18,7 +18,7 @@ jobs:
           command: |
             python3 -m venv venv
             . venv/bin/activate
-            pip install -U pip wheel
+            pip install -U pip setuptools wheel
             pip install dbt-core dbt-postgres dbt-bigquery dbt-snowflake
 
       - run:
@@ -31,10 +31,11 @@ jobs:
           name: "Run Tests - Postgres"
           environment:
             POSTGRES_TEST_HOST: localhost
-            POSTGRES_TEST_USER: root
-            POSTGRES_TEST_PASS: ''
+            POSTGRES_TEST_USER: postgres
+            POSTGRES_TEST_PASSWORD: ''
             POSTGRES_TEST_PORT: 5432
-            POSTGRES_TEST_DBNAME: postgres
+            POSTGRES_TEST_DATABASE: circle_test
+
           command: |
             . venv/bin/activate
             dbt build -t postgres --project-dir $DBT_PROJECT_DIR
