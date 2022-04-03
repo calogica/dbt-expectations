@@ -4,7 +4,8 @@ config:
 
 integration_tests:
   outputs:
-    type: postgres
+    postgres:
+      type: postgres
       host: "{{ env_var('POSTGRES_TEST_HOST') }}"
       user: "{{ env_var('POSTGRES_TEST_USER') }}"
       pass: "{{ env_var('POSTGRES_TEST_PASSWORD') }}"
