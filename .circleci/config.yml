@@ -2,14 +2,17 @@ version: 2.1
 
 jobs:
 
-  integration-postgres:
+  integration-tests:
     docker:
       - image: cimg/python:3.9.9
       - image: cimg/postgres:14.0
 
+    resource_class: small
+
     environment:
       DBT_PROFILES_DIR: ./integration_tests/ci
       DBT_PROJECT_DIR: ./integration_tests
+      BIGQUERY_SERVICE_KEY_PATH: "${HOME}/bigquery-service-key.json"
 
     steps:
       - checkout
@@ -35,10 +38,19 @@ jobs:
             POSTGRES_TEST_PASSWORD: ''
             POSTGRES_TEST_PORT: 5432
             POSTGRES_TEST_DATABASE: circle_test
-
           command: |
             . venv/bin/activate
             dbt build -t postgres --project-dir $DBT_PROJECT_DIR
+
+      - run:
+          name: "Set up GCP credentials"
+          command: echo $BIGQUERY_SERVICE_KEY > $BIGQUERY_SERVICE_KEY_PATH
+
+      - run:
+          name: "Run Tests - BigQuery"
+          command: |
+            . venv/bin/activate
+            dbt build -t bigquery --project-dir $DBT_PROJECT_DIR
 
       - store_artifacts:
           path: ./logs
