@@ -7,6 +7,10 @@ jobs:
       - image: cimg/python:3.9.9
       - image: circleci/postgres:9.6.5-alpine-ram
 
+    environment:
+      DBT_PROFILES_DIR: ./
+      DBT_PROJECT_DIR: ./integration_tests
+
     steps:
       - checkout
       - run:
@@ -17,6 +21,9 @@ jobs:
             pip install -U pip wheel
             pip install dbt-core dbt-postgres dbt-bigquery dbt-snowflake
 
+        . venv/bin/activate
+          dbt deps --project-dir $DBT_PROJECT_DIR
+
       - run:
           name: "Run Tests - Postgres"
           environment:
@@ -25,7 +32,10 @@ jobs:
             POSTGRES_TEST_PASS: ''
             POSTGRES_TEST_PORT: 5432
             POSTGRES_TEST_DBNAME: postgres
-          command: dbt build -t postgres
+          command: |
+            . venv/bin/activate
+            dbt build -t postgres --project-dir $DBT_PROJECT_DIR
+
       - store_artifacts:
           path: ./logs
 
