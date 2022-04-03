@@ -44,7 +44,7 @@ jobs:
 
       - run:
           name: "Set up GCP credentials"
-          command: echo $BIGQUERY_SERVICE_KEY > $BIGQUERY_SERVICE_KEY_PATH
+          command: echo $BIGQUERY_SERVICE_KEY > ${HOME}/bigquery-service-key.json
 
       - run:
           name: "Run Tests - BigQuery"
