@@ -12,7 +12,7 @@ jobs:
     environment:
       DBT_PROFILES_DIR: ./integration_tests/ci
       DBT_PROJECT_DIR: ./integration_tests
-      BIGQUERY_SERVICE_KEY_PATH: "${HOME}/bigquery-service-key.json"
+      BIGQUERY_SERVICE_KEY_PATH: "/home/circleci/bigquery-service-key.json"
 
     steps:
       - checkout
@@ -30,27 +30,35 @@ jobs:
             . venv/bin/activate
               dbt deps --project-dir $DBT_PROJECT_DIR
 
-      - run:
-          name: "Run Tests - Postgres"
-          environment:
-            POSTGRES_TEST_HOST: localhost
-            POSTGRES_TEST_USER: postgres
-            POSTGRES_TEST_PASSWORD: ''
-            POSTGRES_TEST_PORT: 5432
-            POSTGRES_TEST_DATABASE: circle_test
-          command: |
-            . venv/bin/activate
-            dbt build -t postgres --project-dir $DBT_PROJECT_DIR
+      # - run:
+      #     name: "Run Tests - Postgres"
+      #     environment:
+      #       POSTGRES_TEST_HOST: localhost
+      #       POSTGRES_TEST_USER: postgres
+      #       POSTGRES_TEST_PASSWORD: ''
+      #       POSTGRES_TEST_PORT: 5432
+      #       POSTGRES_TEST_DATABASE: circle_test
+      #     command: |
+      #       . venv/bin/activate
+      #       dbt build -t postgres --project-dir $DBT_PROJECT_DIR
 
       - run:
           name: "Set up GCP credentials"
-          command: echo $BIGQUERY_SERVICE_KEY > ${HOME}/bigquery-service-key.json
+          command: |
+            echo "Writing to $BIGQUERY_SERVICE_KEY_PATH"
+            echo $BIGQUERY_SERVICE_KEY > $BIGQUERY_SERVICE_KEY_PATH
+            FILESIZE=$(stat -c%s "$BIGQUERY_SERVICE_KEY_PATH")
+            echo "Size of $BIGQUERY_SERVICE_KEY_PATH = $FILESIZE bytes."
+            echo "BIGQUERY_TEST_DATABASE = $BIGQUERY_TEST_DATABASE"
 
       - run:
           name: "Run Tests - BigQuery"
           command: |
             . venv/bin/activate
             dbt build -t bigquery --project-dir $DBT_PROJECT_DIR
+          environment:
+            BIGQUERY_TEST_DATABASE: dw-dev
+            BIGQUERY_TEST_SCHEMA: dw
 
       - store_artifacts:
           path: ./logs
