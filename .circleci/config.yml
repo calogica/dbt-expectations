@@ -1,26 +1,28 @@
-# Use the latest 2.1 version of CircleCI pipeline process engine.
-# See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
 
-# Define a job to be invoked later in a workflow.
-# See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
-  say-hello:
-    # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
-    # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
+
+  integration-postgres:
     docker:
-      - image: cimg/base:stable
-    # Add steps to the job
-    # See: https://circleci.com/docs/2.0/configuration-reference/#steps
+      - image: cimg/python:3.9.9
+      - image: circleci/postgres:9.6.5-alpine-ram
+
     steps:
       - checkout
       - run:
-          name: "Say hello"
-          command: "echo Hello, World!"
+          name: "Run Tests - Postgres"
+          environment:
+            POSTGRES_TEST_HOST: localhost
+            POSTGRES_TEST_USER: root
+            POSTGRES_TEST_PASS: ''
+            POSTGRES_TEST_PORT: 5432
+            POSTGRES_TEST_DBNAME: postgres
+          command: dbt build -t postgres
+      - store_artifacts:
+          path: ./logs
 
-# Invoke jobs via workflows
-# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
-  say-hello-workflow:
+  version: 2
+  test-all:
     jobs:
-      - say-hello
+      - integration-postgres

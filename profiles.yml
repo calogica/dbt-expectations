@@ -6,9 +6,9 @@ integration_tests:
   outputs:
     postgres:
       type: postgres
-      host: postgres
-      user: postgres
-      pass: postgres
+      host: localhost
+      user: root
+      pass:
       dbname: postgres
       schema: test
       port: 5432
