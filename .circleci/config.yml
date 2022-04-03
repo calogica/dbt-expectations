@@ -57,8 +57,8 @@ jobs:
             . venv/bin/activate
             dbt build -t bigquery --project-dir $DBT_PROJECT_DIR
           environment:
-            BIGQUERY_TEST_DATABASE: dw-dev
-            BIGQUERY_TEST_SCHEMA: dw
+            BIGQUERY_TEST_DATABASE: dev-dw
+            BIGQUERY_TEST_SCHEMA: dbt_expectations_integration_tests
 
       - store_artifacts:
           path: ./logs
