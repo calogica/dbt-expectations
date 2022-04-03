@@ -8,7 +8,7 @@ jobs:
       - image: cimg/postgres:14.0
 
     environment:
-      DBT_PROFILES_DIR: ./
+      DBT_PROFILES_DIR: ./integration_tests/ci
       DBT_PROJECT_DIR: ./integration_tests
 
     steps:
