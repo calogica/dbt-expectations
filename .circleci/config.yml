@@ -10,6 +10,14 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Install Python packages
+          command: |
+            python3 -m venv venv
+            . venv/bin/activate
+            pip install -U pip wheel
+            pip install dbt-core dbt-postgres dbt-bigquery dbt-snowflake
+
+      - run:
           name: "Run Tests - Postgres"
           environment:
             POSTGRES_TEST_HOST: localhost
