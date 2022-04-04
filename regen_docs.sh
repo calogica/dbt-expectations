@@ -6,5 +6,5 @@ mv -f target/*.html ../docs
 git add .
 git commit -am"updating docs site"
 git push --set-upstream origin docs-regen
-git checkout
+git checkout main
 git branch -D docs-regen
