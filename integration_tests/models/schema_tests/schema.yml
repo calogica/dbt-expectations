@@ -77,6 +77,7 @@ models:
               date_column_name: date_day
               sigma_threshold: 6
               take_logs: true
+              severity: warn
 
   - name: timeseries_data_extended
     tests:
@@ -118,6 +119,7 @@ models:
               date_column_name: cast(date_day as {{ dbt_expectations.type_datetime() }})
               sigma_threshold: 6
               take_logs: false
+              severity: warn
 
   - name: timeseries_hourly_data_extended
     tests:
@@ -146,6 +148,7 @@ models:
               test_periods: 12
               sigma_threshold: 6
               take_logs: false
+              severity: warn
 
 
   - name: data_test
