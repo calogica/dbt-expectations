@@ -5,7 +5,7 @@
                                                    group_by=None) %}
 
 {%- set sort_column = column_name if not sort_column else sort_column -%}
-{%- set operator = ">" if strictly else ">=" %}
+{%- set operator = ">" if strictly else ">=" -%}
 with all_values as (
 
     select
