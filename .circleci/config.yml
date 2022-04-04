@@ -70,4 +70,8 @@ workflows:
   version: 2
   test-all:
     jobs:
-      - integration-tests
+      - hold:
+          type: approval
+      - integration-tests:
+          requires:
+            - hold
