@@ -1,3 +1,14 @@
+# dbt-expectations v0.5.5
+
+## New Features
+* Add automated integration testing with CircleCI in https://github.com/calogica/dbt-expectations/pull/161
+* Show `group_by` columns in validation errors for column increasing test by @dluftspring in https://github.com/calogica/dbt-expectations/pull/158
+* Add `exclusion_condition` to `expect_row_values_to_have_data_for_every_n_datepart` by @gofford in https://github.com/calogica/dbt-expectations/pull/141
+
+## Fixes
+* Set flakey integration tests to `warn` in https://github.com/calogica/dbt-expectations/pull/162
+
+
 # dbt-expectations v0.5.4
 
 ## New Features
