@@ -6,7 +6,7 @@ integration_tests:
   outputs:
     postgres:
       type: postgres
-      host: "{{ env_var('POSTGRES_TEST_HOST') }}"
+      host: "{{ env_var('POSTGRES_HOST') }}"
       user: "{{ env_var('POSTGRES_TEST_USER') }}"
       pass: "{{ env_var('POSTGRES_TEST_PASSWORD') }}"
       port: "{{ env_var('POSTGRES_TEST_PORT') | as_number }}"
@@ -24,7 +24,7 @@ integration_tests:
 
     snowflake:
       type: snowflake
-      account: "{{ env_var('SNOWFLAKE_TEST_ACCOUNT') }}"
+      account: "{{ env_var('SNOWFLAKE_ACCOUNT') }}"
       user: "{{ env_var('SNOWFLAKE_TEST_USER') }}"
       password: "{{ env_var('SNOWFLAKE_TEST_PASSWORD') }}"
       role: "{{ env_var('SNOWFLAKE_TEST_ROLE') }}"

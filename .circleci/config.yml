@@ -33,7 +33,7 @@ jobs:
       # - run:
       #     name: "Run Tests - Postgres"
       #     environment:
-      #       POSTGRES_TEST_HOST: localhost
+      #       POSTGRES_HOST: localhost
       #       POSTGRES_TEST_USER: postgres
       #       POSTGRES_TEST_PASSWORD: ''
       #       POSTGRES_TEST_PORT: 5432
