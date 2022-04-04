@@ -5,7 +5,7 @@
                                                    group_by=None) %}
 
 {%- set sort_column = column_name if not sort_column else sort_column -%}
-{%- set operator = ">" if strictly else ">=" %}
+{%- set operator = ">" if strictly else ">=" -%}
 with all_values as (
 
     select
@@ -24,6 +24,9 @@ add_lag_values as (
 
     select
         sort_column,
+        {%- if group_by -%}
+        {{ group_by | join(", ") }},
+        {%- endif %}
         value_field,
         lag(value_field) over
             {%- if not group_by -%}
