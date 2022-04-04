@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/calogica/dbt-expectations/tree/main.svg?style=svg)](https://circleci.com/gh/calogica/dbt-expectations/tree/main)
+
 # dbt-expectations
 
 <img src="expectations.gif"/>
