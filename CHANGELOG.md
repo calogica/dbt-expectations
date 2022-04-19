@@ -1,3 +1,11 @@
+# dbt-expectations v0.5.6
+
+**Patch Release**
+
+## Fixes
+* Fix `expect_compound_columns_to_be_unique` to properly handle `ignore_row_if` by @clausherther in https://github.com/calogica/dbt-expectations/pull/171
+
+
 # dbt-expectations v0.5.5
 
 ## New Features
