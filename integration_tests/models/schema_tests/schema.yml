@@ -155,7 +155,15 @@ models:
     tests:
         - dbt_expectations.expect_compound_columns_to_be_unique:
             column_list: ["date_col", "col_string_b"]
+        - dbt_expectations.expect_compound_columns_to_be_unique:
+            column_list: ["date_col", "col_string_b"]
+            row_condition: 2=2
+        - dbt_expectations.expect_compound_columns_to_be_unique:
+            column_list: ["date_col", "col_string_b"]
             ignore_row_if: "any_value_is_missing"
+        - dbt_expectations.expect_compound_columns_to_be_unique:
+            column_list: ["date_col", "col_string_b"]
+            ignore_row_if: "all_values_are_missing"
         - dbt_expectations.expect_table_row_count_to_equal:
             value: 4
         - dbt_expectations.expect_table_row_count_to_be_between:

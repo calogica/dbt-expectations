@@ -1,10 +1,14 @@
 {% test expect_compound_columns_to_be_unique(model,
-                                                    column_list,
-                                                    quote_columns=False,
-                                                    ignore_row_if="all_values_are_missing",
-                                                    row_condition=None
-                                                    ) %}
-
+                                                column_list,
+                                                quote_columns=False,
+                                                ignore_row_if="all_values_are_missing",
+                                                row_condition=None
+                                                ) %}
+{% if not column_list %}
+    {{ exceptions.raise_compiler_error(
+        "`column_list` must be specified as a list of columns. Got: '" ~ column_list ~"'.'"
+    ) }}
+{% endif %}
 {% if not quote_columns %}
     {%- set columns=column_list %}
 {% elif quote_columns %}
@@ -18,26 +22,26 @@
     ) }}
 {% endif %}
 
-{% set row_condition_ext %}
+{%- set row_condition_ext -%}
 
-{% if row_condition  %}
+{%- if row_condition  %}
     {{ row_condition }} and
-{% endif %}
+{% endif -%}
 
-{% if ignore_row_if == "all_values_are_missing" %}
-    (
-        {% for column in columns -%}
-        {{ column }} is not null{% if not loop.last %} and {% endif %}
-        {%- endfor %}
-    )
-{% elif ignore_row_if == "any_value_is_missing" %}
-    (
-        {% for column in columns -%}
-        {{ column }} is not null{% if not loop.last %} or {% endif %}
-        {%- endfor %}
-    )
-{% endif %}
-{% endset %}
+{%- if ignore_row_if == "all_values_are_missing" %}
+        (
+            {% for column in columns -%}
+            {{ column }} is not null{% if not loop.last %} and {% endif %}
+            {% endfor %}
+        )
+{%- elif ignore_row_if == "any_value_is_missing" %}
+        (
+            {% for column in columns -%}
+            {{ column }} is not null{% if not loop.last %} or {% endif %}
+            {% endfor %}
+        )
+{%- endif -%}
+{%- endset -%}
 
 with validation_errors as (
 
@@ -46,9 +50,10 @@ with validation_errors as (
         {{ column }}{% if not loop.last %},{% endif %}
         {%- endfor %}
     from {{ model }}
-    where 1=1
-    {% if row_condition %}
-        and {{ row_condition }}
+    where
+        1=1
+    {%- if row_condition_ext %}
+        and {{ row_condition_ext }}
     {% endif %}
     group by
         {% for column in columns -%}
