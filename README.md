@@ -4,7 +4,13 @@
 
 <img src="expectations.gif"/>
 
-**dbt-expectations** is an extension package for [**dbt**](https://github.com/dbt-labs/dbt), inspired by the [Great Expectations package for Python](https://greatexpectations.io/). The intent is to allow dbt users to deploy GE-like tests in their data warehouse directly from dbt, vs having to add another integration with their data warehouse.
+`dbt-expectations` is an extension package for [**dbt**](https://github.com/dbt-labs/dbt), inspired by the [Great Expectations package for Python](https://greatexpectations.io/). The intent is to allow dbt users to deploy GE-like tests in their data warehouse directly from dbt, vs having to add another integration with their data warehouse.
+
+## Featured Sponsors ❤️
+
+Development of `dbt-expectations` (and `dbt-date`) is funded by our amazing [sponsors](https://github.com/sponsors/calogica), including our featured sponsors:
+
+<a href="https://www.lightdash.com/" target="_blank"><img src=".sponsors/lightdash.jpg"/></a>
 
 ## Install
 
@@ -25,7 +31,7 @@ For latest release, see [https://github.com/calogica/dbt-expectations/releases](
 
 ### Dependencies
 
-This package includes a reference to [**dbt-date**](https://github.com/calogica/dbt-date) which in turn references [**dbt-utils**](https://github.com/dbt-labs/dbt-utils) so there's no need to also import dbt-utils in your local project.
+This package includes a reference to [`dbt-date`](https://github.com/calogica/dbt-date) which in turn references [`dbt-utils`](https://github.com/dbt-labs/dbt-utils) so there's no need to also import dbt-utils in your local project.
 
 Note: we no longer include `spark_utils` in this package to avoid versioning conflicts. If you are running this package on non-core platforms (outside of Snowflake, BigQuery, Redshift, Postgres), you will need to use a package like `spark_utils` to shim macros.
 
@@ -54,15 +60,6 @@ vars:
 
 You may specify [any valid timezone string](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) in place of `America/Los_Angeles`.
 For example, use `America/New_York` for East Coast Time.
-
-### Integration Tests (Developers Only)
-
-This project contains integration tests for all test macros in a separate `integration_tests` dbt project contained in this repo.
-
-To run the tests:
-
-1. You will need a profile called `integration_tests` in `~/.dbt/profiles.yml` pointing to a writable database. We only support postgres, BigQuery and Snowflake.
-2. Then, from within the `integration_tests` folder, run `dbt build` to run the test models in `integration_tests/models/schema_tests/` and run the tests specified in `integration_tests/models/schema_tests/schema.yml`
 
 ## Available Tests
 
@@ -241,6 +238,7 @@ models: # or seeds:
         column_list: ["col_a", "col_b"]
         transform: uppper # (Optional)
 ```
+
 ### [expect_table_columns_to_contain_set](macros/schema_tests/table_shape/expect_table_columns_to_contain_set.sql)
 
 Expect the columns in a model to contain a given list.
@@ -1055,13 +1053,13 @@ tests:
 
 ### [expect_row_values_to_have_data_for_every_n_datepart](macros/schema_tests/distributional/expect_row_values_to_have_data_for_every_n_datepart.sql)
 
-Expects model to have values for every grouped `date_part`. 
+Expects model to have values for every grouped `date_part`.
 
 For example, this tests whether a model has data for every `day` (grouped on `date_col`) between either:
 
 - The `min`/`max` value of the specified `date_col` (default).
 - A specified `test_start_date` and/or `test_end_date`.
-    - if `test_start_date` or `test_end_date` are not specified, `min`/`max` of `date_col` are used, respectively
+  - if `test_start_date` or `test_end_date` are not specified, `min`/`max` of `date_col` are used, respectively
 
 Note: `test_end_date` is exclusive (e.g. a test with `test_end_date` value of `'2020-01-05'` will pass for a model's `max` `date_col` of `'2021-01-04'`).
 
@@ -1078,6 +1076,17 @@ tests:
         exclusion_condition: statement # (Optional. See details below. Default is 'None')
 ```
 
-The `interval` argument will optionally group `date_part` by a given integer to test data presence at a lower granularity, e.g. adding `interval: 7` to the example above will test whether a model has data for each 7-`day` period instead of for each `day`. 
+The `interval` argument will optionally group `date_part` by a given integer to test data presence at a lower granularity, e.g. adding `interval: 7` to the example above will test whether a model has data for each 7-`day` period instead of for each `day`.
 
 Known or expected missing dates can be excluded from the test by setting the `exclusion_criteria` with a valid SQL statement; e.g., adding `exclusion_condition: not(date_day = '2021-10-19')` will ensure that test passes if and only if `date_day = '2021-10-19'` is the only date with missing data. Alternatively, `exclusion_condition: not(date_part(month, date_day) = 12 and date_part(day, date_day) = 25)` will permit data to be missing on the 25th of December (Christmas day) every year.
+
+## ~ Developers Only ~
+
+### Integration Tests
+
+This project contains integration tests for all test macros in a separate `integration_tests` dbt project contained in this repo.
+
+To run the tests:
+
+1. You will need a profile called `integration_tests` in `~/.dbt/profiles.yml` pointing to a writable database. We only support postgres, BigQuery and Snowflake.
+2. Then, from within the `integration_tests` folder, run `dbt build` to run the test models in `integration_tests/models/schema_tests/` and run the tests specified in `integration_tests/models/schema_tests/schema.yml`
