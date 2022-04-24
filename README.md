@@ -1059,9 +1059,6 @@ For example, this tests whether a model has data for every `day` (grouped on `da
 
 - The `min`/`max` value of the specified `date_col` (default).
 - A specified `test_start_date` and/or `test_end_date`.
-  - if `test_start_date` or `test_end_date` are not specified, `min`/`max` of `date_col` are used, respectively
-
-Note: `test_end_date` is exclusive (e.g. a test with `test_end_date` value of `'2020-01-05'` will pass for a model's `max` `date_col` of `'2021-01-04'`).
 
 *Applies to:* Model, Seed, Source
 
@@ -1071,10 +1068,33 @@ tests:
         date_col: date_day
         date_part: day # (Optional. Default is 'day')
         row_condition: "id is not null" # (Optional)
-        test_start_date: x # (Optional. Replace 'x' with a date. Default is 'None')
-        test_end_date: y # (Optional. Replace 'y' with a date. Default is 'None')
+        test_start_date: 'yyyy-mm-dd' # (Optional. Replace 'yyyy-mm-dd' with a date. Default is 'None')
+        test_end_date: 'yyyy-mm-dd' # (Optional. Replace 'yyyy-mm-dd' with a date. Default is 'None')
         exclusion_condition: statement # (Optional. See details below. Default is 'None')
 ```
+
+**Notes**:
+
+- `test_end_date` is exclusive, e.g. a test with `test_end_date` value of `'2020-01-05'` will pass if your model has data through `'2021-01-04'`.
+
+- If `test_start_date` or `test_end_date` are not specified, the test automatically determines the `min`/`max` of the specified `date_col` from your data, respectively.
+On some platforms, and/or if your table is not partitione on that date column, this may lead to performance issues. In these cases, we recommend setting an explicit date literal. You may also set a "dynamic" date literal via the built-in `modules.datetime` functions:
+
+```yaml
+    date_part: day
+    test_start_date: '2021-05-01'
+    test_end_date: '{{ modules.datetime.date.today() }}'
+```
+
+or, for example:
+
+```yaml
+    date_part: day
+    test_start_date: '2021-05-01'
+    test_end_date: '{{ modules.datetime.date.today() - modules.datetime.timedelta(1)) }}'
+```
+
+Unfortunately, you currently **cannot** use a dynamic SQL date, such as `current_date` or macro from a dbt package such as dbt-date, as the underlying `dbt_utils.date_spine` expects a date literal.
 
 The `interval` argument will optionally group `date_part` by a given integer to test data presence at a lower granularity, e.g. adding `interval: 7` to the example above will test whether a model has data for each 7-`day` period instead of for each `day`.
 
