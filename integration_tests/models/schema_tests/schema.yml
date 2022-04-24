@@ -39,6 +39,13 @@ models:
             date_col: date_day
             date_part: day
             exclusion_condition: not(date_day = '2021-10-19')
+        - dbt_expectations.expect_row_values_to_have_data_for_every_n_datepart:
+            date_col: date_day
+            date_part: day
+            test_start_date: '2021-05-01'
+            # test_end_date: '{{ modules.datetime.date.today() }}'
+            test_end_date: '{{ modules.datetime.date.today() - modules.datetime.timedelta(2) }}'
+
 
     columns:
       - name: date_day
