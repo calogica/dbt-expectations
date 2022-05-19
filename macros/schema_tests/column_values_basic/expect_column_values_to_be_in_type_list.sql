@@ -2,7 +2,7 @@
 {%- if execute -%}
 
     {%- set column_name = column_name | upper -%}
-    {%- set columns_in_relation = dbt_expectations._get_column_list(model) -%}
+    {%- set columns_in_relation = adapter.get_columns_in_relation(model) -%}
     {%- set column_type_list = column_type_list| map("upper") | list -%}
     with relation_columns as (
 
