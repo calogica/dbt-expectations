@@ -8,7 +8,7 @@
 ) }}
 {%- endif -%}
 {%- if execute -%}
-{%- set number_actual_columns = (adapter.get_columns_in_relation(model) | length) -%}
+{%- set number_actual_columns = (dbt_expectations._get_column_list(model) | length) -%}
 
 {%- set expression %}
 ( 1=1

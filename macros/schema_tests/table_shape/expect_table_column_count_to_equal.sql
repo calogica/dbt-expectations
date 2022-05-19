@@ -1,6 +1,6 @@
 {%- test expect_table_column_count_to_equal(model, value) -%}
 {%- if execute -%}
-{%- set number_actual_columns = (adapter.get_columns_in_relation(model) | length) -%}
+{%- set number_actual_columns = (dbt_expectations._get_column_list(model) | length) -%}
 with test_data as (
 
     select

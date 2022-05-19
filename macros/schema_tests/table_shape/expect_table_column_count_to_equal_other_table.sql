@@ -1,7 +1,7 @@
 {%- test expect_table_column_count_to_equal_other_table(model, compare_model) -%}
 {%- if execute -%}
-{%- set number_columns = (adapter.get_columns_in_relation(model) | length) -%}
-{%- set compare_number_columns = (adapter.get_columns_in_relation(compare_model) | length) -%}
+{%- set number_columns = (dbt_expectations._get_column_list(model) | length) -%}
+{%- set compare_number_columns = (dbt_expectations._get_column_list(compare_model) | length) -%}
 with test_data as (
 
     select
