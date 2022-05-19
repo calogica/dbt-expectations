@@ -1,3 +1,9 @@
+{{
+    config(
+        materialized='ephemeral',
+    )
+}}
+
 with dates as (
 
     select * from {{ ref('timeseries_base') }}
