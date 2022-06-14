@@ -1,3 +1,11 @@
+# dbt-expectations v0.5.7
+
+## Documentation
+* Add example for dynamic date params in expect_row_values_to_have_data_for_every_n_datepart by @clausherther in https://github.com/calogica/dbt-expectations/pull/174
+
+## Fixes
+* Fix take_diff syntax in moving stddev test by @karanhegde in https://github.com/calogica/dbt-expectations/pull/178
+
 # dbt-expectations v0.5.6
 
 **Patch Release**
