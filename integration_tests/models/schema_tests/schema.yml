@@ -88,7 +88,7 @@ models:
           - dbt_expectations.expect_column_values_to_be_within_n_moving_stdevs:
               date_column_name: date_day
               sigma_threshold: 6
-              take_diff: false
+              take_diffs: false
               take_logs: true
               severity: warn
 
