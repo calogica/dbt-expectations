@@ -20,6 +20,7 @@ with max_recency as (
     from
         {{ model }}
     where
+        -- to exclude erroneous future dates
         cast({{ column_name }} as {{ dbt_utils.type_timestamp() }}) <= {{ dbt_date.now() }}
         {% if row_condition %}
         and {{ row_condition }}
@@ -30,7 +31,7 @@ select
 from
     max_recency
 where
-    -- if the row_condition excludes all row, we need to compare against a default date
+    -- if the row_condition excludes all rows, we need to compare against a default date
     -- to avoid false negatives
     coalesce(max_timestamp, cast('{{ default_start_date }}' as {{ dbt_utils.type_timestamp() }}))
         <
