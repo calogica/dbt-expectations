@@ -66,9 +66,9 @@ with metric_values as (
         group by
             1
 
-    ),
+    )
     {%- if take_diffs %}
-    grouped_metric_values_with_priors as (
+    , grouped_metric_values_with_priors as (
 
         select
             *,
@@ -91,6 +91,7 @@ with metric_values as (
     select
         *,
         {{ dbt_expectations._get_metric_expression("agg_metric_value", take_logs) }}
+        as metric_test_value
     from
         grouped_metric_values
 
