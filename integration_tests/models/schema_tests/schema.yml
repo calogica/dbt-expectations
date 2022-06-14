@@ -42,8 +42,7 @@ models:
         - dbt_expectations.expect_row_values_to_have_data_for_every_n_datepart:
             date_col: date_day
             date_part: day
-            test_start_date: '2021-05-01'
-            # test_end_date: '{{ modules.datetime.date.today() }}'
+            test_start_date: '{{ modules.datetime.date.today() - modules.datetime.timedelta(365) }}'
             test_end_date: '{{ modules.datetime.date.today() - modules.datetime.timedelta(2) }}'
 
 
@@ -83,6 +82,12 @@ models:
           - dbt_expectations.expect_column_values_to_be_within_n_moving_stdevs:
               date_column_name: date_day
               sigma_threshold: 6
+              take_logs: true
+              severity: warn
+          - dbt_expectations.expect_column_values_to_be_within_n_moving_stdevs:
+              date_column_name: date_day
+              sigma_threshold: 6
+              take_diffs: false
               take_logs: true
               severity: warn
 
