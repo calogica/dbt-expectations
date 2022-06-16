@@ -1,3 +1,8 @@
+# dbt-expectations v0.5.8
+
+## Fixes
+* Fixed timestamp comparisons in expect_grouped_row_values_to_have_recent_data by @clausherther in https://github.com/calogica/dbt-expectations/pull/179
+
 # dbt-expectations v0.5.7
 
 ## Documentation
