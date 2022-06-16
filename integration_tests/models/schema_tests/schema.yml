@@ -372,6 +372,11 @@ models:
             datepart: day
             interval: 1
             row_condition: group_id = 4
+        - dbt_expectations.expect_grouped_row_values_to_have_recent_data:
+            group_by: [group_id]
+            timestamp_column: date_timestamp
+            datepart: day
+            interval: 1
 
   - name: window_function_test
     columns:
