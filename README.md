@@ -342,7 +342,7 @@ Expect the number of rows in a model to match another model times a preconfigure
 models: # or seeds:
   - name: my_model
     tests:
-    - dbt_expectations.expect_table_column_count_to_equal_other_table_times_factor:
+    - dbt_expectations.expect_table_row_count_to_equal_other_table_times_factor:
         compare_model: ref("other_model")
         factor: 13
         row_condition: "id is not null" # (Optional)
