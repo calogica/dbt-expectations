@@ -11,6 +11,7 @@
 Development of `dbt-expectations` (and `dbt-date`) is funded by our amazing [sponsors](https://github.com/sponsors/calogica), including our featured sponsors:
 
 <a href="https://www.lightdash.com/" target="_blank"><img src=".sponsors/lightdash.jpg"/></a>
+<a href="https://www.getre.io/" target="_blank"><img width=40% src="https://uploads-ssl.webflow.com/60bdbc7b0c4f5aa1568dc8cc/60df3224a3b3637230f335d6_REDATA%20LOGO%2011.svg"/></a>
 
 ## Install
 
