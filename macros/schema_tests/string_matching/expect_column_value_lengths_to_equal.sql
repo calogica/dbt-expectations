@@ -3,7 +3,7 @@
                                                     row_condition=None
                                                     ) %}
 
-{% set expression = dbt_utils.length(column_name) ~ " = " ~ value %}
+{% set expression = length(column_name) ~ " = " ~ value %}
 
 {{ dbt_expectations.expression_is_true(model,
                                         expression=expression,

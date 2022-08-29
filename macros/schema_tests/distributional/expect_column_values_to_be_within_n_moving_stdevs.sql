@@ -59,7 +59,7 @@ with metric_values as (
     with grouped_metric_values as (
 
         select
-            {{ dbt_utils.date_trunc(period, date_column_name) }} as metric_period,
+            {{ date_trunc(period, date_column_name) }} as metric_period,
             sum({{ column_name }}) as agg_metric_value
         from
             {{ model }}
@@ -129,10 +129,10 @@ from
 where
 
     metric_period >= cast(
-            {{ dbt_utils.dateadd(period, -test_periods, dbt_utils.date_trunc(period, dbt_date.now())) }}
-            as {{ dbt_utils.type_timestamp() }})
+            {{ dateadd(period, -test_periods, date_trunc(period, dbt_date.now())) }}
+            as {{ type_timestamp() }})
     and
-    metric_period < {{ dbt_utils.date_trunc(period, dbt_date.now()) }}
+    metric_period < {{ date_trunc(period, dbt_date.now()) }}
     and
 
     not (

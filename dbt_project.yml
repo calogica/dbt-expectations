@@ -3,9 +3,9 @@
 # and underscores. A good package name should reflect your organization's
 # name or the intended use of these models
 name: 'dbt_expectations'
-version: '0.5.0'
+version: '0.6.0'
 
-require-dbt-version: [">=1.0.0", "<2.0.0"]
+require-dbt-version: [">=1.2.0", "<2.0.0"]
 config-version: 2
 
 target-path: "target"
