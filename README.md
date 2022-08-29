@@ -20,7 +20,7 @@ Development of `dbt-expectations` (and `dbt-date`) is funded by our amazing [spo
 
 ## Install
 
-`dbt-expectations` currently supports `dbt 1.0.x`.
+`dbt-expectations` currently supports `dbt 1.2.x`.
 
 Check [dbt Hub](https://hub.getdbt.com/calogica/dbt_expectations/latest/) for the latest installation instructions, or [read the docs](https://docs.getdbt.com/docs/package-management) for more information on installing packages.
 
@@ -29,7 +29,7 @@ Include in `packages.yml`
 ```yaml
 packages:
   - package: calogica/dbt_expectations
-    version: [">=0.5.0", "<0.6.0"]
+    version: [">=0.6.0", "<0.7.0"]
     # <see https://github.com/calogica/dbt-expectations/releases/latest> for the latest version tag
 ```
 
@@ -37,7 +37,7 @@ For latest release, see [https://github.com/calogica/dbt-expectations/releases](
 
 ### Dependencies
 
-This package includes a reference to [`dbt-date`](https://github.com/calogica/dbt-date) which in turn references [`dbt-utils`](https://github.com/dbt-labs/dbt-utils) so there's no need to also import dbt-utils in your local project.
+This package includes a reference to [`dbt-date`](https://github.com/calogica/dbt-date) which in turn references [`dbt-utils`](https://github.com/dbt-labs/dbt-utils) so there's no need to also import either `dbt-date` or `dbt-utils` in your local project.
 
 Note: we no longer include `spark_utils` in this package to avoid versioning conflicts. If you are running this package on non-core platforms (outside of Snowflake, BigQuery, Redshift, Postgres), you will need to use a package like `spark_utils` to shim macros.
 
