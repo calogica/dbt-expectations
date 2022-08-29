@@ -27,12 +27,12 @@ with latest_grouped_timestamps as (
         {{ g }},
         {%- endfor %}
         max(1) as join_key,
-        max(cast({{ timestamp_column }} as {{ dbt_utils.type_timestamp() }})) as latest_timestamp_column
+        max(cast({{ timestamp_column }} as {{ type_timestamp() }})) as latest_timestamp_column
     from
         {{ model }}
     where
         -- to exclude erroneous future dates
-        cast({{ timestamp_column }} as {{ dbt_utils.type_timestamp() }}) <= {{ dbt_date.now() }}
+        cast({{ timestamp_column }} as {{ type_timestamp() }}) <= {{ dbt_date.now() }}
         {% if row_condition %}
         and {{ row_condition }}
         {% endif %}
@@ -58,8 +58,8 @@ outdated_grouped_timestamps as (
         -- are the max timestamps per group older than the specified cutoff?
         latest_timestamp_column <
             cast(
-                {{ dbt_utils.dateadd(datepart, interval * -1, dbt_date.now()) }}
-                as {{ dbt_utils.type_timestamp() }}
+                {{ dateadd(datepart, interval * -1, dbt_date.now()) }}
+                as {{ type_timestamp() }}
             )
 
 ),
