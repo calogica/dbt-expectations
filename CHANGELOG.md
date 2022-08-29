@@ -1,3 +1,9 @@
+# dbt-expectations v0.6.0
+
+## Breaking Changes
+* Requires dbt 1.2.x (via https://github.com/calogica/dbt-expectations/pull/189)
+* Migrate to dbt-utils 0.9.0 and dbt-date 0.6.0 by @clausherther in https://github.com/calogica/dbt-expectations/pull/189
+
 # dbt-expectations v0.5.8
 
 ## Fixes
