@@ -10,12 +10,12 @@
 regexp_instr({{ source_value }}, '{{ regexp }}', {{ position }}, {{ occurrence }})
 {% endmacro %}
 
-{# Snowflake used $$...$$ to escape raw strings #}
+{# Snowflake uses $$...$$ to escape raw strings #}
 {% macro snowflake__regexp_instr(source_value, regexp, position, occurrence) %}
 regexp_instr({{ source_value }}, $${{ regexp }}$$, {{ position }}, {{ occurrence }})
 {% endmacro %}
 
-{# BigQuery used "r" to escape raw strings #}
+{# BigQuery uses "r" to escape raw strings #}
 {% macro bigquery__regexp_instr(source_value, regexp, position, occurrence) %}
 regexp_instr({{ source_value }}, r'{{ regexp }}', {{ position }}, {{ occurrence }})
 {% endmacro %}
