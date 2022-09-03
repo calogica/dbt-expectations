@@ -1,6 +1,6 @@
 version: 2
 models:
-  - name: emails
+  - name: data_text
     columns:
       - name: email_address
         tests:
@@ -20,6 +20,14 @@ models:
               like_pattern_list: ["%@%", "%&%"]
           - dbt_expectations.expect_column_values_to_not_match_like_pattern_list:
               like_pattern_list: ["%@%", "%&%"]
+      - name: postal_code_5
+        tests:
+          - dbt_expectations.expect_column_values_to_match_regex:
+              regex: "^\\d{5}"
+      - name: postal_code_5_3
+        tests:
+          - dbt_expectations.expect_column_values_to_match_regex:
+              regex: "^\\d{5}-\\d{3}"
 
 
   - name: timeseries_data
