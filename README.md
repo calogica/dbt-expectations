@@ -119,6 +119,7 @@ For example, use `America/New_York` for East Coast Time.
 ### Aggregate functions
 
 - [expect_column_distinct_count_to_be_greater_than](#expect_column_distinct_count_to_be_greater_than)
+- [expect_column_distinct_count_to_be_less_than](#expect_column_distinct_count_to_be_less_than)
 - [expect_column_distinct_count_to_equal_other_table](#expect_column_distinct_count_to_equal_other_table)
 - [expect_column_distinct_count_to_equal](#expect_column_distinct_count_to_equal)
 - [expect_column_distinct_values_to_be_in_set](#expect_column_distinct_values_to_be_in_set)
@@ -680,6 +681,21 @@ Expect the number of distinct column values to be greater than a given value.
 ```yaml
 tests:
   - dbt_expectations.expect_column_distinct_count_to_be_greater_than:
+      value: 10
+      quote_values: false # (Optional. Default is 'false'.)
+      group_by: [group_id, other_group_id, ...] # (Optional)
+      row_condition: "id is not null" # (Optional)
+```
+
+### [expect_column_distinct_count_to_be_less_than](macros/schema_tests/aggregate_functions/expect_column_less_count_to_be_less_than.sql)
+
+Expect the number of distinct column values to be less than a given value.
+
+*Applies to:* Column
+
+```yaml
+tests:
+  - dbt_expectations.expect_column_distinct_count_to_be_less_than:
       value: 10
       quote_values: false # (Optional. Default is 'false'.)
       group_by: [group_id, other_group_id, ...] # (Optional)
