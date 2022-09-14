@@ -384,6 +384,16 @@ models:
             datepart: day
             interval: 1
 
+    columns:
+      - name: row_value
+        tests:
+          - dbt_expectations.expect_column_values_to_be_within_n_moving_stdevs:
+              date_column_name: date_day
+              group_by: [group_id]
+              sigma_threshold: 6
+              take_logs: true
+              severity: warn
+
   - name: window_function_test
     columns:
       - name: rolling_sum_increasing

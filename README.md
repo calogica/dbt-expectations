@@ -1041,7 +1041,9 @@ tests:
 
 ### [expect_column_values_to_be_within_n_moving_stdevs](macros/schema_tests/distributional/expect_column_values_to_be_within_n_moving_stdevs.sql)
 
-Expects changes in metric values to be within Z sigma away from a moving average, taking the (optionally logged) differences of an aggregated metric value and comparing it to its value N days ago.
+A simple anomaly test based on the assumption that differences between periods in a given time series follow a log-normal distribution.
+Thus, we would expect the logged differences (vs N periods ago) in metric values to be within Z sigma away from a moving average.
+By applying a list of columns in the `group_by` parameter, you can also test for deviations within a group.
 
 *Applies to:* Column
 
@@ -1057,7 +1059,8 @@ tests:
       take_logs: true # (Optional. Default is 'true')
       sigma_threshold_upper: x # (Optional. Replace 'x' with a value. Default is 'None')
       sigma_threshold_lower: y # (Optional. Replace 'y' with a value. Default is 'None')
-      take_diffs: true # (Optional)
+      take_diffs: true # (Optional. Default is 'true')
+      group_by: [group_id] # (Optional. Default is 'None')
 ```
 
 ### [expect_column_values_to_be_within_n_stdevs](macros/schema_tests/distributional/expect_column_values_to_be_within_n_stdevs.sql)
@@ -1069,7 +1072,7 @@ Expects (optionally grouped & summed) metric values to be within Z sigma away fr
 ```yaml
 tests:
   - dbt_expectations.expect_column_values_to_be_within_n_stdevs:
-      group_by: date_day # (Optional. Default is 'None')
+      group_by: group_id # (Optional. Default is 'None')
       sigma_threshold: 3 # (Optional. Default is 3)
 ```
 
