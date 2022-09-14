@@ -24,10 +24,21 @@ models:
         tests:
           - dbt_expectations.expect_column_values_to_match_regex:
               regex: "^\\d{5}"
+              is_raw: True
+          - dbt_expectations.expect_column_values_to_not_match_regex:
+              regex: "@[^.]*"
+              is_raw: True
+          - dbt_expectations.expect_column_values_to_match_regex_list:
+              regex_list: ["^\\d{5}"]
+              is_raw: True
+          - dbt_expectations.expect_column_values_to_not_match_regex_list:
+              regex_list: ["@[^.]*"]
+              is_raw: True
       - name: postal_code_5_3
         tests:
           - dbt_expectations.expect_column_values_to_match_regex:
               regex: "^\\d{5}-\\d{3}"
+              is_raw: True
 
 
   - name: timeseries_data
