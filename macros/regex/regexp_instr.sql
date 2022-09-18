@@ -1,24 +1,33 @@
-{% macro regexp_instr(source_value, regexp, position=1, occurrence=1) %}
+{% macro regexp_instr(source_value, regexp, position=1, occurrence=1, is_raw=False) %}
 
     {{ adapter.dispatch('regexp_instr', 'dbt_expectations')(
-        source_value, regexp, position, occurrence
+        source_value, regexp, position, occurrence, is_raw
     ) }}
 
 {% endmacro %}
 
-{% macro default__regexp_instr(source_value, regexp, position, occurrence) %}
+{% macro default__regexp_instr(source_value, regexp, position, occurrence, is_raw) %}
 regexp_instr({{ source_value }}, '{{ regexp }}', {{ position }}, {{ occurrence }})
 {% endmacro %}
 
-{% macro redshift__regexp_instr(source_value, regexp, position, occurrence) %}
-regexp_instr({{ source_value }}, '{{ regexp }}', {{ position }}, {{ occurrence }})
+{# Snowflake uses $$...$$ to escape raw strings #}
+{% macro snowflake__regexp_instr(source_value, regexp, position, occurrence, is_raw) %}
+{%- set regexp = "$$" ~ regexp ~ "$$" if is_raw else "'" ~ regexp ~ "'" -%}
+regexp_instr({{ source_value }}, {{ regexp }}, {{ position }}, {{ occurrence }})
 {% endmacro %}
 
-{% macro postgres__regexp_instr(source_value, regexp, position, occurrence) %}
+{# BigQuery uses "r" to escape raw strings #}
+{% macro bigquery__regexp_instr(source_value, regexp, position, occurrence, is_raw) %}
+{%- set regexp = "r'" ~ regexp ~ "'" if is_raw else "'" ~ regexp ~ "'" -%}
+regexp_instr({{ source_value }}, {{ regexp }}, {{ position }}, {{ occurrence }})
+{% endmacro %}
+
+{# Postgres does not need to escape raw strings #}
+{% macro postgres__regexp_instr(source_value, regexp, position, occurrence, is_raw) %}
 array_length((select regexp_matches({{ source_value }}, '{{ regexp }}')), 1)
 {% endmacro %}
 
-
-{% macro spark__regexp_instr(source_value, regexp, position, occurrence) %}
-case when {{ source_value }} rlike '{{ regexp }}' then 1 else 0 end
+{# Unclear what Redshift does to escape raw strings #}
+{% macro redshift__regexp_instr(source_value, regexp, position, occurrence, is_raw) %}
+regexp_instr({{ source_value }}, '{{ regexp }}', {{ position }}, {{ occurrence }})
 {% endmacro %}

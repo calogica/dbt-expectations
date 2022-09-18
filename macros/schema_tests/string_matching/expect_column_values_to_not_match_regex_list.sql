@@ -1,12 +1,13 @@
 {% test expect_column_values_to_not_match_regex_list(model, column_name,
                                                     regex_list,
                                                     match_on="any",
-                                                    row_condition=None
+                                                    row_condition=None,
+                                                    is_raw=False
                                                     ) %}
 
 {% set expression %}
 {% for regex in regex_list %}
-{{ dbt_expectations.regexp_instr(column_name, regex) }} = 0
+{{ dbt_expectations.regexp_instr(column_name, regex, is_raw=is_raw) }} = 0
 {%- if not loop.last %}
 {{ " and " if match_on == "all" else " or "}}
 {% endif -%}
