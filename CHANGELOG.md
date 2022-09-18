@@ -1,3 +1,15 @@
+# dbt-expectations v0.6.1
+
+## New Features
+* Add expect_column_distinct_count_to_be_less_than.sql by @dylanrigal in https://github.com/calogica/dbt-expectations/pull/193
+* Add group_by option to expect_column_values_to_be_within_n_moving_stdevs by @clausherther in https://github.com/calogica/dbt-expectations/pull/182
+
+## Fixes
+* Add option to escape raw strings in RegEx functions by @clausherther in https://github.com/calogica/dbt-expectations/pull/191
+
+## New Contributors
+* @dylanrigal made their first contribution in https://github.com/calogica/dbt-expectations/pull/193
+
 # dbt-expectations v0.6.0
 
 ## Breaking Changes
