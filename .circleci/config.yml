@@ -33,6 +33,12 @@ jobs:
 
       - run:
           name: "Run SQLFluff"
+          environment:
+            POSTGRES_HOST: localhost
+            POSTGRES_TEST_USER: postgres
+            POSTGRES_TEST_PASSWORD: ''
+            POSTGRES_TEST_PORT: 5432
+            POSTGRES_TEST_DATABASE: circle_test
           command: |
             . venv/bin/activate
             pwd
