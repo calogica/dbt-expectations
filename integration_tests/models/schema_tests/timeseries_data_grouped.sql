@@ -16,10 +16,8 @@ add_row_values as (
         cast(floor(100 * r.generated_number) as {{ type_int() }}) as row_value
     from
         dates d
-        cross join
-        groupings g
-        cross join
-        row_values r
+        cross join groupings g
+        cross join row_values r
 
 ),
 add_logs as (
@@ -30,7 +28,6 @@ add_logs as (
     from
         add_row_values
 )
-select
-    *
+select *
 from
     add_logs

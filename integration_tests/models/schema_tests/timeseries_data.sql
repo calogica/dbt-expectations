@@ -6,12 +6,12 @@ with dates as (
 add_row_values as (
 
     select
-        d.date_day,
-        cast(d.date_day as {{ dbt_expectations.type_datetime() }}) as date_datetime,
-        cast(d.date_day as {{ type_timestamp() }}) as date_timestamp,
+        date_day,
+        cast(date_day as {{ dbt_expectations.type_datetime() }}) as date_datetime,
+        cast(date_day as {{ type_timestamp() }}) as date_timestamp,
         cast(abs({{ dbt_expectations.rand() }}) as {{ type_float() }}) as row_value
     from
-        dates d
+        dates
 
 ),
 add_logs as (
@@ -22,7 +22,6 @@ add_logs as (
     from
         add_row_values
 )
-select
-    *
+select *
 from
     add_logs
