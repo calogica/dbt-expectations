@@ -35,6 +35,7 @@ jobs:
           name: "Run SQLFluff"
           command: |
             . venv/bin/activate
+            cd integration_tests
             sqlfluff lint
 
       - run:
