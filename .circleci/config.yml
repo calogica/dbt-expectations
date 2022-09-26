@@ -41,10 +41,7 @@ jobs:
             POSTGRES_TEST_DATABASE: circle_test
           command: |
             . venv/bin/activate
-            pwd
             cd $DBT_PROJECT_DIR
-            echo "where are we now?"
-            pwd
             sqlfluff lint models
 
       - run:
