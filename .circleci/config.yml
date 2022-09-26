@@ -36,7 +36,7 @@ jobs:
           command: |
             . venv/bin/activate
             cd integration_tests
-            sqlfluff lint
+            sqlfluff lint models
 
       - run:
           name: "Run Tests - Postgres"

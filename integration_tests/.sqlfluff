@@ -1,7 +1,7 @@
 [sqlfluff]
 verbose = 1
 nocolor = False
-dialect = bigquery
+dialect = postgres
 templater = dbt
 rules = None
 exclude_rules = L003,L011,L022,L031
@@ -9,6 +9,7 @@ recurse = 0
 output_line_length = 100
 
 [sqlfluff:templater:dbt]
+profile = postgres
 
 [sqlfluff:indentation]
 indented_joins = True
