@@ -35,6 +35,10 @@ jobs:
           name: "Run SQLFluff"
           command: |
             . venv/bin/activate
+            pwd
+            cd $DBT_PROJECT_DIR
+            echo "where are we now?"
+            pwd
             sqlfluff lint models
 
       - run:
