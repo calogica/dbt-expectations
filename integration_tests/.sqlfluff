@@ -9,7 +9,8 @@ recurse = 0
 output_line_length = 100
 
 [sqlfluff:templater:dbt]
-target = postgres
+profiles_dir = ci
+profile = postgres
 
 [sqlfluff:indentation]
 indented_joins = True
