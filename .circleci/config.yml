@@ -23,13 +23,19 @@ jobs:
             . venv/bin/activate
             pip install -U pip setuptools wheel
             pip install dbt-core dbt-postgres dbt-bigquery dbt-snowflake
-            pip install sqlfluff
+            pip install sqlfluff sqlfluff-templater-dbt
 
       - run:
           name: Install dbt dependencies
           command: |
             . venv/bin/activate
               dbt deps --project-dir $DBT_PROJECT_DIR
+
+      - run:
+          name: "Run SQLFluff"
+          command: |
+            . venv/bin/activate
+            sqlfluff lint
 
       - run:
           name: "Run Tests - Postgres"
@@ -51,12 +57,6 @@ jobs:
             FILESIZE=$(stat -c%s "$BIGQUERY_SERVICE_KEY_PATH")
             echo "Size of $BIGQUERY_SERVICE_KEY_PATH = $FILESIZE bytes."
             echo "BIGQUERY_TEST_DATABASE = $BIGQUERY_TEST_DATABASE"
-
-      - run:
-          name: "Run SQLFluff"
-          command: |
-            . venv/bin/activate
-            sqlfluff lint
 
       - run:
           name: "Run Tests - BigQuery"
