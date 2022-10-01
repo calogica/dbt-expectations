@@ -28,19 +28,12 @@
     {{ row_condition }} and
 {% endif -%}
 
-{%- if ignore_row_if == "all_values_are_missing" %}
-        (
-            {% for column in columns -%}
-            {{ column }} is not null{% if not loop.last %} and {% endif %}
-            {% endfor %}
-        )
-{%- elif ignore_row_if == "any_value_is_missing" %}
-        (
-            {% for column in columns -%}
-            {{ column }} is not null{% if not loop.last %} or {% endif %}
-            {% endfor %}
-        )
-{%- endif -%}
+{%- set op = "and" if ignore_row_if == "all_values_are_missing" else "or" -%}
+    not (
+        {% for column in columns -%}
+        {{ column }} is null{% if not loop.last %} {{ op }} {% endif %}
+        {% endfor %}
+    )
 {%- endset -%}
 
 with validation_errors as (
