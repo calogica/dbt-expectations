@@ -1120,7 +1120,7 @@ or, for example:
 ```yaml
     date_part: day
     test_start_date: '2021-05-01'
-    test_end_date: '{{ modules.datetime.date.today() - modules.datetime.timedelta(1)) }}'
+    test_end_date: '{{ modules.datetime.date.today() - modules.datetime.timedelta(1) }}'
 ```
 
 Unfortunately, you currently **cannot** use a dynamic SQL date, such as `current_date` or macro from a dbt package such as dbt-date, as the underlying `dbt_utils.date_spine` expects a date literal.
