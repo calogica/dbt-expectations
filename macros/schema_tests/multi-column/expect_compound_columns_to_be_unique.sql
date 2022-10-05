@@ -9,6 +9,13 @@
         "`column_list` must be specified as a list of columns. Got: '" ~ column_list ~"'.'"
     ) }}
 {% endif %}
+{%- set ignore_row_if_values = ["all_values_are_missing", "any_value_is_missing"] -%}
+{% if ignore_row_if not in ignore_row_if_values %}
+    {{ exceptions.raise_compiler_error(
+        "`ignore_row_if` must be one of " ~ (ignore_row_if_values | join(", ")) ~ ". Got: '" ~ ignore_row_if ~"'.'"
+    ) }}
+{% endif %}
+
 {% if not quote_columns %}
     {%- set columns=column_list %}
 {% elif quote_columns %}
