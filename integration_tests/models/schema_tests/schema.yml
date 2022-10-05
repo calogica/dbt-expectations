@@ -207,9 +207,9 @@ models:
             ignore_row_if: "all_values_are_missing"
             config:
                 # this should fail, so we flip the fail condition
-                fail_calc: '(count(*)=0)::int'
+                fail_calc: 'cast((count(*)=0) as int)'
         - dbt_expectations.expect_compound_columns_to_be_unique:
-            column_list: ["col_null", "col_null"]
+            column_list: ["col_null", "col_null_2"]
             ignore_row_if: "all_values_are_missing"
         - dbt_expectations.expect_table_row_count_to_equal:
             value: 4
@@ -225,7 +225,7 @@ models:
             row_condition: 1=1
             compare_row_condition: 1=1
         - dbt_expectations.expect_table_column_count_to_equal:
-            value: 7
+            value: 8
         - dbt_expectations.expect_table_column_count_to_be_between:
             min_value: 1
             max_value: 10
@@ -236,9 +236,9 @@ models:
         - dbt_expectations.expect_table_columns_to_contain_set:
             column_list: ["col_numeric_b", "col_string_a"]
         - dbt_expectations.expect_table_columns_to_match_set:
-            column_list: ["idx", "date_col", "col_numeric_a", "col_numeric_b", "col_string_a", "col_string_b", "col_null"]
+            column_list: ["idx", "date_col", "col_numeric_a", "col_numeric_b", "col_string_a", "col_string_b", "col_null", "col_null_2"]
         - dbt_expectations.expect_table_columns_to_match_ordered_list:
-            column_list: ["idx", "date_col", "col_numeric_a", "col_numeric_b", "col_string_a", "col_string_b", "col_null"]
+            column_list: ["idx", "date_col", "col_numeric_a", "col_numeric_b", "col_string_a", "col_string_b", "col_null", "col_null_2"]
         - dbt_expectations.expect_table_column_count_to_equal_other_table:
             compare_model: ref("data_test")
         - dbt_expectations.expect_table_columns_to_not_contain_set:
