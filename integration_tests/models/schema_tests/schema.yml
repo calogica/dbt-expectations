@@ -203,6 +203,12 @@ models:
             column_list: ["date_col", "col_null"]
             ignore_row_if: "any_value_is_missing"
         - dbt_expectations.expect_compound_columns_to_be_unique:
+            column_list: ["date_col", "col_null"]
+            ignore_row_if: "all_values_are_missing"
+            config:
+                # this should fail, so we flip the fail condition
+                fail_calc: '(count(*)=0)::int'
+        - dbt_expectations.expect_compound_columns_to_be_unique:
             column_list: ["col_null", "col_null"]
             ignore_row_if: "all_values_are_missing"
         - dbt_expectations.expect_table_row_count_to_equal:
