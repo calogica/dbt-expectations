@@ -9,6 +9,13 @@
         "`column_list` must be specified as a list of columns. Got: '" ~ column_list ~"'.'"
     ) }}
 {% endif %}
+{%- set ignore_row_if_values = ["all_values_are_missing", "any_value_is_missing"] -%}
+{% if ignore_row_if not in ignore_row_if_values %}
+    {{ exceptions.raise_compiler_error(
+        "`ignore_row_if` must be one of " ~ (ignore_row_if_values | join(", ")) ~ ". Got: '" ~ ignore_row_if ~"'.'"
+    ) }}
+{% endif %}
+
 {% if not quote_columns %}
     {%- set columns=column_list %}
 {% elif quote_columns %}
@@ -28,19 +35,12 @@
     {{ row_condition }} and
 {% endif -%}
 
-{%- if ignore_row_if == "all_values_are_missing" %}
-        (
-            {% for column in columns -%}
-            {{ column }} is not null{% if not loop.last %} and {% endif %}
-            {% endfor %}
-        )
-{%- elif ignore_row_if == "any_value_is_missing" %}
-        (
-            {% for column in columns -%}
-            {{ column }} is not null{% if not loop.last %} or {% endif %}
-            {% endfor %}
-        )
-{%- endif -%}
+{%- set op = "and" if ignore_row_if == "all_values_are_missing" else "or" -%}
+    not (
+        {% for column in columns -%}
+        {{ column }} is null{% if not loop.last %} {{ op }} {% endif %}
+        {% endfor %}
+    )
 {%- endset -%}
 
 with validation_errors as (
