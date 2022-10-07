@@ -9,12 +9,6 @@
         "`column_list` must be specified as a list of columns. Got: '" ~ column_list ~"'.'"
     ) }}
 {% endif %}
-{%- set ignore_row_if_values = ["all_values_are_missing", "any_value_is_missing"] -%}
-{% if ignore_row_if not in ignore_row_if_values %}
-    {{ exceptions.raise_compiler_error(
-        "`ignore_row_if` must be one of " ~ (ignore_row_if_values | join(", ")) ~ ". Got: '" ~ ignore_row_if ~"'.'"
-    ) }}
-{% endif %}
 
 {% if not quote_columns %}
     {%- set columns=column_list %}
@@ -31,16 +25,12 @@
 
 {%- set row_condition_ext -%}
 
-{%- if row_condition  %}
+    {%- if row_condition  %}
     {{ row_condition }} and
-{% endif -%}
+    {% endif -%}
 
-{%- set op = "and" if ignore_row_if == "all_values_are_missing" else "or" -%}
-    not (
-        {% for column in columns -%}
-        {{ column }} is null{% if not loop.last %} {{ op }} {% endif %}
-        {% endfor %}
-    )
+    {{ dbt_expectations.ignore_row_if_expression(ignore_row_if, columns) }}
+
 {%- endset -%}
 
 with validation_errors as (
