@@ -27,6 +27,16 @@
     ) }}
 {% endif %}
 
+{%- set row_condition_ext -%}
+
+    {%- if row_condition  %}
+    {{ row_condition }} and
+    {% endif -%}
+
+    {{ dbt_expectations.ignore_row_if_expression(ignore_row_if, columns) }}
+
+{%- endset -%}
+
 with column_values as (
 
     select
@@ -35,24 +45,10 @@ with column_values as (
         {{ column }}{% if not loop.last %},{% endif %}
         {%- endfor %}
     from {{ model }}
-    where 1=1
-    {% if row_condition %}
-        and {{ row_condition }}
-    {% endif %}
-    {% if ignore_row_if == "all_values_are_missing" %}
-        and
-        (
-            {% for column in columns -%}
-            {{ column }} is not null{% if not loop.last %} and {% endif %}
-            {%- endfor %}
-        )
-    {% elif ignore_row_if == "any_value_is_missing" %}
-        and
-        (
-            {% for column in columns -%}
-            {{ column }} is not null{% if not loop.last %} or {% endif %}
-            {%- endfor %}
-        )
+    where
+        1=1
+    {%- if row_condition_ext %}
+        and {{ row_condition_ext }}
     {% endif %}
 
 ),
