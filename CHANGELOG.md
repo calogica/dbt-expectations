@@ -2,6 +2,7 @@
 
 ## Breaking Changes
 * Fix boolean logic in `expect_compound_columns_to_be_unique` `ignore_row_if`  by @clausherther in https://github.com/calogica/dbt-expectations/pull/202
+  * Fixed issue https://github.com/calogica/dbt-expectations/issues/200 raised by @mcannamela
 * Refactor ignore_row_if logic by @clausherther in https://github.com/calogica/dbt-expectations/pull/204
 
 ## Under The Hood
