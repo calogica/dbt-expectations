@@ -10,7 +10,8 @@ add_row_values as (
 
     select
         cast(dates.date_hour as {{ dbt_expectations.type_datetime() }}) as date_hour,
-        cast(abs({{ dbt_expectations.rand() }}) as {{ type_float() }}) as row_value
+        cast(100 * abs({{ dbt_expectations.rand() }}) as {{ type_float() }}) as row_value
+
     from
         dates
         cross join row_values

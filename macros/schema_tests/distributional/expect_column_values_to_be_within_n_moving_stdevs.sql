@@ -126,7 +126,8 @@ metric_sigma as (
     select
         *,
         (metric_test_value - metric_test_rolling_average) as metric_test_delta,
-        (metric_test_value - metric_test_rolling_average)/nullif(metric_test_rolling_stddev, 0) as metric_test_sigma
+        (metric_test_value - metric_test_rolling_average)/
+            nullif(metric_test_rolling_stddev, 0) as metric_test_sigma
     from
         metric_moving_calcs
 

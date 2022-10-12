@@ -9,7 +9,8 @@ add_row_values as (
         date_day,
         cast(date_day as {{ dbt_expectations.type_datetime() }}) as date_datetime,
         cast(date_day as {{ type_timestamp() }}) as date_timestamp,
-        cast(abs({{ dbt_expectations.rand() }}) as {{ type_float() }}) as row_value
+        cast(100 * abs({{ dbt_expectations.rand() }}) as {{ type_float() }}) as row_value
+
     from
         dates
 

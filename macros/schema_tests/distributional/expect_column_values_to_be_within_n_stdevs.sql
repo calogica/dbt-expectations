@@ -3,7 +3,11 @@
                                   group_by=None,
                                   sigma_threshold=3
                                 ) -%}
-    {{ adapter.dispatch('test_expect_column_values_to_be_within_n_stdevs', 'dbt_expectations') (model, column_name, group_by, sigma_threshold) }}
+    {{
+        adapter.dispatch('test_expect_column_values_to_be_within_n_stdevs', 'dbt_expectations') (
+            model, column_name, group_by, sigma_threshold
+        )
+    }}
 {%- endtest %}
 
 {% macro default__test_expect_column_values_to_be_within_n_stdevs(model,
@@ -11,21 +15,16 @@
                                   group_by,
                                   sigma_threshold
                                 ) %}
+
 with metric_values as (
 
-    {% if group_by -%}
     select
-        {{ group_by }} as metric_date,
+        {{ group_by | join(",") ~ "," if group_by }}
         sum({{ column_name }}) as {{ column_name }}
     from
         {{ model }}
-    group by
-        1
-    {%- else -%}
-    select
-        {{ column_name }} as {{ column_name }}
-    from
-        {{ model }}
+    {% if group_by -%}
+    {{  dbt_utils.group_by(group_by | length) }}
     {%- endif %}
 
 ),
@@ -43,7 +42,8 @@ metric_values_z_scores as (
 
     select
         *,
-        ({{ column_name }} - {{ column_name }}_average)/{{ column_name }}_stddev as {{ column_name }}_sigma
+        ({{ column_name }} - {{ column_name }}_average)/
+            nullif({{ column_name }}_stddev, 0) as {{ column_name }}_sigma
     from
         metric_values_with_statistics
 
