@@ -43,7 +43,7 @@ metric_values_z_scores as (
     select
         *,
         ({{ column_name }} - {{ column_name }}_average)/
-            {{ column_name }}_stddev as {{ column_name }}_sigma
+            nullif({{ column_name }}_stddev, 0) as {{ column_name }}_sigma
     from
         metric_values_with_statistics
 
