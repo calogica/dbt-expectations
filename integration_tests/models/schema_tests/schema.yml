@@ -98,6 +98,9 @@ models:
         tests:
           - dbt_expectations.expect_column_values_to_be_within_n_stdevs:
               sigma_threshold: 6
+          - dbt_expectations.expect_column_values_to_be_within_n_stdevs:
+              group_by: ["date_day"]
+              sigma_threshold: 6
           - dbt_expectations.expect_column_values_to_be_within_n_moving_stdevs:
               date_column_name: date_day
               sigma_threshold: 6
@@ -399,18 +402,12 @@ models:
             datepart: day
             interval: 1
         - dbt_expectations.expect_grouped_row_values_to_have_recent_data:
-            group_by: [group_id, row_value]
-            timestamp_column: date_day
-            datepart: day
-            interval: 1
-        - dbt_expectations.expect_grouped_row_values_to_have_recent_data:
             group_by: [group_id]
             timestamp_column: date_day
             datepart: day
             interval: 1
             row_condition: group_id = 4
         - dbt_expectations.expect_grouped_row_values_to_have_recent_data:
-            group_by: [group_id]
             timestamp_column: date_timestamp
             datepart: day
             interval: 1
@@ -424,6 +421,10 @@ models:
               sigma_threshold: 6
               take_logs: true
               severity: warn
+          - dbt_expectations.expect_column_values_to_be_within_n_stdevs:
+              group_by: [group_id]
+              sigma_threshold: 6
+
 
   - name: window_function_test
     columns:
