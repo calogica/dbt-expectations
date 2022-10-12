@@ -1,3 +1,12 @@
+# dbt-expectations v0.7.0
+
+## Breaking Changes
+* Fix boolean logic in `expect_compound_columns_to_be_unique` `ignore_row_if`  by @clausherther in https://github.com/calogica/dbt-expectations/pull/202
+* Refactor ignore_row_if logic by @clausherther in https://github.com/calogica/dbt-expectations/pull/204
+
+## Under The Hood
+* Add SQL Fluff support by @clausherther in https://github.com/calogica/dbt-expectations/pull/198
+
 # dbt-expectations v0.6.1
 
 ## New Features
