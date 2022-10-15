@@ -64,7 +64,7 @@ with metric_values as (
     with grouped_metric_values as (
 
         select
-            {{ dbt_utils.date_trunc(period, date_column_name) }} as metric_period,
+            {{ date_trunc(period, date_column_name) }} as metric_period,
             {{ group_by | join(",") ~ "," if group_by }}
             sum({{ column_name }}) as agg_metric_value
         from
