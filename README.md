@@ -1013,6 +1013,11 @@ tests:
       row_condition: "id is not null" # (Optional)
 ```
 
+Note:
+* `all_values_are_missing` (default) means that rows are excluded where _all_ of the test columns are `null`
+* `any_value_is_missing` means that rows are excluded where _either_ of the test columns are `null`
+  
+  
 ### [expect_multicolumn_sum_to_equal](macros/schema_tests/multi-column/expect_multicolumn_sum_to_equal.sql)
 
 Expects that sum of all rows for a set of columns is equal to a specific value
@@ -1042,6 +1047,11 @@ tests:
       quote_columns: false # (Optional)
       row_condition: "id is not null" # (Optional)
 ```
+
+Note:
+* `all_values_are_missing` (default) means that rows are excluded where _all_ of the test columns are `null`
+* `any_value_is_missing` means that rows are excluded where _either_ of the test columns are `null`
+
 
 ### [expect_column_values_to_be_within_n_moving_stdevs](macros/schema_tests/distributional/expect_column_values_to_be_within_n_moving_stdevs.sql)
 
