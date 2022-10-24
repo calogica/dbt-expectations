@@ -8,11 +8,15 @@
 
 ## Featured Sponsors ❤️
 
-Development of `dbt-expectations` (and `dbt-date`) is funded by our amazing [sponsors](https://github.com/sponsors/calogica), including our featured sponsors:
+Development of `dbt-expectations` (and `dbt-date`) is funded by our amazing [sponsors](https://github.com/sponsors/calogica), including our **featured** sponsors:
+
+### aggua (<a href="https://www.aggua.io/" target="_blank">www.aggua.io</a>)
+
+<a href="https://www.aggua.io/" target="_blank"><img width="80%" src="https://uploads-ssl.webflow.com/628f445aa439cdd1dfb160c0/62b4295accb569ec87d751a5_aggua-logo.svg"/></a>
 
 ### re_data (<a href="https://www.getre.io/" target="_blank">www.getre.io</a>)
 
-<a href="https://www.getre.io/" target="_blank"><img width=30% src="https://uploads-ssl.webflow.com/60bdbc7b0c4f5aa1568dc8cc/60df3224a3b3637230f335d6_REDATA%20LOGO%2011.svg"/></a>
+<a href="https://www.getre.io/" target="_blank"><img width="30%" src="https://uploads-ssl.webflow.com/60bdbc7b0c4f5aa1568dc8cc/60df3224a3b3637230f335d6_REDATA%20LOGO%2011.svg"/></a>
 
 ## Install
 
@@ -1014,10 +1018,10 @@ tests:
 ```
 
 Note:
-* `all_values_are_missing` (default) means that rows are excluded where _all_ of the test columns are `null`
-* `any_value_is_missing` means that rows are excluded where _either_ of the test columns are `null`
-  
-  
+
+- `all_values_are_missing` (default) means that rows are excluded where *all* of the test columns are `null`
+- `any_value_is_missing` means that rows are excluded where *either* of the test columns are `null`
+
 ### [expect_multicolumn_sum_to_equal](macros/schema_tests/multi-column/expect_multicolumn_sum_to_equal.sql)
 
 Expects that sum of all rows for a set of columns is equal to a specific value
@@ -1049,9 +1053,9 @@ tests:
 ```
 
 Note:
-* `all_values_are_missing` (default) means that rows are excluded where _all_ of the test columns are `null`
-* `any_value_is_missing` means that rows are excluded where _either_ of the test columns are `null`
 
+- `all_values_are_missing` (default) means that rows are excluded where *all* of the test columns are `null`
+- `any_value_is_missing` means that rows are excluded where *either* of the test columns are `null`
 
 ### [expect_column_values_to_be_within_n_moving_stdevs](macros/schema_tests/distributional/expect_column_values_to_be_within_n_moving_stdevs.sql)
 
