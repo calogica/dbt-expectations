@@ -39,6 +39,7 @@ jobs:
             POSTGRES_TEST_PASSWORD: ''
             POSTGRES_TEST_PORT: 5432
             POSTGRES_TEST_DATABASE: circle_test
+            POSTGRES_TEST_SCHEMA: dbt_expectations_integration_tests
           command: |
             . venv/bin/activate
             cd $DBT_PROJECT_DIR
