@@ -37,23 +37,7 @@ For latest release, see [https://github.com/calogica/dbt-expectations/releases](
 
 ### Dependencies
 
-This package includes a reference to [`dbt-date`](https://github.com/calogica/dbt-date) which in turn references [`dbt-utils`](https://github.com/dbt-labs/dbt-utils) so there's no need to also import either `dbt-date` or `dbt-utils` in your local project.
-
-Note: we no longer include `spark_utils` in this package to avoid versioning conflicts. If you are running this package on non-core platforms (outside of Snowflake, BigQuery, Redshift, Postgres), you will need to use a package like `spark_utils` to shim macros.
-
-For example, in `packages.yml`, you will need to include the relevant package:
-
-```yaml
-  - package: dbt-labs/spark_utils
-    version: <latest or range>
-```
-
-And reference in the dispatch list for `dbt_utils` in `dbt_project.yml`:
-
-```yaml
-vars:
-    dbt_utils_dispatch_list: [spark_utils]
-```
+This package includes a reference to [`dbt-date`](https://github.com/calogica/dbt-date), so there's no need to also import `dbt-date` in your local project.
 
 ### Variables
 
@@ -1137,7 +1121,7 @@ or, for example:
     test_end_date: '{{ modules.datetime.date.today() - modules.datetime.timedelta(1) }}'
 ```
 
-Unfortunately, you currently **cannot** use a dynamic SQL date, such as `current_date` or macro from a dbt package such as dbt-date, as the underlying `dbt_utils.date_spine` expects a date literal.
+Unfortunately, you currently **cannot** use a dynamic SQL date, such as `current_date` or macro from a dbt package such as dbt-date, as the underlying `date_spine` macro expects a date literal.
 
 The `interval` argument will optionally group `date_part` by a given integer to test data presence at a lower granularity, e.g. adding `interval: 7` to the example above will test whether a model has data for each 7-`day` period instead of for each `day`.
 

@@ -18,11 +18,9 @@ clean-targets: ["target", "dbt_modules", "dbt_packages"]
 dispatch:
   - macro_namespace: dbt_expectations
     search_order: ['dbt_expectations_integration_tests', 'dbt_expectations']
-  - macro_namespace: dbt_utils
-    search_order: ['dbt_expectations', 'dbt_utils']
+
 vars:
     'dbt_date:time_zone': 'America/Los_Angeles'
-
 quoting:
     database: false
     identifier: false
