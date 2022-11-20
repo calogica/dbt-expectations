@@ -11,7 +11,7 @@ integration_tests:
       pass: "{{ env_var('POSTGRES_TEST_PASSWORD') }}"
       port: "{{ env_var('POSTGRES_TEST_PORT') | as_number }}"
       dbname: "{{ env_var('POSTGRES_TEST_DATABASE') }}"
-      schema: dbt_utils_integration_tests_postgres
+      schema: "{{ env_var('POSTGRES_TEST_SCHEMA') }}"
       threads: 5
 
     bigquery:
