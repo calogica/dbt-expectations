@@ -69,7 +69,7 @@ with metric_values as (
             sum({{ column_name }}) as agg_metric_value
         from
             {{ model }}
-        {{  dbt_utils.group_by(1 + group_by_length) }}
+        {{  dbt_expectations.group_by(1 + group_by_length) }}
 
     )
     {%- if take_diffs %}

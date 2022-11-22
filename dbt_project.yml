@@ -12,7 +12,3 @@ target-path: "target"
 clean-targets: ["target", "dbt_packages"]
 macro-paths: ["macros"]
 log-path: "logs"
-
-dispatch:
-  - macro_namespace: dbt_utils
-    search_order: ['dbt_expectations', 'dbt_utils']  # enable override

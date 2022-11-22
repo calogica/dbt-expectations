@@ -1,1 +1,1 @@
-{{ dbt_utils.generate_series(upper_bound=8) }}
+{{ dbt_date.generate_series(upper_bound=8) }}

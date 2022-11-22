@@ -6,7 +6,7 @@ with dates as (
 add_row_values as (
 
     select
-        date_day,
+        cast(date_day as date) as date_day,
         cast(date_day as {{ dbt_expectations.type_datetime() }}) as date_datetime,
         cast(date_day as {{ type_timestamp() }}) as date_timestamp,
         cast(100 * abs({{ dbt_expectations.rand() }}) as {{ type_float() }}) as row_value

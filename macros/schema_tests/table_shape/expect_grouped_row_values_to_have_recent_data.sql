@@ -36,7 +36,7 @@ with latest_grouped_timestamps as (
         {% endif %}
 
     {% if group_by -%}
-    {{  dbt_utils.group_by(group_by | length) }}
+    {{  dbt_expectations.group_by(group_by | length) }}
     {%- endif %}
 ),
 total_row_counts as (
@@ -48,7 +48,7 @@ total_row_counts as (
     from
         latest_grouped_timestamps
     {% if group_by -%}
-    {{  dbt_utils.group_by(group_by | length) }}
+    {{  dbt_expectations.group_by(group_by | length) }}
     {%- endif %}
 
 

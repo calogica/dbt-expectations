@@ -24,7 +24,7 @@ with metric_values as (
     from
         {{ model }}
     {% if group_by -%}
-    {{  dbt_utils.group_by(group_by | length) }}
+    {{  dbt_expectations.group_by(group_by | length) }}
     {%- endif %}
 
 ),
