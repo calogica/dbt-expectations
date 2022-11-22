@@ -1,3 +1,9 @@
+# dbt-expectations v0.8.0
+
+## Breaking Changes
+NOTE: including this package in your project will no longer auto-include `dbt-utils`!
+* Remove references to dbt_utils by @clausherther in https://github.com/calogica/dbt-expectations/pull/217
+
 # dbt-expectations v0.7.0
 
 ## Breaking Changes
