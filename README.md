@@ -29,7 +29,7 @@ Include in `packages.yml`
 ```yaml
 packages:
   - package: calogica/dbt_expectations
-    version: [">=0.7.0", "<0.8.0"]
+    version: [">=0.8.0", "<0.9.0"]
     # <see https://github.com/calogica/dbt-expectations/releases/latest> for the latest version tag
 ```
 
