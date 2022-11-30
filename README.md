@@ -475,7 +475,7 @@ tests:
 
 Expect column values to be increasing.
 
-If `strictly: True`, then this expectation is only satisfied if each consecutive value is strictly increasing–equal values are treated as failures.
+If `strictly: True`, then this expectation is only satisfied if each consecutive value is strictly increasing – equal values are treated as failures.
 
 *Applies to:* Column
 
@@ -492,7 +492,7 @@ tests:
 
 Expect column values to be decreasing.
 
-If `strictly=True`, then this expectation is only satisfied if each consecutive value is strictly increasing–equal values are treated as failures.
+If `strictly=True`, then this expectation is only satisfied if each consecutive value is strictly decreasing – equal values are treated as failures.
 
 *Applies to:* Column
 
