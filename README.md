@@ -227,7 +227,7 @@ models: # or seeds:
     tests:
     - dbt_expectations.expect_table_columns_to_not_contain_set:
         column_list: ["col_a", "col_b"]
-        transform: uppper # (Optional)
+        transform: upper # (Optional)
 ```
 
 ### [expect_table_columns_to_contain_set](macros/schema_tests/table_shape/expect_table_columns_to_contain_set.sql)
@@ -242,7 +242,7 @@ models: # or seeds:
     tests:
     - dbt_expectations.expect_table_columns_to_contain_set:
         column_list: ["col_a", "col_b"]
-        transform: uppper # (Optional)
+        transform: upper # (Optional)
 ```
 
 ### [expect_table_column_count_to_equal](macros/schema_tests/table_shape/expect_table_column_count_to_equal.sql)
@@ -271,7 +271,7 @@ models: # or seeds:
     tests:
     - dbt_expectations.expect_table_columns_to_match_ordered_list:
         column_list: ["col_a", "col_b"]
-        transform: uppper # (Optional)
+        transform: upper # (Optional)
 ```
 
 ### [expect_table_columns_to_match_set](macros/schema_tests/table_shape/expect_table_columns_to_match_set.sql)
@@ -286,7 +286,7 @@ models: # or seeds:
     tests:
     - dbt_expectations.expect_table_columns_to_match_set:
         column_list: ["col_a", "col_b"]
-        transform: uppper # (Optional)
+        transform: upper # (Optional)
 ```
 
 ### [expect_table_row_count_to_be_between](macros/schema_tests/table_shape/expect_table_row_count_to_be_between.sql)
