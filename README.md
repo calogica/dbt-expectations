@@ -1,8 +1,8 @@
 [![CircleCI](https://circleci.com/gh/calogica/dbt-expectations/tree/main.svg?style=svg)](https://circleci.com/gh/calogica/dbt-expectations/tree/main)
 
-# dbt-expectations
+# <img width="10%" src="https://raw.githubusercontent.com/calogica/dbt-expectations/main/static/dbt-expectations-logo.svg"/> dbt-expectations
 
-<img src="expectations.gif"/>
+<img src="https://raw.githubusercontent.com/calogica/dbt-expectations/main/expectations.gif"/>
 
 `dbt-expectations` is an extension package for [**dbt**](https://github.com/dbt-labs/dbt), inspired by the [Great Expectations package for Python](https://greatexpectations.io/). The intent is to allow dbt users to deploy GE-like tests in their data warehouse directly from dbt, vs having to add another integration with their data warehouse.
 
