@@ -145,7 +145,7 @@ Expect the specified column to exist.
 
 ```yaml
 tests:
-- dbt_expectations.expect_column_to_exist
+  - dbt_expectations.expect_column_to_exist
 ```
 
 ### [expect_row_values_to_have_recent_data](macros/schema_tests/table_shape/expect_row_values_to_have_recent_data.sql)
@@ -157,9 +157,9 @@ Expect the model to have rows that are at least as recent as the defined interva
 ```yaml
 tests:
   - dbt_expectations.expect_row_values_to_have_recent_data:
-        datepart: day
-        interval: 1
-        row_condition: 'id is not null' #optional
+      datepart: day
+      interval: 1
+      row_condition: 'id is not null' #optional
 ```
 
 ### [expect_grouped_row_values_to_have_recent_data](macros/schema_tests/table_shape/expect_grouped_row_values_to_have_recent_data.sql)
@@ -173,19 +173,19 @@ Use this to test whether there is recent data for each grouped row defined by `g
 models: # or seeds:
   - name : my_model
     tests :
-        - dbt_expectations.expect_grouped_row_values_to_have_recent_data:
-            group_by: [group_id]
-            timestamp_column: date_day
-            datepart: day
-            interval: 1
-            row_condition: "id is not null" #optional
-        # or also:
-        - dbt_expectations.expect_grouped_row_values_to_have_recent_data:
-            group_by: [group_id, other_group_id]
-            timestamp_column: date_day
-            datepart: day
-            interval: 1
-            row_condition: "id is not null" #optional
+      - dbt_expectations.expect_grouped_row_values_to_have_recent_data:
+          group_by: [group_id]
+          timestamp_column: date_day
+          datepart: day
+          interval: 1
+          row_condition: "id is not null" #optional
+      # or also:
+      - dbt_expectations.expect_grouped_row_values_to_have_recent_data:
+          group_by: [group_id, other_group_id]
+          timestamp_column: date_day
+          datepart: day
+          interval: 1
+          row_condition: "id is not null" #optional
 ```
 
 ### [expect_table_column_count_to_be_between](macros/schema_tests/table_shape/expect_table_column_count_to_be_between.sql)
@@ -211,8 +211,8 @@ Expect the number of columns in a model to match another model.
 models: # or seeds:
   - name: my_model
     tests:
-    - dbt_expectations.expect_table_column_count_to_equal_other_table:
-        compare_model: ref("other_model")
+      - dbt_expectations.expect_table_column_count_to_equal_other_table:
+          compare_model: ref("other_model")
 ```
 
 ### [expect_table_columns_to_not_contain_set](macros/schema_tests/table_shape/expect_table_columns_to_not_contain_set.sql)
@@ -225,9 +225,9 @@ Expect the columns in a model not to contain a given list.
 models: # or seeds:
   - name: my_model
     tests:
-    - dbt_expectations.expect_table_columns_to_not_contain_set:
-        column_list: ["col_a", "col_b"]
-        transform: upper # (Optional)
+      - dbt_expectations.expect_table_columns_to_not_contain_set:
+          column_list: ["col_a", "col_b"]
+          transform: upper # (Optional)
 ```
 
 ### [expect_table_columns_to_contain_set](macros/schema_tests/table_shape/expect_table_columns_to_contain_set.sql)
@@ -240,9 +240,9 @@ Expect the columns in a model to contain a given list.
 models: # or seeds:
   - name: my_model
     tests:
-    - dbt_expectations.expect_table_columns_to_contain_set:
-        column_list: ["col_a", "col_b"]
-        transform: upper # (Optional)
+      - dbt_expectations.expect_table_columns_to_contain_set:
+          column_list: ["col_a", "col_b"]
+          transform: upper # (Optional)
 ```
 
 ### [expect_table_column_count_to_equal](macros/schema_tests/table_shape/expect_table_column_count_to_equal.sql)
@@ -255,8 +255,8 @@ Expect the number of columns in a model to be equal to `expected_number_of_colum
 models: # or seeds:
   - name: my_model
     tests:
-    - dbt_expectations.expect_table_column_count_to_equal:
-        value: 7
+      - dbt_expectations.expect_table_column_count_to_equal:
+          value: 7
 ```
 
 ### [expect_table_columns_to_match_ordered_list](macros/schema_tests/table_shape/expect_table_columns_to_match_ordered_list.sql)
@@ -269,9 +269,9 @@ Expect the columns to exactly match a specified list.
 models: # or seeds:
   - name: my_model
     tests:
-    - dbt_expectations.expect_table_columns_to_match_ordered_list:
-        column_list: ["col_a", "col_b"]
-        transform: upper # (Optional)
+      - dbt_expectations.expect_table_columns_to_match_ordered_list:
+          column_list: ["col_a", "col_b"]
+          transform: upper # (Optional)
 ```
 
 ### [expect_table_columns_to_match_set](macros/schema_tests/table_shape/expect_table_columns_to_match_set.sql)
@@ -284,9 +284,9 @@ Expect the columns in a model to match a given list.
 models: # or seeds:
   - name: my_model
     tests:
-    - dbt_expectations.expect_table_columns_to_match_set:
-        column_list: ["col_a", "col_b"]
-        transform: upper # (Optional)
+      - dbt_expectations.expect_table_columns_to_match_set:
+          column_list: ["col_a", "col_b"]
+          transform: upper # (Optional)
 ```
 
 ### [expect_table_row_count_to_be_between](macros/schema_tests/table_shape/expect_table_row_count_to_be_between.sql)
@@ -298,12 +298,12 @@ Expect the number of rows in a model to be between two values.
 models: # or seeds:
   - name: my_model
     tests:
-    - dbt_expectations.expect_table_row_count_to_be_between:
-        min_value: 1 # (Optional)
-        max_value: 4 # (Optional)
-        group_by: [group_id, other_group_id, ...] # (Optional)
-        row_condition: "id is not null" # (Optional)
-        strictly: false # (Optional. Adds an 'or equal to' to the comparison operator for min/max)
+      - dbt_expectations.expect_table_row_count_to_be_between:
+          min_value: 1 # (Optional)
+          max_value: 4 # (Optional)
+          group_by: [group_id, other_group_id, ...] # (Optional)
+          row_condition: "id is not null" # (Optional)
+          strictly: false # (Optional. Adds an 'or equal to' to the comparison operator for min/max)
 ```
 
 ### [expect_table_row_count_to_equal_other_table](macros/schema_tests/table_shape/expect_table_row_count_to_equal_other_table.sql)
@@ -316,11 +316,11 @@ Expect the number of rows in a model match another model.
 models: # or seeds:
   - name: my_model
     tests:
-    - dbt_expectations.expect_table_row_count_to_equal_other_table:
-        compare_model: ref("other_model")
-        factor: 1 # (Optional)
-        row_condition: "id is not null" # (Optional)
-        compare_row_condition: "id is not null" # (Optional)
+      - dbt_expectations.expect_table_row_count_to_equal_other_table:
+          compare_model: ref("other_model")
+          factor: 1 # (Optional)
+          row_condition: "id is not null" # (Optional)
+          compare_row_condition: "id is not null" # (Optional)
 ```
 
 ### [expect_table_row_count_to_equal_other_table_times_factor](macros/schema_tests/table_shape/expect_table_row_count_to_equal_other_table_times_factor.sql)
@@ -333,11 +333,11 @@ Expect the number of rows in a model to match another model times a preconfigure
 models: # or seeds:
   - name: my_model
     tests:
-    - dbt_expectations.expect_table_row_count_to_equal_other_table_times_factor:
-        compare_model: ref("other_model")
-        factor: 13
-        row_condition: "id is not null" # (Optional)
-        compare_row_condition: "id is not null" # (Optional)
+      - dbt_expectations.expect_table_row_count_to_equal_other_table_times_factor:
+          compare_model: ref("other_model")
+          factor: 13
+          row_condition: "id is not null" # (Optional)
+          compare_row_condition: "id is not null" # (Optional)
 ```
 
 ### [expect_table_row_count_to_equal](macros/schema_tests/table_shape/expect_table_row_count_to_equal.sql)
@@ -350,10 +350,10 @@ Expect the number of rows in a model to be equal to `expected_number_of_rows`.
 models: # or seeds:
   - name: my_model
     tests:
-    - dbt_expectations.expect_table_row_count_to_equal:
-        value: 4
-        group_by: [group_id, other_group_id, ...] # (Optional)
-        row_condition: "id is not null" # (Optional)
+      - dbt_expectations.expect_table_row_count_to_equal:
+          value: 4
+          group_by: [group_id, other_group_id, ...] # (Optional)
+          row_condition: "id is not null" # (Optional)
 ```
 
 ### [expect_column_values_to_be_unique](macros/schema_tests/column_values_basic/expect_column_values_to_be_unique.sql)
