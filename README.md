@@ -1,24 +1,33 @@
-[![CircleCI](https://circleci.com/gh/calogica/dbt-expectations/tree/main.svg?style=svg)](https://circleci.com/gh/calogica/dbt-expectations/tree/main)
+<h1 align="center">dbt-expectations</h1>
+<p align="center">
+<img alt="logo" width="10%" src="https://raw.githubusercontent.com/calogica/dbt-expectations/main/static/dbt-expectations-logo.svg" />
+</p>
 
-# <img width="10%" src="https://raw.githubusercontent.com/calogica/dbt-expectations/main/static/dbt-expectations-logo.svg"/> dbt-expectations
+<hr/>
 
-<img src="https://raw.githubusercontent.com/calogica/dbt-expectations/main/expectations.gif"/>
+<p align="center">
+<a href="https://circleci.com/gh/calogica/dbt-expectations/tree/main">
+<img alt="CircleCI" src="https://img.shields.io/circleci/build/github/calogica/dbt-expectations/main?style=plastic"/>
+</a>
+<img alt="License" src="https://img.shields.io/badge/license-Apache--2.0-ff69b4?style=plastic"/>
 
+</p>
+## About
 `dbt-expectations` is an extension package for [**dbt**](https://github.com/dbt-labs/dbt), inspired by the [Great Expectations package for Python](https://greatexpectations.io/). The intent is to allow dbt users to deploy GE-like tests in their data warehouse directly from dbt, vs having to add another integration with their data warehouse.
 
-## Featured Sponsors ❤️
+### Featured Sponsors ❤️
 
 Development of `dbt-expectations` (and `dbt-date`) is funded by our amazing [sponsors](https://github.com/sponsors/calogica), including our **featured** sponsors:
 
-### aggua (<a href="https://www.aggua.io/" target="_blank">www.aggua.io</a>)
+#### aggua (<a href="https://www.aggua.io/" target="_blank">www.aggua.io</a>)
 
 <a href="https://www.aggua.io/" target="_blank"><img width="80%" src="https://uploads-ssl.webflow.com/628f445aa439cdd1dfb160c0/62b4295accb569ec87d751a5_aggua-logo.svg"/></a>
 
-### Elementary (<a href="https://www.elementary-data.com/" target="_blank">www.elementary-data.com</a>)
+#### Elementary (<a href="https://www.elementary-data.com/" target="_blank">www.elementary-data.com</a>)
 
 <a href="https://www.elementary-data.com/" target="_blank"><img width="80%" src="https://raw.githubusercontent.com/elementary-data/elementary/master/static/header_git.png"/></a>
 
-### re_data (<a href="https://www.getre.io/" target="_blank">www.getre.io</a>)
+#### re_data (<a href="https://www.getre.io/" target="_blank">www.getre.io</a>)
 
 <a href="https://www.getre.io/" target="_blank"><img width="30%" src="https://uploads-ssl.webflow.com/60bdbc7b0c4f5aa1568dc8cc/60df3224a3b3637230f335d6_REDATA%20LOGO%2011.svg"/></a>
 
@@ -1141,3 +1150,5 @@ To run the tests:
 
 1. You will need a profile called `integration_tests` in `~/.dbt/profiles.yml` pointing to a writable database. We only support postgres, BigQuery and Snowflake.
 2. Then, from within the `integration_tests` folder, run `dbt build` to run the test models in `integration_tests/models/schema_tests/` and run the tests specified in `integration_tests/models/schema_tests/schema.yml`
+
+<img src="https://raw.githubusercontent.com/calogica/dbt-expectations/main/expectations.gif"/>
