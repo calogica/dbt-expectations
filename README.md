@@ -14,6 +14,10 @@ Development of `dbt-expectations` (and `dbt-date`) is funded by our amazing [spo
 
 <a href="https://www.aggua.io/" target="_blank"><img width="80%" src="https://uploads-ssl.webflow.com/628f445aa439cdd1dfb160c0/62b4295accb569ec87d751a5_aggua-logo.svg"/></a>
 
+### Elementary (<a href="https://www.elementary-data.com/" target="_blank">www.elementary-data.com</a>)
+
+<a href="https://www.elementary-data.com/" target="_blank"><img width="80%" src="https://raw.githubusercontent.com/elementary-data/elementary/master/static/header_git.png"/></a>
+
 ### re_data (<a href="https://www.getre.io/" target="_blank">www.getre.io</a>)
 
 <a href="https://www.getre.io/" target="_blank"><img width="30%" src="https://uploads-ssl.webflow.com/60bdbc7b0c4f5aa1568dc8cc/60df3224a3b3637230f335d6_REDATA%20LOGO%2011.svg"/></a>
