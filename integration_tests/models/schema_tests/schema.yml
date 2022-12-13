@@ -124,6 +124,10 @@ models:
           date_col: date_day
           date_part: day
           interval: 7
+      - dbt_expectations.expect_table_aggregation_to_equal_other_table:
+          expression: count(distinct date_day)
+          compare_expression: count(*)
+          compare_model: ref("timeseries_data")
 
     columns:
       - name: date_day
@@ -258,6 +262,12 @@ models:
           compare_model: ref("data_test")
           group_by: [idx]
           tolerance_percent: .5
+      - dbt_expectations.expect_table_aggregation_to_equal_other_table:
+          expression: sum(col_numeric_a)
+          compare_expression: sum(col_numeric_a * .99)
+          compare_model: ref("data_test")
+          group_by: [idx]
+          tolerance_percent: .95
       - dbt_expectations.expect_column_pair_values_to_be_in_set:
           column_A: col_numeric_a
           column_B: col_numeric_b
