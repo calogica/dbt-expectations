@@ -73,6 +73,7 @@ For example, use `America/New_York` for East Coast Time.
 - [expect_column_to_exist](#expect_column_to_exist)
 - [expect_row_values_to_have_recent_data](#expect_row_values_to_have_recent_data)
 - [expect_grouped_row_values_to_have_recent_data](#expect_grouped_row_values_to_have_recent_data)
+- [expect_table_aggregation_to_equal_other_table](#expect_table_aggregation_to_equal_other_table)
 - [expect_table_column_count_to_be_between](#expect_table_column_count_to_be_between)
 - [expect_table_column_count_to_equal_other_table](#expect_table_column_count_to_equal_other_table)
 - [expect_table_column_count_to_equal](#expect_table_column_count_to_equal)
@@ -202,6 +203,50 @@ models: # or seeds:
           interval: 1
           row_condition: "id is not null" #optional
 ```
+
+### [expect_table_aggregation_to_equal_other_table](macros/schema_tests/table_shape/expect_table_aggregation_to_equal_other_table.sql)
+
+Except an (optionally grouped) expression to match the same (or optionally other) expression in a different table.
+
+*Applies to:* Model, Seed, Source
+
+Simple:
+
+```yaml
+tests:
+  - dbt_expectations.expect_table_aggregation_to_equal_other_table:
+      expression: sum(col_numeric_a)
+      compare_model: ref("other_model")
+      group_by: [idx]
+```
+
+More complex:
+
+```yaml
+tests:
+  - dbt_expectations.expect_table_aggregation_to_equal_other_table:
+      expression: count(*)
+      compare_model: ref("other_model")
+      compare_expression: count(distinct id)
+      group_by: [date_column]
+      compare_group_by: [some_other_date_column]
+```
+
+or:
+
+```yaml
+tests:
+  - dbt_expectations.expect_table_aggregation_to_equal_other_table:
+      expression: max(column_a)
+      compare_model: ref("other_model")
+      compare_expression: max(column_b)
+      group_by: [date_column]
+      compare_group_by: [some_other_date_column]
+      row_condition: some_flag=true
+      compare_row_condition: some_flag=false
+```
+
+**Note**: You can also express a **tolerance** factor, either as an absolute tolerable difference, `tolerance`, or as a tolerable % difference `tolerance_percent`.
 
 ### [expect_table_column_count_to_be_between](macros/schema_tests/table_shape/expect_table_column_count_to_be_between.sql)
 
