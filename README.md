@@ -378,6 +378,8 @@ models: # or seeds:
     tests:
       - dbt_expectations.expect_table_row_count_to_equal_other_table:
           compare_model: ref("other_model")
+          group_by: [col1, col2] # (Optional)
+          compare_group_by: [col1, col2] # (Optional)
           factor: 1 # (Optional)
           row_condition: "id is not null" # (Optional)
           compare_row_condition: "id is not null" # (Optional)
@@ -396,6 +398,8 @@ models: # or seeds:
       - dbt_expectations.expect_table_row_count_to_equal_other_table_times_factor:
           compare_model: ref("other_model")
           factor: 13
+          group_by: [col1, col2] # (Optional)
+          compare_group_by: [col1, col2] # (Optional)
           row_condition: "id is not null" # (Optional)
           compare_row_condition: "id is not null" # (Optional)
 ```
