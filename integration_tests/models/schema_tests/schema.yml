@@ -394,6 +394,14 @@ models:
       - dbt_expectations.expect_table_row_count_to_equal_other_table_times_factor:
           compare_model: ref("data_test")
           factor: 2
+      - dbt_expectations.expect_table_row_count_to_equal_other_table_times_factor:
+          compare_model: ref("data_test")
+          group_by: [date_col]
+          factor: 2
+      - dbt_expectations.expect_table_row_count_to_equal_other_table_times_factor:
+          compare_model: ref("data_test")
+          group_by: [date_col, idx]
+          factor: 2
 
   - name : timeseries_data_grouped
     tests :
