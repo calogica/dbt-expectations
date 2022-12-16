@@ -31,3 +31,7 @@ array_length((select regexp_matches({{ source_value }}, '{{ regexp }}')), 1)
 {% macro redshift__regexp_instr(source_value, regexp, position, occurrence, is_raw) %}
 regexp_instr({{ source_value }}, '{{ regexp }}', {{ position }}, {{ occurrence }})
 {% endmacro %}
+
+{% macro spark__regexp_instr(source_value, regexp, position, occurrence, is_raw) %}
+regexp_instr({{ source_value }}, '{{ regexp }}')
+{% endmacro %}
