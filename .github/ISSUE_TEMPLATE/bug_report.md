@@ -31,10 +31,10 @@ assignees: ''
 
 ### Which database adapter are you using with dbt?
 
-Note: dbt-expectations currently does not support database adapters are than the ones listed below.
+Note: dbt-expectations currently does not support database adapters other than the ones listed below.
 
-- [ ] Postgres
-- [ ] Snowflake
-- [ ] BigQuery
+- Postgres
+- Snowflake
+- BigQuery
 
 ### Additional Context
