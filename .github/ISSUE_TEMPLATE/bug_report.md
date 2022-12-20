@@ -1,7 +1,7 @@
 ---
 name: Bug report
 about: I think I've found a bug
-title: "[BUG["
+title: "[BUG]"
 labels: ''
 assignees: ''
 
@@ -30,6 +30,7 @@ assignees: ''
 ```
 
 ### Which database adapter are you using with dbt?
+
 Note: dbt-expectations currently does not support database adapters are than the ones listed below.
 
 - [ ] Postgres
