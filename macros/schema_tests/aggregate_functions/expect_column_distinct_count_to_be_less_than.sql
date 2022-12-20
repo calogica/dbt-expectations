@@ -1,10 +1,9 @@
 {% test expect_column_distinct_count_to_be_less_than(model,
-                                                                column_name,
-                                                                value,
-                                                                quote_values=False,
-                                                                group_by=None,
-                                                                row_condition=None
-                                                                ) %}
+                                                       column_name,
+                                                       value,
+                                                       group_by=None,
+                                                       row_condition=None
+                                                       ) %}
 {% set expression %}
 count(distinct {{ column_name }}) < {{ value }}
 {% endset %}

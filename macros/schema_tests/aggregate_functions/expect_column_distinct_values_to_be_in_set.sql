@@ -1,8 +1,9 @@
-{% test expect_column_distinct_values_to_be_in_set(model, column_name,
-                                                    value_set,
-                                                    quote_values=False,
-                                                    row_condition=None
-                                                    ) %}
+{% test expect_column_distinct_values_to_be_in_set(model,
+                                                     column_name,
+                                                     value_set,
+                                                     quote_values=True,
+                                                     row_condition=None
+                                                     ) %}
 
 with all_values as (
 

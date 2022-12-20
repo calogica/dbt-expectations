@@ -342,6 +342,7 @@ models:
           - dbt_expectations.expect_column_most_common_value_to_be_in_set:
               value_set: [0.5]
               top_n: 1
+              quote_values: false
           - dbt_expectations.expect_column_values_to_be_increasing:
               sort_column: col_numeric_a
               strictly: false
@@ -357,13 +358,11 @@ models:
               quote_values: true
           - dbt_expectations.expect_column_distinct_values_to_equal_set:
               value_set: ['a','b','c','c']
-              quote_values: true
           - dbt_expectations.expect_column_distinct_values_to_be_in_set:
               value_set: ['a','b','c','d']
               quote_values: true
           - dbt_expectations.expect_column_distinct_values_to_contain_set:
               value_set: ['a','b']
-              quote_values: true
           - dbt_expectations.expect_column_value_lengths_to_equal:
               value: 1
           - dbt_expectations.expect_column_values_to_have_consistent_casing
