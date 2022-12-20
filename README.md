@@ -502,7 +502,7 @@ Expect each column value to be in a given set.
 tests:
   - dbt_expectations.expect_column_values_to_be_in_set:
       value_set: ['a','b','c']
-      quote_values: true # (Optional)
+      quote_values: true # (Optional. Default is 'true'.)
       row_condition: "id is not null" # (Optional)
 ```
 
@@ -531,7 +531,7 @@ Expect each column value not to be in a given set.
 tests:
   - dbt_expectations.expect_column_values_to_not_be_in_set:
       value_set: ['e','f','g']
-      quote_values: true # (Optional)
+      quote_values: true # (Optional. Default is 'true'.)
       row_condition: "id is not null" # (Optional)
 ```
 
@@ -723,7 +723,7 @@ Expect the number of distinct column values to be equal to a given value.
 tests:
   - dbt_expectations.expect_column_distinct_count_to_equal:
       value: 10
-      quote_values: false # (Optional. Default is 'false'.)
+      quote_values: true # (Optional. Default is 'true'.)
       group_by: [group_id, other_group_id, ...] # (Optional)
       row_condition: "id is not null" # (Optional)
 ```
@@ -738,7 +738,7 @@ Expect the number of distinct column values to be greater than a given value.
 tests:
   - dbt_expectations.expect_column_distinct_count_to_be_greater_than:
       value: 10
-      quote_values: false # (Optional. Default is 'false'.)
+      quote_values: true # (Optional. Default is 'true'.)
       group_by: [group_id, other_group_id, ...] # (Optional)
       row_condition: "id is not null" # (Optional)
 ```
@@ -753,7 +753,7 @@ Expect the number of distinct column values to be less than a given value.
 tests:
   - dbt_expectations.expect_column_distinct_count_to_be_less_than:
       value: 10
-      quote_values: false # (Optional. Default is 'false'.)
+      quote_values: true # (Optional. Default is 'true'.)
       group_by: [group_id, other_group_id, ...] # (Optional)
       row_condition: "id is not null" # (Optional)
 ```
@@ -768,7 +768,7 @@ Expect the set of distinct column values to be contained by a given set.
 tests:
   - dbt_expectations.expect_column_distinct_values_to_be_in_set:
       value_set: ['a','b','c','d']
-      quote_values: false # (Optional. Default is 'false'.)
+      quote_values: true # (Optional. Default is 'true'.)
       row_condition: "id is not null" # (Optional)
 ```
 
@@ -784,7 +784,7 @@ In contrast to `expect_column_values_to_be_in_set` this ensures not that all col
 tests:
   - dbt_expectations.expect_column_distinct_values_to_contain_set:
       value_set: ['a','b']
-      quote_values: false # (Optional. Default is 'false'.)
+      quote_values: true # (Optional. Default is 'true'.)
       row_condition: "id is not null" # (Optional)
 ```
 
@@ -951,7 +951,7 @@ tests:
   - dbt_expectations.expect_column_most_common_value_to_be_in_set:
       value_set: [0.5]
       top_n: 1
-      quote_values: false # (Optional)
+      quote_values: true # (Optional. Default is 'true'.)
       data_type: "decimal" # (Optional. Default is 'decimal')
       strictly: false # (Optional. Default is 'false'. Adds an 'or equal to' to the comparison operator for min/max)
 ```
