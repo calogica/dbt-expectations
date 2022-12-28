@@ -83,7 +83,7 @@ model_data as (
         {{ dbt.dateadd(
             date_part,
             "mod(
-                cast(" ~ datediff("'" ~ start_date ~ "'", date_col, date_part) ~ " as " ~ dbt.type_int() ~ " ),
+                cast(" ~ dbt.datediff("'" ~ start_date ~ "'", date_col, date_part) ~ " as " ~ dbt.type_int() ~ " ),
                 cast(" ~ interval ~ " as  " ~ dbt.type_int() ~ " )
             ) * (-1)",
             "cast( " ~ dbt.date_trunc(date_part, date_col) ~ " as  " ~ dbt_expectations.type_datetime() ~ ")"
