@@ -35,6 +35,6 @@ where
     -- to avoid false negatives
     coalesce(max_timestamp, cast('{{ default_start_date }}' as {{ dbt_expectations.type_timestamp() }}))
         <
-        cast({{ dateadd(datepart, interval * -1, dbt_date.now()) }} as {{ dbt_expectations.type_timestamp() }})
+        cast({{ dbt.dateadd(datepart, interval * -1, dbt_date.now()) }} as {{ dbt_expectations.type_timestamp() }})
 
 {% endmacro %}

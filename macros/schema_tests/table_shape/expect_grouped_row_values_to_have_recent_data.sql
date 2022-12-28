@@ -62,7 +62,7 @@ outdated_grouped_timestamps as (
         -- are the max timestamps per group older than the specified cutoff?
         latest_timestamp_column <
             cast(
-                {{ dateadd(datepart, interval * -1, dbt_date.now()) }}
+                {{ dbt.dateadd(datepart, interval * -1, dbt_date.now()) }}
                 as {{ dbt_expectations.type_timestamp() }}
             )
 
