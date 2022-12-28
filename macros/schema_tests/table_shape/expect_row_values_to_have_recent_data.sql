@@ -16,12 +16,12 @@
 {%- set default_start_date = '1970-01-01' -%}
 with max_recency as (
 
-    select max(cast({{ column_name }} as {{ type_timestamp() }})) as max_timestamp
+    select max(cast({{ column_name }} as {{ dbt_expectations.type_timestamp() }})) as max_timestamp
     from
         {{ model }}
     where
         -- to exclude erroneous future dates
-        cast({{ column_name }} as {{ type_timestamp() }}) <= {{ dbt_date.now() }}
+        cast({{ column_name }} as {{ dbt_expectations.type_timestamp() }}) <= {{ dbt_date.now() }}
         {% if row_condition %}
         and {{ row_condition }}
         {% endif %}
@@ -33,8 +33,8 @@ from
 where
     -- if the row_condition excludes all rows, we need to compare against a default date
     -- to avoid false negatives
-    coalesce(max_timestamp, cast('{{ default_start_date }}' as {{ type_timestamp() }}))
+    coalesce(max_timestamp, cast('{{ default_start_date }}' as {{ dbt_expectations.type_timestamp() }}))
         <
-        cast({{ dateadd(datepart, interval * -1, dbt_date.now()) }} as {{ type_timestamp() }})
+        cast({{ dbt.dateadd(datepart, interval * -1, dbt_date.now()) }} as {{ dbt_expectations.type_timestamp() }})
 
 {% endmacro %}

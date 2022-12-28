@@ -3,7 +3,7 @@ with data_example as (
     select
         1 as idx,
         '2020-10-21' as date_col,
-        cast(0 as {{ type_float() }}) as col_numeric_a
+        cast(0 as {{ dbt.type_float() }}) as col_numeric_a
 
     union all
 
