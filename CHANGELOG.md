@@ -1,3 +1,8 @@
+# dbt-expectations v0.8.2
+
+## Fixes
+* Fix dangling datediff reference by @clausherther in https://github.com/calogica/dbt-expectations/pull/233
+
 # dbt-expectations v0.8.1
 
 ## Fixes
