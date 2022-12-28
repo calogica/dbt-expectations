@@ -20,7 +20,7 @@ set_values as (
     {% for value in value_set -%}
     select
         {% if quote_values -%}
-        cast('{{ value }}' as {{ type_string() }})
+        cast('{{ value }}' as {{ dbt.type_string() }})
         {%- else -%}
         {{ value }}
         {%- endif %} as value_field

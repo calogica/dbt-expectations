@@ -140,7 +140,7 @@ where
 
     metric_period >= cast(
             {{ dateadd(period, -test_periods, date_trunc(period, dbt_date.now())) }}
-            as {{ type_timestamp() }})
+            as {{ dbt_expectations.type_timestamp() }})
     and
     metric_period < {{ date_trunc(period, dbt_date.now()) }}
     and

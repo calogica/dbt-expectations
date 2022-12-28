@@ -8,8 +8,8 @@
 
         {% for column in columns_in_relation %}
         select
-            cast('{{ column.name | upper }}' as {{ type_string() }}) as relation_column,
-            cast('{{ column.dtype | upper }}' as {{ type_string() }}) as relation_column_type
+            cast('{{ column.name | upper }}' as {{ dbt.type_string() }}) as relation_column,
+            cast('{{ column.dtype | upper }}' as {{ dbt.type_string() }}) as relation_column_type
         {% if not loop.last %}union all{% endif %}
         {% endfor %}
     ),

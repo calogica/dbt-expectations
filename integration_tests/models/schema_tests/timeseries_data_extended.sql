@@ -8,7 +8,7 @@ add_row_values as (
 
     select
         cast(dates.date_day as {{ dbt_expectations.type_datetime() }}) as date_day,
-        cast(100 * abs({{ dbt_expectations.rand() }}) as {{ type_float() }}) as row_value
+        cast(100 * abs({{ dbt_expectations.rand() }}) as {{ dbt.type_float() }}) as row_value
 
     from
         dates

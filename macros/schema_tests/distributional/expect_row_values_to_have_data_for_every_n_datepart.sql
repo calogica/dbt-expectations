@@ -57,8 +57,8 @@ with base_dates as (
             Filtering the spine only where this remainder == 0 will return a spine with every other day as desired, i.e. [2020-01-01, 2020-01-03, 2020-01-05, ...]
     #}
     where mod(
-            cast({{ datediff("'" ~ start_date ~ "'", 'date_' ~ date_part, date_part) }} as {{ type_int() }}),
-            cast({{interval}} as {{ type_int() }})
+            cast({{ datediff("'" ~ start_date ~ "'", 'date_' ~ date_part, date_part) }} as {{ dbt.type_int() }}),
+            cast({{interval}} as {{ dbt.type_int() }})
         ) = 0
     {% endif %}
 
@@ -83,8 +83,8 @@ model_data as (
         {{dateadd(
             date_part,
             "mod(
-                cast(" ~ datediff("'" ~ start_date ~ "'", date_col, date_part) ~ " as " ~ type_int() ~ " ),
-                cast(" ~ interval ~ " as  " ~ type_int() ~ " )
+                cast(" ~ datediff("'" ~ start_date ~ "'", date_col, date_part) ~ " as " ~ dbt.type_int() ~ " ),
+                cast(" ~ interval ~ " as  " ~ dbt.type_int() ~ " )
             ) * (-1)",
             "cast( " ~ date_trunc(date_part, date_col) ~ " as  " ~ dbt_expectations.type_datetime() ~ ")"
         )}} as date_{{ date_part }},
