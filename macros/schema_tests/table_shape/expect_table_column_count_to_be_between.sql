@@ -1,7 +1,7 @@
 {%- test expect_table_column_count_to_be_between(model,
-                                                        min_value=None,
-                                                        max_value=None
-                                                        ) -%}
+                                                    min_value=None,
+                                                    max_value=None
+                                                    ) -%}
 {%- if min_value is none and max_value is none -%}
 {{ exceptions.raise_compiler_error(
     "You have to provide either a min_value, max_value or both."
