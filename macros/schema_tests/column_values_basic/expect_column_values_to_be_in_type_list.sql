@@ -8,7 +8,7 @@
 
         {% for column in columns_in_relation %}
         select
-            cast('{{ column.name | upper }}' as {{ dbt.type_string() }}) as relation_column,
+            cast('{{ escape_single_quotes(column.name) | upper }}' as {{ dbt.type_string() }}) as relation_column,
             cast('{{ column.dtype | upper }}' as {{ dbt.type_string() }}) as relation_column_type
         {% if not loop.last %}union all{% endif %}
         {% endfor %}
@@ -20,7 +20,7 @@
         from
             relation_columns
         where
-            relation_column = '{{ column_name }}'
+            relation_column = '{{ escape_single_quotes(column_name) }}'
             and
             relation_column_type not in ('{{ column_type_list | join("', '") }}')
 
