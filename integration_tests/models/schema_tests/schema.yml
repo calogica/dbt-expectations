@@ -388,6 +388,11 @@ models:
         tests:
           - dbt_expectations.expect_column_values_to_be_null
 
+      - name: col_null_percentage
+        tests:
+          - dbt_expectations.expect_column_null_percentage_to_be_less_than:
+              value: 0.3
+          
   - name : data_test_factored
     tests :
       - dbt_expectations.expect_table_row_count_to_equal_other_table_times_factor:
