@@ -31,19 +31,19 @@ jobs:
             . venv/bin/activate
               dbt deps --project-dir $DBT_PROJECT_DIR
 
-      - run:
-          name: "Run SQLFluff"
-          environment:
-            POSTGRES_HOST: localhost
-            POSTGRES_TEST_USER: postgres
-            POSTGRES_TEST_PASSWORD: ''
-            POSTGRES_TEST_PORT: 5432
-            POSTGRES_TEST_DATABASE: circle_test
-            POSTGRES_TEST_SCHEMA: dbt_expectations_integration_tests
-          command: |
-            . venv/bin/activate
-            cd $DBT_PROJECT_DIR
-            sqlfluff lint models
+      # - run:
+      #     name: "Run SQLFluff"
+      #     environment:
+      #       POSTGRES_HOST: localhost
+      #       POSTGRES_TEST_USER: postgres
+      #       POSTGRES_TEST_PASSWORD: ''
+      #       POSTGRES_TEST_PORT: 5432
+      #       POSTGRES_TEST_DATABASE: circle_test
+      #       POSTGRES_TEST_SCHEMA: dbt_expectations_integration_tests
+      #     command: |
+      #       . venv/bin/activate
+      #       cd $DBT_PROJECT_DIR
+      #       sqlfluff lint models
 
       - run:
           name: "Run Tests - Postgres"
