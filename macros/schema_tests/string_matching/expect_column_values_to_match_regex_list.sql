@@ -2,12 +2,13 @@
                                                     regex_list,
                                                     match_on="any",
                                                     row_condition=None,
-                                                    is_raw=False
+                                                    is_raw=False,
+                                                    flags=""
                                                     ) %}
 
 {% set expression %}
     {% for regex in regex_list %}
-    {{ dbt_expectations.regexp_instr(column_name, regex, is_raw=is_raw) }} > 0
+    {{ dbt_expectations.regexp_instr(column_name, regex, is_raw=is_raw, flags=flags) }} > 0
     {%- if not loop.last %}
     {{ " and " if match_on == "all" else " or "}}
     {% endif -%}
