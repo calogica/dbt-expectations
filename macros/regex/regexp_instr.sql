@@ -9,8 +9,9 @@
 {% macro default__regexp_instr(source_value, regexp, position, occurrence, is_raw, flags) %}
 {# unclear if other databases support raw strings or flags #}
 {% if is_raw or flags %}
-    {{ exceptions.raise_compiler_error(
-            "is_raw and flags options not supported for this adapter"
+    {{ exceptions.warn(
+            "is_raw and flags options are not supported for this adapter "
+            ~ "and are being ignored."
     ) }}
 {% endif %}
 regexp_instr({{ source_value }}, '{{ regexp }}', {{ position }}, {{ occurrence }})
@@ -26,8 +27,8 @@ regexp_instr({{ source_value }}, {{ regexp }}, {{ position }}, {{ occurrence }},
 {# BigQuery uses "r" to escape raw strings #}
 {% macro bigquery__regexp_instr(source_value, regexp, position, occurrence, is_raw, flags) %}
 {% if flags %}
-    {{ exceptions.raise_compiler_error(
-            "The flag option is not supported for BigQuery"
+    {{ exceptions.warn(
+            "The flags option is not supported for BigQuery and is being ignored."
     ) }}
 {% endif %}
 {%- set regexp = "r'" ~ regexp ~ "'" if is_raw else "'" ~ regexp ~ "'" -%}
