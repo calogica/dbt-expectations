@@ -27,7 +27,7 @@ regexp_instr({{ source_value }}, {{ regexp }}, {{ position }}, {{ occurrence }},
 {% macro bigquery__regexp_instr(source_value, regexp, position, occurrence, is_raw, flags) %}
 {% if flags %}
     {{ exceptions.raise_compiler_error(
-            "The flag option is not supported for by BigQuery"
+            "The flag option is not supported for BigQuery"
     ) }}
 {% endif %}
 {%- set regexp = "r'" ~ regexp ~ "'" if is_raw else "'" ~ regexp ~ "'" -%}
