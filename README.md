@@ -600,7 +600,10 @@ tests:
 ### [expect_column_values_to_match_regex](macros/schema_tests/string_matching/expect_column_values_to_match_regex.sql)
 
 Expect column entries to be strings that match a given regular expression. Valid matches can be found anywhere in the string, for example "[at]+" will identify the following strings as expected: "cat", "hat", "aa", "a", and "t", and the following strings as unexpected: "fish", "dog".
-Optionally, `is_raw` indicates the `regex` pattern is a "raw" string and should be escaped. The default is `False`.
+
+Optional (keyword) arguments:
+- `is_raw` indicates the `regex` pattern is a "raw" string and should be escaped. The default is `False`.
+- `flags` is a string of one or more characters that are passed to the regex engine as flags (or parameters). Allowed flags are adapter-specific. A common flag is `i`, for case-insensitive matching. The default is no flags.
 
 *Applies to:* Column
 
@@ -610,12 +613,16 @@ tests:
       regex: "[at]+"
       row_condition: "id is not null" # (Optional)
       is_raw: True # (Optional)
+      flags: i # (Optional)
 ```
 
 ### [expect_column_values_to_not_match_regex](macros/schema_tests/string_matching/expect_column_values_to_not_match_regex.sql)
 
 Expect column entries to be strings that do NOT match a given regular expression. The regex must not match any portion of the provided string. For example, "[at]+" would identify the following strings as expected: "fish”, "dog”, and the following as unexpected: "cat”, "hat”.
-Optionally, `is_raw` indicates the `regex` pattern is a "raw" string and should be escaped. The default is `False`.
+
+Optional (keyword) arguments:
+- `is_raw` indicates the `regex` pattern is a "raw" string and should be escaped. The default is `False`.
+- `flags` is a string of one or more characters that are passed to the regex engine as flags (or parameters). Allowed flags are adapter-specific. A common flag is `i`, for case-insensitive matching. The default is no flags.
 
 *Applies to:* Column
 
@@ -625,12 +632,16 @@ tests:
       regex: "[at]+"
       row_condition: "id is not null" # (Optional)
       is_raw: True # (Optional)
+      flags: i # (Optional)
 ```
 
 ### [expect_column_values_to_match_regex_list](macros/schema_tests/string_matching/expect_column_values_to_match_regex_list.sql)
 
 Expect the column entries to be strings that can be matched to either any of or all of a list of regular expressions. Matches can be anywhere in the string.
-Optionally, `is_raw` indicates the `regex` patterns are "raw" strings and should be escaped. The default is `False`.
+
+Optional (keyword) arguments:
+- `is_raw` indicates the `regex` pattern is a "raw" string and should be escaped. The default is `False`.
+- `flags` is a string of one or more characters that are passed to the regex engine as flags (or parameters). Allowed flags are adapter-specific. A common flag is `i`, for case-insensitive matching. The default is no flags.
 
 *Applies to:* Column
 
@@ -641,12 +652,16 @@ tests:
       match_on: any # (Optional. Default is 'any', which applies an 'OR' for each regex. If 'all', it applies an 'AND' for each regex.)
       row_condition: "id is not null" # (Optional)
       is_raw: True # (Optional)
+      flags: i # (Optional)
 ```
 
 ### [expect_column_values_to_not_match_regex_list](macros/schema_tests/string_matching/expect_column_values_to_not_match_regex_list.sql)
 
 Expect the column entries to be strings that do not match any of a list of regular expressions. Matches can be anywhere in the string.
-Optionally, `is_raw` indicates the `regex` patterns are "raw" strings and should be escaped. The default is `False`.
+
+Optional (keyword) arguments:
+- `is_raw` indicates the `regex` pattern is a "raw" string and should be escaped. The default is `False`.
+- `flags` is a string of one or more characters that are passed to the regex engine as flags (or parameters). Allowed flags are adapter-specific. A common flag is `i`, for case-insensitive matching. The default is no flags.
 
 *Applies to:* Column
 
@@ -657,6 +672,7 @@ tests:
       match_on: any # (Optional. Default is 'any', which applies an 'OR' for each regex. If 'all', it applies an 'AND' for each regex.)
       row_condition: "id is not null" # (Optional)
       is_raw: True # (Optional)
+      flags: i # (Optional)
 ```
 
 ### [expect_column_values_to_match_like_pattern](macros/schema_tests/string_matching/expect_column_values_to_match_like_pattern.sql)
