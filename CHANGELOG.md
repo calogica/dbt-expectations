@@ -1,3 +1,15 @@
+# dbt-expectations v0.8.3
+
+## New Features
+* Add optional flags argument to regex tests by @tconbeer in https://github.com/calogica/dbt-expectations/pull/247
+
+## Docs
+* Update docs site by @clausherther in https://github.com/calogica/dbt-expectations/pull/235
+
+## Under The Hood
+* Add explicit reference to dbt.length() by @clausherther in https://github.com/calogica/dbt-expectations/pull/234
+* Disabling SQLFluff by @clausherther in https://github.com/calogica/dbt-expectations/pull/242
+
 # dbt-expectations v0.8.2
 
 ## Fixes
