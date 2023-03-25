@@ -17,8 +17,8 @@ models:
               config:
                 enabled: "{{ target.type in ['postgres', 'snowflake', 'redshift' ] }}"
           - dbt_expectations.expect_column_values_to_match_regex:
-              regex: "&[^.]*"
-              flags: i
+              regex: "[A-Z]"
+              flags: c
               config:
                 enabled: "{{ target.type in ['postgres', 'snowflake', 'redshift' ] }}"
                 error_if: "=0"
@@ -33,8 +33,7 @@ models:
           - dbt_expectations.expect_column_values_to_not_match_regex:
               regex: "[A-Z]"
           - dbt_expectations.expect_column_values_to_not_match_regex:
-              regex: "[A-Z]"
-              flags: i
+              regex: "[a-z]"
               config:
                 error_if: "=0"
                 warn_if: "<4"
@@ -51,8 +50,8 @@ models:
               config:
                 enabled: "{{ target.type in ['postgres', 'snowflake', 'redshift' ] }}"
           - dbt_expectations.expect_column_values_to_match_regex_list:
-              regex_list: ["![A-G]", "![H-Z]"]
-              flags: i
+              regex_list: ["[A-G]", "[H-Z]"]
+              flags: c
               config:
                 enabled: "{{ target.type in ['postgres', 'snowflake', 'redshift' ] }}"
                 error_if: "=0"
@@ -76,10 +75,10 @@ models:
           - dbt_expectations.expect_column_values_to_not_match_regex_list:
               regex_list: ["[A-G]", "[H-Z]"]
           - dbt_expectations.expect_column_values_to_not_match_regex_list:
-              regex_list: ["[N-Q]", "[R-Z]"]
+              regex_list: ["[A-Z]", "[0-9]"]
               flags: i
           - dbt_expectations.expect_column_values_to_not_match_regex_list:
-              regex_list: ["[A-G]", "[N-Q]", "[R-Z]"]
+              regex_list: ["[A-Z]", "[0-9]"]
               flags: i
               match_on: all
               config:
