@@ -38,7 +38,7 @@ regexp_instr({{ source_value }}, {{ regexp }}, {{ position }}, {{ occurrence }})
 {# Postgres does not need to escape raw strings #}
 {% macro postgres__regexp_instr(source_value, regexp, position, occurrence, is_raw, flags) %}
 {% if flags %}{{ dbt_expectations._validate_flags(flags, 'bcegimnpqstwx') }}{% endif %}
-array_length((select regexp_matches({{ source_value }}, '{{ regexp }}', '{{ flags }}')), 1)
+coalesce(array_length((select regexp_matches({{ source_value }}, '{{ regexp }}', '{{ flags }}')), 1), 0)
 {% endmacro %}
 
 {# Unclear what Redshift does to escape raw strings #}
