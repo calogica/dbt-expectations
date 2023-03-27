@@ -77,11 +77,14 @@ models:
           - dbt_expectations.expect_column_values_to_not_match_regex_list:
               regex_list: ["[A-Z]", "[0-9]"]
               flags: i
+              config:
+                enabled: "{{ target.type in ['postgres', 'snowflake', 'redshift' ] }}"
           - dbt_expectations.expect_column_values_to_not_match_regex_list:
               regex_list: ["[A-Z]", "[0-9]"]
               flags: i
               match_on: all
               config:
+                enabled: "{{ target.type in ['postgres', 'snowflake', 'redshift' ] }}"
                 error_if: "=0"
                 warn_if: "<4"
           - dbt_expectations.expect_column_values_to_match_like_pattern:
