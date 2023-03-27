@@ -104,6 +104,7 @@ models:
               match_on: all
               config:
                 enabled: "{{ target.type in ['postgres', 'snowflake', 'redshift' ] }}"
+                enabled: "{{ target.type in ['postgres', 'snowflake', 'redshift' ] }}"
                 error_if: "=0"
                 warn_if: "<4"
             # match '@' anywhere in string
