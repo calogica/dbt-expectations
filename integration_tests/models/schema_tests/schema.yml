@@ -4,18 +4,22 @@ models:
     columns:
       - name: email_address
         tests:
+            # match email address
           - dbt_expectations.expect_column_values_to_match_regex:
               regex: "@[^.]*"
+            # does not match email address, should fail
           - dbt_expectations.expect_column_values_to_match_regex:
               regex: "&[^.]*"
               config:
                 error_if: "=0"
                 warn_if: "<4"
+            # match all uppercase, but match case-insensitive (where implemented)
           - dbt_expectations.expect_column_values_to_match_regex:
               regex: "[A-Z]"
               flags: i
               config:
                 enabled: "{{ target.type in ['postgres', 'snowflake', 'redshift' ] }}"
+            # match all uppercase, case-sensitive (where implemented), should fail
           - dbt_expectations.expect_column_values_to_match_regex:
               regex: "[A-Z]"
               flags: c
@@ -23,32 +27,40 @@ models:
                 enabled: "{{ target.type in ['postgres', 'snowflake', 'redshift' ] }}"
                 error_if: "=0"
                 warn_if: "<4"
+            # do not match other non-email string, should pass
           - dbt_expectations.expect_column_values_to_not_match_regex:
               regex: "&[^.]*"
+            # match email address, should fail
           - dbt_expectations.expect_column_values_to_not_match_regex:
               regex: "@[^.]*"
               config:
                 error_if: "=0"
                 warn_if: "<4"
+            # match all uppercase, case-sensitive (default), should pass
           - dbt_expectations.expect_column_values_to_not_match_regex:
               regex: "[A-Z]"
+            # match all lowercase, case-sensitive (default), should fail
           - dbt_expectations.expect_column_values_to_not_match_regex:
               regex: "[a-z]"
               config:
                 error_if: "=0"
                 warn_if: "<4"
+            # do match one of email address or other non-email string
           - dbt_expectations.expect_column_values_to_match_regex_list:
               regex_list: ["@[^.]*", "&[^.]*"]
+            # do not match other non-email strings, should fail
           - dbt_expectations.expect_column_values_to_match_regex_list:
               regex_list: ["#[^.]*", "&[^.]*"]
               config:
                 error_if: "=0"
                 warn_if: "<4"
+            # match all uppercase, but match case-insensitive (where implemented)
           - dbt_expectations.expect_column_values_to_match_regex_list:
               regex_list: ["[A-G]", "[H-Z]"]
               flags: i
               config:
                 enabled: "{{ target.type in ['postgres', 'snowflake', 'redshift' ] }}"
+            # match all uppercase, but match case-sensitive (where implemented), should fail
           - dbt_expectations.expect_column_values_to_match_regex_list:
               regex_list: ["[A-G]", "[H-Z]"]
               flags: c
@@ -56,58 +68,76 @@ models:
                 enabled: "{{ target.type in ['postgres', 'snowflake', 'redshift' ] }}"
                 error_if: "=0"
                 warn_if: "<4"
+            # match email address or other string
           - dbt_expectations.expect_column_values_to_not_match_regex_list:
               regex_list: ["@[^.]*", "&[^.]*"]
+            # match email address, should fail
           - dbt_expectations.expect_column_values_to_not_match_regex_list:
               regex_list: ["@[^.]*", "@[^.]*"]
               config:
                 error_if: "=0"
                 warn_if: "<4"
+            # do not match any of other non-email string
           - dbt_expectations.expect_column_values_to_not_match_regex_list:
               regex_list: ["&[^.]*", "&[^.]*"]
               match_on: all
+            # do not match any of email or other non-email string, should fail
           - dbt_expectations.expect_column_values_to_not_match_regex_list:
               regex_list: ["@[^.]*", "&[^.]*"]
               match_on: all
               config:
                 error_if: "=0"
                 warn_if: "<4"
+            # do not match all uppercase
           - dbt_expectations.expect_column_values_to_not_match_regex_list:
               regex_list: ["[A-G]", "[H-Z]"]
+            # do not match all uppercase or numbers, case-insensitive (where implemented)
           - dbt_expectations.expect_column_values_to_not_match_regex_list:
               regex_list: ["[A-Z]", "[0-9]"]
               flags: i
+              config:
+                enabled: "{{ target.type in ['postgres', 'snowflake', 'redshift' ] }}"
+            # do not match all uppercase and numbers, case-insensitive (where implemented)
           - dbt_expectations.expect_column_values_to_not_match_regex_list:
               regex_list: ["[A-Z]", "[0-9]"]
               flags: i
               match_on: all
               config:
+                enabled: "{{ target.type in ['postgres', 'snowflake', 'redshift' ] }}"
                 error_if: "=0"
                 warn_if: "<4"
+            # match '@' anywhere in string
           - dbt_expectations.expect_column_values_to_match_like_pattern:
               like_pattern: "%@%"
+            # match '&' anywhere in string, should fail
           - dbt_expectations.expect_column_values_to_match_like_pattern:
               like_pattern: "%&%"
               config:
                 error_if: "=0"
                 warn_if: "<4"
+            # do not match '&' anywhere in string
           - dbt_expectations.expect_column_values_to_not_match_like_pattern:
               like_pattern: "%&%"
+            # do not match '@' anywhere in string, should fail
           - dbt_expectations.expect_column_values_to_not_match_like_pattern:
               like_pattern: "%@%"
               config:
                 error_if: "=0"
                 warn_if: "<4"
+            # match at least one of '@' or '&' anywhere in string
           - dbt_expectations.expect_column_values_to_match_like_pattern_list:
               like_pattern_list: ["%@%", "%&%"]
+            # match both '@' or '&' anywhere in string, should fail
           - dbt_expectations.expect_column_values_to_match_like_pattern_list:
               like_pattern_list: ["%@%", "%&%"]
               match_on: all
               config:
                 error_if: "=0"
                 warn_if: "<4"
+            # do not match at least one of '@' or '&' anywhere in string
           - dbt_expectations.expect_column_values_to_not_match_like_pattern_list:
               like_pattern_list: ["%@%", "%&%"]
+            # do not match either of '@' or '&' anywhere in string, should fail
           - dbt_expectations.expect_column_values_to_not_match_like_pattern_list:
               like_pattern_list: ["%@%", "%&%"]
               match_on: all
