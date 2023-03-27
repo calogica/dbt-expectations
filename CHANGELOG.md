@@ -1,3 +1,12 @@
+# dbt-expectations v0.8.4
+
+## Fixes
+* escape quotes in `expect_column_values_to_be_in_type_list` by @RobbertDM in https://github.com/calogica/dbt-expectations/pull/251
+* Fix `postgres__regexp_instr` not validating regex #249 by @lookslikeitsnot in https://github.com/calogica/dbt-expectations/pull/250
+
+## Under The Hood
+* added negative tests for regex email test to make sure those tests are failing when they should
+
 # dbt-expectations v0.8.3
 
 ## New Features
