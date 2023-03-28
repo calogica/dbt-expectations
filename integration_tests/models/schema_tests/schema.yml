@@ -18,7 +18,14 @@ models:
               regex: "[A-Z]"
               flags: i
               config:
-                enabled: "{{ target.type in ['postgres', 'snowflake', 'redshift' ] }}"
+                enabled: "{{ target.type in ['postgres', 'snowflake', 'redshift', 'bigquery' ] }}"
+            # match all uppercase with inline case-insensitive flag and case-insensitive flag parameter (where implemented)
+            # check that adapters handling flags by inlining them don't break because of the flag duplication
+          - dbt_expectations.expect_column_values_to_match_regex:
+              regex: "(?i)[A-Z]"
+              flags: i
+              config:
+                enabled: "{{ target.type in ['postgres', 'snowflake', 'redshift', 'bigquery' ] }}"
             # match all uppercase, case-sensitive (where implemented), should fail
           - dbt_expectations.expect_column_values_to_match_regex:
               regex: "[A-Z]"
@@ -59,7 +66,7 @@ models:
               regex_list: ["[A-G]", "[H-Z]"]
               flags: i
               config:
-                enabled: "{{ target.type in ['postgres', 'snowflake', 'redshift' ] }}"
+                enabled: "{{ target.type in ['postgres', 'snowflake', 'redshift', 'bigquery' ] }}"
             # match all uppercase, but match case-sensitive (where implemented), should fail
           - dbt_expectations.expect_column_values_to_match_regex_list:
               regex_list: ["[A-G]", "[H-Z]"]
@@ -96,15 +103,14 @@ models:
               regex_list: ["[A-Z]", "[0-9]"]
               flags: i
               config:
-                enabled: "{{ target.type in ['postgres', 'snowflake', 'redshift' ] }}"
+                enabled: "{{ target.type in ['postgres', 'snowflake', 'redshift', 'bigquery' ] }}"
             # do not match all uppercase and numbers, case-insensitive (where implemented)
           - dbt_expectations.expect_column_values_to_not_match_regex_list:
               regex_list: ["[A-Z]", "[0-9]"]
               flags: i
               match_on: all
               config:
-                enabled: "{{ target.type in ['postgres', 'snowflake', 'redshift' ] }}"
-                enabled: "{{ target.type in ['postgres', 'snowflake', 'redshift' ] }}"
+                enabled: "{{ target.type in ['postgres', 'snowflake', 'redshift', 'bigquery' ] }}"
                 error_if: "=0"
                 warn_if: "<4"
             # match '@' anywhere in string
