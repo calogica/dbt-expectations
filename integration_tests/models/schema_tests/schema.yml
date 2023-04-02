@@ -13,12 +13,17 @@ models:
               config:
                 error_if: "=0"
                 warn_if: "<4"
-            # match all uppercase, but match case-insensitive (where implemented)
+            # match all uppercase, but match case-insensitive
           - dbt_expectations.expect_column_values_to_match_regex:
               regex: "[A-Z]"
               flags: i
+            # match all uppercase with inline case-insensitive flag and case-insensitive flag parameter (where implemented)
+            # check that adapters handling flags by inlining them don't break because of the flag duplication
+          - dbt_expectations.expect_column_values_to_match_regex:
+              regex: "(?i)[A-Z]"
+              flags: i
               config:
-                enabled: "{{ target.type in ['postgres', 'snowflake', 'redshift' ] }}"
+                enabled: "{{ target.type == 'bigquery' }}"
             # match all uppercase, case-sensitive (where implemented), should fail
           - dbt_expectations.expect_column_values_to_match_regex:
               regex: "[A-Z]"
@@ -54,12 +59,10 @@ models:
               config:
                 error_if: "=0"
                 warn_if: "<4"
-            # match all uppercase, but match case-insensitive (where implemented)
+            # match all uppercase, but match case-insensitive
           - dbt_expectations.expect_column_values_to_match_regex_list:
               regex_list: ["[A-G]", "[H-Z]"]
               flags: i
-              config:
-                enabled: "{{ target.type in ['postgres', 'snowflake', 'redshift' ] }}"
             # match all uppercase, but match case-sensitive (where implemented), should fail
           - dbt_expectations.expect_column_values_to_match_regex_list:
               regex_list: ["[A-G]", "[H-Z]"]
@@ -91,20 +94,16 @@ models:
             # do not match all uppercase
           - dbt_expectations.expect_column_values_to_not_match_regex_list:
               regex_list: ["[A-G]", "[H-Z]"]
-            # do not match all uppercase or numbers, case-insensitive (where implemented)
+            # do not match all uppercase or numbers, case-insensitive
           - dbt_expectations.expect_column_values_to_not_match_regex_list:
               regex_list: ["[A-Z]", "[0-9]"]
               flags: i
-              config:
-                enabled: "{{ target.type in ['postgres', 'snowflake', 'redshift' ] }}"
-            # do not match all uppercase and numbers, case-insensitive (where implemented)
+            # do not match all uppercase and numbers, case-insensitive
           - dbt_expectations.expect_column_values_to_not_match_regex_list:
               regex_list: ["[A-Z]", "[0-9]"]
               flags: i
               match_on: all
               config:
-                enabled: "{{ target.type in ['postgres', 'snowflake', 'redshift' ] }}"
-                enabled: "{{ target.type in ['postgres', 'snowflake', 'redshift' ] }}"
                 error_if: "=0"
                 warn_if: "<4"
             # match '@' anywhere in string
