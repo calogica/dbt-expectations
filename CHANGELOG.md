@@ -1,3 +1,9 @@
+# dbt-expectations v0.8.5
+
+## New Features
+
+* Add support for regex flags for BigQuery by @lookslikeitsnot in https://github.com/calogica/dbt-expectations/pull/253
+
 # dbt-expectations v0.8.4
 
 ## Fixes
