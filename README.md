@@ -77,6 +77,7 @@ For example, use `America/New_York` for East Coast Time.
 - [expect_table_column_count_to_be_between](#expect_table_column_count_to_be_between)
 - [expect_table_column_count_to_equal_other_table](#expect_table_column_count_to_equal_other_table)
 - [expect_table_column_count_to_equal](#expect_table_column_count_to_equal)
+- [expect_table_column_names_and_dtypes](#expect_table_column_names_and_dtypes)
 - [expect_table_columns_to_not_contain_set](#expect_table_columns_to_not_contain_set)
 - [expect_table_columns_to_contain_set](#expect_table_columns_to_contain_set)
 - [expect_table_columns_to_match_ordered_list](#expect_table_columns_to_match_ordered_list)
@@ -273,6 +274,24 @@ models: # or seeds:
     tests:
       - dbt_expectations.expect_table_column_count_to_equal_other_table:
           compare_model: ref("other_model")
+```
+
+### [expect_table_column_names_and_dtypes](macros/schema_tests/table_shape/expect_table_column_names_and_dtypes.sql)
+
+Expect the names and dtypes of the columns in a model to match provided a Python dict.
+
+*Applies to:* Model, Seed, Source
+
+```yaml
+models: # or seeds:
+  - name: my_model
+    tests:
+      - dbt_expectations.expect_table_column_names_and_dtypes:
+          mapping: {
+             'NAME': 'VARCHAR',
+             'BIRTHDAY': 'DATE',
+             'AGE_IN_YEARS': 'INTEGER',
+          }
 ```
 
 ### [expect_table_columns_to_not_contain_set](macros/schema_tests/table_shape/expect_table_columns_to_not_contain_set.sql)
