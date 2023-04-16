@@ -283,15 +283,16 @@ Expect the names and dtypes of the columns in a model to match provided a Python
 *Applies to:* Model, Seed, Source
 
 ```yaml
-models: # or seeds:
-  - name: my_model
-    tests:
-      - dbt_expectations.expect_table_column_names_and_dtypes:
-          mapping:
-             name: VARCHAR
-             birthday: DATE
-             age_in_years: INTEGER
-
+sources:
+  - name: my_source
+    tables:
+      - name: my_table
+        tests:
+          - dbt_expectations.expect_table_column_names_and_dtypes:
+              mapping:
+                 name: VARCHAR
+                 birthday: DATE
+                 age_in_years: INTEGER
 ```
 
 ### [expect_table_columns_to_not_contain_set](macros/schema_tests/table_shape/expect_table_columns_to_not_contain_set.sql)
