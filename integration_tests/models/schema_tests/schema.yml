@@ -249,7 +249,9 @@ models:
       - dbt_expectations.expect_table_column_count_to_equal_other_table:
           compare_model: ref("data_test")
       - dbt_expectations.expect_table_column_names_and_dtypes:
-          mapping: {'date_col': 'DATE', 'col_string_b': 'STRING'}
+          mapping:
+            date_col: DATE
+            col_string_b: STRING
       - dbt_expectations.expect_table_columns_to_not_contain_set:
           column_list: ["col_numeric_c", "col_string_d"]
       - dbt_expectations.expression_is_true:
