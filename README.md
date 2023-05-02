@@ -27,10 +27,12 @@ Development of `dbt-expectations` (and `dbt-date`) is funded by our amazing [spo
 
 ### Datacoves (<a href="https://datacoves.com/product" target="_blank">datacoves.com</a>)
 
+<a href="https://datacoves.com/product" target="_blank">
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://github.com/datacoves/dbt-coves/blob/main/images/datacoves-dark.png">
   <img alt="Datacoves" src="https://github.com/datacoves/dbt-coves/blob/main/images/datacoves-light.png" width="150">
 </picture>
+</a>
 
 ### Elementary (<a href="https://www.elementary-data.com/" target="_blank">www.elementary-data.com</a>)
 
