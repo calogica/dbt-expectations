@@ -25,6 +25,13 @@ Development of `dbt-expectations` (and `dbt-date`) is funded by our amazing [spo
 
 <a href="https://www.aggua.io/" target="_blank"><img width="80%" src="https://uploads-ssl.webflow.com/628f445aa439cdd1dfb160c0/62b4295accb569ec87d751a5_aggua-logo.svg"/></a>
 
+### Datacoves (<a href="https://datacoves.com/product" target="_blank">datacoves.com</a>)
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="images/datacoves-dark.png">
+  <img alt="Datacoves" src="images/datacoves-light.png" width="150">
+</picture>
+
 ### Elementary (<a href="https://www.elementary-data.com/" target="_blank">www.elementary-data.com</a>)
 
 <a href="https://www.elementary-data.com/" target="_blank"><img width="80%" src="https://raw.githubusercontent.com/elementary-data/elementary/master/static/header_git.png"/></a>
@@ -138,7 +145,7 @@ For example, use `America/New_York` for East Coast Time.
 
 ### Multi-column
 
-- [expect_column_pair_values_A_to_be_greater_than_B](#expect_column_pair_values_A_to_be_greater_than_B)
+- [expect_column_pair_values_A_to_be_greater_than_B](#expect_column_pair_values_a_to_be_greater_than_b)
 - [expect_column_pair_values_to_be_equal](#expect_column_pair_values_to_be_equal)
 - [expect_column_pair_values_to_be_in_set](#expect_column_pair_values_to_be_in_set)
 - [expect_compound_columns_to_be_unique](#expect_compound_columns_to_be_unique)
@@ -602,6 +609,7 @@ tests:
 Expect column entries to be strings that match a given regular expression. Valid matches can be found anywhere in the string, for example "[at]+" will identify the following strings as expected: "cat", "hat", "aa", "a", and "t", and the following strings as unexpected: "fish", "dog".
 
 Optional (keyword) arguments:
+
 - `is_raw` indicates the `regex` pattern is a "raw" string and should be escaped. The default is `False`.
 - `flags` is a string of one or more characters that are passed to the regex engine as flags (or parameters). Allowed flags are adapter-specific. A common flag is `i`, for case-insensitive matching. The default is no flags.
 
@@ -621,6 +629,7 @@ tests:
 Expect column entries to be strings that do NOT match a given regular expression. The regex must not match any portion of the provided string. For example, "[at]+" would identify the following strings as expected: "fish”, "dog”, and the following as unexpected: "cat”, "hat”.
 
 Optional (keyword) arguments:
+
 - `is_raw` indicates the `regex` pattern is a "raw" string and should be escaped. The default is `False`.
 - `flags` is a string of one or more characters that are passed to the regex engine as flags (or parameters). Allowed flags are adapter-specific. A common flag is `i`, for case-insensitive matching. The default is no flags.
 
@@ -640,6 +649,7 @@ tests:
 Expect the column entries to be strings that can be matched to either any of or all of a list of regular expressions. Matches can be anywhere in the string.
 
 Optional (keyword) arguments:
+
 - `is_raw` indicates the `regex` pattern is a "raw" string and should be escaped. The default is `False`.
 - `flags` is a string of one or more characters that are passed to the regex engine as flags (or parameters). Allowed flags are adapter-specific. A common flag is `i`, for case-insensitive matching. The default is no flags.
 
@@ -660,6 +670,7 @@ tests:
 Expect the column entries to be strings that do not match any of a list of regular expressions. Matches can be anywhere in the string.
 
 Optional (keyword) arguments:
+
 - `is_raw` indicates the `regex` pattern is a "raw" string and should be escaped. The default is `False`.
 - `flags` is a string of one or more characters that are passed to the regex engine as flags (or parameters). Allowed flags are adapter-specific. A common flag is `i`, for case-insensitive matching. The default is no flags.
 
