@@ -13,6 +13,7 @@ jobs:
       DBT_PROFILES_DIR: ./integration_tests/ci
       DBT_PROJECT_DIR: ./integration_tests
       BIGQUERY_SERVICE_KEY_PATH: "/home/circleci/bigquery-service-key.json"
+      DBT_VERSION: 1.4.1
 
     steps:
       - checkout
@@ -22,8 +23,7 @@ jobs:
             python3 -m venv venv
             . venv/bin/activate
             pip install -U pip setuptools wheel
-            pip install dbt-core dbt-postgres dbt-bigquery dbt-snowflake
-            pip install sqlfluff sqlfluff-templater-dbt
+            pip install dbt-core==$DBT_VERSION dbt-postgres==$DBT_VERSION dbt-bigquery==$DBT_VERSION dbt-snowflake==$DBT_VERSION
 
       - run:
           name: Install dbt dependencies
