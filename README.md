@@ -1011,6 +1011,8 @@ tests:
       quote_values: true # (Optional. Default is 'true'.)
       data_type: "decimal" # (Optional. Default is 'decimal')
       strictly: false # (Optional. Default is 'false'. Adds an 'or equal to' to the comparison operator for min/max)
+      ties_okay: true # (Optional. Default is 'false'. If true, the expectation will succeed if values outside 
+                      # the designated set are as common (but not more common) than designated values)
 ```
 
 ### [expect_column_max_to_be_between](macros/schema_tests/aggregate_functions/expect_column_max_to_be_between.sql)
