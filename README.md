@@ -1009,10 +1009,12 @@ tests:
       value_set: [0.5]
       top_n: 1
       quote_values: true # (Optional. Default is 'true'.)
-      data_type: "decimal" # (Optional. Default is 'decimal')
+      data_type: "decimal"  # (Optional. Default is adapter-specific equivalent of 'decimal' with a scale provided by dbt. 
+                            # Using decimal/numeric without scale might result in unexpected behaviour with Snowflake where scale
+                            # defaults to 0 resulting in values being rounded)
       strictly: false # (Optional. Default is 'false'. Adds an 'or equal to' to the comparison operator for min/max)
-      ties_okay: true # (Optional. Default is 'false'. If true, the expectation will succeed if values outside 
-                      # the designated set are as common (but not more common) than designated values)
+      allow_ties: true # (Optional. Default is 'false'. If true, the expectation will succeed if values outside 
+                       # the designated set are as common (but not more common) than designated values)
 ```
 
 ### [expect_column_max_to_be_between](macros/schema_tests/aggregate_functions/expect_column_max_to_be_between.sql)

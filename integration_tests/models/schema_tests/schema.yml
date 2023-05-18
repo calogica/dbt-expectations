@@ -513,11 +513,11 @@ models:
               config:
                 error_if: "=0"
                 warn_if: "<>1"
-            # expect error if value is column but not most common and ties_okay is true
+            # expect error if value is column but not most common and allow_ties is true
           - dbt_expectations.expect_column_most_common_value_to_be_in_set:
               value_set: [1]
               top_n: 1
-              ties_okay: true
+              allow_ties: true
               quote_values: false
               config:
                 error_if: "=0"
@@ -562,31 +562,31 @@ models:
               config:
                 error_if: "=0"
                 warn_if: "<3"
-            # Expect success if not all most common values are in the set but ties_okay is set
+            # Expect success if not all most common values are in the set but allow_ties is set
           - dbt_expectations.expect_column_most_common_value_to_be_in_set:
               value_set: ['b']
               top_n: 1
-              ties_okay: true
-            # Expect error if none of the most common values are in the set and ties_okay is set
+              allow_ties: true
+            # Expect error if none of the most common values are in the set and allow_ties is set
           - dbt_expectations.expect_column_most_common_value_to_be_in_set:
               value_set: ['invalid_value']
               top_n: 1
-              ties_okay: true
+              allow_ties: true
               config:
                 error_if: "=0"
                 warn_if: "<4"
-            # Expect success if not all most common values are in the set but ties_okay is set
+            # Expect success if not all most common values are in the set but allow_ties is set
             # and the set contains extra values 
           - dbt_expectations.expect_column_most_common_value_to_be_in_set:
               value_set: ['b', 'invalid_value']
               top_n: 1
-              ties_okay: true
-            # Expect success if not all most common values are in the set but ties_okay is set
+              allow_ties: true
+            # Expect success if not all most common values are in the set but allow_ties is set
             # and value is not first one of the column naturally ordered
           - dbt_expectations.expect_column_most_common_value_to_be_in_set:
               value_set: ['ab']
               top_n: 1
-              ties_okay: true
+              allow_ties: true
             # Expect success if all most common values are in the set
           - dbt_expectations.expect_column_most_common_value_to_be_in_set:
               value_set: ['b', 'ab', 'abc', 'abcd']

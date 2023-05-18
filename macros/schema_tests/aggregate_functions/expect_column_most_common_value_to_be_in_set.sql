@@ -3,13 +3,15 @@
                                                        value_set,
                                                        top_n,
                                                        quote_values=True,
-                                                       data_type="decimal",
+                                                       data_type=None,
                                                        row_condition=None,
-                                                       ties_okay=False
+                                                       allow_ties=False
                                                        ) -%}
-
+    {# For Snowflake, using a default 'decimal' instead of dbt.type_numeric() 
+        rounds up the value when casting #}
+    {% set data_type = dbt.type_numeric() if not data_type else data_type %}
     {{ adapter.dispatch('test_expect_column_most_common_value_to_be_in_set', 'dbt_expectations') (
-            model, column_name, value_set, top_n, quote_values, data_type, row_condition, ties_okay
+            model, column_name, value_set, top_n, quote_values, data_type, row_condition, allow_ties
         ) }}
 
 {%- endtest %}
@@ -21,9 +23,9 @@
                                                                       quote_values,
                                                                       data_type,
                                                                       row_condition,
-                                                                      ties_okay
+                                                                      allow_ties
                                                                       ) %}
-
+{% set data_type = data_type %}
 with value_counts as (
 
     select
@@ -93,14 +95,35 @@ most_common_values_not_in_set as (
     where
         value_field not in (select value_field from unique_set_values)
 ),
+most_common_values_in_set as (
+    select 
+        value_field 
+    from 
+        value_count_top_n 
+    {{ dbt.except() }}
+    select 
+        value_field 
+    from 
+        most_common_values_not_in_set
+),
 validation_errors as (
-    {% if ties_okay -%}
-    select mcvnis.* from most_common_values_not_in_set mcvnis
-    , (select count(*) as cnt from most_common_values_not_in_set) as most_common_values_not_in_set_cnt
-    , (select count(*) as cnt from value_count_top_n) as most_common_values_cnt
-    where most_common_values_not_in_set_cnt.cnt >= most_common_values_cnt.cnt
+    {% if allow_ties -%}
+    select 
+        * 
+    from 
+        most_common_values_not_in_set
+    where
+        {# 
+            If the intersection between the most common values and the values in the set is not empty, 
+            succeed. Otherwise fail the test and select all the most common values from the column.
+        #}
+        (
+            select count(*) 
+            from most_common_values_in_set
+        ) = 0
     {%- else -%}
-    select * from most_common_values_not_in_set
+    select * 
+    from most_common_values_not_in_set
     {%- endif -%}
 )
 
