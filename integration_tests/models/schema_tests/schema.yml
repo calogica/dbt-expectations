@@ -505,6 +505,17 @@ models:
               value_set: [0.5]
               top_n: 1
               quote_values: false
+          - dbt_expectations.expect_column_most_common_value_to_be_in_set:
+              value_set: [0.5, 0, 1]
+              top_n: 2
+              quote_values: false
+          - dbt_expectations.expect_column_most_common_value_to_be_in_set:
+              value_set: [0.5, 0]
+              top_n: 2
+              quote_values: false
+              config:
+                error_if: "=0"
+                warn_if: "<>1"
           - dbt_expectations.expect_column_values_to_be_increasing:
               sort_column: col_numeric_a
               strictly: false

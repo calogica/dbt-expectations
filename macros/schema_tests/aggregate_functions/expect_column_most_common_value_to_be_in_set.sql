@@ -48,7 +48,7 @@ value_counts_ranked as (
 
     select
         *,
-        row_number() over(order by value_count desc) as value_count_rank
+        rank() over(order by value_count desc) as value_count_rank
     from
         value_counts
 
@@ -60,7 +60,7 @@ value_count_top_n as (
     from
         value_counts_ranked
     where
-        value_count_rank = {{ top_n }}
+        value_count_rank <= {{ top_n }}
 
 ),
 set_values as (
