@@ -5,13 +5,13 @@
                                                        quote_values=True,
                                                        data_type=None,
                                                        row_condition=None,
-                                                       allow_ties=False
+                                                       ties_okay=False
                                                        ) -%}
     {# For Snowflake, using a default 'decimal' instead of dbt.type_numeric() 
         rounds up the value when casting #}
     {% set data_type = dbt.type_numeric() if not data_type else data_type %}
     {{ adapter.dispatch('test_expect_column_most_common_value_to_be_in_set', 'dbt_expectations') (
-            model, column_name, value_set, top_n, quote_values, data_type, row_condition, allow_ties
+            model, column_name, value_set, top_n, quote_values, data_type, row_condition, ties_okay
         ) }}
 
 {%- endtest %}
@@ -23,7 +23,7 @@
                                                                       quote_values,
                                                                       data_type,
                                                                       row_condition,
-                                                                      allow_ties
+                                                                      ties_okay
                                                                       ) %}
 {% set data_type = data_type %}
 with value_counts as (
@@ -64,7 +64,7 @@ value_count_top_n as (
     from
         value_counts_ranked
     where
-        value_count_rank = {{ top_n }}
+        value_count_rank <= {{ top_n }}
 
 ),
 set_values as (
@@ -107,7 +107,7 @@ most_common_values_in_set as (
         most_common_values_not_in_set
 ),
 validation_errors as (
-    {% if allow_ties -%}
+    {% if ties_okay -%}
     select 
         * 
     from 

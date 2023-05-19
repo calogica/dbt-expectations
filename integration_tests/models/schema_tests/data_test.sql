@@ -1,8 +1,8 @@
 select
     1 as idx,
     '2020-10-21' as date_col,
-    cast(0 as {{ dbt.type_float() }}) as col_numeric_a,
-    cast(1 as {{ dbt.type_float() }}) as col_numeric_b,
+    cast(0 as {{ dbt.type_numeric() }}) as col_numeric_a,
+    cast(1 as {{ dbt.type_numeric() }}) as col_numeric_b,
     'a' as col_string_a,
     'b' as col_string_b,
     cast(null as {{ dbt.type_string() }}) as col_null,

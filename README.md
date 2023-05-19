@@ -1013,7 +1013,7 @@ tests:
                             # Using decimal/numeric without scale might result in unexpected behaviour with Snowflake where scale
                             # defaults to 0 resulting in values being rounded)
       strictly: false # (Optional. Default is 'false'. Adds an 'or equal to' to the comparison operator for min/max)
-      allow_ties: true # (Optional. Default is 'false'. If true, the expectation will succeed if values outside 
+      ties_okay: true # (Optional. Default is 'false'. If true, the expectation will succeed if values outside 
                        # the designated set are as common (but not more common) than designated values)
 ```
 
