@@ -505,12 +505,12 @@ models:
               value_set: [0.5]
               top_n: 1
               quote_values: false
-              # Expect success if all most common values are in set 
+              # Expect success if all most common values at all n levels are in set 
           - dbt_expectations.expect_column_most_common_value_to_be_in_set:
               value_set: [0.5, 0, 1]
               top_n: 2
               quote_values: false
-              # Expect failure if not all most common values are in set 
+              # Expect failure if not all most common values at all n levels are in set 
           - dbt_expectations.expect_column_most_common_value_to_be_in_set:
               value_set: [0.5, 0]
               top_n: 2
@@ -518,7 +518,7 @@ models:
               config:
                 error_if: "=0"
                 warn_if: "<>1"
-              # Expect success if some of the most common values are in set and ties_okay is true
+              # Expect success if some of the most common values at all n levels are in set and ties_okay is true
           - dbt_expectations.expect_column_most_common_value_to_be_in_set:
               value_set: [0.5, 0]
               top_n: 2
@@ -527,6 +527,12 @@ models:
               # Expect success if any of the top 2 most common levels value are in set and ties_okay is true
           - dbt_expectations.expect_column_most_common_value_to_be_in_set:
               value_set: [0]
+              top_n: 2
+              ties_okay: true
+              quote_values: false
+              # Expect success if any of the top most common level value is in set and ties_okay is true
+          - dbt_expectations.expect_column_most_common_value_to_be_in_set:
+              value_set: [0.5]
               top_n: 2
               ties_okay: true
               quote_values: false

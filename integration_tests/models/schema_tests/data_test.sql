@@ -13,8 +13,8 @@ union all
 select
     2 as idx,
     '2020-10-22' as date_col,
-    1 as col_numeric_a,
-    0 as col_numeric_b,
+    cast(1 as {{ dbt.type_numeric() }}) as col_numeric_a,
+    cast(0 as {{ dbt.type_numeric() }}) as col_numeric_b,
     'b' as col_string_a,
     'ab' as col_string_b,
     null as col_null,
@@ -25,8 +25,8 @@ union all
 select
     3 as idx,
     '2020-10-23' as date_col,
-    0.5 as col_numeric_a,
-    0.5 as col_numeric_b,
+    cast(0.5 as {{ dbt.type_numeric() }}) as col_numeric_a,
+    cast(0.5 as {{ dbt.type_numeric() }}) as col_numeric_b,
     'c' as col_string_a,
     'abc' as col_string_b,
     null as col_null,
@@ -37,8 +37,8 @@ union all
 select
     4 as idx,
     '2020-10-23' as date_col,
-    0.5 as col_numeric_a,
-    0.5 as col_numeric_b,
+    cast(0.5 as {{ dbt.type_numeric() }}) as col_numeric_a,
+    cast(0.5 as {{ dbt.type_numeric() }}) as col_numeric_b,
     'c' as col_string_a,
     'abcd' as col_string_b,
     null as col_null,
