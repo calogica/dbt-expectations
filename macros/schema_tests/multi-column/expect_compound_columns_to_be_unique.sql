@@ -39,6 +39,7 @@ with validation_errors as (
         {% for column in columns -%}
         {{ column }}{% if not loop.last %},{% endif %}
         {%- endfor %}
+        ,count(*) as {{adapter.quote("n_records")}}
     from {{ model }}
     where
         1=1
