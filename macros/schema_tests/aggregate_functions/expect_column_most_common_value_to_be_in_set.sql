@@ -25,7 +25,6 @@
                                                                       row_condition,
                                                                       ties_okay
                                                                       ) %}
-{% set data_type = data_type %}
 with value_counts as (
 
     select
@@ -95,16 +94,17 @@ most_common_values_not_in_set as (
     where
         value_field not in (select value_field from unique_set_values)
 ),
+{# Get the partial matches for ties_okay #}
 most_common_values_in_set as (
     select 
         value_field 
     from 
         value_count_top_n 
-    {{ dbt.except() }}
+    {{ dbt.intersect() }}
     select 
         value_field 
     from 
-        most_common_values_not_in_set
+        unique_set_values
 ),
 validation_errors as (
     {% if ties_okay -%}
@@ -114,13 +114,13 @@ validation_errors as (
         most_common_values_not_in_set
     where
         {# 
-            If the intersection between the most common values and the values in the set is not empty, 
-            succeed. Otherwise fail the test and select all the most common values from the column.
+            If the intersection between the most common values and the values in the set is not empty, succeed. 
+            Otherwise fail the test and select all the most common values from the column not in the set.
         #}
-        (
-            select count(*) 
+        not exists (
+            select 1
             from most_common_values_in_set
-        ) = 0
+        )
     {%- else -%}
     select * 
     from most_common_values_not_in_set
