@@ -553,6 +553,7 @@ models:
       - name: col_numeric_c
         tests:
           - dbt_expectations.expect_column_values_to_be_of_numeric_precision_and_scale:
+              column_type: 'numeric'
               column_precision: 2
               column_scale: 1
 

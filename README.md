@@ -515,6 +515,7 @@ Expect a column to be of type numeric with specific precision and scale.
 ```yaml
 tests:
   - dbt_expectations.expect_column_values_to_be_of_numeric_precision_and_scale:
+      column_type: 'numeric'
       column_precision: 30
       column_scale: 4
 ```

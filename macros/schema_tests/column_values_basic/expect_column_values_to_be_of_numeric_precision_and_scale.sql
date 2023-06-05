@@ -1,4 +1,4 @@
-{%- test expect_column_values_to_be_of_numeric_precision_and_scale(model, column_name, column_precision, column_scale) -%}
+{%- test expect_column_values_to_be_of_numeric_precision_and_scale(model, column_name, column_type, column_precision, column_scale) -%}
 {%- if execute -%}
 
     {%- set column_name = column_name | upper -%}
@@ -22,9 +22,9 @@
         from
             relation_columns
         where
-            relation_column = '{{ column_name }}'
+            relation_column = '{{ column_name | upper }}'
             and (
-                relation_column_type <> 'NUMERIC'
+                relation_column_type <> '{{ column_type | upper }}'
                 or 
                 relation_column_precision <> '{{ column_precision }}'
                 or
