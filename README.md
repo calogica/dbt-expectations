@@ -283,7 +283,7 @@ tests:
       compare_row_condition: some_flag=false
 ```
 
-**Note**: You can also express a **tolerance** factor, either as an absolute tolerable difference, `tolerance`, or as a tolerable % difference `tolerance_percent`.
+**Note**: You can also express a **tolerance** factor, either as an absolute tolerable difference, `tolerance`, or as a tolerable % difference `tolerance_percent` expressed as a decimal (i.e 0.05 for 5%).
 
 ### [expect_table_column_count_to_be_between](macros/schema_tests/table_shape/expect_table_column_count_to_be_between.sql)
 
