@@ -47,27 +47,6 @@ Development of `dbt-expectations` (and `dbt-date`) is funded by our amazing [spo
 
 </tr>
 
-<tr>
-<td width="40%" valign="top" align="center">
-<p><a href="https://www.elementary-data.com/" target="_blank">www.elementary-data.com</a></p>
-<p>
-<a href="https://www.elementary-data.com/" target="_blank">
-<img width="40%" src="https://raw.githubusercontent.com/elementary-data/elementary/master/static/header_git.png"/>
-</a>
-</p>
-</td>
-
-<td width="40%" valign="top" align="center">
-<p><a href="https://www.getre.io/" target="_blank">www.getre.io</a></p>
-<p>
-<a href="https://www.getre.io/" target="_blank">
-<img width="30%" src="https://uploads-ssl.webflow.com/60bdbc7b0c4f5aa1568dc8cc/60df3224a3b3637230f335d6_REDATA%20LOGO%2011.svg"/>
-</a>
-</p>
-</td>
-
-</tr>
-
 </table>
 
 ## Install
