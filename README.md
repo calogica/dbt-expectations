@@ -25,15 +25,6 @@ Development of `dbt-expectations` (and `dbt-date`) is funded by our amazing [spo
 <tr>
 
 <td width="40%" valign="top" align="center">
-<p><a href="https://www.aggua.io/" target="_blank">www.aggua.io</a></p>
-<p>
-<a href="https://www.aggua.io/" target="_blank">
-<img width="40%" src="https://uploads-ssl.webflow.com/628f445aa439cdd1dfb160c0/62b4295accb569ec87d751a5_aggua-logo.svg"/>
-</a>
-</p>
-</td>
-
-<td width="40%" valign="top" align="center">
 <p><a href="https://datacoves.com/product" target="_blank">datacoves.com</a></p>
 <p>
 <a href="https://datacoves.com/product" target="_blank">
