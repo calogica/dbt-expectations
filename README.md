@@ -99,6 +99,7 @@ For example, use `America/New_York` for East Coast Time.
 - [expect_column_values_to_not_be_null](#expect_column_values_to_not_be_null)
 - [expect_column_values_to_be_unique](#expect_column_values_to_be_unique)
 - [expect_column_values_to_be_of_type](#expect_column_values_to_be_of_type)
+- [expect_column_values_to_be_of_numeric_precision_and_scale](#expect_column_values_to_be_of_numeric_precision_and_scale)
 - [expect_column_values_to_be_in_type_list](#expect_column_values_to_be_in_type_list)
 - [expect_column_values_to_have_consistent_casing](#expect_column_values_to_have_consistent_casing)
 
@@ -473,6 +474,20 @@ Expect a column to be of a specified data type.
 tests:
   - dbt_expectations.expect_column_values_to_be_of_type:
       column_type: date
+```
+
+### [expect_column_values_to_be_of_numeric_precision_and_scale](macros/schema_tests/column_values_basic/expect_column_values_to_be_of_numeric_precision_and_scale.sql)
+
+Expect a column to be of type numeric with specific precision and scale.
+
+*Applies to:* Column
+
+```yaml
+tests:
+  - dbt_expectations.expect_column_values_to_be_of_numeric_precision_and_scale:
+      column_type: 'numeric'
+      column_precision: 30
+      column_scale: 4
 ```
 
 ### [expect_column_values_to_be_in_type_list](macros/schema_tests/column_values_basic/expect_column_values_to_be_in_type_list.sql)

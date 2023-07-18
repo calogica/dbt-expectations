@@ -33,3 +33,11 @@
 {% macro postgres__type_datetime() -%}
     timestamp without time zone
 {%- endmacro %}
+
+{% macro type_numeric(col_precision, col_scale) %}
+    {{ return(api.Column.numeric_type("numeric", col_precision, col_scale)) }}
+{% endmacro %}
+
+{% macro default__type_numeric() %}
+    {{ return(dbt.type_numeric()) }}
+{% endmacro %}

@@ -394,7 +394,7 @@ models:
           row_condition: 1=1
           compare_row_condition: 1=1
       - dbt_expectations.expect_table_column_count_to_equal:
-          value: 8
+          value: 9
       - dbt_expectations.expect_table_column_count_to_be_between:
           min_value: 1
           max_value: 10
@@ -405,13 +405,13 @@ models:
       - dbt_expectations.expect_table_columns_to_contain_set:
           column_list: ["col_numeric_b", "col_string_a"]
       - dbt_expectations.expect_table_columns_to_match_set:
-          column_list: ["idx", "date_col", "col_numeric_a", "col_numeric_b", "col_string_a", "col_string_b", "col_null", "col_null_2"]
+          column_list: ["idx", "date_col", "col_numeric_a", "col_numeric_b", "col_numeric_c", "col_string_a", "col_string_b", "col_null", "col_null_2"]
       - dbt_expectations.expect_table_columns_to_match_ordered_list:
-          column_list: ["idx", "date_col", "col_numeric_a", "col_numeric_b", "col_string_a", "col_string_b", "col_null", "col_null_2"]
+          column_list: ["idx", "date_col", "col_numeric_a", "col_numeric_b", "col_numeric_c", "col_string_a", "col_string_b", "col_null", "col_null_2"]
       - dbt_expectations.expect_table_column_count_to_equal_other_table:
           compare_model: ref("data_test")
       - dbt_expectations.expect_table_columns_to_not_contain_set:
-          column_list: ["col_numeric_c", "col_string_d"]
+          column_list: ["col_numeric_d", "col_string_d"]
       - dbt_expectations.expression_is_true:
           expression: (col_numeric_a + col_numeric_b = 1)
       - dbt_expectations.equal_expression:
@@ -549,6 +549,13 @@ models:
       - name: col_null
         tests:
           - dbt_expectations.expect_column_values_to_be_null
+
+      - name: col_numeric_c
+        tests:
+          - dbt_expectations.expect_column_values_to_be_of_numeric_precision_and_scale:
+              column_type: 'numeric'
+              column_precision: 2
+              column_scale: 1
 
   - name : data_test_factored
     tests :
