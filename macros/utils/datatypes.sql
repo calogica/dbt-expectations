@@ -33,3 +33,7 @@
 {% macro postgres__type_datetime() -%}
     timestamp without time zone
 {%- endmacro %}
+
+{% macro duckdb__type_datetime() -%}
+    timestamp
+{%- endmacro %}
