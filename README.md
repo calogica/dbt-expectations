@@ -55,6 +55,13 @@ packages:
     # <see https://github.com/calogica/dbt-expectations/releases/latest> for the latest version tag
 ```
 
+This package supports:
+
+* Postgres
+* Snowflake
+* BigQuery
+* DuckDB
+
 For latest release, see [https://github.com/calogica/dbt-expectations/releases](https://github.com/calogica/dbt-expectations/releases)
 
 ### Dependencies
