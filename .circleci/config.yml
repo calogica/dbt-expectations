@@ -13,7 +13,7 @@ jobs:
       DBT_PROFILES_DIR: ./integration_tests/ci
       DBT_PROJECT_DIR: ./integration_tests
       BIGQUERY_SERVICE_KEY_PATH: "/home/circleci/bigquery-service-key.json"
-      DBT_VERSION: 1.4.1
+      DBT_VERSION: 1.6.0
 
     steps:
       - checkout
