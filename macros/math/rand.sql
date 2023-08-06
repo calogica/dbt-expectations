@@ -31,3 +31,9 @@
     random()
 
 {%- endmacro -%}
+
+{% macro duckdb__rand() -%}
+
+    random()
+
+{%- endmacro -%}

@@ -1,5 +1,9 @@
-{{ dbt_date.date_spine('hour',
-        start_date=dbt_date.n_days_ago(10),
-        end_date=dbt_date.tomorrow()
+{% set end_date = modules.datetime.datetime.today().replace(hour=0, minute=0, second=0, microsecond=0) %}
+{% set start_date = (end_date - modules.datetime.timedelta(days=10)) %}
+
+{{ dbt_date.get_base_dates(
+        start_date=start_date,
+        end_date=end_date,
+        datepart="hour"
     )
 }}

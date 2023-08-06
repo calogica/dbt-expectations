@@ -47,6 +47,12 @@ coalesce(array_length((select regexp_matches({{ source_value }}, '{{ regexp }}',
 regexp_instr({{ source_value }}, '{{ regexp }}', {{ position }}, {{ occurrence }}, 0, '{{ flags }}')
 {% endmacro %}
 
+{% macro duckdb__regexp_instr(source_value, regexp, position, occurrence, is_raw, flags) %}
+{% if flags %}{{ dbt_expectations._validate_flags(flags, 'ciep') }}{% endif %}
+regexp_matches({{ source_value }}, '{{ regexp }}', '{{ flags }}')
+{% endmacro %}
+
+
 {% macro _validate_flags(flags, alphabet) %}
 {% for flag in flags %}
     {% if flag not in alphabet %}
@@ -74,7 +80,7 @@ regexp_instr({{ source_value }}, '{{ regexp }}', {{ position }}, {{ occurrence }
 {% if not is_match %}
     {# Using raise_compiler_error causes disabled tests with invalid flags to fail compilation #}
     {{ exceptions.warn(
-        "flags " ~ flags ~ " isn't a valid re2 flag pattern" 
+        "flags " ~ flags ~ " isn't a valid re2 flag pattern"
     ) }}
 {% endif %}
 {% endmacro %}
