@@ -23,7 +23,7 @@ jobs:
             python3 -m venv venv
             . venv/bin/activate
             pip install -U pip setuptools wheel
-            pip install dbt-core==$DBT_VERSION dbt-postgres==$DBT_VERSION dbt-bigquery==$DBT_VERSION dbt-snowflake==$DBT_VERSION
+            pip install dbt-core==$DBT_VERSION dbt-postgres==$DBT_VERSION dbt-bigquery==$DBT_VERSION dbt-snowflake==$DBT_VERSION dbt-duckdb==$DBT_VERSION
 
       - run:
           name: Install dbt dependencies
@@ -75,6 +75,12 @@ jobs:
           command: |
             . venv/bin/activate
             dbt build -t snowflake --project-dir $DBT_PROJECT_DIR
+
+      - run:
+          name: "Run Tests - DuckDB"
+          command: |
+            . venv/bin/activate
+            dbt build -t duckdb --project-dir $DBT_PROJECT_DIR
 
       - store_artifacts:
           path: ./logs
