@@ -1,3 +1,12 @@
+# dbt-expectations v0.9.0
+
+## New Features
+* Add count to expect_compound_columns_to_be_unique by @VDFaller in https://github.com/calogica/dbt-expectations/pull/261
+* Add duckdb support by @clausherther in https://github.com/calogica/dbt-expectations/pull/271
+
+## Docs
+* Update README.md by @mbkupfer in https://github.com/calogica/dbt-expectations/pull/268
+
 # dbt-expectations v0.8.5
 
 ## New Features
