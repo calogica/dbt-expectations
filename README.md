@@ -108,6 +108,8 @@ For example, use `America/New_York` for East Coast Time.
 - [expect_column_values_to_be_of_type](#expect_column_values_to_be_of_type)
 - [expect_column_values_to_be_in_type_list](#expect_column_values_to_be_in_type_list)
 - [expect_column_values_to_have_consistent_casing](#expect_column_values_to_have_consistent_casing)
+- [expect_array_column_to_not_be_empty](#expect_array_column_to_not_be_empty)
+- [expect_struct_column_to_not_be_empty](#expect_struct_column_to_not_be_empty)
 
 ### Sets and ranges
 
@@ -504,6 +506,31 @@ Expect a column to have consistent casing. By setting `display_inconsistent_colu
 tests:
   - dbt_expectations.expect_column_values_to_have_consistent_casing:
       display_inconsistent_columns: false # (Optional)
+```
+
+### [expect_array_column_to_not_be_empty](macros/schema_tests/column_values_basic/expect_array_column_to_not_be_empty.sql)
+
+Expect a column of type `array` to be filled with values. In Hive, this would mean to not have
+any value that looks like this '[]' or sometimes like this '[""]'
+
+*Applies to:* Column
+
+```yaml
+tests:
+  - dbt_expectations.expect_array_column_to_not_be_empty:
+      row_condition: "id is not null" # (Optional)
+```
+
+### [expect_struct_column_to_not_be_empty](macros/schema_tests/column_values_basic/expect_struct_column_to_not_be_empty.sql)
+
+Expect a column of type `struct(array)` to be filled with values. In Hive, this would mean to not have any value that has a size of zero.
+
+*Applies to:* Column
+
+```yaml
+tests:
+  - dbt_expectations.expect_struct_column_to_not_be_empty:
+      row_condition: "id is not null" # (Optional)
 ```
 
 ### [expect_column_values_to_be_in_set](macros/schema_tests/column_values_basic/expect_column_values_to_be_in_set.sql)
