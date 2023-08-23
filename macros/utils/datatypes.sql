@@ -37,3 +37,7 @@
 {% macro duckdb__type_datetime() -%}
     timestamp
 {%- endmacro %}
+
+{% macro spark__type_datetime() -%}
+    timestamp
+{%- endmacro %}

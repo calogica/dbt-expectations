@@ -52,6 +52,15 @@ regexp_instr({{ source_value }}, '{{ regexp }}', {{ position }}, {{ occurrence }
 regexp_matches({{ source_value }}, '{{ regexp }}', '{{ flags }}')
 {% endmacro %}
 
+{% macro spark__regexp_instr(source_value, regexp, position, occurrence, is_raw, flags) %}
+{% if is_raw or flags %}
+    {{ exceptions.warn(
+            "is_raw and flags options are not supported for this adapter "
+            ~ "and are being ignored."
+    ) }}
+{% endif %}
+length(regexp_extract({{ source_value }}, '{{ regexp }}', 0))
+{% endmacro %}
 
 {% macro _validate_flags(flags, alphabet) %}
 {% for flag in flags %}

@@ -19,3 +19,9 @@
     ln({{ x }})
 
 {%- endmacro -%}
+
+{% macro spark__log_natural(x) -%}
+
+    ln({{ x }})
+
+{%- endmacro -%}
