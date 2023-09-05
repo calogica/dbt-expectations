@@ -55,7 +55,7 @@ validation_errors as (
     where
         previous_{{ column_name | trim}} is not null
         and
-        not ((abs(current_{{ column_name | trim}} / previous_{{ column_name | trim}} )-1) {{ operator }} {{ change_threshold }} )
+        not ((abs(current_{{ column_name | trim}} / nullif(previous_{{ column_name | trim}}, 0) )-1) {{ operator }} {{ change_threshold }} )
 
 )
 select *
