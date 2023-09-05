@@ -1,4 +1,4 @@
-{% test expect_column_value_running_abs_change_ratio_to_be(model, column_name,change_ratio,
+{% test expect_column_value_running_abs_change_ratio_to_be(model, column_name,change_threshold,
                                                    sort_column=None,
                                                    row_condition=None,
                                                    strictly=True,
@@ -49,13 +49,13 @@ validation_errors as (
         *
         , current_{{ column_name | trim}} / nullif(previous_{{ column_name | trim}}, 0) - 1 as actual_change_ratio
         , abs(current_{{ column_name | trim}} / nullif(previous_{{ column_name | trim}}, 0)) - 1 as abs_change_ratio 
-        , '{{ operator }} {{ change_ratio }}'  as criteria
+        , '{{ operator }} {{ change_threshold }}'  as criteria
     from
         add_lag_values
     where
         previous_{{ column_name | trim}} is not null
         and
-        not ((abs(current_{{ column_name | trim}} / previous_{{ column_name | trim}} )-1) {{ operator }} {{ change_ratio }} )
+        not ((abs(current_{{ column_name | trim}} / previous_{{ column_name | trim}} )-1) {{ operator }} {{ change_threshold }} )
 
 )
 select *
