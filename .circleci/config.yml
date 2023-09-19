@@ -41,7 +41,7 @@ jobs:
               dbt deps --project-dir $DBT_PROJECT_DIR
 
       - run:
-          name: "Runw Tests - Postgres"
+          name: "Run Tests - Postgres"
           environment:
             POSTGRES_HOST: localhost
             POSTGRES_TEST_USER: postgres
