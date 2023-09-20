@@ -11,3 +11,8 @@
     percentile_cont({{ field }}, {{ quantile }})
     over({%- if partition %}partition by {{ partition }}{% endif -%})
 {% endmacro %}
+
+{% macro spark__quantile(field, quantile, partition) -%}
+    percentile({{ field }}, {{ quantile }})
+    over({%- if partition %}partition by {{ partition }}{% endif -%})
+{% endmacro %}

@@ -14,8 +14,8 @@
     {% set sql %}
 
         select
-            min({{ date_col }}) as start_{{ date_part }},
-            max({{ date_col }}) as end_{{ date_part }}
+            min(cast({{ date_col }} as date)) as start_{{ date_part }},
+            max(cast({{ date_col }} as date)) as end_{{ date_part }}
         from {{ model }}
         {% if row_condition %}
         where {{ row_condition }}
@@ -24,8 +24,14 @@
     {% endset %}
 
     {%- set dr = run_query(sql) -%}
-    {%- set db_start_date = dr.columns[0].values()[0].strftime('%Y-%m-%d') -%}
-    {%- set db_end_date = dr.columns[1].values()[0].strftime('%Y-%m-%d') -%}
+
+    {%- set db_start_date = dr.columns[0].values()[0] -%}
+    {%- set db_end_date = dr.columns[1].values()[0] -%}
+
+    {% if db_start_date is not string %}
+        {%- set db_start_date = db_start_date.strftime('%Y-%m-%d') -%}
+        {%- set db_end_date = db_end_date.strftime('%Y-%m-%d') -%}
+    {% endif %}
 
 {% endif %}
 
@@ -41,6 +47,7 @@
 {% else %}
 {% set end_date = test_end_date %}
 {% endif %}
+
 with base_dates as (
 
     {{ dbt_date.get_base_dates(start_date=start_date, end_date=end_date, datepart=date_part) }}

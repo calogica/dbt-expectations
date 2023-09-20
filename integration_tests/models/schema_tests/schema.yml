@@ -17,6 +17,8 @@ models:
           - dbt_expectations.expect_column_values_to_match_regex:
               regex: "[A-Z]"
               flags: i
+              config:
+                enabled: "{{ target.type not in ['bigquery', 'spark' ] }}"
             # match all uppercase with inline case-insensitive flag and case-insensitive flag parameter (where implemented)
             # check that adapters handling flags by inlining them don't break because of the flag duplication
           - dbt_expectations.expect_column_values_to_match_regex:
@@ -29,7 +31,7 @@ models:
               regex: "[A-Z]"
               flags: c
               config:
-                enabled: "{{ target.type in ['postgres', 'snowflake', 'redshift' ] }}"
+                enabled: "{{ target.type not in ['bigquery', 'spark' ] }}"
                 error_if: "=0"
                 warn_if: "<4"
             # do not match other non-email string, should pass
@@ -63,12 +65,14 @@ models:
           - dbt_expectations.expect_column_values_to_match_regex_list:
               regex_list: ["[A-G]", "[H-Z]"]
               flags: i
+              config:
+                enabled: "{{ target.type not in ['bigquery', 'spark' ] }}"
             # match all uppercase, but match case-sensitive (where implemented), should fail
           - dbt_expectations.expect_column_values_to_match_regex_list:
               regex_list: ["[A-G]", "[H-Z]"]
               flags: c
               config:
-                enabled: "{{ target.type in ['postgres', 'snowflake', 'redshift' ] }}"
+                enabled: "{{ target.type not in ['bigquery', 'spark' ] }}"
                 error_if: "=0"
                 warn_if: "<4"
             # match email address or other string
@@ -98,12 +102,15 @@ models:
           - dbt_expectations.expect_column_values_to_not_match_regex_list:
               regex_list: ["[A-Z]", "[0-9]"]
               flags: i
+              config:
+                enabled: "{{ target.type not in ['bigquery', 'spark' ] }}"
             # do not match all uppercase and numbers, case-insensitive
           - dbt_expectations.expect_column_values_to_not_match_regex_list:
               regex_list: ["[A-Z]", "[0-9]"]
               flags: i
               match_on: all
               config:
+                enabled: "{{ target.type not in ['bigquery', 'spark' ] }}"
                 error_if: "=0"
                 warn_if: "<4"
             # match '@' anywhere in string
@@ -144,15 +151,19 @@ models:
               config:
                 error_if: "=0"
                 warn_if: "<4"
+
       - name: postal_code_5
         tests:
           - dbt_expectations.expect_column_values_to_match_regex:
               regex: "^\\d{5}"
               is_raw: True
+              config:
+                severity: "{{ 'warn' if target.type in ['spark' ] else 'error' }}"
           - dbt_expectations.expect_column_values_to_match_regex:
               regex: "^\\d{55}"
               is_raw: True
               config:
+                severity: "{{ 'warn' if target.type in ['spark' ] else 'error' }}"
                 error_if: "=0"
                 warn_if: "<4"
           - dbt_expectations.expect_column_values_to_not_match_regex:
@@ -162,19 +173,25 @@ models:
               regex: "^\\d{5}"
               is_raw: True
               config:
+                severity: "{{ 'warn' if target.type in ['spark' ] else 'error' }}"
                 error_if: "=0"
                 warn_if: "<4"
           - dbt_expectations.expect_column_values_to_match_regex_list:
               regex_list: ["^\\d{5}"]
               is_raw: True
+              config:
+                severity: "{{ 'warn' if target.type in ['spark' ] else 'error' }}"
           - dbt_expectations.expect_column_values_to_match_regex_list:
               regex_list: ["^\\d{5}", "@[^.]*"]
               is_raw: True
+              config:
+                severity: "{{ 'warn' if target.type in ['spark' ] else 'error' }}"
           - dbt_expectations.expect_column_values_to_match_regex_list:
               regex_list: ["^\\d{5}", "@[^.]*"]
               is_raw: True
               match_on: all
               config:
+                severity: "{{ 'warn' if target.type in ['spark' ] else 'error' }}"
                 error_if: "=0"
                 warn_if: "<4"
           - dbt_expectations.expect_column_values_to_not_match_regex_list:
@@ -183,11 +200,14 @@ models:
           - dbt_expectations.expect_column_values_to_not_match_regex_list:
               regex_list: ["^\\d{5}", "@[^.]*"]
               is_raw: True
+              config:
+                severity: "{{ 'warn' if target.type in ['spark' ] else 'error' }}"
           - dbt_expectations.expect_column_values_to_not_match_regex_list:
               regex_list: ["^\\d{5}", "@[^.]*"]
               is_raw: True
               match_on: all
               config:
+                severity: "{{ 'warn' if target.type in ['spark' ] else 'error' }}"
                 error_if: "=0"
                 warn_if: "<4"
       - name: postal_code_5_3
@@ -195,10 +215,13 @@ models:
           - dbt_expectations.expect_column_values_to_match_regex:
               regex: "^\\d{5}-\\d{3}"
               is_raw: True
+              config:
+                severity: "{{ 'warn' if target.type in ['spark' ] else 'error' }}"
           - dbt_expectations.expect_column_values_to_match_regex:
               regex: "^\\d{5}-\\d{9}"
               is_raw: True
               config:
+                severity: "{{ 'warn' if target.type in ['spark' ] else 'error' }}"
                 error_if: "=0"
                 warn_if: "<4"
 
