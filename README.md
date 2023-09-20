@@ -61,6 +61,7 @@ This package supports:
 * Snowflake
 * BigQuery
 * DuckDB
+* Spark (experimental)
 
 For latest release, see [https://github.com/calogica/dbt-expectations/releases](https://github.com/calogica/dbt-expectations/releases)
 
