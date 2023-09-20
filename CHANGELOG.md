@@ -1,3 +1,9 @@
+# dbt-expectations v0.10.0
+
+## New Features
+* Added experimental spark support by @clausherther in https://github.com/calogica/dbt-expectations/pull/279
+* Changed upper range of dbt-date version dependency by @clausherther in https://github.com/calogica/dbt-expectations/pull/286
+
 # dbt-expectations v0.9.0
 
 ## New Features
