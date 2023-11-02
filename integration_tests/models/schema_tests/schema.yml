@@ -417,7 +417,7 @@ models:
           row_condition: 1=1
           compare_row_condition: 1=1
       - dbt_expectations.expect_table_column_count_to_equal:
-          value: 8
+          value: 9
       - dbt_expectations.expect_table_column_count_to_be_between:
           min_value: 1
           max_value: 10
@@ -428,9 +428,9 @@ models:
       - dbt_expectations.expect_table_columns_to_contain_set:
           column_list: ["col_numeric_b", "col_string_a"]
       - dbt_expectations.expect_table_columns_to_match_set:
-          column_list: ["idx", "date_col", "col_numeric_a", "col_numeric_b", "col_string_a", "col_string_b", "col_null", "col_null_2"]
+          column_list: ["idx", "date_col", "col_numeric_a", "col_numeric_b", "col_string_a", "col_string_b", "col_null", "col_null_2", "col_numeric_a_plus_b"]
       - dbt_expectations.expect_table_columns_to_match_ordered_list:
-          column_list: ["idx", "date_col", "col_numeric_a", "col_numeric_b", "col_string_a", "col_string_b", "col_null", "col_null_2"]
+          column_list: ["idx", "date_col", "col_numeric_a", "col_numeric_b", "col_string_a", "col_string_b", "col_null", "col_null_2", "col_numeric_a_plus_b"]
       - dbt_expectations.expect_table_column_count_to_equal_other_table:
           compare_model: ref("data_test")
       - dbt_expectations.expect_table_columns_to_not_contain_set:
@@ -477,7 +477,9 @@ models:
       - dbt_expectations.expect_multicolumn_sum_to_equal:
           column_list: ["col_numeric_a", "col_numeric_b"]
           sum_total: 4
-
+      - dbt_expectations.expect_multicolumn_sum_to_equal:
+          column_list: ["col_numeric_a", "col_numeric_b"]
+          sum_total: col_numeric_a_plus_b
 
 
     columns:
