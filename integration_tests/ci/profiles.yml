@@ -48,6 +48,6 @@ integration_tests:
       connect_timeout: 60
       retry_all: true
       server_side_parameters:
-        "spark.sql.parser.escapedStringLiterals": true
+        "spark.sql.parser.escapedStringLiterals": "true"
 
   target: postgres
