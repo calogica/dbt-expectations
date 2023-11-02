@@ -9,7 +9,8 @@
 {% set expression %}
 {% for column in column_list %}
 sum({{ column }}){% if not loop.last %} + {% endif %}
-{% endfor %} = {{ sum_total }}
+{# the if just allows for column names or literal numbers #}
+{% endfor %} = {% if sum_total is number %}{{sum_total}}{% else %}sum({{ sum_total }}){% endif %}
 {% endset %}
 
 {{ dbt_expectations.expression_is_true(model,

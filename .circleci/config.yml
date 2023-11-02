@@ -119,7 +119,7 @@ jobs:
           command: |
             python3 -m venv venv
             . venv/bin/activate
-            pip install dbt-spark "dbt-spark[PyHive]"
+            pip install "dbt-spark==$DBT_VERSION" "dbt-spark[PyHive]==$DBT_VERSION"
       - run: *dbt-deps
       - run:
           name: Wait for Spark-Thrift
