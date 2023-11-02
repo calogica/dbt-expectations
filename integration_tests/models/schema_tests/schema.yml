@@ -480,6 +480,10 @@ models:
       - dbt_expectations.expect_multicolumn_sum_to_equal:
           column_list: ["col_numeric_a", "col_numeric_b"]
           sum_total: col_numeric_a_plus_b
+      - dbt_expectations.expect_multicolumn_sum_to_equal:
+          column_list: ["col_numeric_a", "col_numeric_b"]
+          sum_total: col_numeric_a_plus_b
+          group_by: [idx]
 
 
     columns:
