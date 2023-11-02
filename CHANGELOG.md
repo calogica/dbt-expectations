@@ -1,3 +1,7 @@
+# dbt-expectations v0.10.1
+## Fixes
+* Fix sum_total in expect_multicolumn_sum_to_equal to accept column names by @VDFaller in https://github.com/calogica/dbt-expectations/pull/291
+
 # dbt-expectations v0.10.0
 
 ## New Features
