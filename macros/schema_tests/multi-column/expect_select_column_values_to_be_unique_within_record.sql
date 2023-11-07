@@ -40,7 +40,7 @@
 with column_values as (
 
     select
-        row_number() over(order by 1) as row_index,
+        row_number() over(order by {{ columns|join(', ') }}) as row_index,
         {% for column in columns -%}
         {{ column }}{% if not loop.last %},{% endif %}
         {%- endfor %}
