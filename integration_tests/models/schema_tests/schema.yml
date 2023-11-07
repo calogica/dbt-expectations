@@ -329,14 +329,14 @@ models:
       - name: row_value
         tests:
           - dbt_expectations.expect_column_distinct_count_to_equal:
-              row_condition: date_day = {{ dbt_date.yesterday() }}
+              row_condition: cast(date_day as date) = {{ dbt_date.yesterday() }}
               value: 10
           - dbt_expectations.expect_column_distinct_count_to_be_greater_than:
-              row_condition: date_day = {{ dbt_date.yesterday() }}
+              row_condition: cast(date_day as date) = {{ dbt_date.yesterday() }}
               value: 1
           - dbt_expectations.expect_column_distinct_count_to_be_less_than:
               value: 11
-              row_condition: date_day = {{ dbt_date.yesterday() }}
+              row_condition: cast(date_day as date) = {{ dbt_date.yesterday() }}
 
 
 
