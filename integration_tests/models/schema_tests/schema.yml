@@ -25,13 +25,13 @@ models:
               regex: "(?i)[A-Z]"
               flags: i
               config:
-                enabled: "{{ target.type == 'bigquery' }}"
+                enabled: "{{ target.type in ['bigquery', 'trino'] }}"
             # match all uppercase, case-sensitive (where implemented), should fail
           - dbt_expectations.expect_column_values_to_match_regex:
               regex: "[A-Z]"
               flags: c
               config:
-                enabled: "{{ target.type not in ['bigquery', 'spark' ] }}"
+                enabled: "{{ target.type not in ['bigquery', 'spark', 'trino'] }}"
                 error_if: "=0"
                 warn_if: "<4"
             # do not match other non-email string, should pass
@@ -72,7 +72,7 @@ models:
               regex_list: ["[A-G]", "[H-Z]"]
               flags: c
               config:
-                enabled: "{{ target.type not in ['bigquery', 'spark' ] }}"
+                enabled: "{{ target.type not in ['bigquery', 'spark', 'trino'] }}"
                 error_if: "=0"
                 warn_if: "<4"
             # match email address or other string
@@ -242,7 +242,7 @@ models:
       - dbt_expectations.expect_row_values_to_have_data_for_every_n_datepart:
           date_col: date_day
           date_part: day
-          exclusion_condition: not(date_day = '2021-10-19')
+          exclusion_condition: not(date_day = cast('2021-10-19' as date))
       - dbt_expectations.expect_row_values_to_have_data_for_every_n_datepart:
           date_col: date_day
           date_part: day
