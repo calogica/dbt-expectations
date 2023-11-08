@@ -32,7 +32,7 @@ jobs:
             python3 -m venv venv
             . venv/bin/activate
             pip install "dbt-postgres==$DBT_VERSION" "dbt-bigquery==$DBT_VERSION" "dbt-snowflake==$DBT_VERSION"
-            pip install "dbt-duckdb"
+            pip install "dbt-duckdb==$DBT_VERSION"
 
       - run: &dbt-deps
           name: Install dbt dependencies
