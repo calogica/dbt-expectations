@@ -53,5 +53,5 @@ select
 from
     metric_values_z_scores
 where
-    abs({{ column_name }}_sigma) > {{ sigma_threshold }}
+({{ column_name }} > {{ column_name }}_average + ({{ column_name }}_sigma*{{ sigma_threshold }})) OR ({{ column_name }} < {{ column_name }}_average - ({{ column_name }}_sigma*{{ sigma_threshold }}))
 {%- endmacro %}
