@@ -55,7 +55,7 @@ with column_values as (
 unpivot_columns as (
 
     {% for column in columns %}
-    select row_index, '{{ column }}' as column_name, md5({{ column }}) as column_value from column_values
+    select row_index, '{{ column }}' as column_name, {{ dbt_expectations.md5(column) }} as column_value from column_values
     {% if not loop.last %}union all{% endif %}
     {% endfor %}
 ),
