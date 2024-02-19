@@ -1,3 +1,7 @@
+# dbt-expectations v0.10.2
+## Fixes
+* Update Test Expecting Select Column Values To Be Unique Within Record by @bkimjin in https://github.com/calogica/dbt-expectations/pull/300
+
 # dbt-expectations v0.10.1
 ## Fixes
 * Fix sum_total in expect_multicolumn_sum_to_equal to accept column names by @VDFaller in https://github.com/calogica/dbt-expectations/pull/291
