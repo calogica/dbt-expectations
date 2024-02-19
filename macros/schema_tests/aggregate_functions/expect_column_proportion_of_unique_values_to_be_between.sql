@@ -6,7 +6,7 @@
                                                             strictly=False
                                                             ) %}
 {% set expression %}
-count(distinct {{ column_name }})*1.0/count({{ column_name }})
+cast(count(distinct {{ column_name }}) as {{ dbt.type_float() }})/count({{ column_name }})
 {% endset %}
 {{ dbt_expectations.expression_between(model,
                                         expression=expression,

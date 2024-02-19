@@ -62,6 +62,7 @@ This package supports:
 * BigQuery
 * DuckDB
 * Spark (experimental)
+* Trino
 
 For latest release, see [https://github.com/calogica/dbt-expectations/releases](https://github.com/calogica/dbt-expectations/releases)
 
