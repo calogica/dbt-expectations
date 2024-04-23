@@ -42,7 +42,7 @@ Development of `dbt-expectations` (and `dbt-date`) is funded by our amazing [spo
 
 ## Install
 
-`dbt-expectations` currently supports `dbt 1.2.x` or higher.
+`dbt-expectations` currently supports `dbt 1.7.x` or higher.
 
 Check [dbt package hub](https://hub.getdbt.com/calogica/dbt_expectations/latest/) for the latest installation instructions, or [read the docs](https://docs.getdbt.com/docs/package-management) for more information on installing packages.
 
