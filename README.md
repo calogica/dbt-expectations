@@ -222,7 +222,7 @@ models: # or seeds:
 
 ### [expect_table_aggregation_to_equal_other_table](macros/schema_tests/table_shape/expect_table_aggregation_to_equal_other_table.sql)
 
-Except an (optionally grouped) expression to match the same (or optionally other) expression in a different table.
+Expect an (optionally grouped) expression to match the same (or optionally other) expression in a different table.
 
 *Applies to:* Model, Seed, Source
 
