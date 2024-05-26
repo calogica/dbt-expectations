@@ -6,7 +6,7 @@ If you don't have an issue #, please first open an issue on the repo before subm
   
 ## Summary of Changes
 
-(Succint summary of the changes introduced by this PR)
+(Succinct summary of the changes introduced by this PR)
 
 ## Why Do We Need These Changes
     
