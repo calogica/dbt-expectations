@@ -145,7 +145,7 @@ jobs:
     environment:
       DBT_PROFILES_DIR: ./integration_tests/ci
       DBT_PROJECT_DIR: ./integration_tests
-      DBT_VERSION: 1.7.*
+      DBT_VERSION: 1.8.*
 
     steps:
       - checkout
