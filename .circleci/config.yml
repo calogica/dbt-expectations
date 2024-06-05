@@ -149,6 +149,7 @@ jobs:
 
     steps:
       - checkout
+      - run: *pip-install-core
       - run:
           name: Install dbt adapter packages
           command: |
