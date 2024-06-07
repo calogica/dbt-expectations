@@ -3,7 +3,7 @@ models:
   - name: data_text
     columns:
       - name: email_address
-        data_tests:
+        tests:
             # match email address
           - dbt_expectations.expect_column_values_to_match_regex:
               regex: "@[^.]*"
@@ -153,7 +153,7 @@ models:
                 warn_if: "<4"
 
       - name: postal_code_5
-        data_tests:
+        tests:
           - dbt_expectations.expect_column_values_to_match_regex:
               regex: "^\\d{5}"
               is_raw: True
@@ -211,7 +211,7 @@ models:
                 error_if: "=0"
                 warn_if: "<4"
       - name: postal_code_5_3
-        data_tests:
+        tests:
           - dbt_expectations.expect_column_values_to_match_regex:
               regex: "^\\d{5}-\\d{3}"
               is_raw: True
@@ -227,7 +227,7 @@ models:
 
 
   - name: timeseries_data
-    data_tests:
+    tests:
       - dbt_expectations.expect_table_columns_to_match_ordered_list:
           column_list: ["date_day", "date_datetime", "date_timestamp", "row_value", "row_value_log"]
       - dbt_expectations.expect_column_distinct_count_to_equal_other_table:
@@ -252,7 +252,7 @@ models:
 
     columns:
       - name: date_day
-        data_tests:
+        tests:
           - dbt_expectations.expect_row_values_to_have_recent_data:
               datepart: day
               interval: 1
@@ -264,7 +264,7 @@ models:
               compare_model: ref("timeseries_data_extended")
 
       - name: date_datetime
-        data_tests:
+        tests:
           - dbt_expectations.expect_row_values_to_have_recent_data:
               datepart: day
               interval: 1
@@ -272,7 +272,7 @@ models:
               column_type_list: [date, "{{ dbt_expectations.type_datetime() }}"]
 
       - name: date_timestamp
-        data_tests:
+        tests:
           - dbt_expectations.expect_row_values_to_have_recent_data:
               datepart: day
               interval: 1
@@ -280,7 +280,7 @@ models:
               column_type_list: [date, "{{ dbt_expectations.type_timestamp() }}"]
 
       - name: row_value
-        data_tests:
+        tests:
           - dbt_expectations.expect_column_values_to_be_within_n_stdevs:
               sigma_threshold: 6
           - dbt_expectations.expect_column_values_to_be_within_n_stdevs:
@@ -299,7 +299,7 @@ models:
               severity: warn
 
   - name: timeseries_data_extended
-    data_tests:
+    tests:
       - dbt_expectations.expect_table_columns_to_match_ordered_list:
           column_list: ["date_day", "row_value", "row_value_log"]
       - dbt_expectations.expect_row_values_to_have_data_for_every_n_datepart:
@@ -316,7 +316,7 @@ models:
 
     columns:
       - name: date_day
-        data_tests:
+        tests:
           - dbt_expectations.expect_row_values_to_have_recent_data:
               datepart: day
               interval: 1
@@ -327,7 +327,7 @@ models:
               column_type_list: [date, "{{ dbt_expectations.type_datetime() }}"]
 
       - name: row_value
-        data_tests:
+        tests:
           - dbt_expectations.expect_column_distinct_count_to_equal:
               row_condition: cast(date_day as date) = {{ dbt_date.yesterday() }}
               value: 10
@@ -341,7 +341,7 @@ models:
 
 
       - name: row_value_log
-        data_tests:
+        tests:
           - dbt_expectations.expect_column_values_to_be_within_n_moving_stdevs:
               date_column_name: cast(date_day as {{ dbt_expectations.type_datetime() }})
               sigma_threshold: 6
@@ -349,14 +349,14 @@ models:
               severity: warn
 
   - name: timeseries_hourly_data_extended
-    data_tests:
+    tests:
       - dbt_expectations.expect_row_values_to_have_data_for_every_n_datepart:
           date_col: date_hour
           date_part: hour
 
     columns:
       - name: date_hour
-        data_tests:
+        tests:
           - dbt_expectations.expect_row_values_to_have_recent_data:
               datepart: hour
               interval: 24
@@ -367,7 +367,7 @@ models:
 
 
       - name: row_value_log
-        data_tests:
+        tests:
           - dbt_expectations.expect_column_values_to_be_within_n_moving_stdevs:
               date_column_name: cast(date_hour as {{ dbt_expectations.type_datetime() }})
               period: hour
@@ -379,7 +379,7 @@ models:
 
 
   - name: data_test
-    data_tests:
+    tests:
       - dbt_expectations.expect_compound_columns_to_be_unique:
           column_list: ["date_col", "col_string_b"]
       - dbt_expectations.expect_compound_columns_to_be_unique:
@@ -488,7 +488,7 @@ models:
 
     columns:
       - name: idx
-        data_tests:
+        tests:
           - dbt_expectations.expect_column_to_exist:
               column_index: 1
           - dbt_expectations.expect_column_values_to_be_unique
@@ -496,7 +496,7 @@ models:
               sort_column: idx
 
       - name: col_numeric_a
-        data_tests:
+        tests:
           - dbt_expectations.expect_column_to_exist
           - dbt_expectations.expect_column_to_exist:
               column_index: 3
@@ -540,7 +540,7 @@ models:
 
 
       - name: col_string_a
-        data_tests:
+        tests:
           - dbt_expectations.expect_column_values_to_be_in_set:
               value_set: ['a', 'b', 'c']
               quote_values: true
@@ -563,7 +563,7 @@ models:
               value: 4
 
       - name: col_string_b
-        data_tests:
+        tests:
           - dbt_expectations.expect_column_values_to_not_be_in_set:
               value_set: ['a','c']
               quote_values: true
@@ -576,7 +576,7 @@ models:
               max_value: 4
 
       - name: col_null
-        data_tests:
+        tests:
           - dbt_expectations.expect_column_values_to_be_null
 
   - name : data_test_factored
@@ -630,7 +630,7 @@ models:
 
     columns:
       - name: row_value
-        data_tests:
+        tests:
           - dbt_expectations.expect_column_values_to_be_within_n_moving_stdevs:
               date_column_name: date_day
               group_by: [group_id]
