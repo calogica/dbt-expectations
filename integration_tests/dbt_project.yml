@@ -22,6 +22,9 @@ dispatch:
 flags:
   partial_parse: True
   send_anonymous_usage_stats: False
+  warn_error_options:
+    silence: # To silence or ignore dbt 1.8.x upgrade warnings
+      - TestsConfigDeprecation
 
 vars:
     'dbt_date:time_zone': 'America/Los_Angeles'
