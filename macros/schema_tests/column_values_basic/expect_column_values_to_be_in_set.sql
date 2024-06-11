@@ -1,12 +1,16 @@
 {% test expect_column_values_to_be_in_set(model, column_name,
                                                    value_set,
                                                    quote_values=True,
-                                                   row_condition=None
+                                                   row_condition=None,
+                                                   query_context=None
                                                    ) %}
 
 with all_values as (
 
     select
+        {% if query_context %}
+           {{ query_context }},
+        {% endif %}
         {{ column_name }} as value_field
 
     from {{ model }}
@@ -20,7 +24,7 @@ set_values as (
     {% for value in value_set -%}
     select
         {% if quote_values -%}
-        cast('{{ value }}' as {{ dbt.type_string() }})
+        cast('{{ value }}' as {{ dbt_utils.type_string() }})
         {%- else -%}
         {{ value }}
         {%- endif %} as value_field
@@ -30,6 +34,9 @@ set_values as (
 validation_errors as (
     -- values from the model that are not in the set
     select
+        {% if query_context %}
+           {{ query_context }},
+        {% endif %}
         v.value_field
     from
         all_values v
