@@ -2,7 +2,8 @@
                                                          min_value=None,
                                                          max_value=None,
                                                          row_condition=None,
-                                                         strictly=False
+                                                         strictly=False,
+                                                         query_context=None
                                                       ) %}
 {% set expression %}
 {{ dbt.length(column_name) }}
@@ -14,7 +15,8 @@
                                         max_value=max_value,
                                         group_by_columns=None,
                                         row_condition=row_condition,
-                                        strictly=strictly
+                                        strictly=strictly,
+                                        query_context=query_context
                                         ) }}
 
 {% endtest %}
