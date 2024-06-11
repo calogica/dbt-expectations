@@ -4,10 +4,11 @@
                                  max_value=None,
                                  group_by_columns=None,
                                  row_condition=None,
-                                 strictly=False
+                                 strictly=False,
+                                 query_context=None
                                  ) %}
 
-    {{ dbt_expectations.expression_between(model, expression, min_value, max_value, group_by_columns, row_condition, strictly) }}
+    {{ dbt_expectations.expression_between(model, expression, min_value, max_value, group_by_columns, row_condition, strictly, query_context) }}
 
 {% endtest %}
 
@@ -17,7 +18,8 @@
                             max_value,
                             group_by_columns,
                             row_condition,
-                            strictly
+                            strictly,
+                            query_context
                             ) %}
 
 {%- if min_value is none and max_value is none -%}
@@ -38,7 +40,9 @@
 {{ dbt_expectations.expression_is_true(model,
                                         expression=expression_min_max,
                                         group_by_columns=group_by_columns,
-                                        row_condition=row_condition)
+                                        row_condition=row_condition,
+                                        query_context=query_context
+                                        )
                                         }}
 
 {% endmacro %}
