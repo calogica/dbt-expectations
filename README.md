@@ -106,6 +106,7 @@ For example, use `America/New_York` for East Coast Time.
 
 - [expect_column_values_to_be_null](#expect_column_values_to_be_null)
 - [expect_column_values_to_not_be_null](#expect_column_values_to_not_be_null)
+- [expect_column_values_to_not_be_empty_string](#expect_column_values_to_not_be_empty_string)
 - [expect_column_values_to_be_unique](#expect_column_values_to_be_unique)
 - [expect_column_values_to_be_of_type](#expect_column_values_to_be_of_type)
 - [expect_column_values_to_be_in_type_list](#expect_column_values_to_be_in_type_list)
@@ -469,6 +470,19 @@ Expect column values to be null.
 ```yaml
 tests:
   - dbt_expectations.expect_column_values_to_be_null:
+      row_condition: "id is not null" # (Optional)
+```
+
+### [expect_column_values_to_not_be_empty_string](macros/schema_tests/column_values_basic/expect_column_values_to_not_be_empty_string.sql)
+
+Expect column values to not be an empty string.
+
+*Applies to:* Column
+
+```yaml
+tests:
+  - dbt_expectations.expect_column_values_to_not_be_empty_string:
+      trim: True # (Default is false)
       row_condition: "id is not null" # (Optional)
 ```
 
