@@ -2,7 +2,8 @@
                                                    sort_column=None,
                                                    strictly=True,
                                                    row_condition=None,
-                                                   group_by=None) %}
+                                                   group_by=None,
+                                                   step=None) %}
 
 {%- set sort_column = column_name if not sort_column else sort_column -%}
 {%- set operator = "<" if strictly else "<=" %}
@@ -44,7 +45,12 @@ validation_errors as (
     where
         value_field_lag is not null
         and
-        not (value_field {{ operator }} value_field_lag)
+        not (
+            (value_field {{ operator }} value_field_lag)
+            {%- if step %}
+            and ((value_field_lag - value_field) = {{ step }})
+            {%- endif %}
+        )
 
 )
 select *

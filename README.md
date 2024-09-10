@@ -566,6 +566,7 @@ tests:
       row_condition: "id is not null" # (Optional)
       strictly: true # (Optional for comparison operator. Default is 'true', and it uses '>'. If set to 'false' it uses '>='.)
       group_by: [group_id, other_group_id, ...] # (Optional)
+      step: 1 # (Optional. If set, it requires the difference between values to be exactly this step. Requires numeric columns.)
 ```
 
 ### [expect_column_values_to_be_decreasing](macros/schema_tests/column_values_basic/expect_column_values_to_be_decreasing.sql)
@@ -583,6 +584,7 @@ tests:
       row_condition: "id is not null" # (Optional)
       strictly: true # (Optional for comparison operator. Default is 'true' and it uses '<'. If set to 'false', it uses '<='.)
       group_by: [group_id, other_group_id, ...] # (Optional)
+      step: 1 # (Optional. If set, it requires the difference between values to be exactly this step. Requires numeric columns.)
 ```
 
 ### [expect_column_value_lengths_to_be_between](macros/schema_tests/string_matching/expect_column_value_lengths_to_be_between.sql)
