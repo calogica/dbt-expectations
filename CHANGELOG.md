@@ -1,3 +1,14 @@
+# dbt-expectations v0.10.4
+## New Features
+* Adds optional `step` param to expect_column_values_to_be_{in,de}creasing by @vitorbaptista in https://github.com/calogica/dbt-expectations/pull/316
+
+## Docs
+* Update README.md by @thomaslaber in https://github.com/calogica/dbt-expectations/pull/303
+* "Expect" instead of "Except" by @dbeatty10 in https://github.com/calogica/dbt-expectations/pull/308
+
+## Fixes
+* Upgrade for dbt 1.8.x by @clausherther in https://github.com/calogica/dbt-expectations/pull/309
+
 # dbt-expectations v0.10.3
 ## New Features
 * [CI] Uprade to dbt=1.7.x by @clausherther in https://github.com/calogica/dbt-expectations/pull/292
