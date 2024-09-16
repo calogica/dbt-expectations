@@ -1,0 +1,4 @@
+# for convenience - test locally against latest changes in dbt-core + adapters
+dbt-core@git+https://github.com/dbt-labs/dbt-core.git#subdirectory=core
+dbt-postgres@git+https://github.com/dbt-labs/dbt-postgres.git
+tox>=3.13
