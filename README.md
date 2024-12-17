@@ -1,15 +1,14 @@
-## Note: This package is no longer actively supported. 
 <hr/>
 <h1 align="center">dbt-expectations</h1>
 <p align="center">
-<img alt="logo" width="10%" src="https://raw.githubusercontent.com/calogica/dbt-expectations/main/static/dbt-expectations-logo.svg" />
+<img alt="logo" width="10%" src="https://raw.githubusercontent.com/metaplane/dbt-expectations/main/static/dbt-expectations-logo.svg" />
 </p>
 
 <hr/>
 
 <p align="center">
-<a href="https://circleci.com/gh/calogica/dbt-expectations/tree/main">
-<img alt="CircleCI" src="https://img.shields.io/circleci/build/github/calogica/dbt-expectations/main?style=plastic"/>
+<a href="https://circleci.com/gh/metaplane/dbt-expectations/tree/main">
+<img alt="CircleCI" src="https://img.shields.io/circleci/build/github/metaplane/dbt-expectations/main?style=plastic"/>
 </a>
 <img alt="License" src="https://img.shields.io/badge/license-Apache--2.0-ff69b4?style=plastic"/>
 
@@ -23,15 +22,15 @@
 
 `dbt-expectations` currently supports `dbt 1.7.x` or higher.
 
-Check [dbt package hub](https://hub.getdbt.com/calogica/dbt_expectations/latest/) for the latest installation instructions, or [read the docs](https://docs.getdbt.com/docs/package-management) for more information on installing packages.
+[read the docs](https://docs.getdbt.com/docs/package-management) for more information on installing packages.
 
 Include in `packages.yml`
 
 ```yaml
 packages:
-  - package: calogica/dbt_expectations
-    version: [">=0.10.0", "<0.11.0"]
-    # <see https://github.com/calogica/dbt-expectations/releases/latest> for the latest version tag
+    - package: calogica/dbt_expectations
+      version: [">=0.10.0", "<0.11.0"]
+        # <see https://github.com/calogica/dbt-expectations/releases/latest> for the latest version tag
 ```
 
 This package supports:
@@ -43,7 +42,7 @@ This package supports:
 * Spark (experimental)
 * Trino
 
-For latest release, see [https://github.com/calogica/dbt-expectations/releases](https://github.com/calogica/dbt-expectations/releases)
+For latest release, see [https://github.com/metaplane/dbt-expectations/releases](https://github.com/metaplane/dbt-expectations/releases)
 
 ### Dependencies
 
@@ -1219,4 +1218,4 @@ To run the tests:
 1. You will need a profile called `integration_tests` in `~/.dbt/profiles.yml` pointing to a writable database. We only support postgres, BigQuery and Snowflake.
 2. Then, from within the `integration_tests` folder, run `dbt build` to run the test models in `integration_tests/models/schema_tests/` and run the tests specified in `integration_tests/models/schema_tests/schema.yml`
 
-<img src="https://raw.githubusercontent.com/calogica/dbt-expectations/main/expectations.gif"/>
+<img src="https://raw.githubusercontent.com/metaplane/dbt-expectations/main/expectations.gif"/>
