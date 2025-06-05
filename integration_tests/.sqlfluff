@@ -5,7 +5,6 @@ dialect = postgres
 templater = dbt
 rules = None
 exclude_rules = L003,L011,L022,L031
-recurse = 0
 output_line_length = 100
 
 [sqlfluff:templater:dbt]
